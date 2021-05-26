@@ -1,12 +1,14 @@
 import React from 'react'
-import { Form,Button,Col, Navbar, NavLink, Nav, Container, Image, Media } from 'react-bootstrap'
+import { Form,Button,Col, Navbar, NavLink, Nav, Container, Image, Media , Row} from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
 import quoteA from "../../images/alice.png"
 import quoteS from "../../images/sandra.png"
 import quoteJ from "../../images/jack.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus,faAngleLeft,faAngleRight,faQuoteLeft,faQuoteRight } from '@fortawesome/free-solid-svg-icons'
+import { faPlus,faAngleLeft,faAngleRight,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
 import arrowIcon from '../../images/arrowIcon.png'
+import videoImg from '../../images/videoimg.png'
+
 
 export const WelcomePage = () => {
     return (
@@ -41,9 +43,9 @@ export const WelcomePage = () => {
           </div>
           
       </div>
-        <h1>What people say ...</h1>
-<Carousel className="mx-auto" style={{width:"920px"}}>
-  <Carousel.Item>
+        <h1 className ="txt text-left">What people say ...</h1>
+<Carousel className="mx-auto" style={{width:"1020px"}}>
+  <Carousel.Item style={{height:"400px"}}>
   <div className="carousel-inner px-5 pb-4">
                             <div className="carousel-item active">
                                 <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteA} alt="" width="75"/>
@@ -77,7 +79,7 @@ export const WelcomePage = () => {
                             </div>
                         </div>
   </Carousel.Item>
-  <Carousel.Item>
+  <Carousel.Item style={{height:"400px"}}>
   <div className="carousel-inner px-5 pb-4">
                             <div className="carousel-item active">
                                 <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteA} alt="" width="75"/>
@@ -110,8 +112,9 @@ export const WelcomePage = () => {
                                 </div>
                             </div>
                         </div>
+                        
   </Carousel.Item>
-  <Carousel.Item>
+  <Carousel.Item style={{height:"400px"}}>
   <div className="carousel-inner px-5 pb-4">
                             <div className="carousel-item active">
                                 <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteA} alt="" width="75"/>
@@ -147,14 +150,29 @@ export const WelcomePage = () => {
                             </div>
                         </div>
   </Carousel.Item>
-  
-</Carousel>
-<a className="carousel-control-prev" href="#projectCarousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-</a>
-<a className="carousel-control-next" href="#projectCarousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-</a>
+</Carousel> 
+<div class ="bg-col-vid">
+    <h1 className ="txt text-left " >How it works ?</h1>         
+
+<Container>
+  <Row>
+    <Col className="align-self-center">
+        <div className="video-btn text-left">
+            <h3 className="d-inline-block"><FontAwesomeIcon className ="mr-3" icon={faPlusCircle}/> Post an item</h3>
+            <h3 className="d-inline-block mt-3 mb-4 "><FontAwesomeIcon className ="mr-3" icon={faUserPlus}/>Choose a recipient</h3>
+            <h3 className="d-inline-block"><FontAwesomeIcon className ="mr-4" icon={faRedoAlt}/>Repeat</h3>
+        </div>
+        <Button className ="btn-right">Show more details</Button>
+
+    </Col>
+
+    <Col>
+    <Image src={videoImg} width="450px" height ="300px"></Image>
+    </Col>
+  </Row>
+</Container>
+</div>
+
 </div>
     )
 }

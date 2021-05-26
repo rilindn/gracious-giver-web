@@ -51,9 +51,59 @@ code {
 
 .carousel-indicators li {
   border: none;
-  background: #ccc;
+  height: 15px;
+  width: 15px;
+  margin:5px;
+  /* border: 2px solid black; */
+  border-radius:50%;
+  background: #ED1858!important;
 }
 
 .carousel-indicators li.active {
-  background: #28a745;
+  background-color: #ED1858;
+}
+
+.txt{
+  margin:50px 0 60px 250px;
+}
+
+.carousel-control-prev-icon{
+ position: absolute;
+ color:lightgreen!important;
+ top: 150px;
+ right: 160px;
+ width: 50px!important;
+ height: 50px!important;
+ background-color: #ED1858!important;
+ border-radius: 40%;
+}
+.carousel-control-next-icon{
+  position: absolute;
+ color:lightgreen!important;
+  top: 150px;
+  left: 160px;
+  width: 50px!important;
+ height: 50px!important;
+  background-color: #ED1858!important;
+  border-radius:40%;
+}
+.video-btn{
+  height: 200px;
+  width: 300px;
+}
+
+.btn-right{
+  margin-right: 280px;
+}
+
+.bg-col-vid{
+  background-color: rgb(236, 236, 236);
+  padding-top: 5px;
+  padding-bottom: 50px;
+}
+
+.btn-primary {
+  
+  background-color:#ED1858!important;
+  border-color:#ED1858!important;
 }

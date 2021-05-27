@@ -10,6 +10,7 @@ import arrowIcon from '../../images/arrowIcon.png'
 import videoImg from '../../images/videoimg.png'
 
 
+
 export const WelcomePage = () => {
     return (
         <div>

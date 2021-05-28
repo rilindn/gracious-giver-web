@@ -5,6 +5,7 @@ import { List } from 'semantic-ui-react'
 import {faAngleDoubleRight} from '@fortawesome/free-solid-svg-icons'
 import { SocialIcon } from 'react-social-icons';
 
+
 export const Footer = () => {
   return (
     <div>

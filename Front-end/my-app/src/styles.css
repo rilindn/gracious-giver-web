@@ -173,3 +173,49 @@ section .section-title {
 #footer ul.quick-links li:hover a i {
   font-weight: 700;
 }
+
+
+/*post product*/
+
+.form-components-width{
+  /* width: 50%; */
+  padding: 30px;
+}
+
+.txt-post-product{
+  background-color:#3C6E71;
+  border-radius: 20px;
+  width: 700px;
+  height: 150px;
+}
+
+.form-group-el{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+.post-prodForm-btn{
+  margin-left: 550px;
+  
+}
+
+.new-post-t{
+  margin-right: 530px;
+}
+
+.new-post-p{
+  margin-right: 450px;
+  padding-top: 25px;
+  color: black;
+}
+
+.new-post-j{
+  margin-right: 70px;
+  color: white;
+}
+
+.new-post-n{
+  margin-right: 365px;
+  color: white;
+}

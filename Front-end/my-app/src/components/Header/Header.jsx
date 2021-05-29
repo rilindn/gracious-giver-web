@@ -7,6 +7,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import { FaUser } from 'react-icons/fa'
 import { BsChatFill,BsSearch } from 'react-icons/bs'
 import { MdAddCircleOutline } from 'react-icons/md'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 
 function Header() {
   return (
@@ -38,18 +39,24 @@ function Header() {
               <BsSearch className="header-search-icon"/>
               </div>
             </Form>
+            
             <Nav className="dropdownmenu">
-              <BsChatFill id="chat" color="white" size="25px" />
-
-              <FaUser id="user" color="white" size="25px" />
-              <NavDropdown id="basic-nav-dropdown">
-                <NavDropdown.Item href="">Posts</NavDropdown.Item>
-                <NavDropdown.Item href="">Bookmark</NavDropdown.Item>
-                <NavDropdown.Item href="">Settings</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="">Log out</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
+              
+            <BsChatFill id="chat" color="white" size="25px" />
+            <DropdownButton
+                menuAlign="right"
+                title={<FaUser id="user" color="white" size="25px" />}
+                id="dropdown-menu-align-right"
+                variant="transparent"
+                style={{backgroundColor:"none"}}
+              >
+                <Dropdown.Item eventKey="1">Posts</Dropdown.Item>
+                <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
+                <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="4">Log out</Dropdown.Item>
+              </DropdownButton>
+              </Nav>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

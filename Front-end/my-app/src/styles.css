@@ -269,7 +269,7 @@ section .section-title {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.65) 100%
+    rgba(0, 0, 0, 0.8) 100%
   );
   opacity: 0.5;
   border-radius: 17px;
@@ -287,7 +287,7 @@ section .section-title {
   font-size: 10pt;
   border-radius: 0 0 6px 6px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 17px;
 }
 .itemTypeFree {
   text-align: left;
@@ -339,10 +339,11 @@ section .section-title {
   color: #ed1858;
   font-style: italic;
   font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .searchpost {
-  margin-left: 250px;
+  margin-left: 200px;
 }
 
 #textbox {
@@ -359,10 +360,14 @@ section .section-title {
   margin-left: 40px;
   font-size: 17px;
 }
+.dropdown-toggle::after {
+  display: none !important;
+}
 
 .dropdownmenu {
   display: flex;
-  margin-left: 210px;
+  align-items: center;
+  margin-left: 250px;
 }
 
 .header-search {

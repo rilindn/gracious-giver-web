@@ -22,7 +22,7 @@ const Home = () => {
                 <div className="rowProd" >
                     <div className="prodCol">
                         <div className="home-prod">
-                            <img src={prod1} width="230px" height="230px" alt=""/>
+                            <img src={prod1} width="300px" height="270px" alt=""/>
                             <div class="itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -35,7 +35,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod1} width="230px" height="230px" alt=""/>
+                            <img src={prod1} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -48,7 +48,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -62,7 +62,7 @@ const Home = () => {
 
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod1} width="230px" height="230px" alt=""/>
+                            <img src={prod1} width="300px" height="270px" alt=""/>
                             <div class="itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -75,7 +75,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod1} width="230px" height="230px" alt=""/>
+                            <img src={prod1} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -88,7 +88,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -101,7 +101,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -114,7 +114,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -127,7 +127,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -140,7 +140,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -153,7 +153,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE
@@ -166,7 +166,7 @@ const Home = () => {
                     </div>
                     <div className="prodCol" >
                         <div className="home-prod">
-                            <img src={prod2} width="230px" height="230px" alt=""/>
+                            <img src={prod2} width="300px" height="270px" alt=""/>
                             <div class="caption itemText">
                                 <h5 className="prodTitle">
                                     <span class="itemTypeFree">FREE

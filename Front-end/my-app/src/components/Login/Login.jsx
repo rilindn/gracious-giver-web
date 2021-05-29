@@ -1,17 +1,24 @@
 import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBModalFooter, MDBRow } from "mdb-react-ui-kit";
 import React from "react";
-import Background from '../../images/background.jpg'
+import Footer from "../footer/Footer";
+import HeaderLoginRegister from "../Header/HeaderLoginRegister";
+import {BsPersonFill} from "react-icons/bs";
 
  
 const FormPage = () => {
   return (
-   
-    <MDBContainer>
-      <MDBRow>
-        <MDBCol md="6">
-          <MDBCard>
-            <MDBCardBody className="mx-4">
-              <div className="text-center">
+    <div id="bodyRegister">
+      <div>
+        <HeaderLoginRegister>
+
+        </HeaderLoginRegister>
+      </div>
+    <MDBContainer >
+      <MDBRow  >
+        <MDBCol md="6" >
+          <MDBCard id="logincard">
+            <MDBCardBody className="mx-4 ">
+              <div className="text-center ">
                 <h3 className="dark-grey-text mb-5">
                   <strong>Sign in</strong>
                 </h3>
@@ -23,13 +30,19 @@ const FormPage = () => {
                 validate
                 error="wrong"
                 success="right"
+                placeholder="your email"
+                
+
               />
               <MDBInput
+               
                 label="Your password"
                 group
                 type="password"
                 validate
                 containerClass="mb-0"
+                placeholder="xxxxxxx"
+                icon="BsPersonFill"
               />
               <p className="font-small blue-text d-flex justify-content-end pb-3">
                 Forgot
@@ -92,7 +105,11 @@ const FormPage = () => {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-   
+    <div>
+      <Footer/>
+    </div>
+    </div>
+    
   );
 };
 

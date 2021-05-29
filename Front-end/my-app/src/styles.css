@@ -1,3 +1,5 @@
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -377,4 +379,31 @@ section .section-title {
   position: absolute;
   top: 12px;
   right: 26px;
+}
+#bodyRegister{
+
+  background-image: url(./images/background3.jpg);
+  min-width: 100%;
+  min-height: 100%;
+  background-position: fixed;
+  background-size: cover;
+  
+
+}
+.card{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  color:#fff;
+ 
+}
+#CardRegister{
+  background-color: #ffffff26;
+}
+#logincard{
+  background-color: #ffffff26;
+  border: 1px solid rgb(255 255 255 / 62%);
+}
+#headerloginregister{
+  background-color: #ffffff00;
+
 }

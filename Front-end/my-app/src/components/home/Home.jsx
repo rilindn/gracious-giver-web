@@ -8,7 +8,8 @@ const Home = () => {
         <div>
             <h3>Give away or find FREE second hand stuff</h3>
             <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]} className="mb-3">
-                <ToggleButton className="border-right m-1" style={{width:"80px"}} value={1}>All</ToggleButton>
+                <ToggleButton className="border-right m-1" style={{width:"80px"}} value={1}
+                >All</ToggleButton>
                 <ToggleButton className="m-1" style={{width:"80px"}} value={2}>Free</ToggleButton>
                 <ToggleButton className="border-right m-1" style={{width:"80px"}} value={3}>Needed</ToggleButton>
             </ToggleButtonGroup>

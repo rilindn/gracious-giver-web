@@ -5,29 +5,32 @@ import quoteA from "../../images/alice.png"
 import quoteS from "../../images/sandra.png"
 import quoteJ from "../../images/jack.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus,faAngleLeft,faAngleRight,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
 import arrowIcon from '../../images/arrowIcon.png'
 import videoImg from '../../images/videoimg.png'
-
+import { Footer } from './../footer/Footer';
 
 
 export const WelcomePage = () => {
     return (
         <div>
-        <Navbar className="d-flex justify-content-end" bg="" expand="lg">
-          <Nav style={{margin:"10px 30px 0 0"}}>
-            <NavLink className="d-inline text-black font-weight-bold" style={{marginRight:"20px"}} to="/">
-              Log In
-            </NavLink>
-            <NavLink
-              className="d-inline sign-up-btn text-white font-weight-bold"
-              to="/department"
-            >
-              Sign Up
-            </NavLink>
-          </Nav>
-      </Navbar>
-      <div className="d-flex justify-content-starts align-items-center bg-img">
+          <Navbar className="d-flex justify-content-end" bg="" expand="lg">
+            <Nav style={{margin:"10px 30px 0 0"}}>
+                <NavLink 
+                className="d-inline text-black font-weight-bold" 
+                style={{marginRight:"20px"}} 
+                href="/home">
+                Log In
+                </NavLink>
+                <NavLink
+                className="d-inline sign-up-btn text-white font-weight-bold"
+                href="/home"
+                >
+                Sign Up
+                </NavLink>
+            </Nav>
+        </Navbar>
+      <div className="d-flex justify-content-start align-items-center bg-img">
         <div className="d-flex flex-column review-inner-container">
         <h1 style={{fontSize:"60px"}}>Want free stuff?</h1>
         <h6>or</h6>
@@ -173,6 +176,7 @@ export const WelcomePage = () => {
   </Row>
 </Container>
 </div>
+<Footer/>
 
 </div>
     )

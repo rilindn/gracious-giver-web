@@ -295,4 +295,9 @@ section .section-title {
   font-size: 12px;
   margin-bottom: 5px;
 }
+.row{
+  justify-content: space-around;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 

@@ -5,8 +5,12 @@ import prod2 from "../../images/prod2.png"
 import { Footer } from './../footer/Footer';
 import Header from './../Header/Header';
 import Product from './Product';
+<<<<<<< HEAD
 import Axios from 'axios';
 import axios from 'axios';
+=======
+
+>>>>>>> e1fadf08abb5cdd3c88a70ec7a37a464fee03d6f
 
 const Home = (props) => {
 

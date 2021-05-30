@@ -48,9 +48,8 @@ function Header() {
                 title={<FaUser id="user" color="white" size="25px" />}
                 id="dropdown-menu-align-right"
                 variant="transparent"
-                style={{backgroundColor:"none"}}
               >
-                <Dropdown.Item eventKey="1">Posts</Dropdown.Item>
+                <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />

@@ -46,6 +46,7 @@ class PostProdForm extends Component {
             (result) => {
               alert("Product added succesfully!")
             },
+<<<<<<< HEAD
             (error) => {
               alert('Failed')
             },
@@ -70,6 +71,27 @@ class PostProdForm extends Component {
             },
           )
       }
+=======
+            body:JSON.stringify({
+                ProductName: event.target.ProductName.value,
+                ProductCategory: event.target.ProductCategory.value,
+                ProductState: event.target.ProductState.value,
+                ProductPhoto: event.target.ProductPhoto.value,
+                ProductDescription: event.target.ProductDescription.value,
+                ProductLocation: event.target.ProductLocation.value,
+                ProductComment: event.target.ProductComment.value
+            })
+        })
+        
+            .then(res=>res.json())
+            .then((result)=>{
+                alert("Product added succesfully!");
+            },
+            (error)=>{
+                alert("Failed!");
+            })
+        }
+>>>>>>> e1fadf08abb5cdd3c88a70ec7a37a464fee03d6f
 
   render(){
     return (

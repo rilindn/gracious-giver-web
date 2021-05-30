@@ -253,6 +253,9 @@ section .section-title {
   width: 300px;
   height: 270px;
 }
+.prodImg {
+  border-radius: 15px;
+}
 .home-prod::after {
   content: '';
   position: absolute;

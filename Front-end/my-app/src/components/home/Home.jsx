@@ -1,25 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import { Pagination, Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import prod1 from "../../images/prod1.png"
 import prod2 from "../../images/prod2.png"
 import { Footer } from './../footer/Footer';
 import Header from './../Header/Header';
 import Sidebar from './../Sidebar/Sidebar';
 import Product from './Product';
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
+import Axios from 'axios';
+import axios from 'axios';
+
 
 const Home = (props) => {
 
-    const[products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [loading,setLodaing] = useState(false);
+
 
     useEffect(()=>{
         getproducts();
     },[]);
 
     const getproducts = async () => {
-        const response = await fetch(`http://localhost:5000/api/product`)
-        const data = await response.json();
-        setProducts(data);
+        try{
+        const data = await axios.get(`http://localhost:5000/api/product`)
+        .then(res=>{
+            console.log(res)
+            setProducts(res.data)
+        })
+        setLodaing(true);
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 
     return (
@@ -44,13 +60,15 @@ const Home = (props) => {
 
             <div className="productsALL">
                 <div className="rowProd" >
-                    {products.map(product=>(
+                    {loading ? 
+                    products.map(product=>(
                         <Product
                         title={product.ProductName}
                         image={product.ProductPhoto}
                         location={product.ProductLocation}
                         />
-                    ))}
+                    )) :  <Spinner animation="border" className="m-5"/>}
+                    
                         
                 </div>
             </div>

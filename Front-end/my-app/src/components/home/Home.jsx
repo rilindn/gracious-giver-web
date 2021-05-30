@@ -5,7 +5,7 @@ import prod2 from "../../images/prod2.png"
 import { Footer } from './../footer/Footer';
 import Header from './../Header/Header';
 import Product from './Product';
-import Axios from 'axios';
+
 
 const Home = (props) => {
 

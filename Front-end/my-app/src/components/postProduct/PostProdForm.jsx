@@ -22,15 +22,16 @@ class PostProdForm extends Component {
                 ProductPhoto: event.target.ProductPhoto.value,
                 ProductDescription: event.target.ProductDescription.value,
                 ProductLocation: event.target.ProductLocation.value,
-                ProductComment: event.target.ProductName.value
+                ProductComment: event.target.ProductComment.value
             })
         })
+        
             .then(res=>res.json())
             .then((result)=>{
                 alert("Product added succesfully!");
             },
             (error)=>{
-                alert("Failed");
+                alert("Failed!");
             })
         }
 

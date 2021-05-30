@@ -1,12 +1,14 @@
 .sidebar {
-    position: fixed;
-    top: 77px;
+    position: absolute;
+    top: 76px;
     left: -300px;
     width: 300px;
-    height: 100%;
+    min-height: 100%;
+   
     background-color: #3C6E71;
     transition: left 300ms ease-out;
-    
+    z-index: 1;
+ 
   }
   .sidebar.active {
     left: 0px;
@@ -29,7 +31,7 @@
   .hamburger {
     border: none;
     outline: 0;
-    background-color: inherit;
+    background-color: transparent;
     width: 40px;
     height: 20px;
     position: absolute;

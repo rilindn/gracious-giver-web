@@ -19,12 +19,12 @@ export const WelcomePage = () => {
                 <NavLink 
                 className="d-inline text-black font-weight-bold" 
                 style={{marginRight:"20px"}} 
-                href="/home">
+                href="/login">
                 Log In
                 </NavLink>
                 <NavLink
                 className="d-inline sign-up-btn text-white font-weight-bold"
-                href="/home"
+                href="/register"
                 >
                 Sign Up
                 </NavLink>

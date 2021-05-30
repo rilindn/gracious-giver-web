@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pagination, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import prod1 from "../../images/prod1.png"
 import prod2 from "../../images/prod2.png"
 import { Footer } from './../footer/Footer';
 import Header from './../Header/Header';
+import Product from './Product';
+import Axios from 'axios';
 
-const Home = () => {
+const Home = (props) => {
+
+    const[products, setProducts] = useState([]);
+
+    useEffect(()=>{
+        getproducts();
+    },[]);
+
+    const getproducts = async () => {
+        const response = await fetch(`http://localhost:5000/api/product`)
+        const data = await response.json();
+        setProducts(data);
+    }
+
     return (
         <div>
             <Header/>
@@ -20,174 +35,25 @@ const Home = () => {
 
             <div className="productsALL">
                 <div className="rowProd" >
-                    <div className="prodCol">
-                        <div className="home-prod">
-                            <img src={prod1} width="300px" height="270px" alt=""/>
-                            <div class="itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                        Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod1} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processorrrrrr
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod1} width="300px" height="270px" alt=""/>
-                            <div class="itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                        Xeon processorrr
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod1} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="prodCol" >
-                        <div className="home-prod">
-                            <img src={prod2} width="300px" height="270px" alt=""/>
-                            <div class="caption itemText">
-                                <h5 className="prodTitle">
-                                    <span class="itemTypeFree">FREE
-                                    </span> 
-                                    Xeon processor
-                                </h5>
-                                <p className="prodLocation">Balaclava, Victoria</p> 
-                            </div>
-                        </div>
-                    </div>
+                    {products.map(product=>(
+                        <Product
+                        title={product.ProductName}
+                        image={product.ProductPhoto}
+                        location={product.ProductLocation}
+                        />
+                    ))}
+                        
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Pagination style={{color:"greenyellow"}}>
-                    <Pagination.Prev />
+                <Pagination>
+                    <Pagination.Prev style={{backgroundColor:"greenyellow"}} />
                     <Pagination.Item active>{1}</Pagination.Item>
                     <Pagination.Item>{2}</Pagination.Item>
                     <Pagination.Item>{3}</Pagination.Item>
                     <Pagination.Item>{4}</Pagination.Item>
                     <Pagination.Item>{5}</Pagination.Item>
-                    <Pagination.Item >{6}</Pagination.Item>
+                    <Pagination.Item>{6}</Pagination.Item>
                     <Pagination.Item>{7}</Pagination.Item>
                     <Pagination.Next />
                 </Pagination>

@@ -4,8 +4,9 @@ import prod1 from "../../images/prod1.png"
 import prod2 from "../../images/prod2.png"
 import { Footer } from './../footer/Footer';
 import Header from './../Header/Header';
+import Sidebar from './../Sidebar/Sidebar';
 import Product from './Product';
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Home = (props) => {
 
@@ -24,6 +25,14 @@ const Home = (props) => {
     return (
         <div>
             <Header/>
+            <Router>
+        <Sidebar />
+        <Switch>
+          <Route path=""  />
+          <Route path="" />
+          <Route path="" />
+        </Switch>
+      </Router>
             <div className="pt-5">
             <h3>Give away or find FREE second hand stuff</h3>
             <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]} className="mb-3">

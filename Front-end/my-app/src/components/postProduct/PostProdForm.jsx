@@ -1,43 +1,80 @@
+import axios from 'axios';
 import React, { Component } from 'react'
 import { Form, Col, Button} from 'react-bootstrap'
 
 class PostProdForm extends Component {
 
-    constructor(props){
-        super(props);
-        this.addProduct = this.addProduct.bind(this);
-    };
-
-    addProduct(event){
-        fetch('http://localhost:5000/api/Product',{
-            method:"POST",
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                ProductName: event.target.ProductName.value,
-                ProductCategory: event.target.ProductCategory.value,
-                ProductState: event.target.ProductState.value,
-                ProductPhoto: event.target.ProductPhoto.value,
-                ProductDescription: event.target.ProductDescription.value,
-                ProductLocation: event.target.ProductLocation.value,
-                ProductComment: event.target.ProductName.value
-            })
+    
+    constructor(props) {
+        super(props)
+        this.state = { prods: [] }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleFileSelected = this.handleFileSelected.bind(this)
+      }
+    
+      photofilename = 'anonymous.png'
+      imagesrc = process.env.REACT_APP_PHOTOPATH + this.photofilename
+    
+      componentDidMount() {
+        fetch('http://localhost:5000/api/productcategory')
+          .then((response) => response.json())
+          .then((data) => {
+            this.setState({ prods: data })
+          })
+      }
+    
+      handleSubmit(event) {
+        event.preventDefault()
+        fetch('http://localhost:5000/api/product', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ProductName: event.target.ProductName.value,
+            ProductCategory: event.target.ProductCategory.value,
+            ProductState: event.target.ProductState.value,
+            ProductPhoto: this.photofilename,
+            ProductDescription: event.target.ProductDescription.value,
+            ProductLocation: event.target.ProductLocation.value,
+            ProductComment: event.target.ProductComment.value
+          }),
         })
-            .then(res=>res.json())
-            .then((result)=>{
-                alert("Product added succesfully!");
+          .then((res) => res.json())
+          .then(
+            (result) => {
+              alert("Product added succesfully!")
             },
-            (error)=>{
-                alert("Failed");
-            })
-        }
+            (error) => {
+              alert('Failed')
+            },
+          )
+      }
+      handleFileSelected(event) {
+        event.preventDefault()
+        this.photofilename = event.target.files[0].name
+        const formData = new FormData()
+        formData.append('myFile', event.target.files[0], event.target.files[0].name)
+        fetch(process.env.REACT_APP_API + 'product/SaveFile', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then(
+            (result) => {
+              this.imagesrc = process.env.REACT_APP_PHOTOPATH + result
+            },
+            (error) => {
+              alert('Failed')
+            },
+          )
+      }
 
   render(){
     return (
         <div>
-        <Form onSubmit={this.addProduct} style={{width:"750px"}} className ="form-components-width mx-auto">
+        <Form onSubmit={this.handleSubmit} style={{width:"750px"}} className ="form-components-width mx-auto">
           <Form.Group className="form-group-el d-flex">
             <Form.Label htmlFor="inputName">Product Name</Form.Label>
             <Form.Control
@@ -100,7 +137,9 @@ class PostProdForm extends Component {
             <Form.File
             name="ProductPhoto" 
             style={{width: "400px"}}  
-            className ="d-flex"id="exampleFormControlFile1"/>
+            className ="d-flex"
+            id="exampleFormControlFile1"
+            onChange={this.handleFileSelected}/>
           </Form.Group >
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
             <Form.Label text-left >Additional Description</Form.Label>

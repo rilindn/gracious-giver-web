@@ -409,13 +409,18 @@ section .section-title {
   box-shadow: inset 0 0 5px #3c6e71;
 }
 .label-alignin {
-  width: 365px;
+  width: 380px;
   text-align: left;
   margin: 20px 0 1px 0;
 }
 
 .lbl-position {
   margin-left: 130px;
+  padding-left: 30px;
+}
+
+.pad{
+  padding-left:30px;
 }
 
 .lbl-position-d {
@@ -425,6 +430,7 @@ section .section-title {
 .btn-position {
   display: flex;
   margin-left: 430px;
+  
 }
 
 .lbl-position-lgn {
@@ -455,6 +461,7 @@ section .section-title {
   transition: left 300ms ease-out;
   z-index: 2;
   opacity: 0.95;
+  
 }
 .sidebar.active {
   left: 0px;
@@ -518,4 +525,56 @@ section .section-title {
 }
 .sidebar.active .hamburger div {
   transform: scale(0);
+}
+
+.q-width{
+  height: 100px;
+}
+
+.icon-position{
+  position: absolute;
+  top:195px;
+  left: 160px;
+}
+
+.icon-position-p{
+  position: absolute;
+  left: 160px;
+  top:278px
+}
+
+.icon-position-c{
+  position: absolute;
+  left: 160px;
+  top: 360px;
+}
+
+.icon-position-pc{
+  position: absolute;
+  left: 160px;
+  top:610px
+}
+
+.icon-position-e{
+  position: absolute;
+  left: 160px;
+  top:693px;
+}
+
+.icon-position-ce{
+  position: absolute;
+  left: 160px;
+  top: 777px;
+}
+
+.icon-position-ul{
+  position: absolute;
+  left: 80px;
+  top: 145px;
+}
+
+.icon-position-pl{
+  position: absolute;
+  left: 80px;
+  top:215px
 }

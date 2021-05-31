@@ -5,6 +5,8 @@ import HeaderLoginRegister from "../Header/HeaderLoginRegister";
 import {BsPersonFill} from "react-icons/bs";
 import { Form, FormControl, FormLabel } from "react-bootstrap";
 import { SocialIcon } from 'react-social-icons';
+import { FontAwesome } from 'react-icons/fa'
+import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt, FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
 
  
 const FormPage = () => {
@@ -28,26 +30,22 @@ const FormPage = () => {
 
               <FormLabel>
                       Username </FormLabel>
+              <FaUser className="icon-position-ul"/>       
               <MDBInput className="lbl-position-lgn"
-                group
                 type="email"
-                validate
                 error="wrong"
                 success="right"
-                placeholder="Username"
-                style={{width:"400px"}}
+                style={{width:"400px", paddingLeft:"30px"}}
               />
 
             <FormLabel>
                       Password </FormLabel>
+              <FaLock className="icon-position-pl"/>        
               <MDBInput className = "lbl-position-lgn"
-                group
                 type="password"
-                validate
                 containerClass="mb-0"
-                placeholder="Password"
                 icon="BsPersonFill"
-                style={{width:"400px"}}
+                style={{width:"400px", paddingLeft:"30px"}}
               />
               <p className="font-small blue-text d-flex-f pb-3">
                 Forgot
@@ -63,7 +61,6 @@ const FormPage = () => {
                   rounded
                   className="btn-block z-depth-1a"
                   style={{width:"100px"}}
-                  href="/home"
                 >
                   Sign in
                 </MDBBtn>
@@ -72,15 +69,41 @@ const FormPage = () => {
 
                 or Sign in with:
               </p>
+              {/* <div className="row my-3 d-flex justify-content-center">
+                <MDBBtn
+                  type="button"
+                  color="white"
+                  rounded
+                  className="mr-md-3 z-depth-1a"
+                >
+                  <MDBIcon fab icon="facebook-f" className="black-text text-center" />
+                </MDBBtn>
+                <MDBBtn
+                  type="button"
+                  color="black"
+                  rounded
+                  // className="mr-md-3 z-depth-1a"
+                >
+                  <MDBIcon fab icon="twitter" className="black-text" />
+                </MDBBtn>
+                <MDBBtn
+                  type="button"
+                  color="black"
+                  rounded
+                  className="z-depth-1a"
+                >
+                  <MDBIcon fab icon="google-plus-g" className="black-text" />
+                </MDBBtn>
+              </div> */}
 
-        <ul className="d-flex  list-unstyled list-inline social justify-content-center">
+        <ul className="d-flex  list-unstyled list-inline social justify-content-center list">
 						<li className="list-inline-item"><a><SocialIcon url="https://facebook.com"/></a></li>
 						<li className="list-inline-item"><a><SocialIcon url="https://mail.google.com/" /></a></li>
 					</ul>
             </MDBCardBody>
               <p className="font-small grey-text d-flex justify-content-center">
                 Not a member?
-                <a href="/register" className="blue-text ml-1">
+                <a href="#!" className="blue-text ml-1">
 
                   Sign Up
                 </a>

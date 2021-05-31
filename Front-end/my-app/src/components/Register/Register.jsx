@@ -5,14 +5,18 @@ import Footer from '../../components/footer/Footer'
 import userLogo from '../../images/username1.png'
 import { Form, FormControl, FormLabel } from "react-bootstrap";
 import { MDBInputGroupText } from "mdb-react-ui-kit";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesome } from 'react-icons/fa'
+import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt, FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
+
+
 
 
 
 
 
 const FormPage = () => {
+
+  
   
   return (
     <div id="bodyRegister">
@@ -31,45 +35,33 @@ const FormPage = () => {
                 
                 
                   <FormLabel  className="label-alignin">
-                      Username </FormLabel>
-                      
-                  <MDBInput className ="lbl-position"
-                  
-                    icon ={faPlusCircle}
-                    group
+                   Username </FormLabel>
+                   <FaUser className="icon-position"/>
+                  <MDBInput className ="lbl-position pad"
                     type="text"
-                    validate
                     error="wrong"
                     success="right"
-                    placeholder=" Username"
-                    style={{width:"400px"}}
+                    style={{width:"400px", paddingLeft:"30px" }}
                   />
                   
                   <FormLabel className="label-alignin">
                     Password
                   </FormLabel >
+                  <FaLock className="icon-position-p"/>
                     <MDBInput className ="lbl-position"
-                    icon="lock"
-                    group
                     type="password"
-                    validate
-                    placeholder="Password"
-                    style={{width:"400px"}}
+                    style={{width:"400px", paddingLeft:"30px" }}
                   />
                   <FormLabel className="label-alignin">
                   Confirm password
                   </FormLabel>
+                  <FaLock className="icon-position-c"/>
                    <MDBInput className ="lbl-position"
-                  icon="lock"
-                  group
                   type="password"
                   validate
-                  placeholder="Confirm password"
-                  style={{width:"400px"}}
+                  style={{width:"400px", paddingLeft:"30px" }}
                  />
                 
-          
-
                    <FormLabel className="label-alignin">
                      State
                   </FormLabel>
@@ -102,42 +94,35 @@ const FormPage = () => {
                    <FormLabel className="label-alignin">
                    Postcode
                   </FormLabel>
-
+                  <FaMapMarked className="icon-position-pc"/>
                    <MDBInput className ="lbl-position"
-                    icon="envelope"
                     group
                     type="number"
                     validate
                     error="wrong"
                     success="right"
-                    placeholder="Postcode"
-                    style={{width:"400px"}}
+                    style={{width:"400px", paddingLeft:"30px"}}
                   />
                   <FormLabel className="label-alignin">
                   Email
                 </FormLabel>
+                <FaEnvelope className="icon-position-e"/>
                   <MDBInput className ="lbl-position"
-                    icon="envelope"
-                    group
                     type="email"
-                    validate
                     error="wrong"
                     success="right"
-                    placeholder="Email"
-                    style={{width:"400px"}}
+                    style={{width:"400px", paddingLeft:"30px"}}
                   />
                   <FormLabel className="label-alignin">
                   Confirm your email
                   </FormLabel>
+                  <FaEnvelope className="icon-position-ce"/>
                   <MDBInput className ="lbl-position"
-                    icon="exclamation-triangle"
-                    group
                     type="text"
                     validate
                     error="wrong"
                     success="right"
-                    placeholder="Confirm email"
-                    style={{width:"400px"}}
+                    style={{width:"400px", paddingLeft:"30px"}}
                   />
                   <FormLabel className="label-alignin">
                     Gender
@@ -175,8 +160,7 @@ const FormPage = () => {
                   gradient="blue"
                   rounded
                   style={{width:"100px"}}
-                  className="btn-block z-depth-1a btn-position"
-                  href="/home">
+                  className="btn-block z-depth-1a btn-position">
                     Register
                   </MDBBtn>
                 </div>

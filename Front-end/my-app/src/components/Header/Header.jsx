@@ -45,14 +45,14 @@ function Header() {
               
             <BsChatFill id="chat" color="white" size="25px" />
             <DropdownButton
-                menuAlign="right"
+                menuAlign="left"
                 title={<FaUser id="user" color="white" size="25px" />}
-                id="dropdown-menu-align-right"
+                id="dropdown-menu-align-left"
                 variant="transparent"
               >
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Dashboard</Dropdown.Item>
+                <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item href="/login" eventKey="4">Log out</Dropdown.Item>

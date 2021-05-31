@@ -175,7 +175,8 @@ const FormPage = () => {
                   gradient="blue"
                   rounded
                   style={{width:"100px"}}
-                  className="btn-block z-depth-1a btn-position">
+                  className="btn-block z-depth-1a btn-position"
+                  href="/home">
                     Register
                   </MDBBtn>
                 </div>

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
-import prod1 from "../../images/prod1.png"
-import prod2 from "../../images/prod2.png"
-import { Footer } from './../footer/Footer';
-import Header from './../Header/Header';
-import Sidebar from './../Sidebar/Sidebar';
+import { Footer } from '../footer/Footer';
+import Header from '../Header/Header';
 import Product from './Product';
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-
-import Axios from 'axios';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Sidebar from '../Sidebar/Sidebar';
 
 
 const Home = (props) => {
@@ -45,6 +39,7 @@ const Home = (props) => {
         <Sidebar />
         <Switch>
           <Route path=""  />
+          <Route path="" />
           <Route path="" />
           <Route path="" />
         </Switch>

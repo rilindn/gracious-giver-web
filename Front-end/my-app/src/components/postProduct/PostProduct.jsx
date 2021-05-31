@@ -10,7 +10,7 @@ export const PostProduct = () => {
      <div>
         <Header/>
         <div className="pt-3 prod-form-wrapper mx-auto">
-            <h3  style ={{fontFamily:'Hanalei Fill'}} className="new-post-t">New Post</h3>    
+            <h2  style ={{fontFamily:'Hanalei Fill'}} className="new-post-t">New Post</h2>    
             <div className ="txt-post-product mx-auto ">
             <h4 style ={{fontFamily:'Hanalei Fill'}} className="new-post-p">Posting Guideliness</h4>
             <h6 className="new-post-j">Just remember that every item posted should be free, legal and family-friendly.</h6>

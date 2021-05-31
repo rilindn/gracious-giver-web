@@ -22,7 +22,7 @@ const Home = (props) => {
         try{
         const data = await axios.get(`http://localhost:5000/api/product`)
         .then(res=>{
-            console.log(res)
+            console.log(res.data)
             setProducts(res.data)
         })
         setLodaing(true);
@@ -58,6 +58,7 @@ const Home = (props) => {
                     {loading ? 
                     products.map(product=>(
                         <Product
+                        key={product.ProductId}
                         title={product.ProductName}
                         image={product.ProductPhoto}
                         location={product.ProductLocation}

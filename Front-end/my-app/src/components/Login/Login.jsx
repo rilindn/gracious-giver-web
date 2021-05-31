@@ -63,6 +63,7 @@ const FormPage = () => {
                   rounded
                   className="btn-block z-depth-1a"
                   style={{width:"100px"}}
+                  href="/home"
                 >
                   Sign in
                 </MDBBtn>
@@ -71,32 +72,6 @@ const FormPage = () => {
 
                 or Sign in with:
               </p>
-              {/* <div className="row my-3 d-flex justify-content-center">
-                <MDBBtn
-                  type="button"
-                  color="white"
-                  rounded
-                  className="mr-md-3 z-depth-1a"
-                >
-                  <MDBIcon fab icon="facebook-f" className="black-text text-center" />
-                </MDBBtn>
-                <MDBBtn
-                  type="button"
-                  color="black"
-                  rounded
-                  // className="mr-md-3 z-depth-1a"
-                >
-                  <MDBIcon fab icon="twitter" className="black-text" />
-                </MDBBtn>
-                <MDBBtn
-                  type="button"
-                  color="black"
-                  rounded
-                  className="z-depth-1a"
-                >
-                  <MDBIcon fab icon="google-plus-g" className="black-text" />
-                </MDBBtn>
-              </div> */}
 
         <ul className="d-flex  list-unstyled list-inline social justify-content-center">
 						<li className="list-inline-item"><a><SocialIcon url="https://facebook.com"/></a></li>
@@ -105,7 +80,7 @@ const FormPage = () => {
             </MDBCardBody>
               <p className="font-small grey-text d-flex justify-content-center">
                 Not a member?
-                <a href="#!" className="blue-text ml-1">
+                <a href="/register" className="blue-text ml-1">
 
                   Sign Up
                 </a>

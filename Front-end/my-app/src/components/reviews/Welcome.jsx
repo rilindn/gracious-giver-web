@@ -3,7 +3,13 @@ import { Form,Button,Col, Navbar, NavLink, Nav, Container, Image, Media , Row} f
 import Carousel from 'react-bootstrap/Carousel'
 import quoteA from "../../images/alice.png"
 import quoteS from "../../images/sandra.png"
-import quoteJ from "../../images/jack.png"
+import quoteN from "../../images/N.jpg"
+import quoteK from "../../images/K.jpg"
+import quoteAn from "../../images/A.jpg"
+import quoteAa from "../../images/Aa.jpg"
+import quoteAm from "../../images/Amy.jpg"
+import quoteNi from "../../images/Ni.jpg"
+import quoteHa from "../../images/Harris.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
 import arrowIcon from '../../images/arrowIcon.png'
@@ -52,30 +58,29 @@ export const WelcomePage = () => {
   <Carousel.Item style={{height:"400px"}}>
   <div className="carousel-inner px-5 pb-4">
                             <div className="carousel-item active">
-                                <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteA} alt="" width="75"/>
+                                <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteK} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                            <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>
-                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                            <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>I have gotten so many great items from this site. A swimming pool, kids playhouse and more-love it .<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>
+                                            <footer className="blockquote-footer">Katherine                             
                                             </footer>
                                         </blockquote>
                                     </div>
                                 </Media>
-                                <Media><Image className="rounded-circle img-thumbnail" src={quoteS} alt="" width="75"/>
+                                <Media><Image className="rounded-circle img-thumbnail" src={quoteAn} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>This is so handy! I've been using freecycle for ages but this app makes it much easier.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                          
+                                          <footer className="blockquote-footer">Anderson                                               
                                             </footer>
                                         </blockquote>
                                     </div>
                                 </Media>
-                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteJ} alt="" width="75"/>
+                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteN} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Brilliant! Really easy to use, as a mother of 5 kids this has been very handy indeed with regards to doing up my house.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                
+                                                    <footer className="blockquote-footer">Nicole
                                             </footer>
                                         </blockquote>
                                     </div>
@@ -86,30 +91,29 @@ export const WelcomePage = () => {
   <Carousel.Item style={{height:"400px"}}>
   <div className="carousel-inner px-5 pb-4">
                             <div className="carousel-item active">
-                                <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteA} alt="" width="75"/>
+                                <Media className="media"><Image className="rounded-circle img-thumbnail" src={quoteAm} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                            <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>
-                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                            <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Works great! MUCH easier than using the freecycle website. Highly recommend it!.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>
+                                            <footer className="blockquote-footer">Brenda
                                             </footer>
                                         </blockquote>
                                     </div>
                                 </Media>
-                                <Media><Image className="rounded-circle img-thumbnail" src={quoteS} alt="" width="75"/>
+                                <Media><Image className="rounded-circle img-thumbnail" src={quoteAa} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>I absolutely love this app! There is always someone nice to help a family in need!<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            
+                                        <footer className="blockquote-footer">Amy
                                             </footer>
                                         </blockquote>
                                     </div>
                                 </Media>
-                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteJ} alt="" width="75"/>
+                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteNi} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
-                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>I've received a free 55" TV, some cleaning supplies, boots for my son who outgrows them every year, and more. Don't forget to post the things you no longer need! I do! And it's the "cycle" in Freecycle! Love it!.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                           
+                                         <footer className="blockquote-footer">Nick
                                             </footer>
                                         </blockquote>
                                     </div>
@@ -125,8 +129,7 @@ export const WelcomePage = () => {
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
                                             <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Really great app, helping to keep reusable/upcyclable "waste" out of landfill!<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>
-                                            <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                            <footer className="blockquote-footer">Jessica
                                             </footer>
                                         </blockquote>
                                     </div>
@@ -135,18 +138,18 @@ export const WelcomePage = () => {
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
                                         <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>People helping people - it doesn't get better than this!<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            
-                                        <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <footer className="blockquote-footer">Anna
+                                                
                                             </footer>
                                         </blockquote>
                                     </div>
                                 </Media>
-                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteJ} alt="" width="75"/>
+                                <div className="media"><img className="rounded-circle img-thumbnail" src={quoteHa} alt="" width="75"/>
                                     <div className="media-body ml-3">
                                         <blockquote className="blockquote border-0 p-0">
                                         <p className="font-italic lead"><FontAwesomeIcon className="mr-3" icon={faQuoteLeft}/>Wonderful service. I have found several items and always had a great experience. I also gave away several items and it was quick and easy.<FontAwesomeIcon className="ml-3" icon={faQuoteRight}/></p>                                            
-                                        <footer className="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
+                                        <footer className="blockquote-footer">Harris
+                                               
                                             </footer>
                                         </blockquote>
                                     </div>

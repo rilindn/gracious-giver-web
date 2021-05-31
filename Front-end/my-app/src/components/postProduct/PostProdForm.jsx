@@ -1,30 +1,29 @@
 import axios from 'axios';
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { Form, Col, Button} from 'react-bootstrap'
 
-class PostProdForm extends Component {
+const PostProdForm = () => {
 
     
-    constructor(props) {
-        super(props)
-        this.state = { prods: [] }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleFileSelected = this.handleFileSelected.bind(this)
-      }
-    
-      photofilename = 'anonymous.png'
-      imagesrc = process.env.REACT_APP_PHOTOPATH + this.photofilename
-    
-      componentDidMount() {
-        fetch('http://localhost:5000/api/productcategory')
-          .then((response) => response.json())
-          .then((data) => {
-            this.setState({ prods: data })
-          })
-      }
-    
-      handleSubmit(event) {
-        event.preventDefault()
+    const [categories, setCategories] = useState([]);
+
+    useEffect(()=>{
+        getCategories();
+    },[]);
+
+    const getCategories = async () => {
+        try{
+        const data = await axios.get('http://localhost:5000/api/productcategory')
+        .then(res=>{
+            console.log(res)
+            setCategories(res.data)
+        })
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    const handleSubmit = (event) => {
         fetch('http://localhost:5000/api/product', {
           method: 'POST',
           headers: {
@@ -35,7 +34,7 @@ class PostProdForm extends Component {
             ProductName: event.target.ProductName.value,
             ProductCategory: event.target.ProductCategory.value,
             ProductState: event.target.ProductState.value,
-            ProductPhoto: this.photofilename,
+            ProductPhoto: event.target.ProductPhoto.value,
             ProductDescription: event.target.ProductDescription.value,
             ProductLocation: event.target.ProductLocation.value,
             ProductComment: event.target.ProductComment.value
@@ -47,34 +46,52 @@ class PostProdForm extends Component {
               alert("Product added succesfully!")
             },
             (error) => {
-              alert('Failed')
+              alert(error)
             },
           )
-      }
-      handleFileSelected(event) {
-        event.preventDefault()
-        this.photofilename = event.target.files[0].name
-        const formData = new FormData()
-        formData.append('myFile', event.target.files[0], event.target.files[0].name)
-        fetch(process.env.REACT_APP_API + 'product/SaveFile', {
-          method: 'POST',
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then(
-            (result) => {
-              this.imagesrc = process.env.REACT_APP_PHOTOPATH + result
-            },
-            (error) => {
-              alert('Failed')
-            },
-          )
-      }
+    }
+    //   handleImageUpload(event) {
+    //     const files = event.target.files
+    //     const formData = new FormData()
+    //     formData.append('myFile', files[0])
+      
+    //     fetch('http://localhost:5000/api/ProductPhotos', {
+    //       method: 'POST',
+    //       body: {
+    //         ProductPhotoPath: event.target.ProductPhoto.value
+    //       }
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       console.log(data)
+    //     })
+    //     .catch(error => {
+    //       alert(error)
+    //     })
+    //   }
+    //   handleFileSelected(event) {
+    //     event.preventDefault()
+    //     this.photofilename = event.target.files[0].name
+    //     const formData = new FormData()
+    //     formData.append('myFile', event.target.files[0], event.target.files[0].name)
+    //     fetch(process.env.REACT_APP_API + 'product/SaveFile', {
+    //       method: 'POST',
+    //       body: formData,
+    //     })
+    //       .then((res) => res.json())
+    //       .then(
+    //         (result) => {
+    //           this.imagesrc = process.env.REACT_APP_PHOTOPATH + result
+    //         },
+    //         (error) => {
+    //           alert(error)
+    //         },
+    //       )
+    //   }
 
-  render(){
     return (
         <div>
-        <Form onSubmit={this.handleSubmit} style={{width:"750px"}} className ="form-components-width mx-auto">
+        <Form onSubmit={handleSubmit} style={{width:"750px"}} className ="form-components-width mx-auto">
           <Form.Group className="form-group-el d-flex">
             <Form.Label htmlFor="inputName">Product Name</Form.Label>
             <Form.Control
@@ -92,10 +109,10 @@ class PostProdForm extends Component {
              as="select" 
              custom
              >
-              <option>Clothes</option>
-              <option>Tech</option>
-              <option>Health</option>
-              <option>Equipments</option>
+             {categories.map(categorie=>(
+                
+              <option>{categorie.ProductCategoryName}</option>
+             ))}
             </Form.Control>
           </Form.Group> 
 
@@ -138,8 +155,7 @@ class PostProdForm extends Component {
             name="ProductPhoto" 
             style={{width: "400px"}}  
             className ="d-flex"
-            id="exampleFormControlFile1"
-            onChange={this.handleFileSelected}/>
+            id="exampleFormControlFile1"/>
           </Form.Group >
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
             <Form.Label text-left >Additional Description</Form.Label>
@@ -160,11 +176,11 @@ class PostProdForm extends Component {
             as="select" 
             custom
             >
-              <option>Hogosht</option>
-              <option>Kamenicë</option>
-              <option>Ferizaj</option>
-              <option>Malishevë</option>
-              <option>Terrnoc</option>
+              <option>London</option>
+              <option>Manchester</option>
+              <option>Oxford</option>
+              <option>Edinburgh</option>
+              <option>Glasgow</option>
             </Form.Control>
           </Form.Group>
 
@@ -183,7 +199,6 @@ class PostProdForm extends Component {
                 </Form>
         </div>
     )
-}
 }
 
 export default PostProdForm

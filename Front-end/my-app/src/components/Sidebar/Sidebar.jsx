@@ -1,9 +1,9 @@
 import React from 'react';
 import  { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Sidebar.css";
 
 function Sidebar() {
+  
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   return (

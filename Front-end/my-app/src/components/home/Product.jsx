@@ -1,6 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import prod1 from "../../images/prod1.png"
+import prod1 from "../../images/dinningTable.jpg"
 const Product = ({title,image,location}) => {
 
     const imagesrc = process.env.REACT_APP_PHOTOPATH + image

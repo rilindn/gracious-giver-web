@@ -12,6 +12,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 function Header() {
   return (
     <div className="header">
+      
       <Navbar bg="#3C6E71">
         <Navbar.Brand id="logo" href="/home"></Navbar.Brand>
 
@@ -51,9 +52,10 @@ function Header() {
               >
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
+                <Dropdown.Item eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item eventKey="4">Log out</Dropdown.Item>
+                <Dropdown.Item href="/login" eventKey="4">Log out</Dropdown.Item>
               </DropdownButton>
               </Nav>
           </Nav>

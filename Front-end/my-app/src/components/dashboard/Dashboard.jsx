@@ -5,6 +5,10 @@ import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import ProductTable from './dash-prod/ProductTable';
 import CityTable from './dash-city/CityTable';
 
+import CategTable from './dash-category/CategTable';
+
+import StateTable from './dash-state/StateTable';
+import StreetTable from'./dash-street/StreetTable';
 
 // document.ready(function(){
 // 	// Activate tooltip
@@ -39,6 +43,15 @@ const Dashboard = () => {
     <div>
         <ProductTable/>
         <CityTable/>
+
+        <CategTable/>
+
+        <StateTable/>
+<<<<<<< HEAD
+        <StreetTable/>
+=======
+
+>>>>>>> e5cc8fdaa99a2259c02d7bb9aa5d9ba8af0eaa1c
     </div>
     )
 }

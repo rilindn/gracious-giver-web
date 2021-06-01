@@ -151,6 +151,17 @@ const FormPage = () => {
                 <label class="form-check-label" for="inlineRadio2">Male</label>
               </div>
               </div>
+
+              <FormLabel className="label-alignin">
+                    Date of birth
+                  </FormLabel>
+                  <FormControl className="lbl-position" 
+                  style={{width:"200px"}}
+                  type="date"
+                  name="DateOfBirth"
+                  required
+                  placeholder="Date of birth"
+                  ></FormControl>
                 </div>
 
                 

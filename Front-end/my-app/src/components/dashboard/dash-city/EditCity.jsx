@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
-const editProduct = ({show,onHide}) => {
+const editCity = ({show,onHide}) => {
     return (
         <div>
             <Modal 
@@ -11,7 +11,7 @@ const editProduct = ({show,onHide}) => {
                 <div class="modal-content">
                     <Form>
                         <div class="modal-header">						
-                            <h3 class="modal-title">Edit Product</h3>
+                            <h3 class="modal-title">Edit City</h3>
                             <Button 
                             onClick={onHide}
                             className="modal-close-btn" 
@@ -20,23 +20,15 @@ const editProduct = ({show,onHide}) => {
                                 &times;
                             </Button>
                     </div>
-                        <div class="modal-body">					
+                        <div class="modal-body">	
+                        <FormGroup class="form-group">
+                                <label>Id</label>
+                                <input type="text" class="form-control" required/>
+                            </FormGroup>					
                             <FormGroup class="form-group">
                                 <label>Name</label>
                                 <input type="text" class="form-control" required/>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required/>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required/>
-                            </FormGroup>					
+                            </FormGroup>			
                         </div>
                         <Modal.Footer class="modal-footer">
                             <input 
@@ -52,4 +44,4 @@ const editProduct = ({show,onHide}) => {
     )
 }
 
-export default editProduct
+export default editCity

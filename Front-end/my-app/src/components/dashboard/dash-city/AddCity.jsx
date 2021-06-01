@@ -1,18 +1,18 @@
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
-const addProduct = ({show,onHide}) => {
+const addCity = ({show,onHide}) => {
 
     return (
         <div>
-            <Modal
+            <Modal  
             show={show}
-            id="addEmployeeModal" class="modal fade">
+             class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <Form>
                         <div class="modal-header">						
-                            <h3 class="modal-title">Add Product</h3>
+                            <h3 class="modal-title">Add City</h3>
                             <Button 
                             onClick={onHide}
                             className="modal-close-btn"
@@ -25,19 +25,7 @@ const addProduct = ({show,onHide}) => {
                             <FormGroup class="form-group">
                                 <label>Name</label>
                                 <input type="text" class="form-control" required/>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required/>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required/>
-                            </FormGroup>					
+                            </FormGroup>				
                         </div>
                         <Modal.Footer class="modal-footer">
                             <input 
@@ -55,4 +43,4 @@ const addProduct = ({show,onHide}) => {
     )
 }
 
-export default addProduct
+export default addCity

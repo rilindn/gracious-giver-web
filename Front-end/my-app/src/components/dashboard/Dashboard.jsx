@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Form, Modal, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import ProductTable from './dash-prod/ProductTable';
+import CityTable from './dash-city/CityTable';
 
 
 // document.ready(function(){
@@ -37,6 +38,7 @@ const Dashboard = () => {
     return (
     <div>
         <ProductTable/>
+        <CityTable/>
     </div>
     )
 }

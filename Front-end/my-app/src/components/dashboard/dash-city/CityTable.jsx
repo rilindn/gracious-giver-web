@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
-import AddProduct from '../dash-prod/AddProduct'
-import EditProduct from './EditProduct'
-import DeleteProduct from './DeleteProduct'
+import AddCity from '../dash-city/AddCity'
+import EditCity from './EditCity'
+import DeleteCity from './DeleteCity'
 
 
 // document.ready(function(){
@@ -32,24 +32,24 @@ import DeleteProduct from './DeleteProduct'
 // });
 
 
-const ProductTable = () => {
-
-    const [products, setProducts] = useState([]);
-    const [addProductModal,setAddProductModal] = useState(false);
-    const [editProductModal,setEditProductModal] = useState(false);
-    const [deleteProductModal,setDeleteProductModal] = useState(false);
+const CityTable = () => { 
+ 
+    const [cities, setCities] = useState([]);
+    const [addCityModal,setAddCityModal] = useState(false);
+    const [editCityModal,setEditCityModal] = useState(false);
+    const [deleteCityModal,setDeleteCityModal] = useState(false);
 
 
         useEffect(()=>{
-            getproducts();
+            getcities(); 
         },[]);
 
-        const getproducts = async () => {
-            try{
-            const data = await axios.get(`http://localhost:5000/api/product`)
+        const getcities = async () => {
+            try{ 
+            const data = await axios.get(`http://localhost:5000/api/city`)
             .then(res=>{
                 console.log(res.data)
-                setProducts(res.data)
+                setCities(res.data)
             })
             }
             catch(e){
@@ -59,18 +59,19 @@ const ProductTable = () => {
 
     return (
     <div>
+
         <Container class="container-xl">
             <Table class="table-responsive">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <Row class="row">
                             <Col class="col-sm-6">
-                                <h2><b>Products</b></h2>
+                                <h2><b>Cities</b></h2>
                             </Col>
                             <Col class="col-sm-6">
                                 <Button 
-                                onClick={() => setAddProductModal(true)} 
-                                class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span>
+                                onClick={() => setAddCityModal(true)} 
+                                class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New City</span>
                                 </Button>					
                             </Col>
                         </Row>
@@ -84,37 +85,29 @@ const ProductTable = () => {
                                         <label for="selectAll"></label>
                                     </span>
                                 </th>
-                                <th>Product Name</th>
-                                <th>Product Category</th>
-                                <th>Freshness</th>
-                                <th>Product Description</th>
-                                <th>Product Location</th>
-                                <th>Product Comment</th>
+                                <th>City Id</th>
+                                <th>City Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map(product=>(
+                            {cities.map(city=>(
                                 <tr>
                                 <td>
                                     <span class="custom-checkbox">
                                         <input type="checkbox" id="checkbox1" name="options[]" value="1"/>
                                         <label for="checkbox1"></label>
                                     </span>
-                                </td>
-                                <td>{product.ProductName}</td>
-                                <td>{product.ProductCategory}</td>
-                                <td>{product.ProductState}</td>
-                                <td>{product.ProductDescription}</td>
-                                <td>{product.ProductLocation}</td>
-                                <td>{product.ProductComment}</td>
+                                </td> 
+                                <td>{city.CityId}</td>
+                                <td>{city.CityName}</td>
                                 <td>
                                     <Button 
-                                    onClick={() => setEditProductModal(true)} 
+                                    onClick={() => setEditCityModal(true)} 
                                     class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     
                                     <Button 
-                                    onClick={() => setDeleteProductModal(true)} 
+                                    onClick={() => setDeleteCityModal(true)} 
                                      class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
@@ -122,36 +115,25 @@ const ProductTable = () => {
                             ))}
                         </tbody>
                     </Table>
-                    <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a href="#">Previous</a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                        </ul>
-                    </div>
                 </div>
-            </Table>        
+            </Table>  
+
         </Container>
-        <EditProduct
-         show={editProductModal}
-         onHide={() => setEditProductModal(false)}
+        <EditCity
+         show={editCityModal}
+         onHide={() => setEditCityModal(false)}
          />
-        <AddProduct
-        show={addProductModal}
-        onHide={() => setAddProductModal(false)}
+        <AddCity
+        show={addCityModal}
+        onHide={() => setAddCityModal(false)}
         />
 
-        <DeleteProduct
-        show={deleteProductModal}
-        onHide={() => setDeleteProductModal(false)}
+        <DeleteCity
+        show={deleteCityModal}
+        onHide={() => setDeleteCityModal(false)} 
         />
     </div>
     )
 }
 
-export default ProductTable
+export default CityTable

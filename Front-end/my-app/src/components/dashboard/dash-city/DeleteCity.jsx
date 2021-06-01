@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
 
-const deleteProduct = ({show,onHide}) => {
+const deleteCity = ({show,onHide}) => {
 
     
     return (
@@ -13,7 +13,7 @@ const deleteProduct = ({show,onHide}) => {
              <div class="modal-content">
                     <Form>
                         <div>					
-                            <h4 class="modal-title">Delete Product</h4>
+                            <h4 class="modal-title">Delete City</h4>
                             <Button 
                             onClick={onHide}
                              class="modal-close-btn" 
@@ -22,7 +22,7 @@ const deleteProduct = ({show,onHide}) => {
                                 &times;</Button>
                         </div>
                         <div>				
-                            <p>Are you sure you want to delete this Product?</p>
+                            <p>Are you sure you want to delete this City?</p>
                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
@@ -41,4 +41,4 @@ const deleteProduct = ({show,onHide}) => {
     )
 }
 
-export default deleteProduct
+export default deleteCity

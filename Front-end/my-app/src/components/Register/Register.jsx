@@ -164,6 +164,7 @@ const FormPage = () => {
                   ></FormControl>
                 </div>
 
+              
                 
                 <div className="text-center py-4 mt-3">
                   <MDBBtn 
@@ -174,6 +175,15 @@ const FormPage = () => {
                   className="btn-block z-depth-1a btn-position">
                     Register
                   </MDBBtn>
+
+                  <MDBCardBody>
+              <p className="font-small grey-text d-flex justify-content-center">
+                Already have an Account?
+                <a href="#!" className="blue-text ml-1">
+                  Sign in
+                </a>
+              </p>
+          </MDBCardBody>
                 </div>
               </Form>
             </MDBCardBody>

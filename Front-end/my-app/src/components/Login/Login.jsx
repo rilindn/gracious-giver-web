@@ -103,7 +103,7 @@ const FormPage = () => {
             </MDBCardBody>
               <p className="font-small grey-text d-flex justify-content-center">
                 Not a member?
-                <a href="#!" className="blue-text ml-1">
+                <a href="../register" className="blue-text ml-1">
 
                   Sign Up
                 </a>

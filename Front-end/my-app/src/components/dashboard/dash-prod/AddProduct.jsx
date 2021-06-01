@@ -1,7 +1,24 @@
+import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
 const addProduct = ({show,onHide}) => {
+
+
+    const handleSubmit = (event) => {
+        axios.post('http://localhost:5000/api/product', {
+            ProductName: event.target.ProductName.value,
+            ProductCategory: event.target.ProductCategory.value,
+            ProductLocation: event.target.ProductLocation.value
+          })
+          .then((res) => {
+              alert("Product added succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
 
     return (
         <div>
@@ -10,7 +27,7 @@ const addProduct = ({show,onHide}) => {
             id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Add Product</h3>
                             <Button 
@@ -24,19 +41,27 @@ const addProduct = ({show,onHide}) => {
                         <div class="modal-body">					
                             <FormGroup class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required/>
+                                <input 
+                                name="ProductName"
+                                type="text" 
+                                class="form-control" 
+                                required/>
                             </FormGroup>
                             <FormGroup class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" required/>
+                                <label>Product Category</label>
+                                <input 
+                                name="ProductCategory"
+                                type="text" 
+                                class="form-control" 
+                                required/>
                             </FormGroup>
                             <FormGroup class="form-group">
-                                <label>Address</label>
-                                <textarea class="form-control" required></textarea>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>Phone</label>
-                                <input type="text" class="form-control" required/>
+                                <label>Location</label>
+                                <input
+                                name="ProductLocation" 
+                                class="form-control" 
+                                required
+                                ></input>
                             </FormGroup>					
                         </div>
                         <Modal.Footer class="modal-footer">

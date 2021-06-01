@@ -38,17 +38,18 @@ const ProductTable = () => {
     const [addProductModal,setAddProductModal] = useState(false);
     const [editProductModal,setEditProductModal] = useState(false);
     const [deleteProductModal,setDeleteProductModal] = useState(false);
-
+    const [productV, setProductV] = useState([]);
+    const [productD, setProductD] = useState();
 
         useEffect(()=>{
             getproducts();
         },[]);
 
+
         const getproducts = async () => {
             try{
             const data = await axios.get(`http://localhost:5000/api/product`)
             .then(res=>{
-                console.log(res.data)
                 setProducts(res.data)
             })
             }
@@ -109,13 +110,20 @@ const ProductTable = () => {
                                 <td>{product.ProductComment}</td>
                                 <td>
                                     <Button 
-                                    onClick={() => setEditProductModal(true)} 
+                                    onClick={() => {
+                                        setEditProductModal(true);
+                                        setProductV(product)
+                                    }}
                                     class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
-                                    
                                     <Button 
-                                    onClick={() => setDeleteProductModal(true)} 
-                                     class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                     onClick={() => {
+                                        setDeleteProductModal(true);
+                                        setProductD(product.ProductId)
+                                    }} 
+                                     class="delete" 
+                                     data-toggle="modal"
+                                     ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
                             </tr>
@@ -137,18 +145,20 @@ const ProductTable = () => {
                 </div>
             </Table>        
         </Container>
-        <EditProduct
-         show={editProductModal}
-         onHide={() => setEditProductModal(false)}
-         />
+        
         <AddProduct
         show={addProductModal}
         onHide={() => setAddProductModal(false)}
         />
-
+        <EditProduct
+        show={editProductModal}
+        onHide={() => setEditProductModal(false)}
+        product={productV}
+        />
         <DeleteProduct
         show={deleteProductModal}
         onHide={() => setDeleteProductModal(false)}
+        productId={productD}
         />
     </div>
     )

@@ -1,17 +1,33 @@
+import axios from 'axios'
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
 
-const deleteProduct = ({show,onHide}) => {
+const deleteProduct = ({show,onHide,productId}) => {
 
+    const handleSubmit = (event) => {
+        axios.delete("http://localhost:5000/api/product/"+productId)
+          .then((res) => {
+              alert("Product deleted succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
     
     return (
         <div>   
-        <Modal id="deleteEmployeeModal"
+        <Modal
            show={show}
-           id="addEmployeeModal" class="modal fade">
+           class="modal fade"
+           >
             <div class ="modal-dialog">
-             <div class="modal-content">
-                    <Form>
+             <div 
+             class="modal-content"
+             >
+                    <Form 
+                    onSubmit={handleSubmit}
+                    >
                         <div>					
                             <h4 class="modal-title">Delete Product</h4>
                             <Button 
@@ -30,8 +46,14 @@ const deleteProduct = ({show,onHide}) => {
                             onClick={onHide}
                             type="button" 
                             class="btn btn-default" 
-                            data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            data-dismiss="Modal" 
+                            value="Cancel"
+                            />
+                            <input 
+                            type="submit" 
+                            class="btn btn-danger" 
+                            value="Delete"
+                            />
                         </Modal.Footer>
                     </Form>
                 </div>

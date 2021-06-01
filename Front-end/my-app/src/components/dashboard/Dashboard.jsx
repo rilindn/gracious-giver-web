@@ -4,6 +4,7 @@ import { Form, Modal, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import ProductTable from './dash-prod/ProductTable';
 import CityTable from './dash-city/CityTable';
+import CategTable from './dash-category/CategTable';
 
 
 // document.ready(function(){
@@ -39,6 +40,7 @@ const Dashboard = () => {
     <div>
         <ProductTable/>
         <CityTable/>
+        <CategTable/>
     </div>
     )
 }

@@ -61,6 +61,7 @@ const FormPage = () => {
                   rounded
                   className="btn-block z-depth-1a"
                   style={{width:"100px"}}
+                  href="/home"
                 >
                   Sign in
                 </MDBBtn>

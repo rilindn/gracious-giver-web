@@ -7,7 +7,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import { FaUser } from 'react-icons/fa'
 import { BsChatFill,BsSearch } from 'react-icons/bs'
 import { MdAddCircleOutline } from 'react-icons/md'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { Dropdown, DropdownButton, SplitButton } from 'react-bootstrap'
 
 function Header() {
   return (
@@ -45,9 +45,9 @@ function Header() {
               
             <BsChatFill id="chat" color="white" size="25px" />
             <DropdownButton
-                menuAlign="left"
+                menuAlign={{ lg: 'right' }}
                 title={<FaUser id="user" color="white" size="25px" />}
-                id="dropdown-menu-align-left"
+                id="dropdown-menu-align-right"
                 variant="transparent"
               >
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 

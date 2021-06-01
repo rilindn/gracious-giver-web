@@ -151,8 +151,20 @@ const FormPage = () => {
                 <label class="form-check-label" for="inlineRadio2">Male</label>
               </div>
               </div>
+
+              <FormLabel className="label-alignin">
+                    Date of birth
+                  </FormLabel>
+                  <FormControl className="lbl-position" 
+                  style={{width:"200px"}}
+                  type="date"
+                  name="DateOfBirth"
+                  required
+                  placeholder="Date of birth"
+                  ></FormControl>
                 </div>
 
+              
                 
                 <div className="text-center py-4 mt-3">
                   <MDBBtn 
@@ -165,6 +177,15 @@ const FormPage = () => {
                   >
                     Register
                   </MDBBtn>
+
+                  <MDBCardBody>
+              <p className="font-small grey-text d-flex justify-content-center">
+                Already have an Account?
+                <a href="../Login" className="blue-text ml-1">
+                  Sign in
+                </a>
+              </p>
+          </MDBCardBody>
                 </div>
               </Form>
             </MDBCardBody>

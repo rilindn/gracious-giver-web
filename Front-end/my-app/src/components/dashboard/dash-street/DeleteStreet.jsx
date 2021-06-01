@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
-import deleteStreet from '../dash-street/DeleteStreet'
 
-const deleteState = ({show,onHide}) => {
+const deleteStreet = ({show,onHide}) => {
 
     
     return (
@@ -14,7 +13,7 @@ const deleteState = ({show,onHide}) => {
              <div class="modal-content">
                     <Form>
                         <div>					
-                            <h4 class="modal-title">Delete State</h4>
+                            <h4 class="modal-title">Delete Street</h4>
                             <Button 
                             onClick={onHide}
                              class="modal-close-btn" 
@@ -23,7 +22,7 @@ const deleteState = ({show,onHide}) => {
                                 &times;</Button>
                         </div>
                         <div>				
-                            <p>Are you sure you want to delete this State?</p>
+                            <p>Are you sure you want to delete this Streey?</p>
                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>

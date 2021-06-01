@@ -5,7 +5,7 @@ import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import ProductTable from './dash-prod/ProductTable';
 import CityTable from './dash-city/CityTable';
 import StateTable from './dash-state/StateTable';
-
+import StreetTable from'./dash-street/StreetTable';
 
 // document.ready(function(){
 // 	// Activate tooltip
@@ -41,6 +41,7 @@ const Dashboard = () => {
         <ProductTable/>
         <CityTable/>
         <StateTable/>
+        <StreetTable/>
     </div>
     )
 }

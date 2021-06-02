@@ -8,7 +8,7 @@ const deleteStreet = ({show,onHide,streetId}) => {
     const handleSubmit = (event) => {
         axios.delete("http://localhost:5000/api/street/"+streetId)
           .then((res) => {
-              alert("Product deleted succesfully!")
+              alert("Street deleted succesfully!")
             },
             (error) => {
               alert(error)
@@ -27,25 +27,20 @@ const deleteStreet = ({show,onHide,streetId}) => {
                  class="modal-content">
                     <Form
                     onSubmit={handleSubmit}
+                    className="p-3"
                     >
                         <div>					
                             <h4 class="modal-title">Delete Street</h4>
-                            <Button 
-                            onClick={onHide}
-                             class="modal-close-btn" 
-                             data-dismiss="modal" 
-                             aria-hidden="true">  
-                                &times;</Button>
                         </div>
                         <div>				
-                            <p>Are you sure you want to delete this Streey?</p>
+                            <p>Are you sure you want to delete this Street?</p>
                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
                             <input type="submit" class="btn btn-danger" value="Delete"/>
                         </Modal.Footer>

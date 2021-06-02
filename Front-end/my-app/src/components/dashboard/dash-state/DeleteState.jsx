@@ -27,15 +27,10 @@ const deleteState = ({show,onHide,stateId}) => {
              >
                     <Form 
                     onSubmit={handleSubmit}
+                    className="p-3"
                     >
                         <div>					
                             <h4 class="modal-title">Delete State</h4>
-                            <Button 
-                            onClick={onHide}
-                             class="modal-close-btn" 
-                             data-dismiss="modal" 
-                             aria-hidden="true">  
-                                &times;</Button>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this State?</p>
@@ -45,7 +40,7 @@ const deleteState = ({show,onHide,stateId}) => {
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" 
                             value="Cancel"
                             />

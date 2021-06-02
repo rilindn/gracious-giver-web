@@ -29,13 +29,6 @@ const editState = ({show,onHide,state}) => {
                     <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Edit State</h3>
-                            <Button 
-                            onClick={onHide}
-                            className="modal-close-btn" 
-                            data-dismiss="modal" 
-                            aria-hidden="true">
-                                &times;
-                            </Button>
                     </div>
                         <div class="modal-body">					
                             <FormGroup class="form-group">
@@ -52,7 +45,7 @@ const editState = ({show,onHide,state}) => {
                         <Modal.Footer class="modal-footer">
                             <input 
                             onClick={onHide}
-                            type="submit" class="btn btn-default" data-dismiss="modal" value="Cancel"/>
+                            type="button" class="btn btn-light" data-dismiss="modal" value="Cancel"/>
                             <input type="submit" class="btn btn-info" value="Save"/>
                         </Modal.Footer>
                     </Form>

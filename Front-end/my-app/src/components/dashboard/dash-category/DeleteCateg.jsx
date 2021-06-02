@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
 import axios from 'axios'
+
 const deleteCateg = ({show,onHide,ProductCategoryId}) => {
+
     const handleSubmit = (event) => {
         axios.delete("http://localhost:5000/api/productcategory/"+ProductCategoryId)
           .then((res) => {
@@ -19,16 +21,10 @@ const deleteCateg = ({show,onHide,ProductCategoryId}) => {
            show={show}
           class="modal fade">
             <div class ="modal-dialog">
-             <div class="modal-content">
-                    <Form  onSubmit={handleSubmit}>
+             <div class="modal-content" >
+                    <Form  onSubmit={handleSubmit}  className="p-3">
                         <div>					
                             <h4 class="modal-title">Delete Product Category</h4>
-                            <Button 
-                            onClick={onHide}
-                             class="modal-close-btn" 
-                             data-dismiss="modal" 
-                             aria-hidden="true">  
-                                &times;</Button>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this Product Category?</p>
@@ -38,7 +34,7 @@ const deleteCateg = ({show,onHide,ProductCategoryId}) => {
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
                             <input type="submit" class="btn btn-danger" value="Delete"/>
                         </Modal.Footer>

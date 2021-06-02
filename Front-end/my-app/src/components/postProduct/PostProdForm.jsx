@@ -24,13 +24,7 @@ const PostProdForm = () => {
         }
     }
     const handleSubmit = (event) => {
-        fetch('http://localhost:5000/api/product', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        axios.post('http://localhost:5000/api/product', {
             ProductName: event.target.ProductName.value,
             ProductCategory: event.target.ProductCategory.value,
             ProductState: event.target.ProductState.value,
@@ -38,11 +32,9 @@ const PostProdForm = () => {
             ProductDescription: event.target.ProductDescription.value,
             ProductLocation: event.target.ProductLocation.value,
             ProductComment: event.target.ProductComment.value
-          }),
-        })
-          .then((res) => res.json())
+          })
           .then(
-            (result) => {
+            (res) => {
               alert("Product added succesfully!")
             },
             (error) => {

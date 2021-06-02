@@ -28,13 +28,6 @@ const addCity = ({show,onHide}) => {
                     <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Add City</h3>
-                            <Button 
-                            onClick={onHide}
-                            className="modal-close-btn"
-                            data-dismiss="modal" 
-                            aria-hidden="true">
-                                &times;
-                            </Button>
                         </div>
                         <div class="modal-body">					
                             <FormGroup class="form-group">
@@ -46,7 +39,7 @@ const addCity = ({show,onHide}) => {
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
                             <input type="submit" class="btn btn-success" value="Add"/>
                         </Modal.Footer>

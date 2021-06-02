@@ -71,35 +71,24 @@ const StateTable = () => {
                             <Col class="col-sm-6">
                                 <Button 
                                 onClick={() => setAddStateModal(true)} 
-                                class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New State</span>
+                                class="btn btn-success" 
+                                variant ="success"
+                                data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New State</span>
                                 </Button>					
                             </Col>
                         </Row>
                     </div>
-                    <Table className="table striped bordered hover">
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll"/>
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
-
                                 <th>State Id</th>
                                 <th>State Name</th>
-                                
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {states.map(state=>(
                                 <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1"/>
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
                                 <td>{state.ShtetiId}</td>
                                 <td>{state.Emri}</td>
                                 <td>
@@ -108,7 +97,9 @@ const StateTable = () => {
                                         setEditStateModal(true);
                                         setStateV(state)
                                     }}
-                                    class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                    className="m-2" 
+                                    variant ="warning"
+                                    data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     <Button 
                                      onClick={() => {
@@ -116,6 +107,7 @@ const StateTable = () => {
                                         setStateD(state.ShtetiId)
                                     }} 
                                      class="delete" 
+                                     variant ="danger"
                                      data-toggle="modal"
                                      ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>

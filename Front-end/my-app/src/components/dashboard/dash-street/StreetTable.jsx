@@ -7,31 +7,6 @@ import EditStreet from './EditStreet'
 import DeleteStreet from './DeleteStreet'
 
 
-// document.ready(function(){
-// 	// Activate tooltip
-// 	'[data-toggle="tooltip"]'.tooltip();
-	
-// 	// Select/Deselect checkboxes
-// 	var checkbox = 'table tbody input[type="checkbox"]';
-// 	"#selectAll".click(function(){
-// 		if(this.checked){
-// 			checkbox.each(function(){
-// 				this.checked = true;                        
-// 			});
-// 		} else{
-// 			checkbox.each(function(){
-// 				this.checked = false;                        
-// 			});
-// 		} 
-// 	});
-// 	checkbox.click(function(){
-// 		if(!this.checked){
-// 			"#selectAll".prop("checked", false);
-// 		}
-// 	});
-// });
-
-
 const StreetTable = () => { 
  
     const [streets, setStreets] = useState([]);
@@ -73,51 +48,46 @@ const StreetTable = () => {
                             <Col class="col-sm-6">
                                 <Button 
                                 onClick={() => setAddStreetModal(true)} 
-                                class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Street</span>
+                                class="btn btn-success" 
+                                variant="success"
+                                data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Street</span>
                                 </Button>					
                             </Col>
                         </Row>
                     </div>
-                    <Table className="table striped bordered hover">
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll"/>
-                                        <label for="selectAll"></label>
-                                    </span>
-                                </th>
                                 <th>Street Id</th>
                                 <th>Street Name</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {streets.map(street=>(
                                 <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1"/>
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td> 
                                 <td>{street.StreetId }</td>
                                 <td>{street.StreetName}</td>
-                                <td>
+                                <td >
                                     <Button 
                                     onClick={() => {setEditStreetModal(true)
                                         setStreetV(street)
                                     }
                                     } 
-                                    class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                    className="m-2" 
+                                    variant="warning"
+                                    data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     
                                     <Button 
                                 onClick={() => {
                                     setDeleteStreetModal(true);
-                                            setStreetD(street.StreetId)
+                                        setStreetD(street.StreetId)
                                         }
                                     } 
-                                     class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                     class="delete" 
+                                     variant="danger"
+                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
                             </tr>
@@ -143,6 +113,7 @@ const StreetTable = () => {
         <EditStreet
          show={editStreetModal}
          onHide={() => setEditStreetModal(false)}
+         street={streetV}
          />
         <AddStreet
         show={addStreetModal}
@@ -152,6 +123,7 @@ const StreetTable = () => {
         <DeleteStreet
         show={deleteStreetModal}
         onHide={() => setDeleteStreetModal(false)} 
+        streetId={streetD}
         />
     </div>
     )

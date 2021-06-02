@@ -24,18 +24,9 @@ const deleteProduct = ({show,onHide,productId}) => {
             <div class ="modal-dialog">
              <div 
              class="modal-content"
-             >
-                    <Form 
-                    onSubmit={handleSubmit}
-                    >
+             > <Form onSubmit={handleSubmit} className="p-3">
                         <div>					
                             <h4 class="modal-title">Delete Product</h4>
-                            <Button 
-                            onClick={onHide}
-                             class="modal-close-btn" 
-                             data-dismiss="modal" 
-                             aria-hidden="true">  
-                                &times;</Button>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this Product?</p>
@@ -45,7 +36,7 @@ const deleteProduct = ({show,onHide,productId}) => {
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" 
                             value="Cancel"
                             />

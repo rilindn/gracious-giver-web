@@ -23,15 +23,9 @@ const deleteCity = ({show,onHide,cityId}) => {
            id="addEmployeeModal" class="modal fade">
             <div class ="modal-dialog">
              <div class="modal-content">
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} className="p-3">
                         <div>					
                             <h4 class="modal-title">Delete City</h4>
-                            <Button 
-                            onClick={onHide}
-                             class="modal-close-btn" 
-                             data-dismiss="modal" 
-                             aria-hidden="true">  
-                                &times;</Button>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this City?</p>
@@ -41,7 +35,7 @@ const deleteCity = ({show,onHide,cityId}) => {
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-default" 
+                            class="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
                             <input type="submit" class="btn btn-danger" value="Delete"/>
                         </Modal.Footer>

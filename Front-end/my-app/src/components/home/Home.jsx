@@ -70,7 +70,7 @@ const Home = (props) => {
             </div>
             <div className="d-flex justify-content-center">
                 <Pagination>
-                    <Pagination.Prev style={{backgroundColor:"greenyellow"}} />
+                    <Pagination.Prev />
                     <Pagination.Item active>{1}</Pagination.Item>
                     <Pagination.Item>{2}</Pagination.Item>
                     <Pagination.Item>{3}</Pagination.Item>

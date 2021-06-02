@@ -31,16 +31,9 @@ const editProduct = ({show,onHide,product}) => {
             class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form onSubmit={handleSubmit}>
+                    <Form >
                         <div class="modal-header">						
                             <h3 class="modal-title">Edit Product</h3>
-                            <Button 
-                            onClick={onHide}
-                            className="modal-close-btn" 
-                            data-dismiss="modal" 
-                            aria-hidden="true">
-                                &times;
-                            </Button>
                     </div>
                         <div class="modal-body">					
                             <FormGroup class="form-group">
@@ -72,10 +65,18 @@ const editProduct = ({show,onHide,product}) => {
                             </FormGroup>					
                         </div>
                         <Modal.Footer class="modal-footer">
-                            <input 
+                            <Button 
                             onClick={onHide}
-                            type="submit" class="btn btn-default" data-dismiss="modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-info" value="Save"/>
+                            variant="light"
+                            >
+                            Cancel
+                            </Button>
+                            <Button 
+                            onClick={handleSubmit}
+                            variant="info"
+                            >
+                            Save
+                            </Button>
                         </Modal.Footer>
                     </Form>
                 </div>

@@ -1,7 +1,22 @@
 import React from 'react'
+import axios from 'axios';
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
 const addCity = ({show,onHide}) => {
+
+
+    const handleSubmit = (event) => {
+        axios.post('http://localhost:5000/api/city', {
+            CityName: event.target.CityName.value,
+          })
+          .then((res) => {
+              alert("City added succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
 
     return (
         <div>
@@ -10,7 +25,7 @@ const addCity = ({show,onHide}) => {
              class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Add City</h3>
                             <Button 
@@ -24,7 +39,7 @@ const addCity = ({show,onHide}) => {
                         <div class="modal-body">					
                             <FormGroup class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required/>
+                                <input type="text" name ="CityName" class="form-control" required/>
                             </FormGroup>				
                         </div>
                         <Modal.Footer class="modal-footer">

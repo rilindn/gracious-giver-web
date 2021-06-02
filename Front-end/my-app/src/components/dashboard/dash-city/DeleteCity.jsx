@@ -1,17 +1,29 @@
 import React from 'react'
-import { Form, Modal, Button, } from 'react-bootstrap'
+import axios from 'axios';
+import { Form, Modal, Button, Alert, } from 'react-bootstrap'
 
-const deleteCity = ({show,onHide}) => {
+const deleteCity = ({show,onHide,cityId}) => {
 
+    const handleSubmit = (event) => {
+        axios.delete("http://localhost:5000/api/city/"+cityId)
+          .then((res) => {
+              <Alert>City deleted succesfully!</Alert>
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
+    
     
     return (
         <div>   
-        <Modal id="deleteEmployeeModal"
+        <Modal 
            show={show}
            id="addEmployeeModal" class="modal fade">
             <div class ="modal-dialog">
              <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div>					
                             <h4 class="modal-title">Delete City</h4>
                             <Button 

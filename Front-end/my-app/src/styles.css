@@ -805,3 +805,26 @@ table.table .avatar {
   width: 10px !important;
   margin-left: 20px;
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin:0px 0px 0px 0px;
+}
+
+.btn-primary{
+  margin-left: 23px;
+  background-color: red;
+}
+
+.table-title{
+  background-color: rgb(241, 237, 235);
+}
+
+.table-wrapper{
+  margin-top: 50px;
+}
+
+.h-position{
+  color: black;
+}

@@ -9,6 +9,8 @@ import CategTable from './dash-category/CategTable';
 
 import StateTable from './dash-state/StateTable';
 import StreetTable from'./dash-street/StreetTable';
+import Header from '../Header/Header';
+import Footer from '../footer/Footer';
 
 // document.ready(function(){
 // 	// Activate tooltip
@@ -41,17 +43,14 @@ const Dashboard = () => {
 
     return (
     <div>
+         <Header/>
         <ProductTable/>
         <CityTable/>
 
         <CategTable/>
 
         <StateTable/>
-<<<<<<< HEAD
-        <StreetTable/>
-=======
-
->>>>>>> e5cc8fdaa99a2259c02d7bb9aa5d9ba8af0eaa1c
+        <Footer/>
     </div>
     )
 }

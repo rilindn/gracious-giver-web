@@ -32,12 +32,16 @@ import DeleteCity from './DeleteCity'
 // });
 
 
+
+
 const CityTable = () => { 
  
     const [cities, setCities] = useState([]);
     const [addCityModal,setAddCityModal] = useState(false);
     const [editCityModal,setEditCityModal] = useState(false);
     const [deleteCityModal,setDeleteCityModal] = useState(false);
+    const [cityV, setCityV] = useState([]);
+    const [cityD, setCityD] = useState();
 
 
         useEffect(()=>{
@@ -59,31 +63,28 @@ const CityTable = () => {
 
     return (
     <div>
-
+       
         <Container class="container-xl">
             <Table class="table-responsive">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <Row class="row">
                             <Col class="col-sm-6">
-                                <h2><b>Cities</b></h2>
+                                <h2 class ="h-position"><b>Cities</b></h2>
                             </Col>
                             <Col class="col-sm-6">
                                 <Button 
                                 onClick={() => setAddCityModal(true)} 
-                                class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New City</span>
+                                class="btn btn-success" variant ="success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New City</span>
                                 </Button>					
                             </Col>
                         </Row>
                     </div>
-                    <Table className="table striped bordered hover">
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="selectAll"/>
-                                        <label for="selectAll"></label>
-                                    </span>
+
                                 </th>
                                 <th>City Id</th>
                                 <th>City Name</th>
@@ -93,28 +94,46 @@ const CityTable = () => {
                             {cities.map(city=>(
                                 <tr>
                                 <td>
-                                    <span class="custom-checkbox">
+                                    {/* <span class="custom-checkbox">
                                         <input type="checkbox" id="checkbox1" name="options[]" value="1"/>
                                         <label for="checkbox1"></label>
-                                    </span>
+                                    </span> */}
                                 </td> 
                                 <td>{city.CityId}</td>
                                 <td>{city.CityName}</td>
                                 <td>
                                     <Button 
-                                    onClick={() => setEditCityModal(true)} 
-                                    class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                    onClick={() => 
+                                        {setEditCityModal(true);
+                                            setCityV(city)
+                                        } }
+                                    class="m-3" variant ="warning"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     
                                     <Button 
-                                    onClick={() => setDeleteCityModal(true)} 
-                                     class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                    onClick={() => 
+                                        {setDeleteCityModal(true);
+                                            setCityD(city.CityId)
+                                        }} 
+                                     class="delete" variant ="danger"data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
                             </tr>
                             ))}
                         </tbody>
                     </Table>
+                    <div class="clearfix">
+                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a href="#">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
                 </div>
             </Table>  
 
@@ -122,15 +141,18 @@ const CityTable = () => {
         <EditCity
          show={editCityModal}
          onHide={() => setEditCityModal(false)}
+         city={cityV}
          />
         <AddCity
         show={addCityModal}
         onHide={() => setAddCityModal(false)}
+        
         />
 
         <DeleteCity
         show={deleteCityModal}
         onHide={() => setDeleteCityModal(false)} 
+        cityId={cityD}
         />
     </div>
     )

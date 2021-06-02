@@ -1,7 +1,22 @@
 import React from 'react'
+import axios from 'axios';
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
-const editCity = ({show,onHide}) => {
+const editCity = ({show,onHide,city}) => {
+
+    const handleSubmit = (event) => {
+        axios.put('http://localhost:5000/api/city/'+ city.CityId, {
+            CityId: city.CityId,
+            CityName: event.target.CityName.value,
+          })
+          .then((res) => {
+              alert("City updated succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
     return (
         <div>
             <Modal 
@@ -9,7 +24,7 @@ const editCity = ({show,onHide}) => {
             class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Edit City</h3>
                             <Button 
@@ -23,11 +38,16 @@ const editCity = ({show,onHide}) => {
                         <div class="modal-body">	
                         <FormGroup class="form-group">
                                 <label>Id</label>
-                                <input type="text" class="form-control" required/>
+                                <input defaultValue={city.CityId} type="text" class="form-control" required disabled/>
                             </FormGroup>					
                             <FormGroup class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" required/>
+                                <input 
+                                name="CityName"
+                                defaultValue={city.CityName} 
+                                type="text" 
+                                class="form-control"
+                                 required/>
                             </FormGroup>			
                         </div>
                         <Modal.Footer class="modal-footer">

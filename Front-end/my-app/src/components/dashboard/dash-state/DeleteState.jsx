@@ -1,18 +1,33 @@
+import axios from 'axios'
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
-import deleteStreet from '../dash-street/DeleteStreet'
 
-const deleteState = ({show,onHide}) => {
+const deleteState = ({show,onHide,stateId}) => {
 
+    const handleSubmit = (event) => {
+        axios.delete("http://localhost:5000/api/Shteti/"+stateId)
+          .then((res) => {
+              alert("State deleted succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
     
     return (
         <div>   
-        <Modal id="deleteEmployeeModal"
+        <Modal
            show={show}
-           id="addEmployeeModal" class="modal fade">
+           class="modal fade"
+           >
             <div class ="modal-dialog">
-             <div class="modal-content">
-                    <Form>
+             <div 
+             class="modal-content"
+             >
+                    <Form 
+                    onSubmit={handleSubmit}
+                    >
                         <div>					
                             <h4 class="modal-title">Delete State</h4>
                             <Button 
@@ -31,8 +46,14 @@ const deleteState = ({show,onHide}) => {
                             onClick={onHide}
                             type="button" 
                             class="btn btn-default" 
-                            data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            data-dismiss="Modal" 
+                            value="Cancel"
+                            />
+                            <input 
+                            type="submit" 
+                            class="btn btn-danger" 
+                            value="Delete"
+                            />
                         </Modal.Footer>
                     </Form>
                 </div>
@@ -42,4 +63,4 @@ const deleteState = ({show,onHide}) => {
     )
 }
 
-export default deleteStreet
+export default deleteState

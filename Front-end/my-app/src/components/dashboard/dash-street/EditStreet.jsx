@@ -1,7 +1,28 @@
+import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
-const editStreet = ({show,onHide}) => {
+const editStreet = ({show,onHide,street}) => {
+
+    const handleSubmit = (event) => {
+        axios.put('http://localhost:5000/api/street/'+ street.StreetId, {
+            StreetId: street.StreetId,
+            StreetName: event.target.
+            StreetName.value
+          })
+          .then((res) => {
+              alert("Product updated succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
+
+
+
+
+
     return (
         <div>
             <Modal 

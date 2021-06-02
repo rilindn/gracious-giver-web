@@ -38,6 +38,8 @@ const StreetTable = () => {
     const [addStreetModal,setAddStreetModal] = useState(false);
     const [editStreetModal,setEditStreetModal] = useState(false);
     const [deleteStreetModal,setDeleteStreetModal] = useState(false);
+    const [streetV, setStreetV] = useState([]);
+    const [streetD, setStreetD] = useState();
 
 
         useEffect(()=>{
@@ -102,12 +104,19 @@ const StreetTable = () => {
                                 <td>{street.StreetName}</td>
                                 <td>
                                     <Button 
-                                    onClick={() => setEditStreetModal(true)} 
+                                    onClick={() => {setEditStreetModal(true)
+                                        setStreetV(street)
+                                    }
+                                    } 
                                     class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     
                                     <Button 
-                                    onClick={() => setDeleteStreetModal(true)} 
+                                onClick={() => {
+                                    setDeleteStreetModal(true);
+                                            setStreetD(street.StreetId)
+                                        }
+                                    } 
                                      class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
@@ -115,6 +124,18 @@ const StreetTable = () => {
                             ))}
                         </tbody>
                     </Table>
+                    <div class="clearfix">
+                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a href="#">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
                 </div>
             </Table>  
 

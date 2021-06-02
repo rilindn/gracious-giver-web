@@ -1,7 +1,22 @@
+import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
 const addState = ({show,onHide}) => {
+
+
+    const handleSubmit = (event) => {
+        axios.post('http://localhost:5000/api/Shteti', {
+            Emri: event.target.Emri.value,
+          })
+          .then((res) => {
+              alert("State added succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
 
     return (
         <div>
@@ -10,7 +25,7 @@ const addState = ({show,onHide}) => {
             id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Add State</h3>
                             <Button 
@@ -21,16 +36,16 @@ const addState = ({show,onHide}) => {
                                 &times;
                             </Button>
                         </div>
-                        <div class="modal-body">					
+                        <div class="modal-body">	
+                        				
                             <FormGroup class="form-group">
-                                <label>State Id</label>
-                                <input type="text" class="form-control" required/>
-                            </FormGroup>
-                            <FormGroup class="form-group">
-                                <label>State Name</label>
-                                <input type="email" class="form-control" required/>
-                            </FormGroup>
-                           					
+                                <label>Name</label>
+                                <input 
+                                name="Emri"
+                                type="text" 
+                                class="form-control" 
+                                required/>
+                            </FormGroup>					
                         </div>
                         <Modal.Footer class="modal-footer">
                             <input 

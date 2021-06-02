@@ -55,6 +55,8 @@ const addProduct = ({show,onHide}) => {
                                 class="form-control" 
                                 required/>
                             </FormGroup>
+
+                            
                             <FormGroup class="form-group">
                                 <label>Location</label>
                                 <input

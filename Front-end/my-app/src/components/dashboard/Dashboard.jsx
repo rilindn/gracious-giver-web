@@ -50,7 +50,14 @@ const Dashboard = () => {
         <CategTable/>
 
         <StateTable/>
+<<<<<<< HEAD
         <Footer/>
+=======
+<<<<<<< HEAD
+=======
+        <StreetTable/>
+>>>>>>> 35ca8085771e0d1155dad5796347684ffe0e27b7
+>>>>>>> aae4af2f686e9be022044d30e8b01c35c6242be5
     </div>
     )
 }

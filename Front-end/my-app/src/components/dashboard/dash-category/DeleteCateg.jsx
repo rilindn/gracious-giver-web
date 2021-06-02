@@ -1,17 +1,26 @@
 import React from 'react'
 import { Form, Modal, Button, } from 'react-bootstrap'
-
-const deleteCateg = ({show,onHide}) => {
-
+import axios from 'axios'
+const deleteCateg = ({show,onHide,ProductCategoryId}) => {
+    const handleSubmit = (event) => {
+        axios.delete("http://localhost:5000/api/productcategory/"+ProductCategoryId)
+          .then((res) => {
+              alert("Product Category deleted succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
     
     return (
         <div>   
-        <Modal id="deleteEmployeeModal"
+        <Modal 
            show={show}
-           id="addEmployeeModal" class="modal fade">
+          class="modal fade">
             <div class ="modal-dialog">
              <div class="modal-content">
-                    <Form>
+                    <Form  onSubmit={handleSubmit}>
                         <div>					
                             <h4 class="modal-title">Delete Product Category</h4>
                             <Button 

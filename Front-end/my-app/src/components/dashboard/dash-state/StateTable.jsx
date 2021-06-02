@@ -32,23 +32,24 @@ import DeleteState from './DeleteState'
 // });
 
 
-const StateTable = () => { 
- 
+const StateTable = () => {
+
     const [states, setStates] = useState([]);
     const [addStateModal,setAddStateModal] = useState(false);
     const [editStateModal,setEditStateModal] = useState(false);
     const [deleteStateModal,setDeleteStateModal] = useState(false);
-
+    const [StateV, setStateV] = useState([]);
+    const [StateD, setStateD] = useState();
 
         useEffect(()=>{
-            getStates(); 
+            getstates();
         },[]);
 
-        const getStates = async () => {
-            try{ 
-            const data = await axios.get(`http://localhost:5000/api/state`)
+
+        const getstates = async () => {
+            try{
+            const data = await axios.get(`http://localhost:5000/api/Shteti`)
             .then(res=>{
-                console.log(res.data)
                 setStates(res.data)
             })
             }
@@ -59,7 +60,6 @@ const StateTable = () => {
 
     return (
     <div>
-
         <Container class="container-xl">
             <Table class="table-responsive">
                 <div class="table-wrapper">
@@ -85,8 +85,10 @@ const StateTable = () => {
                                         <label for="selectAll"></label>
                                     </span>
                                 </th>
+
                                 <th>State Id</th>
                                 <th>State Name</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -97,40 +99,60 @@ const StateTable = () => {
                                         <input type="checkbox" id="checkbox1" name="options[]" value="1"/>
                                         <label for="checkbox1"></label>
                                     </span>
-                                </td> 
-                                <td>{state.ShtetiId }</td>
+                                </td>
+                                <td>{state.ShtetiId}</td>
                                 <td>{state.Emri}</td>
                                 <td>
                                     <Button 
-                                    onClick={() => setEditStateModal(true)} 
+                                    onClick={() => {
+                                        setEditStateModal(true);
+                                        setStateV(state)
+                                    }}
                                     class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
-                                    
                                     <Button 
-                                    onClick={() => setDeleteStateModal(true)} 
-                                     class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                     onClick={() => {
+                                        setDeleteStateModal(true);
+                                        setStateD(state.ShtetiId)
+                                    }} 
+                                     class="delete" 
+                                     data-toggle="modal"
+                                     ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
                             </tr>
                             ))}
                         </tbody>
                     </Table>
+                    <div class="clearfix">
+                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a href="#">Previous</a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </Table>  
-
+            </Table>        
         </Container>
-        <EditState
-         show={editStateModal}
-         onHide={() => setEditStateModal(false)}
-         />
+        
         <AddState
         show={addStateModal}
         onHide={() => setAddStateModal(false)}
         />
-
+        <EditState
+        show={editStateModal}
+        onHide={() => setEditStateModal(false)}
+        state={StateV}
+        />
         <DeleteState
         show={deleteStateModal}
-        onHide={() => setDeleteStateModal(false)} 
+        onHide={() => setDeleteStateModal(false)}
+        stateId={StateD}
         />
     </div>
     )

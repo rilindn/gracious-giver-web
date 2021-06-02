@@ -1,7 +1,22 @@
+import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 
 const addStreet = ({show,onHide}) => {
+
+    const handleSubmit = (event) => {
+        axios.post('http://localhost:5000/api/Street', {
+           
+            StreetName: event.target.StreetName.value
+          })
+          .then((res) => {
+              alert("Product added succesfully!")
+            },
+            (error) => {
+              alert(error)
+            },
+          )
+    }
 
     return (
         <div>
@@ -10,7 +25,7 @@ const addStreet = ({show,onHide}) => {
             id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div class="modal-header">						
                             <h3 class="modal-title">Add Street</h3>
                             <Button 
@@ -22,14 +37,13 @@ const addStreet = ({show,onHide}) => {
                             </Button>
                         </div>
                         <div class="modal-body">					
-                            <FormGroup class="form-group">
-                                <label>Street Id</label>
-                                <input type="text" class="form-control" required/>
-                            </FormGroup>
+                           
                             <FormGroup class="form-group">
                                 <label>Street Name</label>
-                                <input type="email" class="form-control" required/>
+                                <input type="text"
+                                name="StreetName" Sclass="form-control" required/>
                             </FormGroup>
+
                            					
                         </div>
                         <Modal.Footer class="modal-footer">

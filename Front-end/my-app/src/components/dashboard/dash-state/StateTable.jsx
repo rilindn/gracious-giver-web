@@ -1,35 +1,15 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
 import AddState from '../dash-state/AddState'
 import EditState from './EditState'
 import DeleteState from './DeleteState'
+import { Search } from '../DataTable/Search';
+import Pagination from '../DataTable/Pagination';
 
 
-// document.ready(function(){
-// 	// Activate tooltip
-// 	'[data-toggle="tooltip"]'.tooltip();
-	
-// 	// Select/Deselect checkboxes
-// 	var checkbox = 'table tbody input[type="checkbox"]';
-// 	"#selectAll".click(function(){
-// 		if(this.checked){
-// 			checkbox.each(function(){
-// 				this.checked = true;                        
-// 			});
-// 		} else{
-// 			checkbox.each(function(){
-// 				this.checked = false;                        
-// 			});
-// 		} 
-// 	});
-// 	checkbox.click(function(){
-// 		if(!this.checked){
-// 			"#selectAll".prop("checked", false);
-// 		}
-// 	});
-// });
+
 
 
 const StateTable = () => {
@@ -40,6 +20,7 @@ const StateTable = () => {
     const [deleteStateModal,setDeleteStateModal] = useState(false);
     const [StateV, setStateV] = useState([]);
     const [StateD, setStateD] = useState();
+    const [search,setSearch] = useState("");
 
         useEffect(()=>{
             getstates();
@@ -50,6 +31,7 @@ const StateTable = () => {
             try{
             const data = await axios.get(`http://localhost:5000/api/Shteti`)
             .then(res=>{
+                console.log(res.data)
                 setStates(res.data)
             })
             }
@@ -57,6 +39,20 @@ const StateTable = () => {
                 console.log(e);
             }
         }
+
+        const statesData = useMemo( ()=>{
+            let computedStates = states;
+    
+            if(search){
+                computedStates=computedStates.filter(
+                    state =>
+                        state.Emri.toLowerCase().includes(search.toLowerCase())
+    
+                )
+            }
+            return computedStates
+    
+        },[states,search])
 
     return (
     <div>
@@ -69,6 +65,11 @@ const StateTable = () => {
                                 <h2><b>States</b></h2>
                             </Col>
                             <Col class="col-sm-6">
+                            <Search
+                                  onSearch={(value)=>{
+                                      setSearch(value);
+                                  }}
+                                />
                                 <Button 
                                 onClick={() => setAddStateModal(true)} 
                                 class="btn btn-success" 
@@ -87,7 +88,7 @@ const StateTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {states.map(state=>(
+                            {statesData.map(state=>(
                                 <tr>
                                 <td>{state.ShtetiId}</td>
                                 <td>{state.Emri}</td>

@@ -21,7 +21,7 @@ const deleteCateg = ({show,onHide,ProductCategoryId}) => {
            show={show}
           class="modal fade">
             <div class ="modal-dialog">
-             <div class="modal-content" >
+             <div class="modal-content " >
                     <Form  onSubmit={handleSubmit}  className="p-3">
                         <div>					
                             <h4 class="modal-title">Delete Product Category</h4>
@@ -31,7 +31,7 @@ const deleteCateg = ({show,onHide,ProductCategoryId}) => {
                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
-                            <input 
+                            <input                                                                                                  
                             onClick={onHide}
                             type="button" 
                             class="btn btn-info" 

@@ -68,6 +68,7 @@ const ProductTable = () => {
                                   onSearch={(value)=>{
                                       setSearch(value);
                                   }}
+                                  style={{float:"right"}}
                                 />
                             </Col>
                         </Row>

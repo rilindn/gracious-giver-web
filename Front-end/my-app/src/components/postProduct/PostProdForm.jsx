@@ -1,11 +1,17 @@
 import axios from 'axios';
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useRef, useState } from 'react'
 import { Form, Col, Button} from 'react-bootstrap'
 
 const PostProdForm = () => {
 
     
     const [categories, setCategories] = useState([]);
+    const [selectedFile,setSelectedFile] = useState(null);
+    const fileInput = useRef(null);
+
+    const handleFileInputClick = event => {
+      fileInput.current.click();
+    };
 
     useEffect(()=>{
         getCategories();
@@ -23,6 +29,22 @@ const PostProdForm = () => {
             console.log(e);
         }
     }
+
+    const handlePhotoSubmit = (event) => {
+      event.preventDefault()
+      setSelectedFile(event.target.files[0])
+      const formdata = new FormData();
+      formdata.append('image',event.target.files[0], event.target.files[0].name)
+      axios.post('http://localhost:5000/api/product/SaveFile', formdata)
+        .then(
+          (res) => {
+          },
+          (error) => {
+            alert(error)
+          },
+        )
+  }
+
     const handleSubmit = (event) => {
         axios.post('http://localhost:5000/api/product', {
             ProductName: event.target.ProductName.value,
@@ -35,35 +57,16 @@ const PostProdForm = () => {
           })
           .then(
             (res) => {
-              alert("Product added succesfully!")
+              alert(res)
             },
             (error) => {
               alert(error)
             },
           )
     }
-    //   handleImageUpload(event) {
-    //     const files = event.target.files
-    //     const formData = new FormData()
-    //     formData.append('myFile', files[0])
-      
-    //     fetch('http://localhost:5000/api/ProductPhotos', {
-    //       method: 'POST',
-    //       body: {
-    //         ProductPhotoPath: event.target.ProductPhoto.value
-    //       }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log(data)
-    //     })
-    //     .catch(error => {
-    //       alert(error)
-    //     })
-    //   }
-    //   handleFileSelected(event) {
+    //  const handleFileSelected = (event) => {
     //     event.preventDefault()
-    //     this.photofilename = event.target.files[0].name
+    //     selectedFile = event.target.files[0].name
     //     const formData = new FormData()
     //     formData.append('myFile', event.target.files[0], event.target.files[0].name)
     //     fetch(process.env.REACT_APP_API + 'product/SaveFile', {
@@ -83,7 +86,10 @@ const PostProdForm = () => {
 
     return (
         <div>
-        <Form onSubmit={handleSubmit} style={{width:"750px"}} className ="form-components-width mx-auto">
+        <Form 
+        onSubmit={handleSubmit}
+        style={{width:"750px"}} 
+        className ="form-components-width mx-auto">
           <Form.Group className="form-group-el d-flex">
             <Form.Label htmlFor="inputName">Product Name</Form.Label>
             <Form.Control
@@ -143,11 +149,20 @@ const PostProdForm = () => {
 
           <Form.Group className="form-group-el">
           <Form.Label text-left >Image of Product</Form.Label>
+            <Button
+            onClick={handleFileInputClick}
+            >
+              Upload
+            </Button>
             <Form.File
             name="ProductPhoto" 
-            style={{width: "400px"}}  
+            style={{display:"none"}}  
+            hidden
             className ="d-flex"
-            id="exampleFormControlFile1"/>
+            id="exampleFormControlFile1"
+            onChange={handlePhotoSubmit}
+            ref={fileInput}
+            />
           </Form.Group >
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
             <Form.Label text-left >Additional Description</Form.Label>
@@ -187,7 +202,10 @@ const PostProdForm = () => {
             />
           </Form.Group>
             
-          <Button type="submit" className="post-prodForm-btn" >Submit</Button>    
+          <Button 
+          type="submit" 
+          className="post-prodForm-btn"
+          >Submit</Button>    
                 </Form>
         </div>
     )

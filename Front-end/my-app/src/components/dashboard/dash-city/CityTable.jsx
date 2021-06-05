@@ -1,36 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
 import AddCity from '../dash-city/AddCity'
 import EditCity from './EditCity'
 import DeleteCity from './DeleteCity'
-
-
-// document.ready(function(){
-// 	// Activate tooltip
-// 	'[data-toggle="tooltip"]'.tooltip();
-	
-// 	// Select/Deselect checkboxes
-// 	var checkbox = 'table tbody input[type="checkbox"]';
-// 	"#selectAll".click(function(){
-// 		if(this.checked){
-// 			checkbox.each(function(){
-// 				this.checked = true;                        
-// 			});
-// 		} else{
-// 			checkbox.each(function(){
-// 				this.checked = false;                        
-// 			});
-// 		} 
-// 	});
-// 	checkbox.click(function(){
-// 		if(!this.checked){
-// 			"#selectAll".prop("checked", false);
-// 		}
-// 	});
-// });
-
+import { Search } from '../DataTable/Search';
+import Pagination from '../DataTable/Pagination';
 
 
 
@@ -42,6 +18,7 @@ const CityTable = () => {
     const [deleteCityModal,setDeleteCityModal] = useState(false);
     const [cityV, setCityV] = useState([]);
     const [cityD, setCityD] = useState();
+    const [search,setSearch] = useState("");
 
 
         useEffect(()=>{
@@ -61,8 +38,23 @@ const CityTable = () => {
             }
         }
 
+        const cityData = useMemo ( ()=>{
+            let computedCity = cities;
+    
+            if(search){
+                computedCity=computedCity.filter(
+                    cities =>
+                        cities.CityName.toLowerCase().includes(search.toLowerCase())
+                )
+            }
+            return computedCity
+    
+        },[cities,search])
+
+        const data ={}
     return (
     <div>
+       
        
         <Container className="container-xl">
             <Table className="table-responsive">
@@ -73,6 +65,11 @@ const CityTable = () => {
                                 <h2 className ="h-position"><b>Cities</b></h2>
                             </Col>
                             <Col className="col-sm-6">
+                            <Search
+                                  onSearch={(value)=>{
+                                      setSearch(value);
+                                  }}
+                                />
                                 <Button 
                                 onClick={() => setAddCityModal(true)} 
                                 className="btn btn-success" variant ="success" data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New City</span>
@@ -89,7 +86,7 @@ const CityTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {cities.map(city=>(
+                            {cityData.map(city=>(
                                 <tr>
                                 <td>{city.CityId}</td>
                                 <td>{city.CityName}</td>
@@ -129,7 +126,7 @@ const CityTable = () => {
                             <li className="page-item"><a href="#" className="page-link">5</a></li>
                             <li className="page-item"><a href="#" className="page-link">Next</a></li>
                         </ul>
-                    </div>
+                    </div>             
                 </div>
             </Table>  
 

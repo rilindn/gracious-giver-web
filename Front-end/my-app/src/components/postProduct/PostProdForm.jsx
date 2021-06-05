@@ -108,12 +108,10 @@ const PostProdForm = () => {
              custom
              >
              {categories.map(categorie=>(
-                
               <option>{categorie.ProductCategoryName}</option>
              ))}
             </Form.Control>
           </Form.Group> 
-
         <Form.Group className="form-group-el">
               <Form.Label sm={3}>
               Product Freshness

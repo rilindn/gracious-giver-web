@@ -13,22 +13,24 @@ import Pagination from '../DataTable/Pagination';
 const ProductTable = () => {
 
     const [products, setProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
     const [editProductModal,setEditProductModal] = useState(false);
     const [deleteProductModal,setDeleteProductModal] = useState(false);
     const [productV, setProductV] = useState([]);
     const [productD, setProductD] = useState();
     const [search,setSearch] = useState("");
+    const [maxProdShow,setMaxProdShow] = useState(1);
     
 
-        useEffect(()=>{
-            getProducts(); 
+        useEffect( ()=>{
+             getAmOfProducts(maxProdShow); 
+             getAllProducts();
         },[]);
 
-        const getProducts = async () => {
+        const getAmOfProducts = async (maxProdShow) => {
             try{ 
-            const data = await axios.get(`http://localhost:5000/api/product`)
+            await axios.get("http://localhost:5000/api/product/amount/"+maxProdShow)
             .then(res=>{
-                console.log(res.data)
                 setProducts(res.data)
             })
             }
@@ -36,12 +38,31 @@ const ProductTable = () => {
                 console.log(e);
             }
         }
+        const getAllProducts = async () => {
+            try{ 
+            await axios.get("http://localhost:5000/api/product")
+            .then(res=>{
+                setAllProducts(res.data)
+            })
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
 
+        const changeAm = () => {
+            if(maxProdShow==='All'){
+                setProducts(allProducts)
+            }
+            else
+            getAmOfProducts(maxProdShow); 
+        }
 
-    const productsData = useMemo ( ()=>{
-        let computedProducts = products;
+        const productsData = useMemo ( ()=>{
+            let computedProducts = products;
 
         if(search){
+            setProducts(allProducts)
             computedProducts=computedProducts.filter(
                 product =>
                     product.ProductName.toLowerCase().includes(search.toLowerCase())||
@@ -60,22 +81,46 @@ const ProductTable = () => {
                 <div className="table-wrapper">
                     <div className="table-title">
                         <Row className="row">
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-4">
                                 <h2><b>Products</b></h2>
                             </Col>
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-7 d-flex justify-content-end">
+                            <span className="showing-res-txt">Showing {productsData.length} of {allProducts.length} entries</span>
                                 <Search
                                   onSearch={(value)=>{
                                       setSearch(value);
                                   }}
-                                  style={{float:"right"}}
+                                  style={{float:"right",width:"200px"}}
                                 />
+                                <Form.Control
+                                    name="ShowAmOfProduct" 
+                                    as="select" 
+                                    custom
+                                    style={{width:"80px",marginLeft:"3px"}}
+                                    onChange={e=>{setMaxProdShow(e.target.value)}}
+                                    value={maxProdShow}
+                                    >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="All">All</option>
+                                </Form.Control>
+                                <Button
+                                    variant="info"
+                                    onClick={changeAm}
+                                    className="ml-1"
+                                    style={{height:"37px"}}
+                                    >
+                                    Set entries
+                                </Button>
                             </Col>
                         </Row>
                     </div>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
+                                <th>Nr.</th>
                                 <th>Product Name</th>
                                 <th>Product Category</th>
                                 <th>Freshness</th>
@@ -86,8 +131,9 @@ const ProductTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {productsData.map(product=>(
+                            {productsData.map((product,i)=>(
                                 <tr>
+                                <td>#{++i}</td>
                                 <td>{product.ProductName}</td>
                                 <td>{product.ProductCategory}</td>
                                 <td>{product.ProductState}</td>
@@ -118,6 +164,8 @@ const ProductTable = () => {
                             </tr>
                             ))}
                         </tbody>
+                       
+                        
                     </Table>
 
                 </div>

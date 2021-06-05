@@ -1,12 +1,17 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { MDBBtnGroup, MDBRadio } from 'mdb-react-ui-kit';
 import React, { Component, useEffect, useRef, useState } from 'react'
-import { Form, Col, Button} from 'react-bootstrap'
+import { Form, Col, Button, ToggleButton, ButtonGroup} from 'react-bootstrap'
+import faPhotoUpload from '../../images/photoUpload.png'
+
 
 const PostProdForm = () => {
 
     
     const [categories, setCategories] = useState([]);
     const [selectedFile,setSelectedFile] = useState(null);
+    const [radioValue, setRadioValue] = useState('1');
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -64,25 +69,6 @@ const PostProdForm = () => {
             },
           )
     }
-    //  const handleFileSelected = (event) => {
-    //     event.preventDefault()
-    //     selectedFile = event.target.files[0].name
-    //     const formData = new FormData()
-    //     formData.append('myFile', event.target.files[0], event.target.files[0].name)
-    //     fetch(process.env.REACT_APP_API + 'product/SaveFile', {
-    //       method: 'POST',
-    //       body: formData,
-    //     })
-    //       .then((res) => res.json())
-    //       .then(
-    //         (result) => {
-    //           this.imagesrc = process.env.REACT_APP_PHOTOPATH + result
-    //         },
-    //         (error) => {
-    //           alert(error)
-    //         },
-    //       )
-    //   }
 
     return (
         <div>
@@ -120,6 +106,7 @@ const PostProdForm = () => {
                 sm={7} 
                 style={{width: "400px"}}
                 name="ProductState"
+                className="prod-freshnes-radios"
                 >
                 <Form.Check inline
                   value="Brand New"
@@ -142,16 +129,21 @@ const PostProdForm = () => {
                   label="Refurbished"
                   id="formHorizontalRadios3"
                 />
+                
               </Col>
             </Form.Group>
 
           <Form.Group className="form-group-el">
           <Form.Label text-left >Image of Product</Form.Label>
-            <Button
+            <button
+            type="button"
             onClick={handleFileInputClick}
+            className="imgUploadBtn"
             >
-              Upload
-            </Button>
+              {(selectedFile!=null)? 
+              <span>{selectedFile.name}</span> 
+              :  <img src={faPhotoUpload} style={{width:"30px"}}></img>}
+            </button>
             <Form.File
             name="ProductPhoto" 
             style={{display:"none"}}  
@@ -204,7 +196,7 @@ const PostProdForm = () => {
           type="submit" 
           className="post-prodForm-btn"
           >Submit</Button>    
-                </Form>
+          </Form>
         </div>
     )
 }

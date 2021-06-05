@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { Button, Form, FormGroup, Modal, FormLabel, FormControl} from 'react-bootstrap'
 
 const editAdmin = ({show,onHide,admin}) => {
 

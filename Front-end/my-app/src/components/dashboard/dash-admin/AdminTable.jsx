@@ -58,12 +58,12 @@ const AdminTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Admin Id</th>
-                                <th>Admin Name</th>
-                                <th>Admin Password</th>
-                                <th>Admin Email</th>
-                                <th>Admin Gender</th>
-                                <th>Admin Date of Birth</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@ const AdminTable = () => {
                                 <tr>
                                 <td>{admin.AdminId}</td>
                                 <td>{admin.AdminName}</td>
-                                <td>{admin.AdminPassword}</td>
+                                {/* <td>{admin.AdminPassword}</td> */}
                                 <td>{admin.AdminEmail}</td>
                                 <td>{admin.AdminGender}</td>
                                 <td>{admin.AdminDbo}</td>
@@ -129,11 +129,11 @@ const AdminTable = () => {
 
         <DeleteAdmin
         show={deleteAdminModal}
-        onHide={() => setDeleteCityModal(false)} 
+        onHide={() => setDeleteAdminModal(false)} 
         adminId={adminD}
         />
     </div>
     )
 }
 
-export default CityTable
+export default AdminTable

@@ -7,6 +7,7 @@ import CityTable from './dash-city/CityTable';
 import CategTable from './dash-category/CategTable';
 import StateTable from './dash-state/StateTable';
 import StreetTable from'./dash-street/StreetTable';
+import AdminTable from'./dash-admin/AdminTable';
 import Footer from '../footer/Footer';
 
 
@@ -17,6 +18,7 @@ const Dashboard = () => {
     const [cityTable,setCityTable] = useState(false);
     const [stateTable,setStateTable] = useState(false);
     const [streetTable,setStreetTable] = useState(false);
+    const [adminTable, setAdminTable] = useState(false);
 
     
 
@@ -34,6 +36,7 @@ const Dashboard = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(false);
+                    setAdminTable(false);
                 }}
                 className={`dash-btn ${prodTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -48,6 +51,7 @@ const Dashboard = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(false);
+                    setAdminTable(false);
                 }}
                 
                 className={`dash-btn ${categTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
@@ -63,6 +67,7 @@ const Dashboard = () => {
                     setCityTable(true);
                     setStateTable(false);
                     setStreetTable(false);
+                    setAdminTable(false);
                 }}
                 className={`dash-btn ${cityTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -77,6 +82,7 @@ const Dashboard = () => {
                     setCityTable(false);
                     setStateTable(true);
                     setStreetTable(false);
+                    setAdminTable(false);
                 }}
                 className={`dash-btn ${stateTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -91,10 +97,26 @@ const Dashboard = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(true);
+                    setAdminTable(false);
                 }}
                 className={`dash-btn ${streetTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                 Street Table
+                </button>
+            </li>
+            <li>
+                <button
+                onClick={()=>{
+                    setProdTable(false);
+                    setCategTable(false);
+                    setCityTable(false);
+                    setStateTable(false);
+                    setStreetTable(false);
+                    setAdminTable(true);
+                }}
+                className={`dash-btn ${adminTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+                Admin Table
                 </button>
             </li>
         </ul>
@@ -104,6 +126,7 @@ const Dashboard = () => {
             {cityTable ? <CityTable/>: null }
             {stateTable ? <StateTable/>: null }
             {streetTable ? <StreetTable/>: null }
+            {adminTable ? <AdminTable/>: null }
         </div>
         </div>
         <Footer/>

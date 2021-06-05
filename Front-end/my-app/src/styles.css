@@ -186,7 +186,7 @@ section .section-title {
 .form-components-width {
   /* width: 50%; */
   padding: 30px;
-  height: 850px;
+  height: 900px;
 }
 
 .txt-post-product {
@@ -211,6 +211,7 @@ section .section-title {
   margin: 50px;
   box-shadow: inset 0 0 5px #3c6e71;
   background: #e4e4e4;
+  border-radius: 20px;
 }
 
 .new-post-t {
@@ -227,7 +228,26 @@ section .section-title {
   margin-right: 70px;
   color: white;
 }
-
+.form-components-width .form-group-el label {
+  font-weight: 500;
+  font-size: 14pt;
+}
+.prod-freshnes-radios label {
+  font-size: 11pt !important;
+}
+.imgUploadBtn {
+  width: 140px;
+  height: 100px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgb(182, 182, 182);
+  margin-left: -156px;
+}
+.imgUploadBtn:hover {
+  background-color: #ffffff;
+  border: 2px solid #5a8a8d;
+  opacity: 0.9;
+}
 .new-post-n {
   margin-right: 365px;
   color: white;
@@ -656,6 +676,10 @@ table.table .avatar {
   border-radius: 50%;
   vertical-align: middle;
   margin-right: 10px;
+}
+.showing-res-txt {
+  font-size: 15px;
+  margin: 8px 17px 0 0;
 }
 .pagination {
   float: right;

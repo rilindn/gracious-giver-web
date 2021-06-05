@@ -29,7 +29,7 @@ const editCity = ({show,onHide,city}) => {
                             <h3 class="modal-title">Edit City</h3>
                     </div>
                         <div class="modal-body">	
-                        <FormGroup class="form-group">
+                            <FormGroup class="form-group">
                                 <label>Id</label>
                                 <input defaultValue={city.CityId} type="text" class="form-control" required disabled/>
                             </FormGroup>					

@@ -105,7 +105,7 @@ const FormPage = () => {
                             type="password"
                             name="password"
                             style={{width:"400px", paddingLeft:"30px" }}
-                       />
+                    />
                   <FormLabel className="label-alignin">
                       Confirm password
                   </FormLabel>

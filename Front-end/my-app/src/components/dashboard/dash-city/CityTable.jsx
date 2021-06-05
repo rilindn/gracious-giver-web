@@ -13,29 +13,52 @@ import Pagination from '../DataTable/Pagination';
 const CityTable = () => { 
  
     const [cities, setCities] = useState([]);
+    const[allCities, setAllCities] = useState([]);
     const [addCityModal,setAddCityModal] = useState(false);
     const [editCityModal,setEditCityModal] = useState(false);
     const [deleteCityModal,setDeleteCityModal] = useState(false);
     const [cityV, setCityV] = useState([]);
     const [cityD, setCityD] = useState();
     const [search,setSearch] = useState("");
+    const [maxCityShow, setMaxCityShow] = useState(1);
 
 
         useEffect(()=>{
-            getcities(); 
+            getAmOfCities(maxCityShow);
+            getAllCities(); 
         },[]);
+        
+        const getAmOfCities = async (maxCityShow) =>{
+            try{
+              await axios.get("http://localhost:5000/api/city/amount/" + maxCityShow)
+              .then(res=>{
+                  setCities(res.data)
+              })  
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
 
-        const getcities = async () => {
+        const getAllCities = async () => {
             try{ 
-            const data = await axios.get(`http://localhost:5000/api/city`)
+            await axios.get(`http://localhost:5000/api/city`)
             .then(res=>{
                 console.log(res.data)
-                setCities(res.data)
+                setAllCities(res.data)
             })
             }
             catch(e){
                 console.log(e);
             }
+        }
+
+        const changeAm = () =>{
+            if(maxCityShow==='All'){
+                setCities(allCities)
+            }
+            else
+            getAmOfCities(maxCityShow);
         }
 
         const cityData = useMemo ( ()=>{
@@ -53,26 +76,53 @@ const CityTable = () => {
 
         const data ={}
     return (
-    <div>
-       
-       
-        <Container className="container-xl">
-            <Table className="table-responsive">
-                <div className="table-wrapper">
-                    <div className="table-title">
-                        <Row className="row">
-                            <Col className="col-sm-6">
-                                <h2 className ="h-position"><b>Cities</b></h2>
+        <div>
+        <Container class="container-xl">
+            <Table class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <Row class="row">
+                            <Col class="col-sm-6">
+                                <h2><b>Cities</b></h2>
                             </Col>
-                            <Col className="col-sm-6">
-                            <Search
-                                  onSearch={(value)=>{
-                                      setSearch(value);
-                                  }}
-                                />
+                            <Col className ="col-sm-7 d-flex justify-content-end">
+                                 <span className="showing-res-txt">Showing {cityData.length} of {allCities.length} entries</span>
+                                 <Search
+                                    onSearch={(value)=>{
+                                        setSearch(value);
+                                    }}
+                                    style ={{float:"right", width:"200px"}}
+                                 />
+                                 <Form.Control
+                                    name = "ShowAmOfCities"
+                                    as="select" 
+                                    custom
+                                    style={{width:"80px",marginLeft:"3px"}}
+                                    onChange={e=>{setMaxCityShow(e.target.value)}}
+                                    value={maxCityShow}
+                                    >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="All">All</option>
+                                 </Form.Control>
+                                 <Button
+                                    variant="info"
+                                    onClick={changeAm}
+                                    className="ml-1"
+                                    style={{height:"37px"}}
+                                    >
+                                    Set entries
+                                </Button>
+                            </Col>
+                            <Col class="col-sm-6">
+                          
                                 <Button 
                                 onClick={() => setAddCityModal(true)} 
-                                className="btn btn-success" variant ="success" data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New City</span>
+                                class="btn btn-success" 
+                                variant ="success"
+                                data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New City</span>
                                 </Button>					
                             </Col>
                         </Row>

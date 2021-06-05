@@ -1,32 +1,51 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
 import AddStreet from '../dash-street/AddStreet'
 import EditStreet from './EditStreet'
 import DeleteStreet from './DeleteStreet'
+import { Search } from '../DataTable/Search';
+import Pagination from '../DataTable/Pagination';
 
 
 const StreetTable = () => { 
  
     const [streets, setStreets] = useState([]);
+    const[allStreets, setAllStreets] = useState([]);
     const [addStreetModal,setAddStreetModal] = useState(false);
     const [editStreetModal,setEditStreetModal] = useState(false);
     const [deleteStreetModal,setDeleteStreetModal] = useState(false);
     const [streetV, setStreetV] = useState([]);
     const [streetD, setStreetD] = useState();
+    const[search, setSearch] = useState("");
+    const[maxStreetShow, setMaxStreetShow] = useState(1);
 
 
         useEffect(()=>{
-            getStreets(); 
+            getAmOfStreets(maxStreetShow);
+            getAllStreets(); 
         },[]);
 
-        const getStreets = async () => {
+        
+    const getAmOfStreets = async (maxStreetShow) =>{
+        try{
+          await axios.get("http://localhost:5000/api/Street/amount/" + maxStreetShow)
+          .then(res=>{
+            setStreets(res.data)
+          })  
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+        const getAllStreets = async () => {
             try{ 
-            const data = await axios.get(`http://localhost:5000/api/Street`)
+            await axios.get(`http://localhost:5000/api/Street`)
             .then(res=>{
                 console.log(res.data)
-                setStreets(res.data)
+                setAllStreets(res.data)
             })
             }
             catch(e){
@@ -34,9 +53,31 @@ const StreetTable = () => {
             }
         }
 
-    return (
-    <div>
+        const changeAm = () =>{
+            if(maxStreetShow==='All'){
+                setStreets(allStreets)
+            }
+            else
+            getAmOfStreets(maxStreetShow);
+        }
+    
+        const streetData = useMemo( ()=>{
+            let computedStreets = streets;
+    
+            if(search){
+                computedStreets = computedStreets.filter(
+                    street => 
+                        street.StreetName.toLowerCase().includes(search.toLowerCase()) 
+                        
+                )
+            }
+            return computedStreets
+        },[streets, search])
+    
 
+
+    return (
+        <div>
         <Container class="container-xl">
             <Table class="table-responsive">
                 <div class="table-wrapper">
@@ -45,11 +86,43 @@ const StreetTable = () => {
                             <Col class="col-sm-6">
                                 <h2><b>Streets</b></h2>
                             </Col>
+                            <Col className ="col-sm-7 d-flex justify-content-end">
+                                 <span className="showing-res-txt">Showing {streetData.length} of {allStreets.length} entries</span>
+                                 <Search
+                                    onSearch={(value)=>{
+                                        setSearch(value);
+                                    }}
+                                    style ={{float:"right", width:"200px"}}
+                                 />
+                                 <Form.Control
+                                    name = "ShowAmOfStreet"
+                                    as="select" 
+                                    custom
+                                    style={{width:"80px",marginLeft:"3px"}}
+                                    onChange={e=>{setMaxStreetShow(e.target.value)}}
+                                    value={maxStreetShow}
+                                    >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="All">All</option>
+                                 </Form.Control>
+                                 <Button
+                                    variant="info"
+                                    onClick={changeAm}
+                                    className="ml-1"
+                                    style={{height:"37px"}}
+                                    >
+                                    Set entries
+                                </Button>
+                            </Col>
                             <Col class="col-sm-6">
+                          
                                 <Button 
                                 onClick={() => setAddStreetModal(true)} 
                                 class="btn btn-success" 
-                                variant="success"
+                                variant ="success"
                                 data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Street</span>
                                 </Button>					
                             </Col>

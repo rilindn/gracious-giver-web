@@ -15,29 +15,51 @@ import Pagination from '../DataTable/Pagination';
 const StateTable = () => {
 
     const [states, setStates] = useState([]);
+    const [allStates, setAllStates]= useState([]);
     const [addStateModal,setAddStateModal] = useState(false);
     const [editStateModal,setEditStateModal] = useState(false);
     const [deleteStateModal,setDeleteStateModal] = useState(false);
     const [StateV, setStateV] = useState([]);
     const [StateD, setStateD] = useState();
     const [search,setSearch] = useState("");
+    const [maxStateShow, setmaxStateShow] = useState(1);
 
         useEffect(()=>{
-            getstates();
+            getAmOfStates(maxStateShow);
+            getAllStates();
         },[]);
 
-
-        const getstates = async () => {
+        const getAmOfStates = async (maxStateShow) =>{
             try{
-            const data = await axios.get(`http://localhost:5000/api/Shteti`)
+              await axios.get("http://localhost:5000/api/Shteti/amount/" + maxStateShow)
+              .then(res=>{
+                  setStates(res.data)
+              })  
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
+
+        const getAllStates = async () => {
+            try{
+             await axios.get(`http://localhost:5000/api/Shteti`)
             .then(res=>{
                 console.log(res.data)
-                setStates(res.data)
+                setAllStates(res.data)
             })
             }
             catch(e){
                 console.log(e);
             }
+        }
+
+        const changeAm = () =>{
+            if(maxStateShow==='All'){
+                setStates(allStates)
+            }
+            else
+            getAmOfStates(maxStateShow);
         }
 
         const statesData = useMemo( ()=>{
@@ -64,12 +86,39 @@ const StateTable = () => {
                             <Col class="col-sm-6">
                                 <h2><b>States</b></h2>
                             </Col>
+                            <Col className ="col-sm-7 d-flex justify-content-end">
+                                 <span className="showing-res-txt">Showing {statesData.length} of {allStates.length} entries</span>
+                                 <Search
+                                    onSearch={(value)=>{
+                                        setSearch(value);
+                                    }}
+                                    style ={{float:"right", width:"200px"}}
+                                 />
+                                 <Form.Control
+                                    name = "ShowAmOfStates"
+                                    as="select" 
+                                    custom
+                                    style={{width:"80px",marginLeft:"3px"}}
+                                    onChange={e=>{setmaxStateShow(e.target.value)}}
+                                    value={maxStateShow}
+                                    >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="All">All</option>
+                                 </Form.Control>
+                                 <Button
+                                    variant="info"
+                                    onClick={changeAm}
+                                    className="ml-1"
+                                    style={{height:"37px"}}
+                                    >
+                                    Set entries
+                                </Button>
+                            </Col>
                             <Col class="col-sm-6">
-                            <Search
-                                  onSearch={(value)=>{
-                                      setSearch(value);
-                                  }}
-                                />
+                          
                                 <Button 
                                 onClick={() => setAddStateModal(true)} 
                                 class="btn btn-success" 

@@ -11,7 +11,6 @@ const addAdmin = ({show,onHide}) => {
             AdminPassword: event.target.AdminPassword.value,
             AdminEmail: event.target.AdminEmail.value,
             AdminGender: event.target.maleFemale.value,
-            AdminDbo: event.target.birth.value,
           })
           .then((res) => {
               alert("Admin added succesfully!")
@@ -75,19 +74,7 @@ const addAdmin = ({show,onHide}) => {
                                     
                                 <label class="form-check-label" for="inlineRadio2">Male</label>
                                 </div>
-                            </div>	
-
-                            <FormLabel className="label-alignin">
-                                    Date of birth
-                                </FormLabel>
-
-                                <FormControl className="lbl-position" 
-                                    style={{width:"200px"}}
-                                    type="date"
-                                    required
-                                    placeholder="Date of birth"
-                                    name="birth"
-                                ></FormControl>		
+                            </div>		
                         </div>
                                 <Modal.Footer class="modal-footer">
                                     <input 

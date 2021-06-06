@@ -62,6 +62,7 @@ const AdminTable = () => {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Gender</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

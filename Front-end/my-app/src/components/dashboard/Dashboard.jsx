@@ -39,6 +39,7 @@ const Dashboard = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(false);
+                    setAdminTable(false);
                 }}
                 className={`dash-btn ${userTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -129,6 +130,7 @@ const Dashboard = () => {
             <li>
                 <button
                 onClick={()=>{
+                    setUserTable(false);
                     setProdTable(false);
                     setCategTable(false);
                     setCityTable(false);

@@ -131,6 +131,7 @@ const UserTable = () => {
                                 <th>DateOfBirth</th>
                                 <th>Gender</th>
                                 <th>Role</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>

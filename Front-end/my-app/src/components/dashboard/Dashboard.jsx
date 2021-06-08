@@ -1,6 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { Button, Container, Form, Modal, Table, ToggleButton } from 'react-bootstrap';
+import React, { useState } from 'react'
 import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import UserTable from './dash-user/UserTable';
 import ProductTable from './dash-prod/ProductTable';

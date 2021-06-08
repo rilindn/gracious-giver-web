@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React from 'react'
-import { Form, Modal, Button, } from 'react-bootstrap'
+import { Form, Modal} from 'react-bootstrap'
 
 const deleteUser = ({show,onHide,userId}) => {
 
     const handleSubmit = (event) => {
-        axios.delete("http://localhost:5000/api/DM_User/"+userId)
+        axios.delete("http://localhost:5000/api/user/"+userId)
           .then((res) => {
               alert("User deleted succesfully!")
             },
@@ -24,7 +24,7 @@ const deleteUser = ({show,onHide,userId}) => {
             <div class ="modal-dialog">
              <div 
              class="modal-content"
-             > <Form onSubmit={handleSubmit} className="p-3">
+             > <Form  className="p-3">
                         <div>					
                             <h4 class="modal-title">Delete User</h4>
                         </div>
@@ -44,6 +44,7 @@ const deleteUser = ({show,onHide,userId}) => {
                             type="submit" 
                             class="btn btn-danger" 
                             value="Delete"
+                            onClick={handleSubmit}
                             />
                         </Modal.Footer>
                     </Form>

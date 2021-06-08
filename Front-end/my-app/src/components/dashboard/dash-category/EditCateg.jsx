@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { Form, FormGroup, Modal } from 'react-bootstrap'
 import axios from 'axios'
+
 const editCateg = ({show,onHide,categ}) => {
     const handleSubmit = (event) => {
         axios.put('http://localhost:5000/api/productcategory/'+ categ.ProductCategoryId, {

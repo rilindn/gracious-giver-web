@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form,Button,Col, Navbar, NavLink, Nav, Container, Image, Media , Row} from 'react-bootstrap'
+import { Button,Col, Navbar, NavLink, Nav, Container, Image, Media , Row} from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
 import quoteA from "../../images/alice.png"
 import quoteS from "../../images/sandra.png"
@@ -47,7 +47,7 @@ export const WelcomePage = () => {
         
           <Button className="give-browse-btn text-30 font-weight-bold"><FontAwesomeIcon style={{marginRight:"15px"}} icon={faPlus}/>Give</Button>
           <h4 className="give-browse-btn-text font-weight-bold">or</h4>
-          <Button className="give-browse-btn font-weight-bold">Browse<img src={arrowIcon} style={{width:"30px",margin:"0 0 10px 8px"}}></img> </Button>
+          <Button className="give-browse-btn font-weight-bold">Browse<img src={arrowIcon} alt="" style={{width:"30px",margin:"0 0 10px 8px"}}></img> </Button>
           <h4 className="give-browse-btn-text font-weight-bold">items</h4>
           </div>
           </div>

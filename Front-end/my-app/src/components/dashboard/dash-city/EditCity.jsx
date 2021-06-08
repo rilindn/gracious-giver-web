@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { Form, FormGroup, Modal } from 'react-bootstrap'
 
 const editCity = ({show,onHide,city}) => {
 

@@ -1,11 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table} from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import EditProduct from './EditProduct'
 import DeleteProduct from './DeleteProduct'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
 
 
 
@@ -25,7 +23,7 @@ const ProductTable = () => {
         useEffect( ()=>{
              getAmOfProducts(maxProdShow); 
              getAllProducts();
-        },[]);
+        },[maxProdShow]);
 
         const getAmOfProducts = async (maxProdShow) => {
             try{ 
@@ -72,7 +70,7 @@ const ProductTable = () => {
         }
         return computedProducts
 
-    },[products,search])
+    },[products,search,allProducts])
 
     return (
     <div>
@@ -85,7 +83,7 @@ const ProductTable = () => {
                                 <h2><b>Products</b></h2>
                             </Col>
                             <Col className="col-sm-7 d-flex justify-content-end">
-                            <span className="showing-res-txt">Showing {productsData.length} of {allProducts.length} entries</span>
+                            <span className="showing-res-txt">Showing {productsData.length} out of {allProducts.length} entries</span>
                                 <Search
                                   onSearch={(value)=>{
                                       setSearch(value);

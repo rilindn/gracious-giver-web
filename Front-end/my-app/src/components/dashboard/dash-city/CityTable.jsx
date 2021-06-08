@@ -1,12 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AddCity from '../dash-city/AddCity'
 import EditCity from './EditCity'
 import DeleteCity from './DeleteCity'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
 
 
 
@@ -26,7 +24,7 @@ const CityTable = () => {
         useEffect(()=>{
             getAmOfCities(maxCityShow);
             getAllCities(); 
-        },[]);
+        },[maxCityShow]);
         
         const getAmOfCities = async (maxCityShow) =>{
             try{
@@ -74,7 +72,7 @@ const CityTable = () => {
     
         },[cities,search])
 
-        const data ={}
+        
     return (
         <div>
         <Container class="container-xl">

@@ -31,7 +31,9 @@ const editProduct = ({show,onHide,product}) => {
             class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form >
+                    <Form 
+                    onSubmit={handleSubmit}
+                    >
                         <div class="modal-header">						
                             <h3 class="modal-title">Edit Product</h3>
                     </div>
@@ -72,8 +74,8 @@ const editProduct = ({show,onHide,product}) => {
                             Cancel
                             </Button>
                             <Button 
-                            onClick={handleSubmit}
                             variant="info"
+                            type="submit"
                             >
                             Save
                             </Button>

@@ -1,5 +1,4 @@
 import React from 'react'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -7,9 +6,26 @@ import FormControl from 'react-bootstrap/FormControl'
 import { FaUser } from 'react-icons/fa'
 import { BsChatFill,BsSearch } from 'react-icons/bs'
 import { MdAddCircleOutline } from 'react-icons/md'
-import { Dropdown, DropdownButton, SplitButton } from 'react-bootstrap'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import axios from 'axios'
 
-function Header() {
+const Header = ({loggedInUser}) => {
+
+  const handleLogout = async (event) => {
+    const posReq = axios.create({
+      withCredentials:true
+    })
+    await posReq.post('http://localhost:5000/api/logout')
+    .then(
+      (res) =>{
+        alert("Succesfully logged out!")
+      },
+      (error) =>{
+        alert(error)
+      },
+    )
+  }
+
   return (
     <div className="header">
       
@@ -55,7 +71,9 @@ function Header() {
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="/login" eventKey="4">Log out</Dropdown.Item>
+                {loggedInUser==null? null:
+                <Dropdown.Item href="/login" onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
+                }
               </DropdownButton>
               </Nav>
           </Nav>

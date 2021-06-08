@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { Form, Modal, Button, Alert, } from 'react-bootstrap'
+import { Form, Modal, Alert, } from 'react-bootstrap'
 
 const deleteCity = ({show,onHide,cityId}) => {
 

@@ -1,12 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AddStreet from '../dash-street/AddStreet'
 import EditStreet from './EditStreet'
 import DeleteStreet from './DeleteStreet'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
 
 
 const StreetTable = () => { 
@@ -25,7 +23,7 @@ const StreetTable = () => {
         useEffect(()=>{
             getAmOfStreets(maxStreetShow);
             getAllStreets(); 
-        },[]);
+        },[maxStreetShow]);
 
         
     const getAmOfStreets = async (maxStreetShow) =>{

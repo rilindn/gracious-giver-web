@@ -5,10 +5,27 @@ import PostProduct from './components/postProduct/PostProduct'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import Home from './components/home/Home'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+import 'react-notifications/lib/notifications.css'
+import { NotificationContainer } from 'react-notifications'
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState([])
+
+  useEffect(() => {
+    ;(async () => {
+      await axios
+        .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
+        .then((res) => {
+          setLoggedInUser(res.data)
+        })
+    })()
+  }, [])
+
   return (
     <div className="App">
       <Router>
@@ -16,10 +33,10 @@ function App() {
           <WelcomePage />
         </Route>
         <Route path="/home" exact>
-          <Home />
+          <Home loggedInUser={loggedInUser} />
         </Route>
         <Route path="/postProd" exact>
-          <PostProduct />
+          <PostProduct loggedInUser={loggedInUser} />
         </Route>
         <Route path="/login" exact>
           <Login />
@@ -28,8 +45,9 @@ function App() {
           <Register />
         </Route>
         <Route path="/dashboard" exact>
-          <Dashboard />
+          <Dashboard loggedInUser={loggedInUser} />
         </Route>
+        <NotificationContainer />
       </Router>
     </div>
   )

@@ -1,12 +1,5 @@
 import React from 'react'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import { FaUser } from 'react-icons/fa'
-import { BsChatFill,BsSearch } from 'react-icons/bs'
-import { MdAddCircleOutline } from 'react-icons/md'
 
 function Header() {
   return (

@@ -1,15 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form,Row, Table } from 'react-bootstrap';
 import EditUser from './EditUser'
 import DeleteUser from './DeleteUser'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
-
-
-
-
 
 
 const UserTable = () => {
@@ -26,11 +20,11 @@ const UserTable = () => {
     useEffect(()=>{
         getAmofUsers(maxUserShow);
         getAllUsers();
-    },[]);
+    },[maxUserShow]);
 
     const getAmofUsers = async (maxUserShow) =>{
         try{
-          await axios.get("http://localhost:5000/api/DM_User/amount/" + maxUserShow)
+          await axios.get("http://localhost:5000/api/user/amount/" + maxUserShow)
           .then(res=>{
               setUsers(res.data)
           })  
@@ -42,7 +36,7 @@ const UserTable = () => {
 
     const getAllUsers = async () => {
         try{
-             await axios.get(`http://localhost:5000/api/DM_User`)
+             await axios.get(`http://localhost:5000/api/user/all`)
             .then(res=>{
                 console.log(res.data)
                 setAllUsers(res.data)
@@ -65,16 +59,14 @@ const UserTable = () => {
         let computedUsers = users;
 
         if(search){
+            setUsers(allUsers)
             computedUsers = computedUsers.filter(
                 user => 
-                    user.UserName.toLowerCase().includes(search.toLowerCase()) ||
-                    user.UserState.toLowerCase().includes(search.toLowerCase()) ||
-                    user.UserCity.toLowerCase().includes(search.toLowerCase()) ||
-                    user.UserGender.toLowerCase().includes(search.toLowerCase())
+                    user.UserName.toLowerCase().includes(search.toLowerCase())
             )
         }
         return computedUsers
-    },[users, search])
+    },[users, search,allUsers])
 
     return(
         <div>
@@ -87,7 +79,7 @@ const UserTable = () => {
                                     <h2><b>Users</b></h2>
                                 </Col>
                                 <Col className ="col-sm-7 d-flex justify-content-end">
-                                 <span className="showing-res-txt">Showing {userData.length} of {allUsers.length} entries</span>
+                                 <span className="showing-res-txt">Showing {userData.length} out of {allUsers.length} entries</span>
                                  <Search
                                     onSearch={(value)=>{
                                         setSearch(value);
@@ -158,7 +150,7 @@ const UserTable = () => {
                                     <Button 
                                      onClick={() => {
                                         setDeleteUserModal(true);
-                                        setUserD(user.userId)
+                                        setUserD(user.UserId)
                                     }} 
                                      className="delete" 
                                      variant ="danger"

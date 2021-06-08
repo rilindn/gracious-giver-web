@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { Form, FormGroup, Modal } from 'react-bootstrap'
 import axios from 'axios'
 
 const addCateg = ({show,onHide}) => {

@@ -3,7 +3,7 @@ import Header from './../Header/Header';
 import Sidebar from './../Sidebar/Sidebar';
 import { Footer } from './../footer/Footer';
 import PostProdForm from './PostProdForm'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 
 export const PostProduct = () => {

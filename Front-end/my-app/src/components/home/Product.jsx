@@ -1,10 +1,8 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
-import prod1 from "../../images/dinningTable.jpg"
+import React from "react"
 const Product = ({title,image,location}) => {
 
     const defaultImg = "prodImg.jpg"
-    const imgSrc = `http://localhost:5000/photos/${image.replace("C:\\fakepath\\", "")}`;
+    const imgSrc = "http://localhost:5000/photos/"+image===null?defaultImg:(image.replace("C:\\fakepath\\", ""));
 
     return (
         <div>

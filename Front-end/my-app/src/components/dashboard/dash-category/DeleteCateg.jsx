@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Modal, Button, } from 'react-bootstrap'
+import { Form, Modal} from 'react-bootstrap'
 import axios from 'axios'
 
 const deleteCateg = ({show,onHide,ProductCategoryId}) => {

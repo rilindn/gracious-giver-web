@@ -1,12 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import AddCateg from '../dash-category/AddCateg'
 import EditCateg from './EditCateg'
 import DeleteCateg from './DeleteCateg'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
 
 
 const CategTable = () => { 
@@ -24,7 +22,7 @@ const CategTable = () => {
         useEffect(()=>{
             getAmOfCateg(maxCategShow);
             getAllCateg();
-        },[]);
+        },[maxCategShow]);
 
         const getAmOfCateg = async (maxCategShow) =>{
             try{
@@ -133,7 +131,7 @@ const CategTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {categs.map(categ=>(
+                            {categData.map(categ=>(
                                 <tr>
                                 <td>{categ.ProductCategoryId}</td>
                                 <td>{categ.ProductCategoryName}</td>

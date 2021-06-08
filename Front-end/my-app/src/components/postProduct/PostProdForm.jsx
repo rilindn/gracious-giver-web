@@ -1,8 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { MDBBtnGroup, MDBRadio } from 'mdb-react-ui-kit';
-import React, { Component, useEffect, useRef, useState } from 'react'
-import { Form, Col, Button, ToggleButton, ButtonGroup} from 'react-bootstrap'
+import React, { useEffect, useRef, useState } from 'react'
+import { Form, Col, Button} from 'react-bootstrap'
 import faPhotoUpload from '../../images/photoUpload.png'
 
 
@@ -11,7 +9,6 @@ const PostProdForm = () => {
     
     const [categories, setCategories] = useState([]);
     const [selectedFile,setSelectedFile] = useState(null);
-    const [radioValue, setRadioValue] = useState('1');
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -24,9 +21,8 @@ const PostProdForm = () => {
 
     const getCategories = async () => {
         try{
-        const data = await axios.get('http://localhost:5000/api/productcategory')
+        await axios.get('http://localhost:5000/api/productcategory')
         .then(res=>{
-            console.log(res)
             setCategories(res.data)
         })
         }
@@ -62,7 +58,7 @@ const PostProdForm = () => {
           })
           .then(
             (res) => {
-              alert(res)
+              alert("Product added successfully!")
             },
             (error) => {
               alert(error)
@@ -142,7 +138,7 @@ const PostProdForm = () => {
             >
               {(selectedFile!=null)? 
               <span>{selectedFile.name}</span> 
-              :  <img src={faPhotoUpload} style={{width:"30px"}}></img>}
+              :  <img src={faPhotoUpload} style={{width:"30px"}} alt=""></img>}
             </button>
             <Form.File
             name="ProductPhoto" 

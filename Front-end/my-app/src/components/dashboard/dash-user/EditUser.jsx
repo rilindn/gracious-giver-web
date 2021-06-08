@@ -5,16 +5,16 @@ import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 const editUser = ({show, onHide, user}) => {
 
     const handleSubmit = (event) => {
-        axios.put('http://localhost:5000/api/DM_User/'+ user.userId, {
+        axios.put('http://localhost:5000/api/user/'+ user.UserId, {
             UserId: user.UserId,
             UserName: event.target.UserName.value,
-            UserState: user.UserState,
-            UserCity: user.UserCity,
-            UserPostcode: event.target.UserPostcode.value,
+            UserState: event.target.UserState.value,
+            UserCity: event.target.UserCity.value,
+            UserPostcode: user.UserPostcode,
+            UserRole: user.UserRole,
             UserEmail: event.target.UserEmail.value,
-            UserDbo: event.target.UserDbo.value,
-            UserGender: event.target.UserGender.value,
-            UserRole: event.target.UserRole.value,
+            UserGender: user.UserGender,
+            UserDbo: user.UserDbo
           })
           .then((res) => {
               alert("User updated succesfully!")
@@ -32,11 +32,24 @@ const editUser = ({show, onHide, user}) => {
             class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <Form >
+                    
                         <div class="modal-header">						
                             <h3 class="modal-title">Edit User</h3>
                     </div>
-                        <div class="modal-body">					
+                        <div class="modal-body">	
+                        <Form 
+                        onSubmit={handleSubmit}
+                        >				
+                            <FormGroup class="form-group">
+                                <label>User Id</label>
+                                <input 
+                                defaultValue={user.UserId}
+                                name="UserId"
+                                disabled
+                                type="text" 
+                                class="form-control" 
+                                required/>
+                            </FormGroup>
                             <FormGroup class="form-group">
                                 <label>User Name</label>
                                 <input 
@@ -72,8 +85,8 @@ const editUser = ({show, onHide, user}) => {
                                 class="form-control" 
                                 required
                                 ></input>
-                            </FormGroup>			
-                        </div>
+                            </FormGroup>
+                            
                         <Modal.Footer class="modal-footer">
                             <Button 
                             onClick={onHide}
@@ -82,13 +95,14 @@ const editUser = ({show, onHide, user}) => {
                             Cancel
                             </Button>
                             <Button 
-                            onClick={handleSubmit}
                             variant="info"
+                            type="submit"
                             >
                             Save
                             </Button>
                         </Modal.Footer>
-                    </Form>
+                        </Form>			
+                        </div>
                 </div>
             </div>
         </Modal>

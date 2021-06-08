@@ -2,17 +2,16 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } 
 import React, {useEffect, useState } from "react";
 import HeaderLoginRegister from '../../components/Header/HeaderLoginRegister'
 import Footer from '../../components/footer/Footer'
-import userLogo from '../../images/username1.png'
 import { Form, FormControl, FormLabel } from "react-bootstrap";
-import { MDBInputGroupText } from "mdb-react-ui-kit";
-import { FontAwesome } from 'react-icons/fa'
-import { faPlus,faQuoteLeft,faQuoteRight, faPlusCircle, faUserPlus, faRedoAlt, FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
+import { FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 const FormPage = () => {
 
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
+    const [redirect, setRedirect] = useState(false);
     
     useEffect(() =>{
       getStates();
@@ -22,7 +21,7 @@ const FormPage = () => {
 
     const getStates = async () => {
       try{
-        const data = await axios.get('http://localhost:5000/api/shteti')
+        await axios.get('http://localhost:5000/api/shteti')
         .then(res=>{
           console.log(res)
           setStates(res.data)
@@ -35,7 +34,7 @@ const FormPage = () => {
 
     const getCities = async () => {
       try{
-        const data = await axios.get('http://localhost:5000/api/city')
+        await axios.get('http://localhost:5000/api/city')
         .then(res=>{
           console.log(res)
           setCities(res.data)
@@ -48,10 +47,11 @@ const FormPage = () => {
 
 
     const handleSubmit = (event) => {
-      axios.post('http://localhost:5000/api/DM_User', {
+      event.preventDefault();
+      axios.post('http://localhost:5000/api/register', {
         UserName: event.target.username.value,
         UserPassword: event.target.password.value,
-        UserState: event.target.password.value,
+        UserState: event.target.state.value,
         UserCity: event.target.city.value,
         UserPostCode: event.target.postcode.value,
         UserRole: event.target.role.value,
@@ -61,15 +61,20 @@ const FormPage = () => {
       })
       .then(
         (res) =>{
-          alert(res)
-          console.log(res); 
+          alert("Succesfully registered")
+          console.log(res.data); 
         },
         (error) =>{
           alert(error)
         },
       )
+      setRedirect(true);
     }
-    
+
+    if(redirect){
+    return <Redirect to="/login"/>
+    }
+
   return (
     <div id="bodyRegister">
         <div>
@@ -81,6 +86,7 @@ const FormPage = () => {
           <MDBCard id="CardRegister" >
             <MDBCardBody >
               <Form
+               onSubmit={handleSubmit}
                style={{color:"black"}}>
                 <h2 className="text-center py-2">Sign up</h2>
                 <h5 className="pb-4">Ask for stuff, setup alerts and give things away.</h5>
@@ -112,7 +118,7 @@ const FormPage = () => {
                   <FaLock className="icon-position-c"/>
                       <MDBInput className ="lbl-position"
                           type="password"
-                          name="confirmPassowrd"
+                          name="confirmPassword"
                           style={{width:"400px", paddingLeft:"30px" }}
                  />
                 
@@ -182,24 +188,24 @@ const FormPage = () => {
                        <input
                           class="form-check-input"
                           type="radio"
-                          id="inlineRadio1"
+                          id="radioFemale"
                           value="F"
                           name="maleFemale"
                         />
 
-                <label class="form-check-label" for="inlineRadio1">Female</label>
+                <label className="form-check-label" htmlFor="radioFemale">Female</label>
                  </div>
 
-                   <div class="form-check form-check-inline">
+                   <div className="form-check form-check-inline">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
-                        id="inlineRadio2"
+                        id="radioMale"
                         value="M"
                         name="maleFemale"
                        />
                        
-                <label class="form-check-label" for="inlineRadio2">Male</label>
+                <label className="form-check-label" htmlFor="radioMale">Male</label>
                  </div>
               </div>
 
@@ -222,27 +228,27 @@ const FormPage = () => {
                 </FormLabel>
 
                 <div className="d-flex justify-content-start ml-3 ">
-                   <div class="form-check form-check-inline text-left  lbl-position">
+                   <div className="form-check form-check-inline text-left  lbl-position">
                      <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
-                        id="inlineRadio1"
+                        id="radioDonator"
                         value="Donator"
                         name="role"
                     />
 
-                <label class="form-check-label" for="inlineRadio1">Donator</label>
+                <label className="form-check-label" htmlFor="radioDonator">Donator</label>
                   </div>
 
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
-                        id="inlineRadio2"
+                        id="radioReceiver"
                         value="Receiver"
                         name="role"
                     />
-                <label class="form-check-label" for="inlineRadio2">Receiver</label>
+                <label className="form-check-label" htmlFor="radioReceiver">Receiver</label>
                  </div>
               </div>
                 
@@ -253,7 +259,6 @@ const FormPage = () => {
                       rounded
                       style={{width:"150px", }}
                       className=" btn-position"
-                      onClick={handleSubmit}
                       >
                       
                     Register

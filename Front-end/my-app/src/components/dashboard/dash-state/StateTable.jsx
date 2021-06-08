@@ -1,15 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
-import HeaderLoginRegister from '../../Header/HeaderLoginRegister'
+import { Button, Col, Container, Form,  Row, Table } from 'react-bootstrap';
 import AddState from '../dash-state/AddState'
 import EditState from './EditState'
 import DeleteState from './DeleteState'
 import { Search } from '../DataTable/Search';
-import Pagination from '../DataTable/Pagination';
-
-
-
 
 
 const StateTable = () => {
@@ -27,7 +22,7 @@ const StateTable = () => {
         useEffect(()=>{
             getAmOfStates(maxStateShow);
             getAllStates();
-        },[]);
+        },[maxStateShow]);
 
         const getAmOfStates = async (maxStateShow) =>{
             try{

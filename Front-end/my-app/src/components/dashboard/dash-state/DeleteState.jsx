@@ -1,16 +1,32 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
+import StateTable from './StateTable';
 
-const deleteState = ({show,onHide,stateId}) => {
+const DeleteState = ({show,onHide,stateId}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
+
+        event.preventDefault();
         axios.delete("http://localhost:5000/api/Shteti/"+stateId)
           .then((res) => {
-              alert("State deleted succesfully!")
-            },
+            history.push(StateTable)
+            NotificationManager.success(
+            'State deleted succesfully!',
+            '',
+            1000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                'Error while deleting the state!',
+                {error},
+                1000,
+                )
             },
           )
     }
@@ -48,6 +64,7 @@ const deleteState = ({show,onHide,stateId}) => {
                             type="submit" 
                             class="btn btn-danger" 
                             value="Delete"
+                            onClick={onHide}
                             />
                         </Modal.Footer>
                     </Form>
@@ -58,4 +75,4 @@ const deleteState = ({show,onHide,stateId}) => {
     )
 }
 
-export default deleteState
+export default DeleteState

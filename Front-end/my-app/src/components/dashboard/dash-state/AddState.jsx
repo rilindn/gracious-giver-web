@@ -1,19 +1,33 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
+import StateTable from './StateTable';
 
-const addState = ({show,onHide}) => {
+const AddState = ({show,onHide}) => {
 
+    let history = useHistory()
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         axios.post('http://localhost:5000/api/Shteti', {
             Emri: event.target.Emri.value,
           })
           .then((res) => {
-              alert("State added succesfully!")
+                history.push(StateTable)
+                NotificationManager.success(
+                'State added succesfully!',
+                '',
+                2000,
+                )
             },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                    'Error while adding new state!'+{error},
+                    '',
+                    1000,
+                    )
             },
           )
     }
@@ -46,7 +60,7 @@ const addState = ({show,onHide}) => {
                             type="button" 
                             class="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-success" value="Add"/>
+                            <input onClick={onHide} type="submit" class="btn btn-success" value="Add"/>
                         </Modal.Footer>
                     </Form>
                 </div>
@@ -56,4 +70,4 @@ const addState = ({show,onHide}) => {
     )
 }
 
-export default addState
+export default AddState

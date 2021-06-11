@@ -1,9 +1,12 @@
 import React from 'react'
 import axios from 'axios';
 import {Form, FormGroup, Modal, FormLabel} from 'react-bootstrap'
+import { useHistory } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 
 const addAdmin = ({show,onHide}) => {
 
+    let history = useHistory
 
     const handleSubmit = (event) => {
         axios.post('http://localhost:5000/api/GG_Admin', {
@@ -13,7 +16,8 @@ const addAdmin = ({show,onHide}) => {
             AdminGender: event.target.maleFemale.value,
           })
           .then((res) => {
-              alert("Admin added succesfully!")
+              history.push('/');
+              NotificationManager.success('')
             },
             (error) => {
               alert(error)

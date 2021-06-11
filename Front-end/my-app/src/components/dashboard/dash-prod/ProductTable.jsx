@@ -48,14 +48,6 @@ const ProductTable = () => {
             }
         }
 
-        const changeAm = () => {
-            if(maxProdShow==='All'){
-                setProducts(allProducts)
-            }
-            else
-            getAmOfProducts(maxProdShow); 
-        }
-
         const productsData = useMemo ( ()=>{
             let computedProducts = products;
 
@@ -95,7 +87,11 @@ const ProductTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{setMaxProdShow(e.target.value)}}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?setMaxProdShow(allProducts.length):setMaxProdShow(e.target.value);
+                                        }
+                                    }
                                     value={maxProdShow}
                                     >
                                         <option value="1">1</option>
@@ -104,14 +100,6 @@ const ProductTable = () => {
                                         <option value="10">10</option>
                                         <option value="All">All</option>
                                 </Form.Control>
-                                <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                         </Row>
                     </div>

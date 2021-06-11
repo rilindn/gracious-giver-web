@@ -23,6 +23,7 @@ const StateTable = () => {
             getAmOfStates(maxStateShow);
             getAllStates();
         },[maxStateShow]);
+        
 
         const getAmOfStates = async (maxStateShow) =>{
             try{
@@ -47,14 +48,6 @@ const StateTable = () => {
             catch(e){
                 console.log(e);
             }
-        }
-
-        const changeAm = () =>{
-            if(maxStateShow==='All'){
-                setStates(allStates)
-            }
-            else
-            getAmOfStates(maxStateShow);
         }
 
         const statesData = useMemo( ()=>{
@@ -94,23 +87,19 @@ const StateTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{setmaxStateShow(e.target.value)}}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?setmaxStateShow(allStates.length):setmaxStateShow(e.target.value);
+                                        }
+                                    }
                                     value={maxStateShow}
                                     >
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="5">5</option>
                                         <option value="10">10</option>
-                                        <option value="All">All</option>
+                                        <option value='All'>All</option>
                                  </Form.Control>
-                                 <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                             <Col class="col-sm-6">
                           
@@ -174,6 +163,7 @@ const StateTable = () => {
         show={editStateModal}
         onHide={() => setEditStateModal(false)}
         state={StateV}
+        getAllStates={getAllStates()}
         />
         <DeleteState
         show={deleteStateModal}

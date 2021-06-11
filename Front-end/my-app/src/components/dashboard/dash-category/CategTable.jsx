@@ -49,14 +49,6 @@ const CategTable = () => {
             }
         }
 
-        const changeAm = () =>{
-            if(maxCategShow==='All'){
-                setCateg(allCateg)
-            }
-            else
-            getAmOfCateg(maxCategShow);
-        }
-
         const categData = useMemo( ()=>{
             let computedCateg = categs;
     
@@ -93,7 +85,11 @@ const CategTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{SetMaxCategShow(e.target.value)}}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?SetMaxCategShow(allCateg.length):SetMaxCategShow(e.target.value);
+                                        }
+                                    }
                                     value={maxCategShow}
                                     >
                                         <option value="1">1</option>
@@ -102,14 +98,6 @@ const CategTable = () => {
                                         <option value="10">10</option>
                                         <option value="All">All</option>
                                  </Form.Control>
-                                 <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                             <Col class="col-sm-6">
                           

@@ -50,14 +50,6 @@ const StreetTable = () => {
                 console.log(e);
             }
         }
-
-        const changeAm = () =>{
-            if(maxStreetShow==='All'){
-                setStreets(allStreets)
-            }
-            else
-            getAmOfStreets(maxStreetShow);
-        }
     
         const streetData = useMemo( ()=>{
             let computedStreets = streets;
@@ -97,7 +89,11 @@ const StreetTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{setMaxStreetShow(e.target.value)}}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?setMaxStreetShow(allStreets.length):setMaxStreetShow(e.target.value);
+                                        }
+                                    }
                                     value={maxStreetShow}
                                     >
                                         <option value="1">1</option>
@@ -106,14 +102,6 @@ const StreetTable = () => {
                                         <option value="10">10</option>
                                         <option value="All">All</option>
                                  </Form.Control>
-                                 <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                             <Col class="col-sm-6">
                           

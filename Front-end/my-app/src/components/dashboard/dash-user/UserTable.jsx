@@ -47,14 +47,6 @@ const UserTable = () => {
         }
     }
 
-    const changeAm = () =>{
-        if(maxUserShow==='All'){
-            setUsers(allUsers)
-        }
-        else
-        getAmofUsers(maxUserShow);
-    }
-
     const userData = useMemo( ()=>{
         let computedUsers = users;
 
@@ -91,7 +83,11 @@ const UserTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{setMaxUserShow(e.target.value)}}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?setMaxUserShow(allUsers.length):setMaxUserShow(e.target.value);
+                                        }
+                                    }
                                     value={maxUserShow}
                                     >
                                         <option value="1">1</option>
@@ -100,14 +96,6 @@ const UserTable = () => {
                                         <option value="10">10</option>
                                         <option value="All">All</option>
                                  </Form.Control>
-                                 <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                         </Row>
                     </div>

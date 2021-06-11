@@ -12,7 +12,7 @@ import Footer from '../footer/Footer';
 
 const Dashboard = () => {
 
-    const[userTable, setUserTable] = useState(true);
+    const [userTable, setUserTable] = useState(true);
     const [prodTable,setProdTable] = useState(false);
     const [categTable,setCategTable] = useState(false);
     const [cityTable,setCityTable] = useState(false);

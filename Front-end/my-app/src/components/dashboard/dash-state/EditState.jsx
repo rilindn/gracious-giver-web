@@ -1,20 +1,35 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
+import Dashboard from './../Dashboard';
 
-const editState = ({show,onHide,state}) => {
+const EditState = ({show,onHide,state}) => {
+    
+    let history = useHistory()
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         axios.put('http://localhost:5000/api/Shteti/'+ state.ShtetiId, {
             ShtetiId: state.ShtetiId,
             Emri: event.target.Emri.value,
             
           })
           .then((res) => {
-              alert("State updated succesfully!")
-            },
+            history.push(Dashboard)
+            NotificationManager.success(
+            'State edited succesfully!',
+            '',
+            2000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.success(
+                'Error while editing the state!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }
@@ -46,7 +61,7 @@ const editState = ({show,onHide,state}) => {
                             <input 
                             onClick={onHide}
                             type="button" class="btn btn-light" data-dismiss="modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-info" value="Save"/>
+                            <input onClick={onHide} type="submit" class="btn btn-info" value="Save"/>
                         </Modal.Footer>
                     </Form>
                 </div>
@@ -56,4 +71,4 @@ const editState = ({show,onHide,state}) => {
     )
 }
 
-export default editState
+export default EditState

@@ -7,11 +7,11 @@ import Login from './components/Login/Login'
 import Home from './components/home/Home'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
+import ProductDetails from './components/home/ProductDetails'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -46,6 +46,9 @@ function App() {
         </Route>
         <Route path="/dashboard" exact>
           <Dashboard loggedInUser={loggedInUser} />
+        </Route>
+        <Route path="/prodDetails/:productId" exact>
+          <ProductDetails loggedInUser={loggedInUser} />
         </Route>
         <NotificationContainer />
       </Router>

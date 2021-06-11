@@ -11,7 +11,7 @@ import { Search } from '../DataTable/Search';
 const CityTable = () => { 
  
     const [cities, setCities] = useState([]);
-    const[allCities, setAllCities] = useState([]);
+    const [allCities, setAllCities] = useState([]);
     const [addCityModal,setAddCityModal] = useState(false);
     const [editCityModal,setEditCityModal] = useState(false);
     const [deleteCityModal,setDeleteCityModal] = useState(false);
@@ -24,6 +24,7 @@ const CityTable = () => {
         useEffect(()=>{
             getAmOfCities(maxCityShow);
             getAllCities(); 
+            setMaxCityShow();
         },[maxCityShow]);
         
         const getAmOfCities = async (maxCityShow) =>{
@@ -49,14 +50,6 @@ const CityTable = () => {
             catch(e){
                 console.log(e);
             }
-        }
-
-        const changeAm = () =>{
-            if(maxCityShow==='All'){
-                setCities(allCities)
-            }
-            else
-            getAmOfCities(maxCityShow);
         }
 
         const cityData = useMemo ( ()=>{
@@ -96,8 +89,11 @@ const CityTable = () => {
                                     as="select" 
                                     custom
                                     style={{width:"80px",marginLeft:"3px"}}
-                                    onChange={e=>{setMaxCityShow(e.target.value)}}
-                                    value={maxCityShow}
+                                    onChange={e=>
+                                        {
+                                            e.target.value==='All'?setMaxCityShow(allCities.length):setMaxCityShow(e.target.value);
+                                        }
+                                    }
                                     >
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -105,14 +101,6 @@ const CityTable = () => {
                                         <option value="10">10</option>
                                         <option value="All">All</option>
                                  </Form.Control>
-                                 <Button
-                                    variant="info"
-                                    onClick={changeAm}
-                                    className="ml-1"
-                                    style={{height:"37px"}}
-                                    >
-                                    Set entries
-                                </Button>
                             </Col>
                             <Col class="col-sm-6">
                           

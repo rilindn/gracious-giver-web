@@ -1,16 +1,31 @@
 import React from 'react'
 import axios from 'axios';
 import { Form, Modal, Alert, } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const deleteCity = ({show,onHide,cityId}) => {
+const DeleteCity = ({show,onHide,cityId}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
-        axios.delete("http://localhost:5000/api/city/"+cityId)
+
+        event.preventDefault();
+        axios.delete("http://localhost:5000/api/City/"+cityId)
           .then((res) => {
-              <Alert>City deleted succesfully!</Alert>
-            },
+            history.push("/dashboard")
+            NotificationManager.success(
+            'City deleted succesfully!',
+            '',
+            1000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                'Error while deleting the city!',
+                {error},
+                1000,
+                )
             },
           )
     }
@@ -47,4 +62,4 @@ const deleteCity = ({show,onHide,cityId}) => {
     )
 }
 
-export default deleteCity
+export default DeleteCity

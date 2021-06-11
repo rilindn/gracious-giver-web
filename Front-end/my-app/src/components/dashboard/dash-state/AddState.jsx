@@ -15,7 +15,7 @@ const AddState = ({show,onHide}) => {
             Emri: event.target.Emri.value,
           })
           .then((res) => {
-                history.push(StateTable)
+                history.push("/dashboard")
                 NotificationManager.success(
                 'State added succesfully!',
                 '',

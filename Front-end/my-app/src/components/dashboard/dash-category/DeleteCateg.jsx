@@ -1,19 +1,33 @@
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const deleteCateg = ({show,onHide,ProductCategoryId}) => {
+const DeleteCateg = ({show,onHide,ProductCategoryId}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
         axios.delete("http://localhost:5000/api/productcategory/"+ProductCategoryId)
-          .then((res) => {
-              alert("Product Category deleted succesfully!")
-            },
+        .then((res) => {
+            history.push("/dashboard")
+            NotificationManager.success(
+            'Category deleted succesfully!',
+            '',
+            1000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                'Error while deleting the category!',
+                {error},
+                1000,
+                )
             },
           )
     }
+    
     
     return (
         <div>   
@@ -46,4 +60,4 @@ const deleteCateg = ({show,onHide,ProductCategoryId}) => {
     )
 }
 
-export default deleteCateg
+export default DeleteCateg

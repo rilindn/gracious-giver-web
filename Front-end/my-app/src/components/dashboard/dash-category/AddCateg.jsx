@@ -4,7 +4,9 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
+
 const AddCateg = ({ show, onHide }) => {
+
   let history = useHistory()
 
   const handleSubmit = (event) => {
@@ -13,20 +15,23 @@ const AddCateg = ({ show, onHide }) => {
       .post('http://localhost:5000/api/productcategory', {
         ProductCategoryName: event.target.ProductCategoryName.value,
       })
-      .then(
-        (res) => {
-          history.push('/home')
-          NotificationManager.success(
-            'Product Category added succesfully!',
+      .then((res) => {
+        history.push("/dashboard")
+        NotificationManager.success(
+        'Category added succesfully!',
+        '',
+        2000,
+        )
+    },
+    (error) => {
+        NotificationManager.error(
+            'Error while adding new category!'+{error},
             '',
-            2000,
-          )
-        },
-        (error) => {
-          alert(error)
-        },
-      )
-  }
+            1000,
+            )
+    },
+  )
+}
 
   return (
     <div>
@@ -56,7 +61,7 @@ const AddCateg = ({ show, onHide }) => {
                   data-dismiss="Modal"
                   value="Cancel"
                 />
-                <input type="submit" class="btn btn-success" value="Add" />
+                <input type="submit" onClick={onHide} class="btn btn-success" value="Add" />
               </Modal.Footer>
             </Form>
           </div>

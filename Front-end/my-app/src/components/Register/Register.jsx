@@ -184,9 +184,9 @@ const FormPage = () => {
                   </FormLabel>
 
                   <div className="d-flex justify-content-start ml-3 ">
-                     <div class="form-check form-check-inline text-left  lbl-position">
+                     <div className="form-check form-check-inline text-left  lbl-position">
                        <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="radio"
                           id="radioFemale"
                           value="F"

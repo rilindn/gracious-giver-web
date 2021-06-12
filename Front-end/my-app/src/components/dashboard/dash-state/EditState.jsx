@@ -38,30 +38,30 @@ const EditState = ({show,onHide,state}) => {
         <div>
             <Modal 
             show={show} 
-            class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <Form onSubmit={handleSubmit}>
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Edit State</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Edit State</h3>
                     </div>
-                        <div class="modal-body">					
-                            <FormGroup class="form-group">
+                        <div className="modal-body">					
+                            <FormGroup className="form-group">
                                 <label>State Name</label>
                                 <input 
                                 defaultValue={state.Emri}
                                 name="Emri"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
                             				
                         </div>
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <input 
                             onClick={onHide}
-                            type="button" class="btn btn-light" data-dismiss="modal" value="Cancel"/>
-                            <input onClick={onHide} type="submit" class="btn btn-info" value="Save"/>
+                            type="button" className="btn btn-light" data-dismiss="modal" value="Cancel"/>
+                            <input onClick={onHide} type="submit" className="btn btn-info" value="Save"/>
                         </Modal.Footer>
                     </Form>
                 </div>

@@ -30,33 +30,33 @@ const AddCateg = ({ show, onHide }) => {
 
   return (
     <div>
-      <Modal show={show} class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
+      <Modal show={show} className="modal fade">
+        <div className="modal-dialog">
+          <div className="modal-content">
             <Form onSubmit={handleSubmit} className="p-3">
-              <div class="modal-header">
-                <h3 class="modal-title">Add Product Category</h3>
+              <div className="modal-header">
+                <h3 className="modal-title">Add Product Category</h3>
               </div>
-              <div class="modal-body">
-                <FormGroup class="form-group">
+              <div className="modal-body">
+                <FormGroup className="form-group">
                   <label>Name</label>
                   <input
                     type="text"
                     name="ProductCategoryName"
-                    class="form-control"
+                    className="form-control"
                     required
                   />
                 </FormGroup>
               </div>
-              <Modal.Footer class="modal-footer">
+              <Modal.Footer className="modal-footer">
                 <input
                   onClick={onHide}
                   type="button"
-                  class="btn btn-info"
+                  className="btn btn-info"
                   data-dismiss="Modal"
                   value="Cancel"
                 />
-                <input type="submit" class="btn btn-success" value="Add" />
+                <input type="submit" className="btn btn-success" value="Add" />
               </Modal.Footer>
             </Form>
           </div>

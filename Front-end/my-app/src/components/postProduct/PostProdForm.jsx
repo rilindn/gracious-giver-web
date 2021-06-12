@@ -4,7 +4,7 @@ import { Form, Col, Button} from 'react-bootstrap'
 import faPhotoUpload from '../../images/photoUpload.png'
 
 
-const PostProdForm = () => {
+const PostProdForm = ({loggedInUser}) => {
 
     
     const [categories, setCategories] = useState([]);
@@ -54,7 +54,8 @@ const PostProdForm = () => {
             ProductPhoto: event.target.ProductPhoto.value,
             ProductDescription: event.target.ProductDescription.value,
             ProductLocation: event.target.ProductLocation.value,
-            ProductComment: event.target.ProductComment.value
+            ProductComment: event.target.ProductComment.value,
+            DonatorId: loggedInUser.UserId
           })
           .then(
             (res) => {

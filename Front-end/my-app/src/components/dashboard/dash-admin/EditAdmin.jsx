@@ -26,43 +26,43 @@ const editAdmin = ({show,onHide,admin}) => {
         <div>
             <Modal 
             show={show} 
-            class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <Form >
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Edit Admin</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Edit Admin</h3>
                     </div>
-                        <div class="modal-body">		
-                            <FormGroup class="form-group">
+                        <div className="modal-body">		
+                            <FormGroup className="form-group">
                                 <label>Id</label>
-                                <input defaultValue={admin.AdminId} type="text" class="form-control" required disabled/>
+                                <input defaultValue={admin.AdminId} type="text" className="form-control" required disabled/>
                             </FormGroup>			
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Name</label>
                                 <input 
                                 defaultValue={admin.AdminName}
                                 name="AdminName"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Password</label>
                                 <input 
                                 type="password"
                                 defaultValue={admin.AdminPassword}
                                 name ="AdminPassword" 
-                                class="form-control"
+                                className="form-control"
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Email </label>
                                 <input 
                                 defaultValue={admin.AdminEmail}
                                 name="AdminEmail"
                                 type="email" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
                             <FormLabel className="label-alignin">
@@ -70,9 +70,9 @@ const editAdmin = ({show,onHide,admin}) => {
                             </FormLabel>
 
                                 <div className="d-flex justify-content-start ml-3 ">
-                                    <div class="form-check form-check-inline text-left  lbl-position">
+                                    <div className="form-check form-check-inline text-left  lbl-position">
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         id="inlineRadio1"
                                         value="F"
@@ -80,12 +80,12 @@ const editAdmin = ({show,onHide,admin}) => {
                                         defaultValue={admin.maleFemale}
                                         />
 
-                                <label class="form-check-label" for="inlineRadio1">Female</label>
+                                <label className="form-check-label" for="inlineRadio1">Female</label>
                                 </div>
 
-                                <div class="form-check form-check-inline">
+                                <div className="form-check form-check-inline">
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         id="inlineRadio2"
                                         value="M"
@@ -93,7 +93,7 @@ const editAdmin = ({show,onHide,admin}) => {
                                         defaultValue={admin.maleFemale}
                                     />
                                     
-                                <label class="form-check-label" for="inlineRadio2">Male</label>
+                                <label className="form-check-label" for="inlineRadio2">Male</label>
                                 </div>
                             </div>	
 
@@ -111,7 +111,7 @@ const editAdmin = ({show,onHide,admin}) => {
                                 ></FormControl>	
 					
                         </div>
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <Button 
                             onClick={onHide}
                             variant="light"

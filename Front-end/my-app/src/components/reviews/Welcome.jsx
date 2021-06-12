@@ -158,7 +158,7 @@ export const WelcomePage = () => {
                         </div>
   </Carousel.Item>
 </Carousel> 
-<div class ="bg-col-vid">
+<div className ="bg-col-vid">
     <h1 className ="txt text-left " >How it works ?</h1>         
 
 <Container>

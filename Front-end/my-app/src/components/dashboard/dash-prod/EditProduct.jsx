@@ -28,45 +28,45 @@ const editProduct = ({show,onHide,product}) => {
         <div>
             <Modal 
             show={show} 
-            class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <Form 
                     onSubmit={handleSubmit}
                     >
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Edit Product</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Edit Product</h3>
                     </div>
-                        <div class="modal-body">					
-                            <FormGroup class="form-group">
+                        <div className="modal-body">					
+                            <FormGroup className="form-group">
                                 <label>Product Name</label>
                                 <input 
                                 defaultValue={product.ProductName}
                                 name="ProductName"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Product Category</label>
                                 <input 
                                 defaultValue={product.ProductCategory}
                                 name="ProductCategory"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Location</label>
                                 <input
                                 defaultValue={product.ProductLocation}
                                 name="ProductLocation" 
-                                class="form-control" 
+                                className="form-control" 
                                 required
                                 ></input>
                             </FormGroup>					
                         </div>
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <Button 
                             onClick={onHide}
                             variant="light"

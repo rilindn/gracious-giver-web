@@ -15,7 +15,7 @@ const AddState = ({show,onHide}) => {
             Emri: event.target.Emri.value,
           })
           .then((res) => {
-                history.push(StateTable)
+                history.push(StateTable);
                 NotificationManager.success(
                 'State added succesfully!',
                 '',
@@ -36,31 +36,31 @@ const AddState = ({show,onHide}) => {
         <div>
             <Modal
             show={show}
-            id="addEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            id="addEmployeeModal" className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <Form onSubmit={handleSubmit} className="p-3">
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Add State</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Add State</h3>
                         </div>
-                        <div class="modal-body">	
+                        <div className="modal-body">	
                         				
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Name</label>
                                 <input 
                                 name="Emri"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>					
                         </div>
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-info" 
+                            className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input onClick={onHide} type="submit" class="btn btn-success" value="Add"/>
+                            <input onClick={onHide} type="submit" className="btn btn-success" value="Add"/>
                         </Modal.Footer>
                     </Form>
                 </div>

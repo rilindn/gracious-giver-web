@@ -66,12 +66,12 @@ const StateTable = () => {
 
     return (
     <div>
-        <Container class="container-xl">
-            <Table class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <Row class="row">
-                            <Col class="col-sm-6">
+        <Container className="container-xl">
+            <Table className="table-responsive">
+                <div className="table-wrapper">
+                    <div className="table-title">
+                        <Row className="row">
+                            <Col className="col-sm-6">
                                 <h2><b>States</b></h2>
                             </Col>
                             <Col className ="col-sm-7 d-flex justify-content-end">
@@ -101,13 +101,13 @@ const StateTable = () => {
                                         <option value='All'>All</option>
                                  </Form.Control>
                             </Col>
-                            <Col class="col-sm-6">
+                            <Col className="col-sm-6">
                           
                                 <Button 
                                 onClick={() => setAddStateModal(true)} 
-                                class="btn btn-success" 
+                                className="btn btn-success" 
                                 variant ="success"
-                                data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New State</span>
+                                data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New State</span>
                                 </Button>					
                             </Col>
                         </Row>
@@ -133,17 +133,17 @@ const StateTable = () => {
                                     }}
                                     className="m-2" 
                                     variant ="warning"
-                                    data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
+                                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     <Button 
                                      onClick={() => {
                                         setDeleteStateModal(true);
                                         setStateD(state.ShtetiId)
                                     }} 
-                                     class="delete" 
+                                     className="delete" 
                                      variant ="danger"
                                      data-toggle="modal"
-                                     ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                     ><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
                                 </td>
                             </tr>

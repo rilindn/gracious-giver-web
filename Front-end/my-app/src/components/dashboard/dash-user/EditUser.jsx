@@ -29,65 +29,65 @@ const editUser = ({show, onHide, user}) => {
         <div>
             <Modal 
             show={show} 
-            class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Edit User</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Edit User</h3>
                     </div>
-                        <div class="modal-body">	
+                        <div className="modal-body">	
                         <Form 
                         onSubmit={handleSubmit}
                         >				
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>User Id</label>
                                 <input 
                                 defaultValue={user.UserId}
                                 name="UserId"
                                 disabled
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>User Name</label>
                                 <input 
                                 defaultValue={user.UserName}
                                 name="UserName"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>State</label>
                                 <input 
                                 defaultValue={user.UserState}
                                 name="UserState"
                                 type="text" 
-                                class="form-control" 
+                                className="form-control" 
                                 required/>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>City</label>
                                 <input
                                 defaultValue={user.UserCity}
                                 name="UserCity" 
-                                class="form-control" 
+                                className="form-control" 
                                 required
                                 ></input>
                             </FormGroup>
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>User Email</label>
                                 <input
                                 defaultValue={user.UserEmail}
                                 name="UserEmail" 
-                                class="form-control" 
+                                className="form-control" 
                                 required
                                 ></input>
                             </FormGroup>
                             
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <Button 
                             onClick={onHide}
                             variant="light"

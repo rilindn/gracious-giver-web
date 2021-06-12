@@ -11,11 +11,11 @@ export const Footer = () => {
 				<div className="d-flex flex-column justify-content-center col-xs-12 col-sm-4 col-md-5">
 					<h5>Follow Us</h5>
 					<ul className="d-flex list-unstyled list-inline social text-center">
-						<li className="list-inline-item"><a href="https://facebook.com"><SocialIcon url="https://facebook.com"/></a></li>
-						<li className="list-inline-item"><a href="https://twitter.com"><SocialIcon url="https://twitter.com/jaketrent" /></a></li>
-						<li className="list-inline-item"><a href="https://instagram.com"><SocialIcon url="https://instagram.com" /></a></li>
-						<li className="list-inline-item"><a href="https://mail.google.com/"><SocialIcon url="https://mail.google.com/" /></a></li>
-						<li className="list-inline-item"><a href="https://youtube.com/"><SocialIcon url="https://youtube.com/" /></a></li>
+						<li className="list-inline-item"><SocialIcon url="https://facebook.com"/></li>
+						<li className="list-inline-item"><SocialIcon url="https://twitter.com/jaketrent" /></li>
+						<li className="list-inline-item"><SocialIcon url="https://instagram.com" /></li>
+						<li className="list-inline-item"><SocialIcon url="https://mail.google.com/" /></li>
+						<li className="list-inline-item"><SocialIcon url="https://youtube.com/" /></li>
 					</ul>
 				</div>
 				<div className="col-xs-12 col-sm-4 col-md-3">

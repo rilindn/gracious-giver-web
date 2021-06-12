@@ -20,24 +20,24 @@ const deleteCity = ({show,onHide,cityId}) => {
         <div>   
         <Modal 
            show={show}
-           id="addEmployeeModal" class="modal fade">
-            <div class ="modal-dialog">
-             <div class="modal-content">
+           id="addEmployeeModal" className="modal fade">
+            <div className ="modal-dialog">
+             <div className="modal-content">
                     <Form onSubmit={handleSubmit} className="p-3">
                         <div>					
-                            <h4 class="modal-title">Delete City</h4>
+                            <h4 className="modal-title">Delete City</h4>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this City?</p>
-                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            <p className="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-info" 
+                            className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            <input type="submit" className="btn btn-danger" value="Delete"/>
                         </Modal.Footer>
                     </Form>
                 </div>

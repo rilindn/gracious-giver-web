@@ -6,7 +6,7 @@ import PostProdForm from './PostProdForm'
 import { Switch, Route } from "react-router-dom";
 
 
-export const PostProduct = () => {
+export const PostProduct = ({loggedInUser}) => {
     return (
      <div>
         <Header/>
@@ -23,7 +23,7 @@ export const PostProduct = () => {
             <h6 className="new-post-j">Just remember that every item posted should be free, legal and family-friendly.</h6>
                 <h6 className="new-post-n">No services, promotions or advertising.</h6>
                 </div> 
-        <PostProdForm/>
+        <PostProdForm loggedInUser={loggedInUser}/>
     </div>
     <Footer/>
     </div>

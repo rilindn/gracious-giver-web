@@ -22,31 +22,31 @@ const addStreet = ({show,onHide}) => {
         <div>
             <Modal
             show={show}
-            id="addEmployeeModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            id="addEmployeeModal" className="modal fade">
+            <div className="modal-dialog">
+                <div className="modal-content">
                     <Form onSubmit={handleSubmit}>
-                        <div class="modal-header">						
-                            <h3 class="modal-title">Add Street</h3>
+                        <div className="modal-header">						
+                            <h3 className="modal-title">Add Street</h3>
                         </div>
-                        <div class="modal-body">					
+                        <div className="modal-body">					
                            
-                            <FormGroup class="form-group">
+                            <FormGroup className="form-group">
                                 <label>Street Name</label>
                                 <input type="text"
-                                name="StreetName" class="form-control" required/>
+                                name="StreetName" className="form-control" required/>
                             </FormGroup>
 
                            					
                         </div>
-                        <Modal.Footer class="modal-footer">
+                        <Modal.Footer className="modal-footer">
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-info" 
+                            className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"
                             />
-                            <input type="submit" class="btn btn-success" value="Add"/>
+                            <input type="submit" className="btn btn-success" value="Add"/>
                         </Modal.Footer>
                     </Form>
                 </div>

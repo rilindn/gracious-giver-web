@@ -11,9 +11,9 @@ const Product = ({product}) => {
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={imgSrc} width="300px" height="270px" alt="Product " className="prodImg"/>
-                    <div class="itemText">
+                    <div className="itemText">
                       <h5 className="prodTitle">
-                       <span class="itemTypeFree">FREE
+                       <span className="itemTypeFree">FREE
                          </span> 
                                {product.ProductName}
                           </h5>

@@ -834,6 +834,14 @@ table.table .avatar {
 .dash-tables {
   width: 1200px;
 }
-#prdetail{
+#prdetail {
   text-align: left;
+}
+
+/*product details*/
+
+.req-prod-textarea {
+  font-size: 15px;
+  width: 300px;
+  height: 80px;
 }

@@ -19,30 +19,30 @@ const deleteAdmin = ({show,onHide,adminId}) => {
         <div>   
         <Modal
            show={show}
-           class="modal fade"
+           className="modal fade"
            >
-            <div class ="modal-dialog">
+            <div className ="modal-dialog">
              <div 
-             class="modal-content"
+             className="modal-content"
              > <Form onSubmit={handleSubmit} className="p-3">
                         <div>					
-                            <h4 class="modal-title">Delete Admin</h4>
+                            <h4 className="modal-title">Delete Admin</h4>
                         </div>
                         <div>				
                             <p>Are you sure you want to delete this Admin?</p>
-                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            <p className="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
                             <input 
                             onClick={onHide}
                             type="button" 
-                            class="btn btn-info" 
+                            className="btn btn-info" 
                             data-dismiss="Modal" 
                             value="Cancel"
                             />
                             <input 
                             type="submit" 
-                            class="btn btn-danger" 
+                            className="btn btn-danger" 
                             value="Delete"
                             />
                         </Modal.Footer>

@@ -68,12 +68,12 @@ const CityTable = () => {
         
     return (
         <div>
-        <Container class="container-xl">
-            <Table class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <Row class="row">
-                            <Col class="col-sm-6">
+        <Container className="container-xl">
+            <Table className="table-responsive">
+                <div className="table-wrapper">
+                    <div className="table-title">
+                        <Row className="row">
+                            <Col className="col-sm-6">
                                 <h2><b>Cities</b></h2>
                             </Col>
                             <Col className ="col-sm-7 d-flex justify-content-end">
@@ -102,13 +102,13 @@ const CityTable = () => {
                                         <option value="All">All</option>
                                  </Form.Control>
                             </Col>
-                            <Col class="col-sm-6">
+                            <Col className="col-sm-6">
                           
                                 <Button 
                                 onClick={() => setAddCityModal(true)} 
-                                class="btn btn-success" 
+                                className="btn btn-success" 
                                 variant ="success"
-                                data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New City</span>
+                                data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New City</span>
                                 </Button>					
                             </Col>
                         </Row>

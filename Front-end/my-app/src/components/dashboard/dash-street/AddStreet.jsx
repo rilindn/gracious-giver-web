@@ -1,8 +1,12 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const addStreet = ({show,onHide}) => {
+const AddStreet = ({show,onHide}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
         axios.post('http://localhost:5000/api/Street', {
@@ -10,13 +14,25 @@ const addStreet = ({show,onHide}) => {
             StreetName: event.target.StreetName.value
           })
           .then((res) => {
-              alert("Street added succesfully!")
+            history.push("/dashboard")
+            NotificationManager.success(
+            'Street added succesfully!',
+            '',
+            2000,
+            )
+
             },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                    'Error while adding new street!'+{error},
+                    '',
+                    1000,
+                    )
             },
           )
     }
+
+
 
     return (
         <div>
@@ -56,4 +72,4 @@ const addStreet = ({show,onHide}) => {
     )
 }
 
-export default addStreet
+export default AddStreet

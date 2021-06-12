@@ -1,19 +1,32 @@
 import React from 'react'
 import axios from 'axios';
 import { Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const addCity = ({show,onHide}) => {
+const AddCity = ({show,onHide}) => {
 
+    let history = useHistory()
 
     const handleSubmit = (event) => {
-        axios.post('http://localhost:5000/api/city', {
+        event.preventDefault();
+        axios.post('http://localhost:5000/api/City', {
             CityName: event.target.CityName.value,
           })
           .then((res) => {
-              alert("City added succesfully!")
+                history.push("/dashboard")
+                NotificationManager.success(
+                'City added succesfully!',
+                '',
+                2000,
+                )
             },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                    'Error while adding new city!'+{error},
+                    '',
+                    1000,
+                    )
             },
           )
     }
@@ -51,4 +64,4 @@ const addCity = ({show,onHide}) => {
     )
 }
 
-export default addCity
+export default AddCity

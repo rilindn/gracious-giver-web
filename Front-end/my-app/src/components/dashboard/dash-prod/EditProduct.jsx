@@ -1,8 +1,12 @@
 import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const editProduct = ({show,onHide,product}) => {
+const EditProduct = ({show,onHide,product}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
         axios.put('http://localhost:5000/api/product/'+ product.ProductId, {
@@ -16,14 +20,25 @@ const editProduct = ({show,onHide,product}) => {
             ProductComment: product.ProductComment
           })
           .then((res) => {
-              alert("Product updated succesfully!")
-            },
+            history.push("/dashboard")
+            NotificationManager.success(
+            'Product edited succesfully!',
+            '',
+            2000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.success(
+                'Error while editing the product!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }
 
+
+    
     return (
         <div>
             <Modal 
@@ -88,4 +103,4 @@ const editProduct = ({show,onHide,product}) => {
     )
 }
 
-export default editProduct
+export default EditProduct

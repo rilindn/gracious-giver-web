@@ -14,7 +14,7 @@ const DeleteState = ({show,onHide,stateId}) => {
         event.preventDefault();
         axios.delete("http://localhost:5000/api/Shteti/"+stateId)
           .then((res) => {
-            history.push(StateTable)
+            history.push("/dashboard")
             NotificationManager.success(
             'State deleted succesfully!',
             '',

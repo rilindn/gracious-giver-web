@@ -1,8 +1,13 @@
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const editCateg = ({show,onHide,categ}) => {
+const EditCateg = ({show,onHide,categ}) => {
+
+    let history = useHistory()
+
     const handleSubmit = (event) => {
         axios.put('http://localhost:5000/api/productcategory/'+ categ.ProductCategoryId, {
             ProductCategoryId: categ.ProductCategoryId,
@@ -10,10 +15,19 @@ const editCateg = ({show,onHide,categ}) => {
          
           })
           .then((res) => {
-              alert("Category Product updated succesfully!")
-            },
+            history.push("/dashboard")
+            NotificationManager.success(
+            'Category edited succesfully!',
+            '',
+            2000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.success(
+                'Error while editing the category!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }
@@ -56,4 +70,4 @@ const editCateg = ({show,onHide,categ}) => {
     )
 }
 
-export default editCateg
+export default EditCateg

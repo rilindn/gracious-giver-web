@@ -1,19 +1,34 @@
 import React from 'react'
 import axios from 'axios';
 import { Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const editCity = ({show,onHide,city}) => {
+const EditCity = ({show,onHide,city}) => {
+
+    let history = useHistory()
 
     const handleSubmit = (event) => {
-        axios.put('http://localhost:5000/api/city/'+ city.CityId, {
+        event.preventDefault();
+        axios.put('http://localhost:5000/api/City/'+ city.CityId, {
             CityId: city.CityId,
             CityName: event.target.CityName.value,
+            
           })
           .then((res) => {
-              alert("City updated succesfully!")
-            },
+            history.push("/dashboard")
+            NotificationManager.success(
+            'City edited succesfully!',
+            '',
+            2000,
+            )
+        },
             (error) => {
-              alert(error)
+                NotificationManager.success(
+                'Error while editing the city!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }
@@ -57,4 +72,4 @@ const editCity = ({show,onHide,city}) => {
     )
 }
 
-export default editCity
+export default EditCity

@@ -17,7 +17,7 @@ const EditState = ({show,onHide,state}) => {
             
           })
           .then((res) => {
-            history.push(Dashboard)
+            history.push("/dashboard")
             NotificationManager.success(
             'State edited succesfully!',
             '',

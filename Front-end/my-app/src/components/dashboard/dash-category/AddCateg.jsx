@@ -61,11 +61,8 @@ const AddCateg = ({ show, onHide }) => {
                   data-dismiss="Modal"
                   value="Cancel"
                 />
-<<<<<<< HEAD
                 <input type="submit" className="btn btn-success" value="Add" />
-=======
                 <input type="submit" onClick={onHide} class="btn btn-success" value="Add" />
->>>>>>> 5aed1bbecce3bfe6c1e8f1ae4f4961386b8f9b5c
               </Modal.Footer>
             </Form>
           </div>

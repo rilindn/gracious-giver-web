@@ -3,7 +3,6 @@ import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import Dashboard from './../Dashboard';
 
 const EditState = ({show,onHide,state}) => {
     

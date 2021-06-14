@@ -8,7 +8,8 @@ const PostProdForm = ({loggedInUser}) => {
 
     
     const [categories, setCategories] = useState([]);
-    const [selectedFile,setSelectedFile] = useState(null);
+    const [selectedFiles,setSelectedFiles] = useState([]);
+    const [selectedFilesName,setSelectedFilesName] = useState([]);
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -17,7 +18,7 @@ const PostProdForm = ({loggedInUser}) => {
 
     useEffect(()=>{
         getCategories();
-    },[]);
+    },[selectedFiles]);
 
     const getCategories = async () => {
         try{
@@ -31,22 +32,32 @@ const PostProdForm = ({loggedInUser}) => {
         }
     }
 
-    const handlePhotoSubmit = (event) => {
-      event.preventDefault()
-      setSelectedFile(event.target.files[0])
-      const formdata = new FormData();
-      formdata.append('image',event.target.files[0], event.target.files[0].name)
-      axios.post('http://localhost:5000/api/product/SaveFile', formdata)
-        .then(
-          (res) => {
-          },
-          (error) => {
-            alert(error)
-          },
-        )
-  }
+    const handlePhotoSubmit = (e) => {
+      e.preventDefault()
+      if(e.target.files){
+        const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
+        setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
+        var fileArrayN = Array.from(e.target.files)
+        setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
+        console.log("fileArrayN");
+        //console.log(fileArrayN.[0].name);
+        for (let index = 0; index < e.target.files.length; index++) {
+            const formdata = new FormData();
+            formdata.append('image',e.target.files[index], e.target.files[index].name)
+            axios.post('http://localhost:5000/api/product/SaveFile', formdata)
+              .then(
+                (res) => {
+                },
+                (error) => {
+                  alert(error)
+                },
+              )
+          }
+        }
+      }
 
     const handleSubmit = (event) => {
+      event.preventDefault();
         axios.post('http://localhost:5000/api/product', {
             ProductName: event.target.ProductName.value,
             ProductCategory: event.target.ProductCategory.value,
@@ -57,6 +68,15 @@ const PostProdForm = ({loggedInUser}) => {
             ProductComment: event.target.ProductComment.value,
             DonatorId: loggedInUser.UserId
           })
+          .then(()=>{
+            for (let index = 0; index < selectedFilesName.length; index++) {
+              console.log("selectedFilesName");
+              console.log(selectedFilesName[index].name);
+              axios.post('http://localhost:5000/api/ProductPhotos',{
+                Product: "2",
+                ProductPhotoPath: selectedFilesName[index].name
+              }
+            )}})
           .then(
             (res) => {
               alert("Product added successfully!")
@@ -130,19 +150,22 @@ const PostProdForm = ({loggedInUser}) => {
               </Col>
             </Form.Group>
 
-          <Form.Group className="form-group-el">
-          <Form.Label text-left >Image of Product</Form.Label>
+          <Form.Group className="form-group-el img-prod-fgr">
+          <div className="img-prod-label" >
+          <Form.Label >Image of Product</Form.Label></div>
             <button
             type="button"
             onClick={handleFileInputClick}
             className="imgUploadBtn"
             >
-              {(selectedFile!=null)? 
-              <span>{selectedFile.name}</span> 
-              :  <img src={faPhotoUpload} style={{width:"30px"}} alt=""></img>}
+              <img src={faPhotoUpload} alt="" className="add-photo-icon" />
+            {selectedFiles.map(file=>(
+                <img src={file} alt="" className="postProd-img-preview" />
+              ))}
             </button>
             <Form.File
             name="ProductPhoto" 
+            multiple
             style={{display:"none"}}  
             hidden
             className ="d-flex"
@@ -152,7 +175,7 @@ const PostProdForm = ({loggedInUser}) => {
             />
           </Form.Group >
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
-            <Form.Label text-left >Additional Description</Form.Label>
+            <Form.Label  >Additional Description</Form.Label>
             <Form.Control 
             name="ProductDescription" 
             placeholder ="Type here..." 

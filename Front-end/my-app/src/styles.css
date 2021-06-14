@@ -196,6 +196,21 @@ section .section-title {
   height: 150px;
 }
 
+.postProd-img-preview {
+  max-width: 400px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 12px;
+}
+/* .img-prod-label {
+  min-width: 220px;
+  text-align: left;
+} */
+
+.img-prod-fgr {
+  justify-content: unset !important;
+}
+
 .form-group-el {
   display: flex;
   flex-direction: row;
@@ -236,17 +251,30 @@ section .section-title {
   font-size: 11pt !important;
 }
 .imgUploadBtn {
-  width: 140px;
+  min-width: 110px;
+  max-width: 400px;
   height: 100px;
-  border-radius: 30px;
+  border-radius: 7px;
   background-color: #ffffff;
   border: 1px solid rgb(182, 182, 182);
-  margin-left: -156px;
+  margin-left: 103px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
-.imgUploadBtn:hover {
-  background-color: #ffffff;
-  border: 2px solid #5a8a8d;
-  opacity: 0.9;
+.add-photo-icon {
+  width: 30px !important;
+  margin: 0 15px 0 30px;
+}
+
+.add-photo-icon:hover {
+  opacity: 0.8;
+  margin-left: 26px !important;
+  width: 36px !important;
+  height: 32px !important;
 }
 .new-post-n {
   margin-right: 365px;
@@ -844,4 +872,15 @@ table.table .avatar {
   font-size: 15px;
   width: 300px;
   height: 80px;
+}
+
+.prodDetails-img {
+  width: 500px;
+  height: 400px !important;
+  border-radius: 10px;
+}
+.prodDetails-2img {
+  width: 150px !important;
+  height: 100px !important;
+  border-radius: 10px;
 }

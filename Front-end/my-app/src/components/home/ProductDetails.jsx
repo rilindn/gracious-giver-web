@@ -3,6 +3,9 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import prodImg2 from '../../images/s-l1600 (1).jpg'
+import prodImg3 from '../../images/s-l1600 (2).jpg'
+import prodImg4 from '../../images/s-l1600 (3).jpg'
 
 const ProductDetails = () => {
   
@@ -28,25 +31,10 @@ const ProductDetails = () => {
             console.log(e);
         }
     }
-
-    // const getDonator = async () => {
-    //     try{
-    //       if(product.DonatorId!==undefined){
-    //       await axios.get("http://localhost:5000/api/user/"+product.DonatorId)
-    //       .then(res=>{
-    //         setDonator(res.data)
-    //         console.log("Donator");
-    //         console.log(product.DonatorId);
-    //       })
-    //     }
-    //     }catch(e)
-    //     {
-    //       console.log(e)
-    //     }
-    //   }
       if(product.ProductPhoto!==undefined){
         const defaultImg = "prodImg.jpg"
-        var imgSrc = "http://localhost:5000/photos/"+(product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
+        var imgSrc = "http://localhost:5000/photos/"+
+        (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
         
       }
       if(product.DonatorId!==undefined && donator.length===0){
@@ -85,7 +73,7 @@ const ProductDetails = () => {
                       id="figure01"
                       className="view overlay rounded z-depth-1 main-img"
                     >
-                      <img src={imgSrc} className="img-fluid z-depth-1" alt=""></img>
+                      <img src={imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
                     </figure>
                     <figure
                       id="figure01"
@@ -106,7 +94,7 @@ const ProductDetails = () => {
                         <div className="view overlay rounded z-depth-1 gallery-item">
                           <img
                             src={imgSrc}
-                            className="img-fluid z-depth-1"
+                            className="img-fluid z-depth-1  prodDetails-2img"
                             alt=""
                           ></img>
                         </div>
@@ -114,8 +102,8 @@ const ProductDetails = () => {
                       <div className="col-3">
                         <div className="view overlay rounded z-depth-1 gallery-item">
                           <img
-                            src={imgSrc}
-                            className="img-fluid z-depth-1"
+                            src={prodImg2}
+                            className="img-fluid z-depth-1 prodDetails-2img"
                             alt=""
                           ></img>
                         </div>
@@ -123,8 +111,8 @@ const ProductDetails = () => {
                       <div className="col-3">
                         <div className="view overlay rounded z-depth-1 gallery-item">
                           <img
-                            src={imgSrc}
-                            className="img-fluid z-depth-1"
+                            src={prodImg3}
+                            className="img-fluid z-depth-1 prodDetails-2img"
                             alt=""
                           ></img>
                           <div className="mask rgba-white-slight"></div>
@@ -133,8 +121,8 @@ const ProductDetails = () => {
                       <div className="col-3">
                         <div className="view overlay rounded z-depth-1 gallery-item">
                         <img
-                            src={imgSrc}
-                            className="img-fluid z-depth-1"
+                            src={prodImg4}
+                            className="img-fluid z-depth-1 prodDetails-2img"
                             alt=""
                           ></img>
                           <div className="mask rgba-white-slight"></div>
@@ -177,6 +165,12 @@ const ProductDetails = () => {
                         <strong>Donator</strong>
                       </th>
                       <td>{donator.UserName}</td>
+                    </tr>
+                    <tr>
+                      <th className="pl-0 w-25" scope="row">
+                        <strong>Comment</strong>
+                      </th>
+                      <td>{product.ProductComment}</td>
                     </tr>
                   </tbody>
                 </table>

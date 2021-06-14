@@ -2,7 +2,8 @@ import React from "react"
 const Product = ({product}) => {
 
     const defaultImg = "prodImg.jpg"
-    const imgSrc = "http://localhost:5000/photos/"+(product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
+    const imgSrc = "http://localhost:5000/photos/"+
+    (product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
 
     
     return (
@@ -10,7 +11,8 @@ const Product = ({product}) => {
             <div className="prodCol">
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
-                 <img src={imgSrc} width="300px" height="270px" alt="Product " className="prodImg"/>
+                 <img src={imgSrc} 
+                 width="300px" height="270px" alt="Product " className="prodImg"/>
                     <div className="itemText">
                       <h5 className="prodTitle">
                        <span className="itemTypeFree">FREE

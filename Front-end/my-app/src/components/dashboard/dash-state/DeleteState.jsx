@@ -3,7 +3,6 @@ import React from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import StateTable from './StateTable';
 
 const DeleteState = ({show,onHide,stateId}) => {
 

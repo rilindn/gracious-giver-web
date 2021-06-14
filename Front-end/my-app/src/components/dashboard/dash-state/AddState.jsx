@@ -3,7 +3,6 @@ import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import StateTable from './StateTable';
 
 const AddState = ({show,onHide}) => {
 
@@ -15,11 +14,7 @@ const AddState = ({show,onHide}) => {
             Emri: event.target.Emri.value,
           })
           .then((res) => {
-<<<<<<< HEAD
-                history.push(StateTable);
-=======
                 history.push("/dashboard")
->>>>>>> 5aed1bbecce3bfe6c1e8f1ae4f4961386b8f9b5c
                 NotificationManager.success(
                 'State added succesfully!',
                 '',

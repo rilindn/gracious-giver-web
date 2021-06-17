@@ -4,11 +4,12 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteCateg = ({show,onHide,ProductCategoryId}) => {
+const DeleteCateg = ({show,onHide,ProductCategoryId,onUpdate}) => {
 
     let history = useHistory()
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         axios.delete("http://localhost:5000/api/productcategory/"+ProductCategoryId)
         .then((res) => {
             history.push("/dashboard")
@@ -50,7 +51,11 @@ const DeleteCateg = ({show,onHide,ProductCategoryId}) => {
                             type="button" 
                             className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-danger" value="Delete"/>
+                            <input 
+                            onClick={onUpdate}
+                            type="submit" 
+                            className="btn btn-danger" 
+                            value="Delete"/>
                         </Modal.Footer>
                     </Form>
                 </div>

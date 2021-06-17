@@ -11,7 +11,7 @@ const DeleteProduct = ({show,onHide,productId}) => {
     const handleSubmit = (event) => {
 
         event.preventDefault();
-        axios.delete("http://localhost:5000/api/Shteti/"+productId)
+        axios.delete("http://localhost:5000/api/product/"+productId)
           .then((res) => {
             history.push("/dashboard")
             NotificationManager.success(
@@ -58,6 +58,7 @@ const DeleteProduct = ({show,onHide,productId}) => {
                             />
                             <input 
                             type="submit" 
+                            onClick={onHide}
                             className="btn btn-danger" 
                             value="Delete"
                             />

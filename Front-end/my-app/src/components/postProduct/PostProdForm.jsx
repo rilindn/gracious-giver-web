@@ -2,14 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { Form, Col, Button} from 'react-bootstrap'
 import faPhotoUpload from '../../images/photoUpload.png'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
 
 const PostProdForm = ({loggedInUser}) => {
 
-    
+    let history = useHistory()
     const [categories, setCategories] = useState([]);
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
+    const [lastProductId,setLastProductId] = useState([]);
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -18,7 +21,19 @@ const PostProdForm = ({loggedInUser}) => {
 
     useEffect(()=>{
         getCategories();
+        getLastProd();
     },[selectedFiles]);
+
+    const getLastProd = async () => {
+      try{
+        await axios.get("http://localhost:5000/api/product/last")
+        .then((res)=>{
+          setLastProductId(res.data.ProductId + 1)
+        })
+      }catch(e){
+        console.log(e)
+      }
+    }
 
     const getCategories = async () => {
         try{
@@ -44,20 +59,17 @@ const PostProdForm = ({loggedInUser}) => {
         for (let index = 0; index < e.target.files.length; index++) {
             const formdata = new FormData();
             formdata.append('image',e.target.files[index], e.target.files[index].name)
-            axios.post('http://localhost:5000/api/product/SaveFile', formdata)
-              .then(
-                (res) => {
-                },
-                (error) => {
-                  alert(error)
-                },
-              )
+            try{
+              axios.post('http://localhost:5000/api/product/SaveFile', formdata)
+            }catch(e){
+              console.log(e)
+            }
           }
         }
       }
 
     const handleSubmit = (event) => {
-      event.preventDefault();
+        event.preventDefault();
         axios.post('http://localhost:5000/api/product', {
             ProductName: event.target.ProductName.value,
             ProductCategory: event.target.ProductCategory.value,
@@ -70,19 +82,28 @@ const PostProdForm = ({loggedInUser}) => {
           })
           .then(()=>{
             for (let index = 0; index < selectedFilesName.length; index++) {
-              console.log("selectedFilesName");
-              console.log(selectedFilesName[index].name);
+              console.log("las prod");
+              console.log(lastProductId);
               axios.post('http://localhost:5000/api/ProductPhotos',{
-                Product: "2",
+                Product: lastProductId,
                 ProductPhotoPath: selectedFilesName[index].name
               }
             )}})
           .then(
             (res) => {
-              alert("Product added successfully!")
+              history.push("/home");
+              NotificationManager.success(
+              'Product added succesfully!',
+              '',
+              2000,
+              )
             },
             (error) => {
-              alert(error)
+              NotificationManager.error(
+                'Error while adding new product!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }

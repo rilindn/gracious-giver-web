@@ -3,15 +3,13 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import prodImg2 from '../../images/s-l1600 (1).jpg'
-import prodImg3 from '../../images/s-l1600 (2).jpg'
-import prodImg4 from '../../images/s-l1600 (3).jpg'
 
 const ProductDetails = () => {
   
   var {productId} = useParams();
   const [product, setProduct] = useState([]);
   const [donator,setDonator] = useState([]);
+  const [productPhotos,setProductPhotos] = useState([])
   
  
 
@@ -41,6 +39,12 @@ const ProductDetails = () => {
         axios.get("http://localhost:5000/api/user/"+product.DonatorId)
         .then(res=>{
           setDonator(res.data)
+        })
+      }
+      if(product.ProductId!==undefined && productPhotos.length===0){
+        axios.get("http://localhost:5000/api/productphotos/"+product.ProductId)
+        .then(res=>{
+          setProductPhotos(res.data)
         })
       }
 
@@ -90,44 +94,21 @@ const ProductDetails = () => {
                   </div>
                   <div className="col-12">
                     <div className="row ">
-                      <div className="col-3">
-                        <div className="view overlay rounded z-depth-1 gallery-item">
-                          <img
-                            src={imgSrc}
-                            className="img-fluid z-depth-1  prodDetails-2img"
-                            alt=""
-                          ></img>
+                      {
+                        productPhotos.map((productPhoto,i) => (
+                          <div key={productPhoto.PhotoId} className="col-3">
+                          <div className="view overlay rounded z-depth-1 gallery-item">
+                            <img
+                              src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
+                              className="img-fluid z-depth-1 prodDetails-2img"
+                              alt=""
+                            >
+                            </img>
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-3">
-                        <div className="view overlay rounded z-depth-1 gallery-item">
-                          <img
-                            src={prodImg2}
-                            className="img-fluid z-depth-1 prodDetails-2img"
-                            alt=""
-                          ></img>
-                        </div>
-                      </div>
-                      <div className="col-3">
-                        <div className="view overlay rounded z-depth-1 gallery-item">
-                          <img
-                            src={prodImg3}
-                            className="img-fluid z-depth-1 prodDetails-2img"
-                            alt=""
-                          ></img>
-                          <div className="mask rgba-white-slight"></div>
-                        </div>
-                      </div>
-                      <div className="col-3">
-                        <div className="view overlay rounded z-depth-1 gallery-item">
-                        <img
-                            src={prodImg4}
-                            className="img-fluid z-depth-1 prodDetails-2img"
-                            alt=""
-                          ></img>
-                          <div className="mask rgba-white-slight"></div>
-                        </div>
-                      </div>
+                        ))
+                      }
+                      
                     </div>
                   </div>
                 </div>

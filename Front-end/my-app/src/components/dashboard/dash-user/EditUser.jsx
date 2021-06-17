@@ -1,11 +1,16 @@
 import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
+import UserTable from './UserTable'
 
-const editUser = ({show, onHide, user}) => {
+const EditUser = ({show, onHide, user}) => {
 
+    let history = useHistory()
     const handleSubmit = (event) => {
-        axios.put('http://localhost:5000/api/user/'+ user.UserId, {
+        event.preventDefault()
+            axios.put('http://localhost:5000/api/user/'+ user.UserId, {
             UserId: user.UserId,
             UserName: event.target.UserName.value,
             UserState: event.target.UserState.value,
@@ -17,10 +22,19 @@ const editUser = ({show, onHide, user}) => {
             UserDbo: user.UserDbo
           })
           .then((res) => {
-              alert("User updated succesfully!")
+                history.push(UserTable)
+                NotificationManager.success(
+                'User edited succesfully!',
+                '',
+                2000,
+            )
             },
             (error) => {
-              alert(error)
+                NotificationManager.erorr(
+                'Error while editing the user!'+{error},
+                '',
+                1000,
+                )
             },
           )
     }
@@ -32,13 +46,11 @@ const editUser = ({show, onHide, user}) => {
             className="modal fade">
             <div className="modal-dialog">
                 <div className="modal-content">
-                    
-                        <div className="modal-header">						
-                            <h3 className="modal-title">Edit User</h3>
+                    <div className="modal-header">						
+                    <h3 className="modal-title">Edit User</h3>
                     </div>
                         <div className="modal-body">	
-                        <Form 
-                        onSubmit={handleSubmit}
+                        <Form onSubmit={handleSubmit}
                         >				
                             <FormGroup className="form-group">
                                 <label>User Id</label>
@@ -96,6 +108,7 @@ const editUser = ({show, onHide, user}) => {
                             </Button>
                             <Button 
                             variant="info"
+                            onClick={onHide}
                             type="submit"
                             >
                             Save
@@ -111,4 +124,4 @@ const editUser = ({show, onHide, user}) => {
 }
 
 
-export default editUser
+export default EditUser

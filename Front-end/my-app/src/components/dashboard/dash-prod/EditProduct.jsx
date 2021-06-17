@@ -3,12 +3,14 @@ import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
+import ProductTable from './ProductTable'
 
 const EditProduct = ({show,onHide,product}) => {
 
     let history = useHistory()
 
     const handleSubmit = (event) => {
+        event.preventDefault()
         axios.put('http://localhost:5000/api/product/'+ product.ProductId, {
             ProductId: product.ProductId,
             ProductName: event.target.ProductName.value,
@@ -20,7 +22,7 @@ const EditProduct = ({show,onHide,product}) => {
             ProductComment: product.ProductComment
           })
           .then((res) => {
-            history.push("/dashboard")
+            history.push(ProductTable)
             NotificationManager.success(
             'Product edited succesfully!',
             '',
@@ -90,6 +92,7 @@ const EditProduct = ({show,onHide,product}) => {
                             </Button>
                             <Button 
                             variant="info"
+                            onClick={onHide}
                             type="submit"
                             >
                             Save

@@ -9,6 +9,8 @@ const AddStreet = ({show,onHide}) => {
     let history = useHistory()
 
     const handleSubmit = (event) => {
+
+        event.preventDefault()
         axios.post('http://localhost:5000/api/Street', {
            
             StreetName: event.target.StreetName.value
@@ -62,7 +64,7 @@ const AddStreet = ({show,onHide}) => {
                             className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"
                             />
-                            <input type="submit" className="btn btn-success" value="Add"/>
+                            <input onClick={onHide} type="submit" className="btn btn-success" value="Add"/>
                         </Modal.Footer>
                     </Form>
                 </div>

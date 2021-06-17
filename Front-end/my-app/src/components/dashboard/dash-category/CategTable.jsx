@@ -17,12 +17,13 @@ const CategTable = () => {
     const [categV, setCategV] = useState([]);
     const [categD, setCategD] = useState();
     const[search, setSearch] = useState("");
-    const[maxCategShow, SetMaxCategShow] = useState(1);
+    const[maxCategShow, SetMaxCategShow] = useState(10);
+    const [updated,setUpdated] = useState(false);
 
         useEffect(()=>{
             getAmOfCateg(maxCategShow);
             getAllCateg();
-        },[maxCategShow]);
+        },[maxCategShow,addCategModal,editCategModal,deleteCategModal,updated]);
 
         const getAmOfCateg = async (maxCategShow) =>{
             try{
@@ -69,11 +70,11 @@ const CategTable = () => {
                 <div className="table-wrapper">
                     <div className="table-title">
                         <Row className="row">
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-3">
                                 <h2><b>Product Category</b></h2>
                             </Col>
-                            <Col className ="col-sm-7 d-flex justify-content-end">
-                                 <span className="showing-res-txt">Showing {categData.length} of {allCateg.length} entries</span>
+                            <Col className ="col-sm-6 d-flex justify-content-end">
+                                 <span className="showing-res-txt">Showing {categData.length} out of {allCateg.length} entries</span>
                                  <Search
                                     onSearch={(value)=>{
                                         setSearch(value);
@@ -92,14 +93,14 @@ const CategTable = () => {
                                     }
                                     value={maxCategShow}
                                     >
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="5">5</option>
                                         <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
                                         <option value="All">All</option>
                                  </Form.Control>
                             </Col>
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-3">
                           
                                 <Button 
                                 onClick={() => setAddCategModal(true)} 
@@ -162,11 +163,13 @@ const CategTable = () => {
          onHide={() => setEditCategModal(false)}
         categ={categV}
          />
-     
-
         <DeleteCateg
         show={deleteCategModal}
         onHide={() => setDeleteCategModal(false)} 
+        onUpdate={() => {
+            setUpdated(true)
+            setDeleteCategModal(false)
+        }}
         ProductCategoryId={categD}
         />
     </div>

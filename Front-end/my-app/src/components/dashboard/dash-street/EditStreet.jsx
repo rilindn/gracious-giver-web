@@ -10,8 +10,8 @@ const EditStreet = ({show,onHide,street}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:5000/api/Street/'+ street.streetId, {
-            StreetId:  street.streetId,
+        axios.put('http://localhost:5000/api/Street/'+ street.StreetId, {
+            StreetId:  street.StreetId,
             StreetName: event.target.StreetName.value
           })
           .then((res) => {
@@ -70,7 +70,7 @@ const EditStreet = ({show,onHide,street}) => {
                             <input 
                             onClick={onHide}
                             type="button" className="btn btn-light" data-dismiss="modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-info" value="Save"/>
+                            <input onClick={onHide} type="submit" className="btn btn-info" value="Save"/>
                         </Modal.Footer>
                     </Form>
                 </div>

@@ -9,21 +9,22 @@ const EditCateg = ({show,onHide,categ}) => {
     let history = useHistory()
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         axios.put('http://localhost:5000/api/productcategory/'+ categ.ProductCategoryId, {
             ProductCategoryId: categ.ProductCategoryId,
             ProductCategoryName: event.target.ProductCategoryName.value
          
           })
           .then((res) => {
-            history.push("/dashboard")
-            NotificationManager.success(
-            'Category edited succesfully!',
-            '',
-            2000,
-            )
-        },
-            (error) => {
+                history.push("/dashboard")
                 NotificationManager.success(
+                'Category edited succesfully!',
+                '',
+                2000,
+            )
+            },
+            (error) => {
+                NotificationManager.erorr(
                 'Error while editing the category!'+{error},
                 '',
                 1000,
@@ -60,7 +61,7 @@ const EditCateg = ({show,onHide,categ}) => {
                             <input 
                             onClick={onHide}
                             type="button" className="btn btn-light" data-dismiss="modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-info" value="Save"/>
+                            <input type="submit" onClick={onHide} className="btn btn-info" value="Save"/>
                         </Modal.Footer>
                     </Form>
                 </div>

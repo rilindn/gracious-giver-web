@@ -17,13 +17,13 @@ const ProductTable = () => {
     const [productV, setProductV] = useState([]);
     const [productD, setProductD] = useState();
     const [search,setSearch] = useState("");
-    const [maxProdShow,setMaxProdShow] = useState(1);
+    const [maxProdShow,setMaxProdShow] = useState(10);
     
 
         useEffect( ()=>{
              getAmOfProducts(maxProdShow); 
              getAllProducts();
-        },[maxProdShow]);
+        },[maxProdShow,editProductModal,deleteProductModal]);
 
         const getAmOfProducts = async (maxProdShow) => {
             try{ 
@@ -94,10 +94,10 @@ const ProductTable = () => {
                                     }
                                     value={maxProdShow}
                                     >
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="5">5</option>
                                         <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
                                         <option value="All">All</option>
                                 </Form.Control>
                             </Col>
@@ -118,7 +118,7 @@ const ProductTable = () => {
                         </thead>
                         <tbody>
                             {productsData.map((product,i)=>(
-                                <tr>
+                                <tr key={product.ProductId}>
                                 <td>#{++i}</td>
                                 <td>{product.ProductName}</td>
                                 <td>{product.ProductCategory}</td>

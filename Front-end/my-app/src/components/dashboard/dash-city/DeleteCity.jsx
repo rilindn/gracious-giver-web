@@ -52,7 +52,11 @@ const DeleteCity = ({show,onHide,cityId}) => {
                             type="button" 
                             className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-danger" value="Delete"/>
+                            <input 
+                            type="submit"
+                            onClick={onHide}
+                            className="btn btn-danger" 
+                            value="Delete"/>
                         </Modal.Footer>
                     </Form>
                 </div>

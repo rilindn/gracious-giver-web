@@ -1,16 +1,29 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { NotificationManager } from 'react-notifications'
 
-const deleteUser = ({show,onHide,userId}) => {
+const DeleteUser = ({show,onHide,userId}) => {
 
+    let history = useHistory()
     const handleSubmit = (event) => {
+        event.preventDefault();
         axios.delete("http://localhost:5000/api/user/"+userId)
           .then((res) => {
-              alert("User deleted succesfully!")
+                history.push("/dashboard")
+                NotificationManager.success(
+                'User deleted succesfully!',
+                '',
+                1000,
+                )
             },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                'Error while deleting the user!',
+                {error},
+                1000,
+                )
             },
           )
     }
@@ -24,7 +37,7 @@ const deleteUser = ({show,onHide,userId}) => {
             <div className ="modal-dialog">
              <div 
              className="modal-content"
-             > <Form  className="p-3">
+             > <Form  className="p-3" onSubmit={handleSubmit}>
                         <div>					
                             <h4 className="modal-title">Delete User</h4>
                         </div>
@@ -42,9 +55,9 @@ const deleteUser = ({show,onHide,userId}) => {
                             />
                             <input 
                             type="submit" 
+                            onClick={onHide}
                             className="btn btn-danger" 
                             value="Delete"
-                            onClick={handleSubmit}
                             />
                         </Modal.Footer>
                     </Form>
@@ -55,4 +68,4 @@ const deleteUser = ({show,onHide,userId}) => {
     )
 }
 
-export default deleteUser
+export default DeleteUser

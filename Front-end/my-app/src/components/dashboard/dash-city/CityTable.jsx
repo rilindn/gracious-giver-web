@@ -18,14 +18,13 @@ const CityTable = () => {
     const [cityV, setCityV] = useState([]);
     const [cityD, setCityD] = useState();
     const [search,setSearch] = useState("");
-    const [maxCityShow, setMaxCityShow] = useState(1);
+    const [maxCityShow, setMaxCityShow] = useState(10);
 
 
         useEffect(()=>{
             getAmOfCities(maxCityShow);
             getAllCities(); 
-            setMaxCityShow();
-        },[maxCityShow]);
+        },[maxCityShow,addCityModal,editCityModal,deleteCityModal]);
         
         const getAmOfCities = async (maxCityShow) =>{
             try{
@@ -73,10 +72,10 @@ const CityTable = () => {
                 <div className="table-wrapper">
                     <div className="table-title">
                         <Row className="row">
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-3">
                                 <h2><b>Cities</b></h2>
                             </Col>
-                            <Col className ="col-sm-7 d-flex justify-content-end">
+                            <Col className ="col-sm-6 d-flex justify-content-end">
                                  <span className="showing-res-txt">Showing {cityData.length} of {allCities.length} entries</span>
                                  <Search
                                     onSearch={(value)=>{
@@ -95,14 +94,14 @@ const CityTable = () => {
                                         }
                                     }
                                     >
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="5">5</option>
                                         <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
                                         <option value="All">All</option>
                                  </Form.Control>
                             </Col>
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-3">
                           
                                 <Button 
                                 onClick={() => setAddCityModal(true)} 

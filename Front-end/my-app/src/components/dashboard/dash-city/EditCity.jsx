@@ -62,7 +62,11 @@ const EditCity = ({show,onHide,city}) => {
                             <input 
                             onClick={onHide}
                             type="button" className="btn btn-light" data-dismiss="modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-info" value="Save"/>
+                            <input 
+                            onClick={onHide}
+                            type="submit" 
+                            className="btn btn-info" 
+                            value="Save"/>
                         </Modal.Footer>
                     </Form>
                 </div>

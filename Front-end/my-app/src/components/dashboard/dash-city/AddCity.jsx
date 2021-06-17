@@ -54,7 +54,11 @@ const AddCity = ({show,onHide}) => {
                             type="button" 
                             className="btn btn-info" 
                             data-dismiss="Modal" value="Cancel"/>
-                            <input type="submit" className="btn btn-success" value="Add"/>
+                            <input 
+                            type="submit" 
+                            onClick={onHide}
+                            className="btn btn-success" 
+                            value="Add"/>
                         </Modal.Footer>
                     </Form>
                 </div>

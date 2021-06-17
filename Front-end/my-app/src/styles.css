@@ -372,8 +372,12 @@ section .section-title {
 
 /*notifications*/
 
+.notification-container-empty {
+  display: none !important;
+}
+
 .notification-container {
-  top: 80px !important;
+  top: 50px !important;
   width: 360px !important;
   height: 100px !important;
 }
@@ -384,6 +388,11 @@ section .section-title {
 }
 .notification-error {
   color: #721c24 !important;
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb;
+}
+
+.notification-warning {
   background-color: #f8d7da !important;
   border-color: #f5c6cb;
 }

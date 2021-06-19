@@ -1,19 +1,19 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteProduct = ({show,onHide,productId}) => {
+const DeleteProduct = ({show,onHide,productId,onUpdate}) => {
 
-    let history = useHistory()
 
     const handleSubmit = (event) => {
 
         event.preventDefault();
         axios.delete("http://localhost:5000/api/product/"+productId)
+            .then(()=>{
+                onUpdate();
+            })
           .then((res) => {
-            history.push("/dashboard")
             NotificationManager.success(
             'Product deleted succesfully!',
             '',

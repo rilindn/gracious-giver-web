@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const ProductDetails = () => {
+const ProductDetails = ({loggedInUser}) => {
   
   var {productId} = useParams();
   const [product, setProduct] = useState([]);
@@ -52,7 +52,7 @@ const ProductDetails = () => {
    
     
     <div className="">
-      <Header></Header>
+      <Header loggedInUser={loggedInUser}></Header>
         {/* <div className="container p-4 my-4 border">
           <div className="row">
            <div className="col-sm-6 ">

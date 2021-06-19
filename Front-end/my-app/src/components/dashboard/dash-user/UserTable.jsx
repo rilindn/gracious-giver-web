@@ -123,7 +123,7 @@ const UserTable = () => {
                     <td>{user.UserCity}</td>
                     <td>{user.UserPostcode}</td>
                     <td>{user.UserEmail}</td>
-                    <td>{user.UserDbo}</td>
+                    <td>{user.UserDbo.substring(0, 10)}</td>
                     <td>{user.UserGender}</td>
                     <td>{user.UserRole}</td>
                     <td>

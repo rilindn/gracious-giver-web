@@ -58,6 +58,7 @@ const Home = ({loggedInUser}) => {
                            <Product
                             key={product.ProductId}
                             product={product}
+                            loggedInUser={loggedInUser}
                             />
                     )) :  <Spinner animation="border" className="m-5"/>
                        }

@@ -377,7 +377,7 @@ section .section-title {
 }
 
 .notification-container {
-  top: 50px !important;
+  top: 80px !important;
   width: 360px !important;
   height: 100px !important;
 }

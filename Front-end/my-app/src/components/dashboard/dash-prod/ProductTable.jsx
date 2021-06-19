@@ -6,8 +6,6 @@ import DeleteProduct from './DeleteProduct'
 import { Search } from '../DataTable/Search';
 
 
-
-
 const ProductTable = () => {
 
     const [products, setProducts] = useState([]);
@@ -23,14 +21,14 @@ const ProductTable = () => {
         useEffect( ()=>{
              getAmOfProducts(maxProdShow); 
              getAllProducts();
-        },[maxProdShow,editProductModal,deleteProductModal]);
+        },[maxProdShow]);
 
         const getAmOfProducts = async (maxProdShow) => {
             try{ 
-            await axios.get("http://localhost:5000/api/product/amount/"+maxProdShow)
-            .then(res=>{
-                setProducts(res.data)
-            })
+                await axios.get("http://localhost:5000/api/product/amount/"+maxProdShow)
+                .then(res=>{
+                    setProducts(res.data)
+                })
             }
             catch(e){
                 console.log(e);
@@ -160,11 +158,21 @@ const ProductTable = () => {
         <EditProduct
         show={editProductModal}
         onHide={() => setEditProductModal(false)}
+        onUpdate={()=>{
+            getAllProducts();
+            setEditProductModal(false)
+            getAmOfProducts(maxProdShow);
+        } }
         product={productV}
         />
         <DeleteProduct
         show={deleteProductModal}
         onHide={() => setDeleteProductModal(false)}
+        onUpdate={()=>{
+            getAllProducts();
+            setEditProductModal(false)
+            getAmOfProducts(maxProdShow);
+        }}
         productId={productD}
         />
         

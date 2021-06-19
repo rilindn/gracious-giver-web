@@ -59,11 +59,29 @@ const Header = ({loggedInUser}) => {
             
             <Nav className="dropdownmenu">
               
-            <BsChatFill id="chat" color="white" size="25px" />
+
+           
+            <DropdownButton id="hell"
+                menuAlign={{ lg: 'right' }}
+                title={<BsChatFill id="chatt" color="white" size="25px"  />}
+            
+                variant="transparent"
+              >
+                <Dropdown.Item  style={{ textAlign: "center",width:"350px",fontWeight:"bold",color:"#26543b"}} >No Message</Dropdown.Item> 
+             
+                <Dropdown.Divider />
+              
+                <Dropdown.Item href="/login"  style={{ textAlign: "center",width:"350px",color:"#3c6e71"}}  >Open Message Page</Dropdown.Item>
+                
+              </DropdownButton>
+           
+
+
             <DropdownButton
                 menuAlign={{ lg: 'right' }}
-                title={<FaUser id="user" color="white" size="25px" />}
+                title={<FaUser id="user" color="white" size="25px"  />}
                 id="dropdown-menu-align-right"
+                id="hell2"
                 variant="transparent"
               >
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 

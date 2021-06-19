@@ -893,3 +893,14 @@ table.table .avatar {
   height: 100px !important;
   border-radius: 10px;
 }
+
+/*chat dropdown*/
+#hell{
+  display: flex;
+  width: 50px;
+ margin-top: 10px;
+
+}
+#hell2{
+  margin-left: 100px;
+}

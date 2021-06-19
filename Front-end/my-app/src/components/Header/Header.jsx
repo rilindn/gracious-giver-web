@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -8,8 +8,11 @@ import { BsChatFill,BsSearch } from 'react-icons/bs'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import axios from 'axios'
+import { useEffect } from 'react'
 
-const Header = ({loggedInUser}) => {
+const Header = ({}) => {
+  
+  const [loggedInUser, setLoggedInUser] = useState([])
 
   const handleLogout = async (event) => {
     const posReq = axios.create({
@@ -25,6 +28,16 @@ const Header = ({loggedInUser}) => {
       },
     )
   }
+
+  useEffect(() => {(async () => {
+      await axios
+        .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
+        .then((res) => {
+          setLoggedInUser(res.data)
+        })
+    })()
+  }, [])
+
 
   return (
     <div className="header">
@@ -89,7 +102,8 @@ const Header = ({loggedInUser}) => {
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                {loggedInUser==null? null:
+                {console.log(loggedInUser)}
+                {loggedInUser===null? null:
                 <Dropdown.Item href="/login" onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
                 }
               </DropdownButton>

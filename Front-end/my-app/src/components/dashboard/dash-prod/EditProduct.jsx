@@ -1,13 +1,9 @@
 import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-import ProductTable from './ProductTable'
 
-const EditProduct = ({show,onHide,product}) => {
-
-    let history = useHistory()
+const EditProduct = ({show,onHide,product,onUpdate}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -21,22 +17,24 @@ const EditProduct = ({show,onHide,product}) => {
             ProductLocation: event.target.ProductLocation.value,
             ProductComment: product.ProductComment
           })
+          .then(()=> {
+              onUpdate();
+          })
           .then((res) => {
-            history.push(ProductTable)
             NotificationManager.success(
             'Product edited succesfully!',
             '',
             2000,
             )
         },
-            (error) => {
-                NotificationManager.success(
-                'Error while editing the product!'+{error},
-                '',
-                1000,
-                )
-            },
-          )
+          (error) => {
+              NotificationManager.success(
+              'Error while editing the product!'+{error},
+              '',
+              1000,
+              )
+          },
+        )
     }
 
 
@@ -92,7 +90,6 @@ const EditProduct = ({show,onHide,product}) => {
                             </Button>
                             <Button 
                             variant="info"
-                            onClick={onHide}
                             type="submit"
                             >
                             Save

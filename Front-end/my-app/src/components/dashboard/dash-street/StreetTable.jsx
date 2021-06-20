@@ -161,16 +161,31 @@ const StreetTable = () => {
         <EditStreet
          show={editStreetModal}
          onHide={() => setEditStreetModal(false)}
+         onUpdate={()=>{
+            getAllStreets();
+            setEditStreetModal(false)
+            getAmOfStreets(maxStreetShow);
+        } }
          street={streetV}
          />
         <AddStreet
         show={addStreetModal}
         onHide={() => setAddStreetModal(false)}
+        onUpdate={()=>{
+            getAllStreets();
+            setAddStreetModal(false)
+            getAmOfStreets(maxStreetShow);
+        } }
         />
 
         <DeleteStreet
         show={deleteStreetModal}
-        onHide={() => setDeleteStreetModal(false)} 
+        onHide={() => setDeleteStreetModal(false)}
+        onUpdate={()=>{
+            getAllStreets();
+            setDeleteStreetModal(false)
+            getAmOfStreets(maxStreetShow);
+        } } 
         streetId={streetD}
         />
     </div>

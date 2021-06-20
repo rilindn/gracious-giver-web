@@ -1,12 +1,9 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const AddStreet = ({show,onHide}) => {
-
-    let history = useHistory()
+const AddStreet = ({show,onHide,onUpdate}) => {
 
     const handleSubmit = (event) => {
 
@@ -15,8 +12,10 @@ const AddStreet = ({show,onHide}) => {
            
             StreetName: event.target.StreetName.value
           })
+          .then(()=> {
+              onUpdate();
+          })
           .then((res) => {
-            history.push("/dashboard")
             NotificationManager.success(
             'Street added succesfully!',
             '',

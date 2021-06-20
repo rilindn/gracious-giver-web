@@ -171,15 +171,22 @@ const UserTable = () => {
       </Container>
       <EditUser
         show={editUserModal}
-        onHide={() => {
-            setEditUserModal(false)
-            setUpdated(!updated)
+        onHide={() => {setEditUserModal(false)}}
+        onUpdate={()=>{
+          getAllUsers();
+          setEditUserModal(false)
+          getAmofUsers(maxUserShow);
         }}
         user={userV}
       />
       <DeleteUser
         show={deleteUserModal}
         onHide={() => setDeleteUserModal(false)}
+        onUpdate={()=>{
+          getAllUsers();
+          setDeleteUserModal(false)
+          getAmofUsers(maxUserShow);
+        }}
         userId={userD}
       />
     </div>

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
 
-const AddCateg = ({ show, onHide }) => {
+const AddCateg = ({ show, onHide,onUpdate }) => {
 
   let history = useHistory()
 
@@ -14,6 +14,9 @@ const AddCateg = ({ show, onHide }) => {
     axios
       .post('http://localhost:5000/api/productcategory', {
         ProductCategoryName: event.target.ProductCategoryName.value,
+      })
+      .then(()=>{
+        onUpdate();
       })
       .then((res) => {
         history.push("/dashboard")

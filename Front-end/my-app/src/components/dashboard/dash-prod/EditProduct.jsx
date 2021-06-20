@@ -28,7 +28,7 @@ const EditProduct = ({show,onHide,product,onUpdate}) => {
             )
         },
           (error) => {
-              NotificationManager.success(
+              NotificationManager.error(
               'Error while editing the product!'+{error},
               '',
               1000,

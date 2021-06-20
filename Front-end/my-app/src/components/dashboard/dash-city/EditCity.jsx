@@ -1,12 +1,9 @@
 import React from 'react'
 import axios from 'axios';
 import { Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const EditCity = ({show,onHide,city}) => {
-
-    let history = useHistory()
+const EditCity = ({show,onHide,city,onUpdate}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,8 +12,10 @@ const EditCity = ({show,onHide,city}) => {
             CityName: event.target.CityName.value,
             
           })
+          .then(()=>{
+            onUpdate();
+        })
           .then((res) => {
-            history.push("/dashboard")
             NotificationManager.success(
             'City edited succesfully!',
             '',

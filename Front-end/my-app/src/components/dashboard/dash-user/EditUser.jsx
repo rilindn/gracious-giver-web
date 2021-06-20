@@ -1,13 +1,11 @@
 import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import UserTable from './UserTable'
 
-const EditUser = ({show, onHide, user}) => {
+const EditUser = ({show, onHide, user,onUpdate}) => {
 
-    let history = useHistory()
     const handleSubmit = (event) => {
         event.preventDefault()
             axios.put('http://localhost:5000/api/user/'+ user.UserId, {
@@ -21,8 +19,10 @@ const EditUser = ({show, onHide, user}) => {
             UserGender: user.UserGender,
             UserDbo: user.UserDbo
           })
+          .then(()=> {
+              onUpdate();
+          })
           .then((res) => {
-                history.push(UserTable)
                 NotificationManager.success(
                 'User edited succesfully!',
                 '',

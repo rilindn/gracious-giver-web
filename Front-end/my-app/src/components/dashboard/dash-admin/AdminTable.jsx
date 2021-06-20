@@ -3,29 +3,31 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
 import EditAdmin from './EditAdmin'
 import DeleteAdmin from './DeleteAdmin'
+import AddAdmin from './AddAdmin'
 import { Search } from '../DataTable/Search'
 
 const AdminTable = () => {
-  const [Admins, setAdmins] = useState([])
+  const [admins, setAdmins] = useState([])
   const [allAdmins, setAllAdmins] = useState([])
+  const [addAdminModal,setAddAdminModal] = useState(false);
   const [editAdminModal, setEditAdminModal] = useState(false)
   const [deleteAdminModal, setDeleteAdminModal] = useState(false)
-  const [AdminV, setAdminV] = useState([])
-  const [AdminD, setAdminD] = useState()
+  const [adminV, setAdminV] = useState([])
+  const [adminD, setAdminD] = useState()
   const [search, setSearch] = useState('')
-  const [maxAdminshow, setMaxAdminshow] = useState(10)
+  const [maxAdminShow, setMaxAdminShow] = useState(10)
   const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
-    getAmofAdmins(maxAdminshow)
+    getAmOfAdmins(maxAdminShow)
     getAllAdmins()
-  }, [maxAdminshow,editAdminModal,deleteAdminModal, updated])
+  }, [maxAdminShow,addAdminModal,editAdminModal,deleteAdminModal, updated])
 
 
-  const getAmofAdmins = async (maxAdminshow) => {
+  const getAmOfAdmins = async (maxAdminShow) => {
     try {
       await axios
-        .get('http://localhost:5000/api/Admin/amount/' + maxAdminshow)
+        .get('http://localhost:5000/api/user/role/Admin/amount/' + maxAdminShow)
         .then((res) => {
           setAdmins(res.data)
         })
@@ -36,7 +38,7 @@ const AdminTable = () => {
 
   const getAllAdmins = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/user/role/admin`).then((res) => {
+      await axios.get(`http://localhost:5000/api/user/role/admin`).then(res => {
         setAllAdmins(res.data)
       })
     } catch (e) {
@@ -44,17 +46,18 @@ const AdminTable = () => {
     }
   }
 
-  const AdminData = useMemo(() => {
-    let computedAdmins = Admins
+  const adminData = useMemo(() => {
+    let computedAdmins = admins
 
     if (search) {
       setAdmins(allAdmins)
-      computedAdmins = computedAdmins.filter((Admin) =>
-        Admin.AdminName.toLowerCase().includes(search.toLowerCase()),
+      computedAdmins = computedAdmins.filter(
+        admin =>
+         admin.UserName.toLowerCase().includes(search.toLowerCase()),
       )
     }
     return computedAdmins
-  }, [Admins, search, allAdmins])
+  }, [admins, search, allAdmins])
 
   return (
     <div>
@@ -70,7 +73,7 @@ const AdminTable = () => {
                 </Col>
                 <Col className="col-sm-7 d-flex justify-content-end">
                   <span className="showing-res-txt">
-                    Showing {AdminData.length} out of {allAdmins.length} entries
+                    Showing {adminData.length} out of {allAdmins.length} entries
                   </span>
                   <Search
                     onSearch={(value) => {
@@ -85,10 +88,10 @@ const AdminTable = () => {
                     style={{ width: '80px', marginLeft: '3px' }}
                     onChange={(e) => {
                       e.target.value === 'All'
-                        ? setMaxAdminshow(allAdmins.length)
-                        : setMaxAdminshow(e.target.value)
+                        ? setMaxAdminShow(allAdmins.length)
+                        : setMaxAdminShow(e.target.value);
                     }}
-                    value={maxAdminshow}
+                    value={maxAdminShow}
                   >
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -96,6 +99,16 @@ const AdminTable = () => {
                     <option value="100">100</option>
                     <option value="All">All</option>
                   </Form.Control>
+
+                  <Col className="col-sm-3">
+                          
+                          <Button 
+                          onClick={() => setAddAdminModal(true)} 
+                          className="btn btn-success" 
+                          variant ="success"
+                          data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New Admin</span>
+                          </Button>					
+                      </Col>
                 </Col>
               </Row>
             </div>
@@ -115,22 +128,22 @@ const AdminTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {AdminData.map((Admin, i) => (
-                  <tr key={Admin.AdminId}>
+                {adminData.map((admin, i) => (
+                  <tr key={admin.AdminId}>
                     <td>#{++i}</td>
-                    <td>{Admin.AdminName}</td>
-                    <td>{Admin.Adminstate}</td>
-                    <td>{Admin.AdminCity}</td>
-                    <td>{Admin.AdminPostcode}</td>
-                    <td>{Admin.AdminEmail}</td>
-                    <td>{Admin.AdminDbo.substring(0, 10)}</td>
-                    <td>{Admin.AdminGender}</td>
-                    <td>{Admin.AdminRole}</td>
+                    <td>{admin.UserName}</td>
+                    <td>{admin.UserState}</td>
+                    <td>{admin.UserCity}</td>
+                    <td>{admin.UserPostcode}</td>
+                    <td>{admin.UserEmail}</td>
+                    <td>{admin.UserDbo.substring(0, 10)}</td>
+                    <td>{admin.UserGender}</td>
+                    <td>{admin.UserRole}</td>
                     <td>
                       <Button
                         onClick={() => {
                           setEditAdminModal(true)
-                          setAdminV(Admin)
+                          setAdminV(admin)
                         }}
                         className="m-2"
                         variant="warning"
@@ -147,7 +160,7 @@ const AdminTable = () => {
                       <Button
                         onClick={() => {
                           setDeleteAdminModal(true)
-                          setAdminD(Admin.AdminId)
+                          setAdminD(admin.AdminId)
                         }}
                         className="delete"
                         variant="danger"
@@ -169,18 +182,28 @@ const AdminTable = () => {
           </div>
         </Table>
       </Container>
+
+      <AddAdmin
+        show={addAdminModal}
+        onHide={() => setAddAdminModal(false)}
+        onUpdate={()=>{
+            getAllAdmins();
+            setAddAdminModal(false)
+            getAmOfAdmins(maxAdminShow);
+        } }
+        />
       <EditAdmin
         show={editAdminModal}
         onHide={() => {
             setEditAdminModal(false)
             setUpdated(!updated)
         }}
-        Admin={AdminV}
+        admin={adminV}
       />
       <DeleteAdmin
         show={deleteAdminModal}
         onHide={() => setDeleteAdminModal(false)}
-        AdminId={AdminD}
+        adminId={adminD}
       />
     </div>
   )

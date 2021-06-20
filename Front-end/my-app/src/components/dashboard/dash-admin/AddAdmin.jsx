@@ -1,30 +1,75 @@
-import React from 'react'
+import React, {useEffect, useState } from 'react'
 import axios from 'axios';
-import {Form, FormGroup, Modal, FormLabel} from 'react-bootstrap'
+import {Form, FormGroup, Modal, FormLabel, FormControl} from 'react-bootstrap'
+import { FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
+import {MDBInput } from "mdb-react-ui-kit";
 import { useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 
-const addAdmin = ({show,onHide}) => {
 
-    let history = useHistory
 
-    const handleSubmit = (event) => {
-        axios.post('http://localhost:5000/api/GG_Admin', {
-            AdminName: event.target.AdminName.value,
-            AdminPassword: event.target.AdminPassword.value,
-            AdminEmail: event.target.AdminEmail.value,
-            AdminGender: event.target.maleFemale.value,
-          })
-          .then((res) => {
-              history.push('/');
-              NotificationManager.success('')
-            },
-            (error) => {
-              alert(error)
-            },
-          )
+const AddAdmin = ({show, onHide}) => {
+
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [redirect, setRedirect] = useState(false);
+    
+    useEffect(() =>{
+      getStates();
+      getCities();
+    },[]);
+    
+
+    const getStates = async () => {
+      try{
+        await axios.get('http://localhost:5000/api/shteti')
+        .then(res=>{
+          console.log(res)
+          setStates(res.data)
+        })
+      }
+      catch(e){
+        console.log(e);
+      }
     }
 
+    const getCities = async () => {
+      try{
+        await axios.get('http://localhost:5000/api/city')
+        .then(res=>{
+          console.log(res)
+          setCities(res.data)
+        })
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
+
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      axios.post('http://localhost:5000/api/register', {
+        UserName: event.target.AdminName.value,
+        UserPassword: event.target.AdminPassword.value,
+        UserState: event.target.state.value,
+        UserCity: event.target.city.value,
+        UserPostCode: event.target.postcode.value,
+        UserRole: "Admin",
+        UserEmail: event.target.AdminEmail.value,
+        UserGender: event.target.maleFemale.value,
+        UserDbo: event.target.birth.value
+      })
+      .then(
+        (res) =>{
+          alert("Succesfully registered")
+          console.log(res.data); 
+        },
+        (error) =>{
+          alert(error)
+        },
+      )
+    }
     return (
         <div>
             <Modal  
@@ -45,6 +90,43 @@ const addAdmin = ({show,onHide}) => {
                                 <label>Password</label>
                                 <input type="password" name ="AdminPassword" className="form-control" required/>
                             </FormGroup>
+
+                            <FormGroup></FormGroup>
+                            <FormLabel className="label-alignin">
+                                State
+                            </FormLabel>
+                                <Form.Control
+                                    style={{width: "340px"}} 
+                                    as="select" 
+                                    name="state"
+                                    custom
+                                >
+                                    {states.map(state=>(
+                                    <option>{state.Emri}</option>
+                                ))}
+                                </Form.Control>
+                    <FormLabel className="label-alignin">
+                          City
+                    </FormLabel>
+                        <Form.Control 
+                          style={{width: "340px"}} 
+                          as="select" 
+                          name="city"
+                          custom
+                        >
+                          {cities.map(city=>(
+                
+                        <option>{city.CityName}</option>
+                        ))}
+                        </Form.Control>
+                   <FormLabel className="label-alignin">
+                       Postcode
+                    </FormLabel>
+                      <MDBInput 
+                          type="text"
+                          name="postcode"
+                          style={{width:"340px", paddingLeft:"30px"}}
+                      />
                             <FormGroup className="form-group">
                                 <label>Email</label>
                                 <input type="email" name ="AdminEmail" className="form-control" required/>
@@ -78,7 +160,18 @@ const addAdmin = ({show,onHide}) => {
                                     
                                 <label className="form-check-label" for="inlineRadio2">Male</label>
                                 </div>
-                            </div>		
+                            </div>
+                                                 <FormLabel className="label-alignin">
+                    Date of birth
+                  </FormLabel>
+
+                  <FormControl className="lbl-position" 
+                      style={{width:"200px"}}
+                      type="date"
+                      required
+                      placeholder="Date of birth"
+                      name="birth"
+                  ></FormControl>		
                         </div>
                                 <Modal.Footer className="modal-footer">
                                     <input 
@@ -96,4 +189,4 @@ const addAdmin = ({show,onHide}) => {
     )
 }
 
-export default addAdmin
+export default AddAdmin;

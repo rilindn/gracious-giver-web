@@ -160,7 +160,7 @@ const AdminTable = () => {
                       <Button
                         onClick={() => {
                           setDeleteAdminModal(true)
-                          setAdminD(admin.AdminId)
+                          setAdminD(admin.UserId)
                         }}
                         className="delete"
                         variant="danger"

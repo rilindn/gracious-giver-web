@@ -194,15 +194,22 @@ const AdminTable = () => {
         />
       <EditAdmin
         show={editAdminModal}
-        onHide={() => {
-            setEditAdminModal(false)
-            setUpdated(!updated)
+        onHide={() => setEditAdminModal(false)}
+        onUpdate={()=>{
+          getAllAdmins();
+          setEditAdminModal(false)
+          getAmOfAdmins(maxAdminShow);
         }}
         admin={adminV}
       />
       <DeleteAdmin
         show={deleteAdminModal}
         onHide={() => setDeleteAdminModal(false)}
+        onUpdate={()=>{
+          getAllAdmins();
+          setDeleteAdminModal(false)
+          getAmOfAdmins(maxAdminShow);
+        }}
         adminId={adminD}
       />
     </div>

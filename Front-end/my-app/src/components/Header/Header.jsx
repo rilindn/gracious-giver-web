@@ -9,6 +9,7 @@ import { MdAddCircleOutline } from 'react-icons/md'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { List } from 'semantic-ui-react'
 
 const Header = ({}) => {
   
@@ -74,17 +75,17 @@ const Header = ({}) => {
               
 
            
-            <DropdownButton id="hell"
+            <DropdownButton id="hell" 
                 menuAlign={{ lg: 'right' }}
-                title={<BsChatFill id="chatt" color="white" size="25px"  />}
-            
+                title={<BsChatFill id="chatt" color="white" size="25px" />}
+              
                 variant="transparent"
               >
-                <Dropdown.Item  style={{ textAlign: "center",width:"350px",fontWeight:"bold",color:"#26543b"}} >No Message</Dropdown.Item> 
+                <Dropdown.Item  style={{ textAlign: "center",width:"350px",fontWeight:"bold",color:"#26543b"}} >No message</Dropdown.Item> 
              
                 <Dropdown.Divider />
               
-                <Dropdown.Item href="/login"  style={{ textAlign: "center",width:"350px",color:"#3c6e71"}}  >Open Message Page</Dropdown.Item>
+                <Dropdown.Item href="" id="mess" style={{ textAlign: "center",width:"350px",color:"#3c6e71",fontSize:"14px"}}  >Open Message Page</Dropdown.Item>
                 
               </DropdownButton>
            
@@ -97,6 +98,8 @@ const Header = ({}) => {
                 id="hell2"
                 variant="transparent"
               >
+                
+              <List.Item style={{ marginTop:"10px",marginLeft:"23px",color:"#3c6e71",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
@@ -104,7 +107,7 @@ const Header = ({}) => {
                 <Dropdown.Divider />
                 {console.log(loggedInUser)}
                 {loggedInUser===null? null:
-                <Dropdown.Item href="/login" onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
+                <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
                 }
               </DropdownButton>
               </Nav>

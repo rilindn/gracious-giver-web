@@ -899,8 +899,15 @@ table.table .avatar {
   display: flex;
   width: 50px;
  margin-top: 10px;
+ border-top-style: hidden;
 
 }
 #hell2{
   margin-left: 100px;
+  
 }
+ #mess:hover{
+ 
+   text-decoration: underline;
+ }
+ 

@@ -1,19 +1,19 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteStreet = ({show,onHide,streetId}) => {
+const DeleteStreet = ({show,onHide,streetId,onUpdate}) => {
 
-    let history = useHistory()
-  
+    
     const handleSubmit = (event) => {
 
         event.preventDefault();
         axios.delete("http://localhost:5000/api/Street/"+streetId)
-          .then((res) => {
-            history.push("/dashboard")
+        .then(()=>{
+            onUpdate();
+        })
+        .then((res) => {
             NotificationManager.success(
             'Street deleted succesfully!',
             '',

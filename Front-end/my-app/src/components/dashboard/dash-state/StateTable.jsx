@@ -158,15 +158,30 @@ const StateTable = () => {
         <AddState
         show={addStateModal}
         onHide={() => setAddStateModal(false)}
+        onUpdate={()=>{
+            getAllStates();
+            setAddStateModal(false)
+            getAmOfStates(maxStateShow);
+        } }
         />
         <EditState
         show={editStateModal}
         onHide={() => setEditStateModal(false)}
+        onUpdate={()=>{
+            getAllStates();
+            setEditStateModal(false)
+            getAmOfStates(maxStateShow);
+        } }
         state={StateV}
         />
         <DeleteState
         show={deleteStateModal}
         onHide={() => setDeleteStateModal(false)}
+        onUpdate={()=>{
+            getAllStates();
+            setDeleteStateModal(false)
+            getAmOfStates(maxStateShow);
+        } }
         stateId={StateD}
         />
     </div>

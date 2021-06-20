@@ -85,7 +85,7 @@ const Header = ({}) => {
              
                 <Dropdown.Divider />
               
-                <Dropdown.Item href="" id="mess" style={{ textAlign: "center",width:"350px",color:"#3c6e71",fontSize:"14px"}}  >Open Message Page</Dropdown.Item>
+                <Dropdown.Item href="/chat" id="mess" style={{ textAlign: "center",width:"350px",color:"#3c6e71",fontSize:"14px"}}  >Open Message Page</Dropdown.Item>
                 
               </DropdownButton>
            

@@ -1,21 +1,21 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const EditStreet = ({show,onHide,street}) => {
+const EditStreet = ({show,onHide,street,onUpdate}) => {
 
-    let history = useHistory()
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.put('http://localhost:5000/api/Street/'+ street.StreetId, {
             StreetId:  street.StreetId,
             StreetName: event.target.StreetName.value
           })
+          .then(()=> {
+              onUpdate();
+          })
           .then((res) => {
-            history.push("/dashboard")
             NotificationManager.success(
             'Street edited succesfully!',
             '',

@@ -158,17 +158,31 @@ const CityTable = () => {
         <EditCity
          show={editCityModal}
          onHide={() => setEditCityModal(false)}
+         onUpdate={()=>{
+            getAllCities();
+            setEditCityModal(false)
+            getAmOfCities(maxCityShow);
+        } }
          city={cityV}
          />
         <AddCity
         show={addCityModal}
         onHide={() => setAddCityModal(false)}
-        
+        onUpdate={()=>{
+            getAllCities();
+            setAddCityModal(false)
+            getAmOfCities(maxCityShow);
+        } }
         />
 
         <DeleteCity
         show={deleteCityModal}
         onHide={() => setDeleteCityModal(false)} 
+        onUpdate={()=>{
+            getAllCities();
+            setDeleteCityModal(false)
+            getAmOfCities(maxCityShow);
+        } }
         cityId={cityD}
         />
     </div>

@@ -18,12 +18,11 @@ const CategTable = () => {
     const [categD, setCategD] = useState();
     const[search, setSearch] = useState("");
     const[maxCategShow, SetMaxCategShow] = useState(10);
-    const [updated,setUpdated] = useState(false);
 
         useEffect(()=>{
             getAmOfCateg(maxCategShow);
             getAllCateg();
-        },[maxCategShow,addCategModal,editCategModal,deleteCategModal,updated]);
+        },[maxCategShow]);
 
         const getAmOfCateg = async (maxCategShow) =>{
             try{
@@ -156,20 +155,30 @@ const CategTable = () => {
         <AddCateg
         show={addCategModal}
         onHide={() => setAddCategModal(false)}
-        
+        onUpdate={()=>{
+            getAllCateg();
+            setAddCategModal(false)
+            getAmOfCateg(maxCategShow);
+        } }
         />
         <EditCateg
          show={editCategModal}
          onHide={() => setEditCategModal(false)}
+         onUpdate={()=>{
+            getAllCateg();
+            setEditCategModal(false)
+            getAmOfCateg(maxCategShow);
+        } }
         categ={categV}
          />
         <DeleteCateg
         show={deleteCategModal}
         onHide={() => setDeleteCategModal(false)} 
-        onUpdate={() => {
-            setUpdated(true)
+        onUpdate={()=>{
+            getAllCateg();
             setDeleteCategModal(false)
-        }}
+            getAmOfCateg(maxCategShow);
+        } }
         ProductCategoryId={categD}
         />
     </div>

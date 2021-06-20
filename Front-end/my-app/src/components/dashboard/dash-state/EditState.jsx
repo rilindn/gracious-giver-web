@@ -1,22 +1,21 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const EditState = ({show,onHide,state}) => {
+const EditState = ({show,onHide,state,onUpdate}) => {
     
-    let history = useHistory()
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.put('http://localhost:5000/api/Shteti/'+ state.ShtetiId, {
             ShtetiId: state.ShtetiId,
             Emri: event.target.Emri.value,
-            
+          })
+          .then(()=> {
+              onUpdate();
           })
           .then((res) => {
-            history.push("/dashboard")
             NotificationManager.success(
             'State edited succesfully!',
             '',

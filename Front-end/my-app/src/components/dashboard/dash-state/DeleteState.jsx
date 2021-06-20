@@ -1,19 +1,18 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteState = ({show,onHide,stateId}) => {
-
-    let history = useHistory()
+const DeleteState = ({show,onHide,stateId,onUpdate}) => {
 
     const handleSubmit = (event) => {
 
         event.preventDefault();
         axios.delete("http://localhost:5000/api/Shteti/"+stateId)
-          .then((res) => {
-            history.push("/dashboard")
+        .then(()=>{
+            onUpdate();
+        })
+        .then((res) => {
             NotificationManager.success(
             'State deleted succesfully!',
             '',

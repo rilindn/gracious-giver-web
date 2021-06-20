@@ -162,7 +162,7 @@ const ProductTable = () => {
             getAllProducts();
             setEditProductModal(false)
             getAmOfProducts(maxProdShow);
-        } }
+        }}
         product={productV}
         />
         <DeleteProduct
@@ -170,7 +170,7 @@ const ProductTable = () => {
         onHide={() => setDeleteProductModal(false)}
         onUpdate={()=>{
             getAllProducts();
-            setEditProductModal(false)
+            setDeleteProductModal(false)
             getAmOfProducts(maxProdShow);
         }}
         productId={productD}

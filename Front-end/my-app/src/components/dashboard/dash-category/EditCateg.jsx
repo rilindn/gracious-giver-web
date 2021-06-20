@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const EditCateg = ({show,onHide,categ}) => {
+const EditCateg = ({show,onHide,categ,onUpdate}) => {
 
     let history = useHistory()
 
@@ -15,6 +15,9 @@ const EditCateg = ({show,onHide,categ}) => {
             ProductCategoryName: event.target.ProductCategoryName.value
          
           })
+          .then(()=>{
+            onUpdate();
+        })
           .then((res) => {
                 history.push("/dashboard")
                 NotificationManager.success(

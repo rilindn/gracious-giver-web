@@ -1,20 +1,19 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
-const AddState = ({show,onHide}) => {
-
-    let history = useHistory()
+const AddState = ({show,onHide,onUpdate}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('http://localhost:5000/api/Shteti', {
             Emri: event.target.Emri.value,
           })
+          .then(()=>{
+            onUpdate();
+        })
           .then((res) => {
-                history.push("/dashboard")
                 NotificationManager.success(
                 'State added succesfully!',
                 '',

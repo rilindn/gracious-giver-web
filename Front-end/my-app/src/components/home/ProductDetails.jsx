@@ -10,6 +10,7 @@ const ProductDetails = ({loggedInUser}) => {
   const [product, setProduct] = useState([]);
   const [donator,setDonator] = useState([]);
   const [productPhotos,setProductPhotos] = useState([])
+  const [bigImg,setBigImg] = useState()
   
  
 
@@ -33,8 +34,8 @@ const ProductDetails = ({loggedInUser}) => {
         const defaultImg = "prodImg.jpg"
         var imgSrc = "http://localhost:5000/photos/"+
         (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
-        
       }
+      
       if(product.DonatorId!==undefined && donator.length===0){
         axios.get("http://localhost:5000/api/user/"+product.DonatorId)
         .then(res=>{
@@ -46,6 +47,11 @@ const ProductDetails = ({loggedInUser}) => {
         .then(res=>{
           setProductPhotos(res.data)
         })
+      }
+
+      const displaySelectedImage = (e) => {
+        var imgSrc = `http://localhost:5000/photos/${e}`
+        setBigImg(imgSrc);
       }
 
   return (
@@ -77,33 +83,21 @@ const ProductDetails = ({loggedInUser}) => {
                       id="figure01"
                       className="view overlay rounded z-depth-1 main-img"
                     >
-                      <img src={imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
+                      <img src={bigImg?bigImg:imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
                     </figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
                   </div>
                   <div className="col-12">
-                    <div className="row ">
+                    <div className="row">
                       {
                         productPhotos.map((productPhoto,i) => (
-                          <div key={productPhoto.PhotoId} className="col-3">
+                          <div key={productPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
                               src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                            >
-                            </img>
+                              onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}
+                            />
                           </div>
                         </div>
                         ))

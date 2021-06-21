@@ -927,6 +927,11 @@ table.table .avatar {
   height: 100px !important;
   border-radius: 10px;
 }
+.prodDetails-2img:hover{
+ cursor: pointer;
+ opacity: 0.9 ;
+}
+
 .prodDetails-Dashimg {
   width: 70px !important;
   height: 50px !important;

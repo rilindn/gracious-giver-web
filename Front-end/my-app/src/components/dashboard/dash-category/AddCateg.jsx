@@ -11,8 +11,7 @@ const AddCateg = ({ show, onHide,onUpdate }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    axios
-      .post('http://localhost:5000/api/productcategory', {
+    axios.post('http://localhost:5000/api/productcategory', {
         ProductCategoryName: event.target.ProductCategoryName.value,
       })
       .then(()=>{

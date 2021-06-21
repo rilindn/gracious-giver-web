@@ -94,8 +94,7 @@ const Header = ({}) => {
             <DropdownButton
                 menuAlign={{ lg: 'right' }}
                 title={<FaUser id="user" color="white" size="25px"  />}
-                id="dropdown-menu-align-right"
-                id="hell2"
+                id="dropdown-menu-align-right hell2"
                 variant="transparent"
               >
                 

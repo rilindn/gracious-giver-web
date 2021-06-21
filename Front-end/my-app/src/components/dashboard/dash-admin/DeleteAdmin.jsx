@@ -1,16 +1,29 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
+import { NotificationManager } from 'react-notifications'
 
-const deleteAdmin = ({show,onHide,adminId}) => {
+const DeleteAdmin = ({show,onHide,adminId,onUpdate}) => {
 
     const handleSubmit = (event) => {
-        axios.delete("http://localhost:5000/api/GG_Admin/"+adminId)
+        event.preventDefault();
+        axios.delete("http://localhost:5000/api/user/"+adminId)
+            .then(()=>{
+                onUpdate();
+            })
           .then((res) => {
-              alert("Admin deleted succesfully!")
+                NotificationManager.success(
+                'Admin deleted succesfully!',
+                '',
+                1000,
+                )
             },
             (error) => {
-              alert(error)
+                NotificationManager.error(
+                'Error while deleting the Admin!',
+                {error},
+                1000,
+                )
             },
           )
     }
@@ -24,7 +37,7 @@ const deleteAdmin = ({show,onHide,adminId}) => {
             <div className ="modal-dialog">
              <div 
              className="modal-content"
-             > <Form onSubmit={handleSubmit} className="p-3">
+             > <Form  className="p-3" onSubmit={handleSubmit}>
                         <div>					
                             <h4 className="modal-title">Delete Admin</h4>
                         </div>
@@ -42,6 +55,7 @@ const deleteAdmin = ({show,onHide,adminId}) => {
                             />
                             <input 
                             type="submit" 
+                            onClick={onHide}
                             className="btn btn-danger" 
                             value="Delete"
                             />
@@ -54,4 +68,4 @@ const deleteAdmin = ({show,onHide,adminId}) => {
     )
 }
 
-export default deleteAdmin
+export default DeleteAdmin

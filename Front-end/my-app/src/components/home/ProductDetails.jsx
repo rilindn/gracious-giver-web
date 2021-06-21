@@ -3,6 +3,7 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 const ProductDetails = ({loggedInUser}) => {
   
@@ -12,6 +13,7 @@ const ProductDetails = ({loggedInUser}) => {
   const [productPhotos,setProductPhotos] = useState([])
   
  
+
 
     useEffect(()=>{
       getProductData();
@@ -47,6 +49,40 @@ const ProductDetails = ({loggedInUser}) => {
           setProductPhotos(res.data)
         })
       }
+
+      // const insertRequest = (event) => {
+      //   event.proeventDefault();
+      //    axios.post(`http://localhost:5000/api/product_request`, {
+      //     UserId:"17",
+      //     ProductId:"1",
+      //     Message: "fdssf",
+      //     Request_Date: "2000-11-11T00:00:00"
+      //   })
+      //   .then((res)=>{
+      //     //<Redirect to={`prodDetails/${productId}`}/>
+      //   })
+      //   ,(error=>{
+      //     console.log(error);
+      //   })
+      //   }
+        const insertRequest = (event) => {
+          event.preventDefault();
+          axios.post('http://localhost:5000/api/product_request', {
+            UserId:"17",
+            ProductId:"1",
+            Request_Date: "2000-11-11T00:00:00"
+          })
+          .then(
+            (res) =>{
+              console.log(res.data); 
+              <Redirect to="/home"/>
+            },
+            (error) =>{
+              console.log(error)
+            },
+          )
+        }
+      
 
   return (
    
@@ -133,7 +169,7 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{product.ProductCategory}</td>
+                      <td>{product.ProductCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -158,13 +194,14 @@ const ProductDetails = ({loggedInUser}) => {
               </div>
               <form className="d-flex justify-content-start align-items-start">
                 <textarea
+                name = "Message"
                 placeholder="I need this product because..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
 
                 </textarea>
-              <button type="button" className="btn btn-primary btn-md mr-1 mb-2">
+              <button type="submit" onClick={() => insertRequest()} className="btn btn-primary btn-md mr-1 mb-2">
                 Request{' '}
               </button>
               </form>

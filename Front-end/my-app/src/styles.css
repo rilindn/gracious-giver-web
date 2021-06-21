@@ -202,6 +202,14 @@ section .section-title {
   margin: 5px;
   border-radius: 12px;
 }
+
+.editProd-img-preview {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border-radius: 12px;
+}
+
 /* .img-prod-label {
   min-width: 220px;
   text-align: left;
@@ -265,6 +273,15 @@ section .section-title {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
+.imgUploadBtn-dash-edit {
+  margin-left: 0px !important;
+  margin-top: 5px;
+  border-radius: 12px;
+}
+.add-photo-icon-dash {
+  margin: 0 auto !important;
+}
+
 .add-photo-icon {
   width: 30px !important;
   margin: 0 15px 0 30px;
@@ -875,6 +892,23 @@ table.table .avatar {
   text-align: left;
 }
 
+.delProduct-photo {
+  position: absolute;
+  right: 13px;
+  top: 10px;
+}
+.delPhoto-icon-dash {
+  font-size: 20px;
+}
+
+.delPhoto-icon-dash:hover {
+  color: rgb(226, 1, 1);
+  cursor: pointer;
+}
+.editProd-img-preview:hover {
+  opacity: 0.95;
+}
+
 /*product details*/
 
 .req-prod-textarea {
@@ -893,21 +927,29 @@ table.table .avatar {
   height: 100px !important;
   border-radius: 10px;
 }
+.prodDetails-Dashimg {
+  width: 70px !important;
+  height: 50px !important;
+  margin: 1px;
+}
+.prod-img-dash-record {
+  display: flex;
+  flex-wrap: wrap;
+  width: 200px;
+  justify-content: center;
+  border: none !important;
+}
 
 /*chat dropdown*/
-#hell{
+#hell {
   display: flex;
   width: 50px;
- margin-top: 10px;
- border-top-style: hidden;
-
+  margin-top: 10px;
+  border-top-style: hidden;
 }
-#hell2{
+#hell2 {
   margin-left: 100px;
-  
 }
- #mess:hover{
- 
-   text-decoration: underline;
- }
- 
+#mess:hover {
+  text-decoration: underline;
+}

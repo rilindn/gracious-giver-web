@@ -14,7 +14,6 @@ const DeleteUser = ({show,onHide,userId,onUpdate}) => {
                 onUpdate();
             })
           .then((res) => {
-                history.push("/dashboard")
                 NotificationManager.success(
                 'User deleted succesfully!',
                 '',

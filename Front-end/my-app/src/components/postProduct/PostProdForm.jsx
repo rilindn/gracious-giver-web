@@ -173,7 +173,7 @@ const PostProdForm = ({loggedInUser}) => {
 
           <Form.Group className="form-group-el img-prod-fgr">
           <div className="img-prod-label" >
-          <Form.Label >Image of Product</Form.Label></div>
+          <Form.Label >Product Images</Form.Label></div>
             <button
             type="button"
             onClick={handleFileInputClick}

@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import EditProduct from './EditProduct'
 import DeleteProduct from './DeleteProduct'
 import { Search } from '../DataTable/Search';
+import DashProduct from './DashProduct';
 
 
 const ProductTable = () => {
@@ -16,6 +17,7 @@ const ProductTable = () => {
     const [productD, setProductD] = useState();
     const [search,setSearch] = useState("");
     const [maxProdShow,setMaxProdShow] = useState(10);
+    const [updatePhotos,setUpdatePhotos] = useState(false);
     
 
         useEffect( ()=>{
@@ -61,6 +63,8 @@ const ProductTable = () => {
         return computedProducts
 
     },[products,search,allProducts])
+
+   
 
     return (
     <div>
@@ -109,6 +113,7 @@ const ProductTable = () => {
                                 <th>Product Category</th>
                                 <th>Freshness</th>
                                 <th>Product Description</th>
+                                <th>Product Photos</th>
                                 <th>Product Location</th>
                                 <th>Product Comment</th>
                                 <th>Actions</th>
@@ -116,15 +121,19 @@ const ProductTable = () => {
                         </thead>
                         <tbody>
                             {productsData.map((product,i)=>(
+                                
+
                                 <tr key={product.ProductId}>
                                 <td>#{++i}</td>
                                 <td>{product.ProductName}</td>
                                 <td>{product.ProductCategory}</td>
                                 <td>{product.ProductState}</td>
                                 <td>{product.ProductDescription}</td>
+                                <DashProduct product={product} updatePhotos={updatePhotos}/>
                                 <td>{product.ProductLocation}</td>
                                 <td>{product.ProductComment}</td>
                                 <td>
+                                    
                                     <Button 
                                     onClick={() => {
                                         setEditProductModal(true);
@@ -162,6 +171,7 @@ const ProductTable = () => {
             getAllProducts();
             setEditProductModal(false)
             getAmOfProducts(maxProdShow);
+            setUpdatePhotos(!updatePhotos)
         }}
         product={productV}
         />

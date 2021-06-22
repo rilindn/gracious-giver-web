@@ -94,8 +94,7 @@ const Header = ({}) => {
             <DropdownButton
                 menuAlign={{ lg: 'right' }}
                 title={<FaUser id="user" color="white" size="25px"  />}
-                id="dropdown-menu-align-right"
-                id="hell2"
+                id="dropdown-menu-align-right hell2"
                 variant="transparent"
               >
                 
@@ -105,7 +104,6 @@ const Header = ({}) => {
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                {console.log(loggedInUser)}
                 {loggedInUser===null? null:
                 <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
                 }

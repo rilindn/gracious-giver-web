@@ -12,7 +12,6 @@ const PostProdForm = ({loggedInUser}) => {
     const [categories, setCategories] = useState([]);
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
-    const [lastProductId,setLastProductId] = useState([]);
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -21,19 +20,7 @@ const PostProdForm = ({loggedInUser}) => {
 
     useEffect(()=>{
         getCategories();
-        getLastProd();
     },[selectedFiles]);
-
-    const getLastProd = async () => {
-      try{
-        await axios.get("http://localhost:5000/api/product/last")
-        .then((res)=>{
-          setLastProductId(res.data.ProductId + 1)
-        })
-      }catch(e){
-        console.log(e)
-      }
-    }
 
     const getCategories = async () => {
         try{
@@ -54,7 +41,7 @@ const PostProdForm = ({loggedInUser}) => {
         setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
         var fileArrayN = Array.from(e.target.files)
         setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
-        console.log("fileArrayN");
+        //console.log("fileArrayN");
         //console.log(fileArrayN.[0].name);
         for (let index = 0; index < e.target.files.length; index++) {
             const formdata = new FormData();
@@ -81,14 +68,15 @@ const PostProdForm = ({loggedInUser}) => {
             DonatorId: loggedInUser.UserId
           })
           .then(()=>{
-            for (let index = 0; index < selectedFilesName.length; index++) {
-              console.log("las prod");
-              console.log(lastProductId);
-              axios.post('http://localhost:5000/api/ProductPhotos',{
-                Product: lastProductId,
-                ProductPhotoPath: selectedFilesName[index].name
-              }
-            )}})
+            axios.get("http://localhost:5000/api/product/last")
+            .then((res)=>{
+              for (let index = 0; index < selectedFilesName.length; index++) {
+                axios.post('http://localhost:5000/api/ProductPhotos',{
+                  Product: res.data.ProductId,
+                  ProductPhotoPath: selectedFilesName[index].name
+                }
+              )}})
+          })
           .then(
             (res) => {
               history.push("/home");
@@ -173,7 +161,7 @@ const PostProdForm = ({loggedInUser}) => {
 
           <Form.Group className="form-group-el img-prod-fgr">
           <div className="img-prod-label" >
-          <Form.Label >Image of Product</Form.Label></div>
+          <Form.Label >Product Images</Form.Label></div>
             <button
             type="button"
             onClick={handleFileInputClick}

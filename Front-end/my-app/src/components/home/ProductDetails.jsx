@@ -3,6 +3,7 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 const ProductDetails = ({loggedInUser}) => {
   
@@ -10,8 +11,10 @@ const ProductDetails = ({loggedInUser}) => {
   const [product, setProduct] = useState([]);
   const [donator,setDonator] = useState([]);
   const [productPhotos,setProductPhotos] = useState([])
+  const [bigImg,setBigImg] = useState()
   
  
+
 
     useEffect(()=>{
       getProductData();
@@ -33,8 +36,8 @@ const ProductDetails = ({loggedInUser}) => {
         const defaultImg = "prodImg.jpg"
         var imgSrc = "http://localhost:5000/photos/"+
         (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
-        
       }
+      
       if(product.DonatorId!==undefined && donator.length===0){
         axios.get("http://localhost:5000/api/user/"+product.DonatorId)
         .then(res=>{
@@ -47,6 +50,47 @@ const ProductDetails = ({loggedInUser}) => {
           setProductPhotos(res.data)
         })
       }
+
+<<<<<<< HEAD
+      const displaySelectedImage = (e) => {
+        var imgSrc = `http://localhost:5000/photos/${e}`
+        setBigImg(imgSrc);
+      }
+=======
+      // const insertRequest = (event) => {
+      //   event.proeventDefault();
+      //    axios.post(`http://localhost:5000/api/product_request`, {
+      //     UserId:"17",
+      //     ProductId:"1",
+      //     Message: "fdssf",
+      //     Request_Date: "2000-11-11T00:00:00"
+      //   })
+      //   .then((res)=>{
+      //     //<Redirect to={`prodDetails/${productId}`}/>
+      //   })
+      //   ,(error=>{
+      //     console.log(error);
+      //   })
+      //   }
+        const insertRequest = (event) => {
+          event.preventDefault();
+          axios.post('http://localhost:5000/api/product_request', {
+            UserId:"17",
+            ProductId:"1",
+            Request_Date: "2000-11-11T00:00:00"
+          })
+          .then(
+            (res) =>{
+              console.log(res.data); 
+              <Redirect to="/home"/>
+            },
+            (error) =>{
+              console.log(error)
+            },
+          )
+        }
+      
+>>>>>>> 5bcd368033c7813e2b9ed545f1989e5645cbb138
 
   return (
    
@@ -77,33 +121,21 @@ const ProductDetails = ({loggedInUser}) => {
                       id="figure01"
                       className="view overlay rounded z-depth-1 main-img"
                     >
-                      <img src={imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
+                      <img src={bigImg?bigImg:imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
                     </figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
                   </div>
                   <div className="col-12">
-                    <div className="row ">
+                    <div className="row">
                       {
                         productPhotos.map((productPhoto,i) => (
-                          <div key={productPhoto.PhotoId} className="col-3">
+                          <div key={productPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
                               src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                            >
-                            </img>
+                              onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}
+                            />
                           </div>
                         </div>
                         ))
@@ -133,7 +165,7 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{product.ProductCategory}</td>
+                      <td>{product.ProductCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -158,13 +190,14 @@ const ProductDetails = ({loggedInUser}) => {
               </div>
               <form className="d-flex justify-content-start align-items-start">
                 <textarea
+                name = "Message"
                 placeholder="I need this product because..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
 
                 </textarea>
-              <button type="button" className="btn btn-primary btn-md mr-1 mb-2">
+              <button type="submit" onClick={() => insertRequest()} className="btn btn-primary btn-md mr-1 mb-2">
                 Request{' '}
               </button>
               </form>

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { NotificationManager } from 'react-notifications';
 
 const DashProduct = ({product,updatePhotos}) => {
 

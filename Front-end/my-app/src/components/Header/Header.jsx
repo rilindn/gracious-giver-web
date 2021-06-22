@@ -11,7 +11,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { List } from 'semantic-ui-react'
 
-const Header = ({}) => {
+const Header = () => {
   
   const [loggedInUser, setLoggedInUser] = useState([])
 
@@ -98,7 +98,7 @@ const Header = ({}) => {
                 variant="transparent"
               >
                 
-              <List.Item style={{ marginTop:"10px",marginLeft:"23px",color:"#3c6e71",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
+              <List.Item style={{ marginTop:"10px",marginLeft:"23px",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>

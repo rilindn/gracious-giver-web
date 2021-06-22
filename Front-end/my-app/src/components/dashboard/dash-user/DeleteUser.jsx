@@ -1,12 +1,10 @@
 import axios from 'axios'
 import React from 'react'
 import { Form, Modal} from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
 const DeleteUser = ({show,onHide,userId,onUpdate}) => {
 
-    let history = useHistory()
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.delete("http://localhost:5000/api/user/"+userId)

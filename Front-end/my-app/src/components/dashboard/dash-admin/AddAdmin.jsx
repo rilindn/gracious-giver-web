@@ -1,18 +1,13 @@
 import React, {useEffect, useState } from 'react'
 import axios from 'axios';
 import {Form, FormGroup, Modal, FormLabel, FormControl} from 'react-bootstrap'
-import { FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
 import {MDBInput } from "mdb-react-ui-kit";
-import { useHistory } from 'react-router-dom';
-import { NotificationManager } from 'react-notifications';
-
 
 
 const AddAdmin = ({show, onHide}) => {
 
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    const [redirect, setRedirect] = useState(false);
     
     useEffect(() =>{
       getStates();

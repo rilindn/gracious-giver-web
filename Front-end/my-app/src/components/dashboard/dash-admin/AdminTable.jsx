@@ -16,12 +16,11 @@ const AdminTable = () => {
   const [adminD, setAdminD] = useState()
   const [search, setSearch] = useState('')
   const [maxAdminShow, setMaxAdminShow] = useState(10)
-  const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
     getAmOfAdmins(maxAdminShow)
     getAllAdmins()
-  }, [maxAdminShow,addAdminModal,editAdminModal,deleteAdminModal, updated])
+  }, [maxAdminShow,addAdminModal,editAdminModal,deleteAdminModal])
 
 
   const getAmOfAdmins = async (maxAdminShow) => {

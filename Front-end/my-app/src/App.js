@@ -12,7 +12,12 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
+<<<<<<< HEAD
 import Chat from './components/chat/Chat'
+=======
+import Chat from './components/chat/chat'
+import Request from './components/request/request'
+>>>>>>> 1954377ad845384072c11ee82c845efab7aed9f6
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -47,6 +52,9 @@ function App() {
         </Route>
         <Route path="/chat" exact>
           <Chat />
+        </Route>
+        <Route path="/request" exact>
+          <Request />
         </Route>
         <Route path="/dashboard" exact>
           <Dashboard loggedInUser={loggedInUser} />

@@ -102,7 +102,7 @@ const Header = () => {
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
+                <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 {loggedInUser===null? null:
                 <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>

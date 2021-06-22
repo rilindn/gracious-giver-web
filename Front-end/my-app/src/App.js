@@ -13,6 +13,8 @@ import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/chat'
+import Request from './components/request/request'
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
 
@@ -46,6 +48,9 @@ function App() {
         </Route>
         <Route path="/chat" exact>
           <Chat />
+        </Route>
+        <Route path="/request" exact>
+          <Request />
         </Route>
         <Route path="/dashboard" exact>
           <Dashboard loggedInUser={loggedInUser} />

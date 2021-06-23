@@ -1,14 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
-
+import EditRequestt from './EditRequestt'
 import { Search } from '../DataTable/Search';
 
 
-
+const RequesttTable = () => {
+    const [editRequesttModal,setEditRequesttModal] = useState(false);
+   
 
    
-function RequestTable(){
+
     return (
     <div>
         <Container className="container-xl">
@@ -42,15 +44,12 @@ function RequestTable(){
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Nr.</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th>Request Id</th>
+                                <th>Receiver  Id</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Location</th>
+                                <th>Comments</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,13 +68,17 @@ function RequestTable(){
                                 <td>
                                     
                                     <Button 
-                                    
+                                   onClick={() => 
+                                    {setEditRequesttModal(true);
+                                       
+                                    } }
+                                         
                                     className="m-2" 
                                     variant ="warning"
                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     <Button 
-                                    
+                                   
                                      className="delete" 
                                      variant ="danger"
                                      data-toggle="modal"
@@ -92,9 +95,14 @@ function RequestTable(){
                 </div>
             </Table>        
         </Container>
-        
+        <EditRequestt
+         show={editRequesttModal}
+         onHide={() => setEditRequesttModal(false)}
+       
+         />
+
     </div>
     )
-    }
+}
 
-export default RequestTable
+export default RequesttTable

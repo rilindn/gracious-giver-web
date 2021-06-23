@@ -7,7 +7,7 @@ import CategTable from './dash-category/CategTable';
 import StateTable from './dash-state/StateTable';
 import StreetTable from'./dash-street/StreetTable';
 import AdminTable from'./dash-admin/AdminTable';
-import RequestTable from'./dash-requestt/RequestTable';
+import RequesttTable from'./dash-requestt/RequesttTable';
 import Footer from '../footer/Footer';
 import ProductRequestTable from './product-request-dash/ProductRequestTable';
 import axios from 'axios';
@@ -23,7 +23,7 @@ const Dashboard = () => {
     const [streetTable,setStreetTable] = useState(false);
     const [adminTable, setAdminTable] = useState(false);
     const [requestTable, setRequestTable] = useState(false);
-
+    const [requesttTable, setRequesttTable] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
     
     useEffect(() => {(async () => {
@@ -51,6 +51,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${userTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -68,6 +69,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${prodTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -85,6 +87,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 
                 className={`dash-btn ${categTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
@@ -103,6 +106,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${cityTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -120,6 +124,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${stateTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -137,6 +142,7 @@ const Dashboard = () => {
                     setStreetTable(true);
                     setAdminTable(false);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${streetTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -154,6 +160,7 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(true);
                     setRequestTable(false);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${adminTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -171,8 +178,27 @@ const Dashboard = () => {
                     setStreetTable(false);
                     setAdminTable(false);
                     setRequestTable(true);
+                    setRequesttTable(false);
                 }}
                 className={`dash-btn ${requestTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+                 Request Table
+                </button>
+            </li>
+            <li>
+                <button
+                onClick={()=>{
+                    setUserTable(false);
+                    setProdTable(false);
+                    setCategTable(false);
+                    setCityTable(false);
+                    setStateTable(false);
+                    setStreetTable(false);
+                    setAdminTable(false);
+                    setRequestTable(false);
+                    setRequesttTable(true);
+                }}
+                className={`dash-btn ${requesttTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                  Request Table
                 </button>
@@ -186,6 +212,7 @@ const Dashboard = () => {
             {stateTable ? <StateTable/>: null }
             {streetTable ? <StreetTable/>: null }
             {adminTable ? <AdminTable/>: null }
+            {requesttTable ? <RequesttTable/>: null }
             {requestTable ? <ProductRequestTable loggedInUser={loggedInUser}/>: null }
         </div>
         </div>

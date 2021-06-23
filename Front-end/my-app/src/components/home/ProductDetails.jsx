@@ -57,9 +57,7 @@ const ProductDetails = ({loggedInUser}) => {
       
 
       const insertRequest = (event) => {
-          var today = new Date()
-          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'T'+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
-          console.log(date)
+        var date = new Date().toLocaleString()
           axios.post('http://localhost:5000/api/product_request', {
             UserId: loggedInUser.UserId,
             ProductId: product.ProductId,

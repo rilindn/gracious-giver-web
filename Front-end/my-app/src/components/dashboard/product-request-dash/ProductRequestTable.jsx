@@ -4,7 +4,7 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import EditRequest from './EditRequest'
 import DeleteRequest from './DeleteRequest'
 import { Search } from '../DataTable/Search';
-
+import { NotificationManager } from 'react-notifications'
 
 
 const ProductRequestTable = ({loggedInUser}) => { 
@@ -16,7 +16,7 @@ const ProductRequestTable = ({loggedInUser}) => {
     const [requestV, setRequestV] = useState([]);
     const [requestD, setRequestD] = useState();
     const [search,setSearch] = useState("");
-    const [maxRequestShow, setMaxRequestShow] = useState(1);
+    const [maxRequestShow, setMaxRequestShow] = useState(10);
 
 
         useEffect(()=>{
@@ -47,8 +47,62 @@ const ProductRequestTable = ({loggedInUser}) => {
             }
             catch(e){
                 console.log(e);
-            }
+            } 
         }
+
+
+        const handleAcceptRequest  = async (RId) => {
+            var date = new Date().toLocaleString()
+            try{
+              await axios.post(`http://localhost:5000/api/ProductRequestResponse/`,{
+               RequestId: RId.RequestId,
+               Message: RId.Message,
+               Response: "Accepted",
+               Response_Date: date
+              }) 
+              .then((res) => {
+                NotificationManager.success(
+                'Request has been accepted!',
+                '',
+                1000,
+                )},
+                )
+            }
+            catch(e){
+                console.log(e);
+                }
+            }
+
+            const handleDeclineRequest  = async (RId) => {
+                var date = new Date().toLocaleString()
+                try{
+                  await axios.post(`http://localhost:5000/api/ProductRequestResponse/`,{
+                   RequestId: RId.RequestId,
+                   Message: RId.Message,
+                   Response: "Declined",
+                   Response_Date: date
+                  }) 
+                  .then(()=>{
+                    getAmOfRequests(maxRequestShow);
+                    getAllRequests();
+                  })
+                  .then(()=>{
+                    axios.delete("http://localhost:5000/api/product_request/"+ RId.RequestId)
+                  })
+                  .then((res) => {
+                    NotificationManager.success(
+                    'Request has been declined!',
+                    '',
+                    1000,
+                    )},
+                    )
+                }
+                catch(e){
+                    console.log(e);
+                    }
+                }
+
+
 
         const requestData = useMemo ( ()=>{
             let computedRequest = requests;
@@ -142,6 +196,18 @@ const ProductRequestTable = ({loggedInUser}) => {
                                      variant ="danger"
                                      data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
+
+                                     <Button onClick={()=>handleAcceptRequest(request)}
+                                    className="m-2" 
+                                    variant ="success" 
+                                    data-toggle="modal">Accept
+                                    </Button>
+
+                                    <Button onClick={()=>handleDeclineRequest(request)}
+                                    className="m-2" 
+                                    variant ="danger" 
+                                    data-toggle="modal">Decline
+                                    </Button>
                                 </td>
                             </tr>
                             ))}

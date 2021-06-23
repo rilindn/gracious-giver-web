@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import UserTable from './dash-user/UserTable';
 import ProductTable from './dash-prod/ProductTable';
@@ -9,6 +9,8 @@ import StreetTable from'./dash-street/StreetTable';
 import AdminTable from'./dash-admin/AdminTable';
 import RequestTable from'./dash-requestt/RequestTable';
 import Footer from '../footer/Footer';
+import ProductRequestTable from './product-request-dash/ProductRequestTable';
+import axios from 'axios';
 
 
 const Dashboard = () => {
@@ -22,8 +24,16 @@ const Dashboard = () => {
     const [adminTable, setAdminTable] = useState(false);
     const [requestTable, setRequestTable] = useState(false);
 
+    const [loggedInUser, setLoggedInUser] = useState([])
     
-
+    useEffect(() => {(async () => {
+        await axios
+          .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
+          .then((res) => {
+            setLoggedInUser(res.data)
+          })
+      })()
+    }, [])
 
     return (
     <div>
@@ -150,7 +160,6 @@ const Dashboard = () => {
                 Admin Table
                 </button>
             </li>
-
             <li>
                 <button
                 onClick={()=>{
@@ -165,7 +174,7 @@ const Dashboard = () => {
                 }}
                 className={`dash-btn ${requestTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                Request Table
+                 Request Table
                 </button>
             </li>
         </ul>
@@ -177,9 +186,10 @@ const Dashboard = () => {
             {stateTable ? <StateTable/>: null }
             {streetTable ? <StreetTable/>: null }
             {adminTable ? <AdminTable/>: null }
-            {requestTable ? <RequestTable/>: null }
+            {requestTable ? <ProductRequestTable loggedInUser={loggedInUser}/>: null }
         </div>
         </div>
+        
         <Footer/>
     </div>
     )

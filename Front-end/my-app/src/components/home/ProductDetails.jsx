@@ -3,7 +3,8 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { Form } from 'semantic-ui-react'
+import { NotificationManager } from 'react-notifications';
 
 const ProductDetails = ({loggedInUser}) => {
   
@@ -21,11 +22,20 @@ const ProductDetails = ({loggedInUser}) => {
     // eslint-disable-next-line
     },[]);
 
+
     const getProductData = async () => {
         try{
         await axios.get(`http://localhost:5000/api/product/`+productId)
         .then(res=>{
             setProduct(res.data)
+            axios.get("http://localhost:5000/api/productphotos/"+res.data.ProductId)
+            .then(resu=>{
+              setProductPhotos(resu.data)
+            })
+            axios.get("http://localhost:5000/api/user/"+res.data.DonatorId)
+            .then(don=>{
+              setDonator(don.data)
+            })
         })
         }
         catch(e){
@@ -38,59 +48,37 @@ const ProductDetails = ({loggedInUser}) => {
         (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
       }
       
-      if(product.DonatorId!==undefined && donator.length===0){
-        axios.get("http://localhost:5000/api/user/"+product.DonatorId)
-        .then(res=>{
-          setDonator(res.data)
-        })
-      }
-      if(product.ProductId!==undefined && productPhotos.length===0){
-        axios.get("http://localhost:5000/api/productphotos/"+product.ProductId)
-        .then(res=>{
-          setProductPhotos(res.data)
-        })
-      }
-
 
       const displaySelectedImage = (e) => {
         var imgSrc = `http://localhost:5000/photos/${e}`
         setBigImg(imgSrc);
       }
 
-      // const insertRequest = (event) => {
-      //   event.proeventDefault();
-      //    axios.post(`http://localhost:5000/api/product_request`, {
-      //     UserId:"17",
-      //     ProductId:"1",
-      //     Message: "fdssf",
-      //     Request_Date: "2000-11-11T00:00:00"
-      //   })
-      //   .then((res)=>{
-      //     //<Redirect to={`prodDetails/${productId}`}/>
-      //   })
-      //   ,(error=>{
-      //     console.log(error);
-      //   })
-      //   }
-        const insertRequest = (event) => {
-          event.preventDefault();
+      
+
+      const insertRequest = (event) => {
+          var today = new Date()
+          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'T'+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+          console.log(date)
           axios.post('http://localhost:5000/api/product_request', {
-            UserId:"17",
-            ProductId:"1",
-            Request_Date: "2000-11-11T00:00:00"
+            UserId: loggedInUser.UserId,
+            ProductId: product.ProductId,
+            Message: event.target.Message.value,
+            Request_Date: date
           })
           .then(
             (res) =>{
               console.log(res.data); 
-              <Redirect to="/home"/>
+              NotificationManager.success('Your request has been sent!','',3000);
+              event.target.Message.value=null
             },
             (error) =>{
               console.log(error)
+              NotificationManager.error('Problems while requesting the product!','',3000);
             },
           )
         }
       
-
 
   return (
    
@@ -188,7 +176,7 @@ const ProductDetails = ({loggedInUser}) => {
                   </tbody>
                 </table>
               </div>
-              <form className="d-flex justify-content-start align-items-start">
+              <Form onSubmit={(event) => insertRequest(event)}  className="d-flex justify-content-start align-items-start">
                 <textarea
                 name = "Message"
                 placeholder="I need this product because..."
@@ -197,10 +185,10 @@ const ProductDetails = ({loggedInUser}) => {
                 >
 
                 </textarea>
-              <button type="submit" onClick={() => insertRequest()} className="btn btn-primary btn-md mr-1 mb-2">
+              <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
                 Request{' '}
               </button>
-              </form>
+              </Form>
             </div>
           </div>
         </div>

@@ -2,7 +2,6 @@ import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
-import AdminTable from './AdminTable'
 
 const EditAdmin = ({show, onHide, admin,onUpdate}) => {
 

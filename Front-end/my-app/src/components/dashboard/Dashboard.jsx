@@ -7,6 +7,7 @@ import CategTable from './dash-category/CategTable';
 import StateTable from './dash-state/StateTable';
 import StreetTable from'./dash-street/StreetTable';
 import AdminTable from'./dash-admin/AdminTable';
+import RequestTable from'./dash-requestt/RequestTable';
 import Footer from '../footer/Footer';
 
 
@@ -19,6 +20,7 @@ const Dashboard = () => {
     const [stateTable,setStateTable] = useState(false);
     const [streetTable,setStreetTable] = useState(false);
     const [adminTable, setAdminTable] = useState(false);
+    const [requestTable, setRequestTable] = useState(false);
 
     
 
@@ -38,6 +40,7 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(false);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${userTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -54,6 +57,7 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(false);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${prodTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -70,6 +74,7 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(false);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 
                 className={`dash-btn ${categTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
@@ -87,6 +92,7 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(false);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${cityTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -103,6 +109,7 @@ const Dashboard = () => {
                     setStateTable(true);
                     setStreetTable(false);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${stateTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -119,6 +126,7 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(true);
                     setAdminTable(false);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${streetTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -135,10 +143,29 @@ const Dashboard = () => {
                     setStateTable(false);
                     setStreetTable(false);
                     setAdminTable(true);
+                    setRequestTable(false);
                 }}
                 className={`dash-btn ${adminTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                 Admin Table
+                </button>
+            </li>
+
+            <li>
+                <button
+                onClick={()=>{
+                    setUserTable(false);
+                    setProdTable(false);
+                    setCategTable(false);
+                    setCityTable(false);
+                    setStateTable(false);
+                    setStreetTable(false);
+                    setAdminTable(false);
+                    setRequestTable(true);
+                }}
+                className={`dash-btn ${requestTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+                Request Table
                 </button>
             </li>
         </ul>
@@ -150,6 +177,7 @@ const Dashboard = () => {
             {stateTable ? <StateTable/>: null }
             {streetTable ? <StreetTable/>: null }
             {adminTable ? <AdminTable/>: null }
+            {requestTable ? <RequestTable/>: null }
         </div>
         </div>
         <Footer/>

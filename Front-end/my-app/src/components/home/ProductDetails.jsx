@@ -51,12 +51,12 @@ const ProductDetails = ({loggedInUser}) => {
         })
       }
 
-<<<<<<< HEAD
+
       const displaySelectedImage = (e) => {
         var imgSrc = `http://localhost:5000/photos/${e}`
         setBigImg(imgSrc);
       }
-=======
+
       // const insertRequest = (event) => {
       //   event.proeventDefault();
       //    axios.post(`http://localhost:5000/api/product_request`, {
@@ -90,7 +90,7 @@ const ProductDetails = ({loggedInUser}) => {
           )
         }
       
->>>>>>> 5bcd368033c7813e2b9ed545f1989e5645cbb138
+
 
   return (
    

@@ -12,8 +12,8 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-import Chat from './components/chat/Chat'
-import Request from './components/request/request'
+import Chat from './components/chat/chat'
+
 
 
 function App() {
@@ -49,9 +49,6 @@ function App() {
         </Route>
         <Route path="/chat" exact>
           <Chat />
-        </Route>
-        <Route path="/request" exact>
-          <Request />
         </Route>
         <Route path="/dashboard" exact>
           <Dashboard loggedInUser={loggedInUser} />

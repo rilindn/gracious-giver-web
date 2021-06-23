@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table} from 'react-bootstrap';
 import EditRequestt from './EditRequestt'
+import DeleteRequestt from './DeleteRequestt'
 import { Search } from '../DataTable/Search';
 
 
 const RequesttTable = () => {
     const [editRequesttModal,setEditRequesttModal] = useState(false);
-   
+    const [deleteRequesttModal,setDeleteRequesttModal] = useState(false);
 
    
 
@@ -78,7 +79,10 @@ const RequesttTable = () => {
                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                                     </Button>
                                     <Button 
-                                   
+                                onClick={() => 
+                                    {setDeleteRequesttModal(true);
+                                        
+                                    }} 
                                      className="delete" 
                                      variant ="danger"
                                      data-toggle="modal"
@@ -100,6 +104,11 @@ const RequesttTable = () => {
          onHide={() => setEditRequesttModal(false)}
        
          />
+         <DeleteRequestt
+        show={deleteRequesttModal}
+        onHide={() => setDeleteRequesttModal(false)} 
+
+        />
 
     </div>
     )

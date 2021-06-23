@@ -57,8 +57,9 @@ const ProductDetails = ({loggedInUser}) => {
       
 
       const insertRequest = (event) => {
-        var date = new Date().toLocaleString()
-          axios.post('http://localhost:5000/api/product_request', {
+          var date = new Date().toLocaleString()
+          console.log(date)
+          axios.post('http://localhost:5000/api/Product_Request', {
             UserId: loggedInUser.UserId,
             ProductId: product.ProductId,
             Message: event.target.Message.value,
@@ -82,7 +83,7 @@ const ProductDetails = ({loggedInUser}) => {
    
     
     <div className="">
-      <Header loggedInUser={loggedInUser}></Header>
+        <Header search={false}/>
         {/* <div className="container p-4 my-4 border">
           <div className="row">
            <div className="col-sm-6 ">

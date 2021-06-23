@@ -10,10 +10,13 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { List } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 
-const Header = () => {
+const Header = ({search}) => {
   
   const [loggedInUser, setLoggedInUser] = useState([])
+  let history = useHistory();
 
   const handleLogout = async (event) => {
     const posReq = axios.create({
@@ -22,10 +25,12 @@ const Header = () => {
     await posReq.post('http://localhost:5000/api/logout')
     .then(
       (res) =>{
-        alert("Succesfully logged out!")
+        history.push('/');
+        NotificationManager.success('You have been logged out!','',2000);
       },
       (error) =>{
-        alert(error)
+        NotificationManager.error('Problems while logging out!','',500);
+        console.log(error)
       },
     )
   }
@@ -54,11 +59,12 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Collapse id="">
           <Nav className="">
-            <Form inline className="searchpost">
-              <Nav.Link id="post" href="/postProd">
+          <Form inline className="searchpost" style={{width:"300px"}}>
+          <Nav.Link id="post" href="/postProd">
                 <span className="mt-2" style={{fontSize:"19px",marginTop:"10px"}}>
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
+            {search?
               <div className="mr-sm-2 header-search">
               <FormControl
                 type="text"
@@ -68,8 +74,10 @@ const Header = () => {
                 style={{width:"240px"}}
               />
               <BsSearch className="header-search-icon"/>
-              </div>
+              </div>:null}
+              
             </Form>
+            
             
             <Nav className="dropdownmenu">
               
@@ -96,6 +104,7 @@ const Header = () => {
                 title={<FaUser id="user" color="white" size="25px"  />}
                 id="dropdown-menu-align-right hell2"
                 variant="transparent"
+                style={{marginLeft:"50px"}}
               >
                 
               <List.Item style={{ marginTop:"10px",marginLeft:"23px",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import HeaderLoginRegister from '../Header/HeaderLoginRegister'
 import UserTable from './dash-user/UserTable';
 import ProductTable from './dash-prod/ProductTable';
 import CityTable from './dash-city/CityTable';
@@ -11,6 +10,7 @@ import RequesttTable from'./dash-requestt/RequesttTable';
 import Footer from '../footer/Footer';
 import ProductRequestTable from './product-request-dash/ProductRequestTable';
 import axios from 'axios';
+import Header from './../Header/Header';
 
 
 const Dashboard = () => {
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
     return (
     <div>
-        <HeaderLoginRegister/>
+        <Header search={false}/>
         <div className="dash-content">
         <ul className="d-flex dash-selector">
         <li>
@@ -149,6 +149,7 @@ const Dashboard = () => {
                 Street Table
                 </button>
             </li>
+            {loggedInUser.UserRole==='SuperAdmin'?
             <li>
                 <button
                 onClick={()=>{
@@ -167,6 +168,7 @@ const Dashboard = () => {
                 Admin Table
                 </button>
             </li>
+            :null}
             <li>
                 <button
                 onClick={()=>{
@@ -213,6 +215,8 @@ const Dashboard = () => {
             {streetTable ? <StreetTable/>: null }
             {adminTable ? <AdminTable/>: null }
             {requesttTable ? <RequesttTable/>: null }
+            {loggedInUser.UserRole==='SuperAdmin'?
+            (adminTable ? <AdminTable/>: null) :null}
             {requestTable ? <ProductRequestTable loggedInUser={loggedInUser}/>: null }
         </div>
         </div>

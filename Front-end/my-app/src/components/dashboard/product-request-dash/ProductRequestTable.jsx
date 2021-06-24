@@ -17,6 +17,7 @@ const ProductRequestTable = ({loggedInUser}) => {
     const [requestD, setRequestD] = useState();
     const [search,setSearch] = useState("");
     const [maxRequestShow, setMaxRequestShow] = useState(10);
+    const [requester,setRequester] = useState();
 
 
         useEffect(()=>{
@@ -60,6 +61,20 @@ const ProductRequestTable = ({loggedInUser}) => {
                Response: "Accepted",
                Response_Date: date
               }) 
+              .then(()=>{
+                axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
+                    RequestId: RId.RequestId,
+                    UserId: RId.UserId,
+                    ProductId: RId.ProductId,
+                    Message: RId.Message,
+                    Request_Date: RId.Request_Date,
+                    checkedR : true
+                  })
+              })
+              .then(()=>{
+                getAmOfRequests(maxRequestShow);
+                getAllRequests();
+              })
               .then((res) => {
                 NotificationManager.success(
                 'Request has been accepted!',
@@ -76,18 +91,26 @@ const ProductRequestTable = ({loggedInUser}) => {
             const handleDeclineRequest  = async (RId) => {
                 var date = new Date().toLocaleString()
                 try{
-                  await axios.post(`http://localhost:5000/api/ProductRequestResponse/`,{
-                   RequestId: RId.RequestId,
-                   Message: RId.Message,
-                   Response: "Declined",
-                   Response_Date: date
-                  }) 
+                  console.log("prod res")
+                  await axios.post(`http://localhost:5000/api/ProductRequestResponse`,{
+                    RequestId: RId.RequestId,
+                    Message: RId.Message,
+                    Response: "Declined",
+                    Response_Date: date
+                    }) 
+                    .then(()=>{
+                      axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
+                          RequestId: RId.RequestId,
+                          UserId: RId.UserId,
+                          ProductId: RId.ProductId,
+                          Message: RId.Message,
+                          Request_Date: RId.Request_Date,
+                          checkedR : true
+                        })
+                    })
                   .then(()=>{
                     getAmOfRequests(maxRequestShow);
                     getAllRequests();
-                  })
-                  .then(()=>{
-                    axios.delete("http://localhost:5000/api/product_request/"+ RId.RequestId)
                   })
                   .then((res) => {
                     NotificationManager.success(
@@ -160,7 +183,7 @@ const ProductRequestTable = ({loggedInUser}) => {
                         <thead>
                             <tr>
                                 <th>Request Id</th>
-                                <th>User Id</th>
+                                <th>Requester</th>
                                 <th>Product Id</th>
                                 <th>Request</th>
                                 <th>Date</th>

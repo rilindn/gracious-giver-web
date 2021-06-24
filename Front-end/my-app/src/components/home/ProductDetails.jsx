@@ -63,7 +63,8 @@ const ProductDetails = ({loggedInUser}) => {
             UserId: loggedInUser.UserId,
             ProductId: product.ProductId,
             Message: event.target.Message.value,
-            Request_Date: date
+            Request_Date: date,
+            checkedR : false
           })
           .then(
             (res) =>{

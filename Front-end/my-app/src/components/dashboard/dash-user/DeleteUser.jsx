@@ -19,9 +19,10 @@ const DeleteUser = ({show,onHide,userId,onUpdate}) => {
                 )
             },
             (error) => {
+                console.log(error)
                 NotificationManager.error(
                 'Error while deleting the user!',
-                {error},
+                '',
                 1000,
                 )
             },

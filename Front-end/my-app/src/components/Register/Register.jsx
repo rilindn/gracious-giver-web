@@ -6,12 +6,15 @@ import { Form, FormControl, FormLabel } from "react-bootstrap";
 import { FaUser, FaLock, FaMapMarked, FaEnvelope} from 'react-icons/fa'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 
 const FormPage = () => {
 
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const [redirect, setRedirect] = useState(false);
+    let history = useHistory();
     
     useEffect(() =>{
       getStates();
@@ -61,11 +64,13 @@ const FormPage = () => {
       })
       .then(
         (res) =>{
-          alert("Succesfully registered")
+          history.push('/login');
+          NotificationManager.success('You have been successfully registered as '+event.target.role.value+'!','',3000);
           console.log(res.data); 
         },
-        (error) =>{
-          alert(error)
+        (error) =>{ 
+          NotificationManager.error('Problems while trying to register, try again later!','',500);
+          console.log(error);
         },
       )
       setRedirect(true);

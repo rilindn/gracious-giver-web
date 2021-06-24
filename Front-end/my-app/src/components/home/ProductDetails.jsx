@@ -3,6 +3,8 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { Form } from 'semantic-ui-react'
+import { NotificationManager } from 'react-notifications';
 
 const ProductDetails = ({loggedInUser}) => {
   
@@ -10,19 +12,30 @@ const ProductDetails = ({loggedInUser}) => {
   const [product, setProduct] = useState([]);
   const [donator,setDonator] = useState([]);
   const [productPhotos,setProductPhotos] = useState([])
+  const [bigImg,setBigImg] = useState()
   
  
+
 
     useEffect(()=>{
       getProductData();
     // eslint-disable-next-line
     },[]);
 
+
     const getProductData = async () => {
         try{
         await axios.get(`http://localhost:5000/api/product/`+productId)
         .then(res=>{
             setProduct(res.data)
+            axios.get("http://localhost:5000/api/productphotos/"+res.data.ProductId)
+            .then(resu=>{
+              setProductPhotos(resu.data)
+            })
+            axios.get("http://localhost:5000/api/user/"+res.data.DonatorId)
+            .then(don=>{
+              setDonator(don.data)
+            })
         })
         }
         catch(e){
@@ -33,26 +46,45 @@ const ProductDetails = ({loggedInUser}) => {
         const defaultImg = "prodImg.jpg"
         var imgSrc = "http://localhost:5000/photos/"+
         (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
-        
       }
-      if(product.DonatorId!==undefined && donator.length===0){
-        axios.get("http://localhost:5000/api/user/"+product.DonatorId)
-        .then(res=>{
-          setDonator(res.data)
-        })
+      
+
+      const displaySelectedImage = (e) => {
+        var imgSrc = `http://localhost:5000/photos/${e}`
+        setBigImg(imgSrc);
       }
-      if(product.ProductId!==undefined && productPhotos.length===0){
-        axios.get("http://localhost:5000/api/productphotos/"+product.ProductId)
-        .then(res=>{
-          setProductPhotos(res.data)
-        })
-      }
+
+      
+
+      const insertRequest = (event) => {
+          var date = new Date().toLocaleString()
+          console.log(date)
+          axios.post('http://localhost:5000/api/Product_Request', {
+            UserId: loggedInUser.UserId,
+            ProductId: product.ProductId,
+            Message: event.target.Message.value,
+            Request_Date: date,
+            checkedR : false
+          })
+          .then(
+            (res) =>{
+              console.log(res.data); 
+              NotificationManager.success('Your request has been sent!','',3000);
+              event.target.Message.value=null
+            },
+            (error) =>{
+              console.log(error)
+              NotificationManager.error('Problems while requesting the product!','',3000);
+            },
+          )
+        }
+      
 
   return (
    
     
     <div className="">
-      <Header loggedInUser={loggedInUser}></Header>
+        <Header search={false}/>
         {/* <div className="container p-4 my-4 border">
           <div className="row">
            <div className="col-sm-6 ">
@@ -77,33 +109,21 @@ const ProductDetails = ({loggedInUser}) => {
                       id="figure01"
                       className="view overlay rounded z-depth-1 main-img"
                     >
-                      <img src={imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
+                      <img src={bigImg?bigImg:imgSrc} className="img-fluid z-depth-1 prodDetails-img" alt=""></img>
                     </figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
-                    <figure
-                      id="figure01"
-                      className="view overlay rounded z-depth-1"
-                    ></figure>
                   </div>
                   <div className="col-12">
-                    <div className="row ">
+                    <div className="row">
                       {
                         productPhotos.map((productPhoto,i) => (
-                          <div key={productPhoto.PhotoId} className="col-3">
+                          <div key={productPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
                               src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                            >
-                            </img>
+                              onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}
+                            />
                           </div>
                         </div>
                         ))
@@ -133,7 +153,7 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{product.ProductCategory}</td>
+                      <td>{product.ProductCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -156,18 +176,19 @@ const ProductDetails = ({loggedInUser}) => {
                   </tbody>
                 </table>
               </div>
-              <form className="d-flex justify-content-start align-items-start">
+              <Form onSubmit={(event) => insertRequest(event)}  className="d-flex justify-content-start align-items-start">
                 <textarea
+                name = "Message"
                 placeholder="I need this product because..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
 
                 </textarea>
-              <button type="button" className="btn btn-primary btn-md mr-1 mb-2">
+              <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
                 Request{' '}
               </button>
-              </form>
+              </Form>
             </div>
           </div>
         </div>

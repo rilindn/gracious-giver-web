@@ -2,7 +2,6 @@ import axios from 'axios'
 import React from 'react'
 import { Button, Form, FormGroup, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
-import UserTable from './UserTable'
 
 const EditUser = ({show, onHide, user,onUpdate}) => {
 

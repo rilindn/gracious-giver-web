@@ -1,25 +1,21 @@
 import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 
 
 const AddCateg = ({ show, onHide,onUpdate }) => {
 
-  let history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    axios
-      .post('http://localhost:5000/api/productcategory', {
+    axios.post('http://localhost:5000/api/productcategory', {
         ProductCategoryName: event.target.ProductCategoryName.value,
       })
       .then(()=>{
         onUpdate();
       })
       .then((res) => {
-        history.push("/dashboard")
         NotificationManager.success(
         'Category added succesfully!',
         '',

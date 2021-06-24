@@ -14,12 +14,11 @@ const UserTable = () => {
   const [userD, setUserD] = useState()
   const [search, setSearch] = useState('')
   const [maxUserShow, setMaxUserShow] = useState(10)
-  const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
     getAmofUsers(maxUserShow)
     getAllUsers()
-  }, [maxUserShow,editUserModal,deleteUserModal, updated])
+  }, [maxUserShow,editUserModal,deleteUserModal])
 
 
   const getAmofUsers = async (maxUserShow) => {

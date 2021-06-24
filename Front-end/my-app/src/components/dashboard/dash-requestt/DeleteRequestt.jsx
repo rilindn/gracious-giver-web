@@ -1,33 +1,11 @@
 import axios from 'axios'
 import React from 'react'
-import { Form, Modal} from 'react-bootstrap'
+import { Form, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteUser = ({show,onHide,userId,onUpdate}) => {
+const DeleteRequestt = ({show,onHide}) => {
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.delete("http://localhost:5000/api/user/"+userId)
-            .then(()=>{
-                onUpdate();
-            })
-          .then((res) => {
-                NotificationManager.success(
-                'User deleted succesfully!',
-                '',
-                1000,
-                )
-            },
-            (error) => {
-                console.log(error)
-                NotificationManager.error(
-                'Error while deleting the user!',
-                '',
-                1000,
-                )
-            },
-          )
-    }
+   
     
     return (
         <div>   
@@ -38,12 +16,16 @@ const DeleteUser = ({show,onHide,userId,onUpdate}) => {
             <div className ="modal-dialog">
              <div 
              className="modal-content"
-             > <Form  className="p-3" onSubmit={handleSubmit}>
+             >
+                    <Form 
+                   
+                    className="p-3"
+                    >
                         <div>					
-                            <h4 className="modal-title">Delete User</h4>
+                            <h4 className="modal-title">Delete Request</h4>
                         </div>
                         <div>				
-                            <p>Are you sure you want to delete this User?</p>
+                            <p>Are you sure you want to delete this request?</p>
                             <p className="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
@@ -56,9 +38,9 @@ const DeleteUser = ({show,onHide,userId,onUpdate}) => {
                             />
                             <input 
                             type="submit" 
-                            onClick={onHide}
                             className="btn btn-danger" 
                             value="Delete"
+                            onClick={onHide}
                             />
                         </Modal.Footer>
                     </Form>
@@ -69,4 +51,4 @@ const DeleteUser = ({show,onHide,userId,onUpdate}) => {
     )
 }
 
-export default DeleteUser
+export default DeleteRequestt

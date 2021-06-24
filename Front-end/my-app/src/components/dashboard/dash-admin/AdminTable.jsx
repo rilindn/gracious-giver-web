@@ -16,12 +16,11 @@ const AdminTable = () => {
   const [adminD, setAdminD] = useState()
   const [search, setSearch] = useState('')
   const [maxAdminShow, setMaxAdminShow] = useState(10)
-  const [updated, setUpdated] = useState(false)
 
   useEffect(() => {
     getAmOfAdmins(maxAdminShow)
     getAllAdmins()
-  }, [maxAdminShow,addAdminModal,editAdminModal,deleteAdminModal, updated])
+  }, [maxAdminShow,addAdminModal,editAdminModal,deleteAdminModal])
 
 
   const getAmOfAdmins = async (maxAdminShow) => {
@@ -61,17 +60,17 @@ const AdminTable = () => {
 
   return (
     <div>
-      <Container className="container-x1">
+      <Container className="container-xl">
         <Table className="table-responsive">
           <div className="table-wrapper">
             <div className="table-title">
               <Row className="row">
-                <Col className="col-sm-4">
+                <Col className="col-sm-3">
                   <h2>
                     <b>Admins</b>
                   </h2>
                 </Col>
-                <Col className="col-sm-7 d-flex justify-content-end">
+                <Col className="col-sm-6 d-flex justify-content-end">
                   <span className="showing-res-txt">
                     Showing {adminData.length} out of {allAdmins.length} entries
                   </span>
@@ -100,6 +99,7 @@ const AdminTable = () => {
                     <option value="All">All</option>
                   </Form.Control>
 
+                  </Col>
                   <Col className="col-sm-3">
                           
                           <Button 
@@ -108,8 +108,8 @@ const AdminTable = () => {
                           variant ="success"
                           data-toggle="modal"><i className="material-icons">&#xE147;</i> <span>Add New Admin</span>
                           </Button>					
-                      </Col>
-                </Col>
+                      
+                    </Col>
               </Row>
             </div>
             <Table striped bordered hover>

@@ -10,10 +10,13 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { List } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 
-const Header = ({}) => {
+const Header = ({search}) => {
   
   const [loggedInUser, setLoggedInUser] = useState([])
+  let history = useHistory();
 
   const handleLogout = async (event) => {
     const posReq = axios.create({
@@ -22,10 +25,12 @@ const Header = ({}) => {
     await posReq.post('http://localhost:5000/api/logout')
     .then(
       (res) =>{
-        alert("Succesfully logged out!")
+        history.push('/');
+        NotificationManager.success('You have been logged out!','',2000);
       },
       (error) =>{
-        alert(error)
+        NotificationManager.error('Problems while logging out!','',500);
+        console.log(error)
       },
     )
   }
@@ -54,11 +59,12 @@ const Header = ({}) => {
         </Navbar.Brand>
         <Navbar.Collapse id="">
           <Nav className="">
-            <Form inline className="searchpost">
-              <Nav.Link id="post" href="/postProd">
+          <Form inline className="searchpost" style={{width:"300px"}}>
+          <Nav.Link id="post" href="/postProd">
                 <span className="mt-2" style={{fontSize:"19px",marginTop:"10px"}}>
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
+            {search?
               <div className="mr-sm-2 header-search">
               <FormControl
                 type="text"
@@ -68,8 +74,10 @@ const Header = ({}) => {
                 style={{width:"240px"}}
               />
               <BsSearch className="header-search-icon"/>
-              </div>
+              </div>:null}
+              
             </Form>
+            
             
             <Nav className="dropdownmenu">
               
@@ -94,18 +102,21 @@ const Header = ({}) => {
             <DropdownButton
                 menuAlign={{ lg: 'right' }}
                 title={<FaUser id="user" color="white" size="25px"  />}
-                id="dropdown-menu-align-right"
-                id="hell2"
+                id="dropdown-menu-align-right hell2"
                 variant="transparent"
+                style={{marginLeft:"50px"}}
               >
                 
-              <List.Item style={{ marginTop:"10px",marginLeft:"23px",color:"#3c6e71",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
+              <List.Item style={{ marginTop:"10px",marginLeft:"23px",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
+<<<<<<< HEAD
                 <Dropdown.Item  href="/settings"eventKey="3">Settings</Dropdown.Item>
+=======
+                <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
+>>>>>>> c05a9149005ffddafaad842691cd935042491754
                 <Dropdown.Divider />
-                {console.log(loggedInUser)}
                 {loggedInUser===null? null:
                 <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>
                 }

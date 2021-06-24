@@ -109,7 +109,7 @@ const Header = ({search}) => {
                 
               <List.Item style={{ marginTop:"10px",marginLeft:"23px",fontSize:"16px",textDecoration:"underline", color:"#ed1858",height:"30px"}}>Your Account</List.Item> 
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
-                <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
+                <Dropdown.Item href ="/bookmark "eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
                 <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />

@@ -13,6 +13,7 @@ import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/Chat'
+import BookmarkPage from './components/Bookmark/BookmarkPage'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -53,6 +54,9 @@ function App() {
         </Route>
         <Route path="/prodDetails/:productId" exact>
           <ProductDetails loggedInUser={loggedInUser} />
+        </Route>
+        <Route path="/bookmark" exact>
+          <BookmarkPage  />
         </Route>
         <NotificationContainer />
       </Router>

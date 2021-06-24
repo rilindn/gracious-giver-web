@@ -105,33 +105,6 @@ const FormPage = () => {
 
                 or Sign in with:
               </p>
-              {/* <div className="row my-3 d-flex justify-content-center">
-                <MDBBtn
-                  type="button"
-                  color="white"
-                  rounded
-                  className="mr-md-3 z-depth-1a"
-                >
-                  <MDBIcon fab icon="facebook-f" className="black-text text-center" />
-                </MDBBtn>
-                <MDBBtn
-                  type="button"
-                  color="black"
-                  rounded
-                  // className="mr-md-3 z-depth-1a"
-                >
-                  <MDBIcon fab icon="twitter" className="black-text" />
-                </MDBBtn>
-                <MDBBtn
-                  type="button"
-                  color="black"
-                  rounded
-                  className="z-depth-1a"
-                >
-                  <MDBIcon fab icon="google-plus-g" className="black-text" />
-                </MDBBtn>
-              </div> */}
-
         <ul className="d-flex  list-unstyled list-inline social justify-content-center list">
 						<li className="list-inline-item"><a href="https://facebook.com"><SocialIcon url="https://facebook.com"/></a></li>
 						<li className="list-inline-item"><a href="https://mail.google.com/"><SocialIcon url="https://mail.google.com/" /></a></li>

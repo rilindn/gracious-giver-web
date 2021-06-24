@@ -103,7 +103,7 @@ const Header = ({}) => {
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Settings</Dropdown.Item>
+                <Dropdown.Item  href="/settings"eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 {console.log(loggedInUser)}
                 {loggedInUser===null? null:

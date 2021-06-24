@@ -1327,3 +1327,39 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   height: 130vh;
   margin-top: 40px;
 }
+
+/*request*/
+
+.request {
+  margin: 70px 35px;
+  width: 300px;
+  height: 270px;
+}
+.reques{
+  width: 300px;
+  height: 270px;
+  position: absolute;
+
+}
+.requestFree {
+  text-align: left;
+  padding: 10px 5px;
+  background: #3c6e71;
+  color: #fff;
+  font-size: 8pt;
+  border-radius: 3px;
+  margin-right: 5px;
+  display: inline-block;
+  line-height: 0;
+}
+
+
+.home-prodd {
+  position: relative;
+  width: 300px;
+  height: 270px;
+   border-radius: 10px;
+   border: 1px solid rgb(201, 201, 201);
+   
+  background-color: white;
+}

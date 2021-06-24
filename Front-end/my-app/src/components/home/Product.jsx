@@ -24,7 +24,30 @@ const Product = ({product}) => {
                     </div>
                   </a>
             </div>
-        </div>
+
+            <div className="request">
+            <a href="" >
+              <div className="home-prodd">
+                
+              <div className="reques">
+                  <h1 style={{fontSize:"20px",marginTop:"100px",color:"black"}}>request .....</h1>
+                  </div>
+                    <div className="itemText">
+                
+                      <h5 className="prodTitle" style={{color:"black"}}>
+                       <span className="requestFree">NEEDED
+                         </span> 
+                              Needed something .....
+                          </h5>
+                          <p className="prodLocation"
+                          style={{color:"black"}}>Location</p> 
+                       </div>
+                    </div>
+                  </a>
+            </div>
+
+          </div>
+        
     )
 }
 

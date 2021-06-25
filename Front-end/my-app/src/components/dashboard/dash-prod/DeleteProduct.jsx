@@ -23,7 +23,7 @@ const DeleteProduct = ({show,onHide,productId,onUpdate}) => {
             (error) => {
                 NotificationManager.error(
                 'Error while deleting the product!',
-                {error},
+                "",
                 1000,
                 )
             },

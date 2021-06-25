@@ -15,6 +15,7 @@ function Sidebar() {
         <li><Link to="">Home</Link></li>
         <li><Link to="">Services</Link></li>
         <li><Link to="">Contact</Link></li>
+        <li><Link to="/organization">Register Organization</Link></li>
       </ul>
     </nav>
   );

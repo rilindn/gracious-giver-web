@@ -22,7 +22,7 @@ const DeleteCity = ({show,onHide,cityId,onUpdate}) => {
             (error) => {
                 NotificationManager.error(
                 'Error while deleting the city!',
-                {error},
+                "",
                 1000,
                 )
             },

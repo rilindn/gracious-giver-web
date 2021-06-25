@@ -241,6 +241,10 @@ section .section-title {
   margin-right: 530px;
 }
 
+.new-post-t1 {
+  margin-left: 10px;
+}
+
 .new-post-p {
   margin-right: 450px;
   padding-top: 25px;
@@ -250,6 +254,17 @@ section .section-title {
 .new-post-j {
   margin-right: 70px;
   color: white;
+}
+
+.new-post-j1 {
+  color: white;
+  margin-top: 25px; 
+  background-color: #3c6e71;
+  height: 30px;
+  border-radius: 10px;
+  width: 660px;
+  margin-left: 70px;
+  padding: 5px;
 }
 .form-components-width .form-group-el label {
   font-weight: 500;

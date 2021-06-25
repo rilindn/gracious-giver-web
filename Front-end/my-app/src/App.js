@@ -15,7 +15,10 @@ import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
-import EditMyUserData from './components/UserSettings/EditMyUserData'
+import EditMyUserData from './components/UserSettings/editUser'
+import Organization from './components/Organization/Organization'
+
+
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -65,6 +68,12 @@ function App() {
         </Route>
         <Route path="/bookmark" exact>
           <BookmarkPage />
+        </Route>
+        <Route path="/settings" exact>
+          <EditMyUserData/>
+        </Route>
+        <Route path="/organization" exact>
+          <Organization/>
         </Route>
         <NotificationContainer />
       </Router>

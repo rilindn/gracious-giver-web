@@ -1435,3 +1435,19 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
   background-color: white;
 }
+
+/*request*/
+.new-post-t1 {
+  margin-left: 10px;
+}
+
+.new-post-j1 {
+  color: white;
+  margin-top: 25px; 
+  background-color: #3c6e71;
+  height: 30px;
+  border-radius: 10px;
+  width: 660px;
+  margin-left: 70px;
+  padding: 5px;
+}

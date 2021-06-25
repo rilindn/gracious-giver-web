@@ -8,7 +8,7 @@ import { NotificationManager } from 'react-notifications'
 
 
 
-const RequesttTable = ({loggedInUser})=> {
+const RequesttTable = ()=> {
     
     const [requestts, setRequestts] = useState([]);
     const [allRequestts, setAllRequestts] = useState([]);

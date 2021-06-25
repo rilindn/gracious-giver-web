@@ -2,6 +2,7 @@ import './App.css'
 import WelcomePage from './components/reviews/Welcome'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import PostProduct from './components/postProduct/PostProduct'
+import RequestForm from './components/Request-form/RequestForm'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import Home from './components/home/Home'
@@ -12,11 +13,7 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-<<<<<<< HEAD
 import Chat from './components/chat/chat'
-=======
-import Chat from './components/chat/Chat'
->>>>>>> 9483422a88dc41409dbc4d853900b9af295aed0c
 import BookmarkPage from './components/Bookmark/BookmarkPage'
 import EditMyUserData from './components/UserSettings/EditMyUserData'
 
@@ -47,6 +44,9 @@ function App() {
         </Route>
         <Route path="/login" exact>
           <Login />
+        </Route>
+        <Route path="/RequestForm">
+          <RequestForm/>
         </Route>
         <Route path="/register" exact>
           <Register />

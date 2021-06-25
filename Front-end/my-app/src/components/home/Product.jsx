@@ -1,14 +1,40 @@
+import axios from "axios";
 import React from "react"
-const Product = ({product}) => {
+import { NotificationManager } from 'react-notifications'
+
+const Product = ({product, loggedInUser}) => {
 
     const defaultImg = "prodImg.jpg"
     const imgSrc = "http://localhost:5000/photos/"+
     (product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
 
+
+    const handleBookmark = async () =>{
+          await axios.post(`http://localhost:5000/api/Bookmark/`,{
+              ProductId:product.ProductId,
+              UserId:loggedInUser.UserId,
+          })
+          .then (()=>{
+            NotificationManager.success(
+              'Product has been bookmarked succefsully!',
+              "",
+              2000
+            )
+          },
+          (error) => {
+            NotificationManager.error(
+            'Error while bookmarking the product!',
+            '',
+            1000,
+            )
+        },
+      )
+    }
     
     return (
         <div>
             <div className="prodCol">
+            <i class="fas fa-bookmark bo-prod" onClick={handleBookmark} ></i>
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={imgSrc} 

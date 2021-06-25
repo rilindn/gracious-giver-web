@@ -3,6 +3,7 @@ import CityTable from '../dash-city/CityTable';
 import CategTable from '../dash-category/CategTable';
 import StateTable from '../dash-state/StateTable';
 import StreetTable from'../dash-street/StreetTable';
+import OrganizationCategoryTable from '../dash-organization/OrganizationCategoryTable'
 import axios from 'axios';
 
 
@@ -12,6 +13,8 @@ const OtherTables = () => {
     const [cityTable,setCityTable] = useState(false);
     const [stateTable,setStateTable] = useState(false);
     const [streetTable,setStreetTable] = useState(false);
+    const [organizationCategoryTable,setOrganizationCategoryTable] = useState(false);
+
     const [loggedInUser, setLoggedInUser] = useState([])
     
     useEffect(() => {(async () => {
@@ -36,11 +39,12 @@ const OtherTables = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(false);
+                    setOrganizationCategoryTable(false);
                 }}
                 
                 className={`dash-btn ${categTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                Category Table
+                Product Category
                 </button>
             </li>
             <li>
@@ -50,6 +54,7 @@ const OtherTables = () => {
                     setCityTable(true);
                     setStateTable(false);
                     setStreetTable(false);
+                    setOrganizationCategoryTable(false);
                 }}
                 className={`dash-btn ${cityTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -63,6 +68,7 @@ const OtherTables = () => {
                     setCityTable(false);
                     setStateTable(true);
                     setStreetTable(false);
+                    setOrganizationCategoryTable(false);
                 }}
                 className={`dash-btn ${stateTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -76,10 +82,25 @@ const OtherTables = () => {
                     setCityTable(false);
                     setStateTable(false);
                     setStreetTable(true);
+                    setOrganizationCategoryTable(false);
                 }}
                 className={`dash-btn ${streetTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                 Street Table
+                </button>
+            </li>
+            <li>
+                <button
+                onClick={()=>{
+                    setCategTable(false);
+                    setCityTable(false);
+                    setStateTable(false);
+                    setStreetTable(false);
+                    setOrganizationCategoryTable(true);
+                }}
+                className={`dash-btn ${organizationCategoryTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+                Organization Category
                 </button>
             </li>
             
@@ -89,6 +110,7 @@ const OtherTables = () => {
             {cityTable ? <CityTable/>: null }
             {stateTable ? <StateTable/>: null }
             {streetTable ? <StreetTable/>: null }
+            {organizationCategoryTable ? <OrganizationCategoryTable/>: null }
         </div>
         </div>
         </div>

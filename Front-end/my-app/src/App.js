@@ -12,22 +12,12 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-import Chat from './components/chat/chat'
-=======
->>>>>>> d7f545d5345be4a35ede00ccfe509c2c4f522321
 import Chat from './components/chat/Chat'
->>>>>>> 9483422a88dc41409dbc4d853900b9af295aed0c
 import BookmarkPage from './components/Bookmark/BookmarkPage'
-<<<<<<< HEAD
 import EditMyUserData from './components/UserSettings/editUser'
 import Organization from './components/Organization/Organization'
 
-=======
-import EditMyUserData from './components/UserSettings/EditMyUserData'
->>>>>>> d7f545d5345be4a35ede00ccfe509c2c4f522321
+
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])

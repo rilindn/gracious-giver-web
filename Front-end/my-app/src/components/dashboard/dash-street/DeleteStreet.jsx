@@ -23,7 +23,7 @@ const DeleteStreet = ({show,onHide,streetId,onUpdate}) => {
             (error) => {
                 NotificationManager.error(
                 'Error while deleting the street!',
-                {error},
+                "",
                 1000,
                 )
             },

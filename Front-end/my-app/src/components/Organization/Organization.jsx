@@ -26,7 +26,7 @@ const PostProdForm = ({loggedInUser}) => {
 
     const getCategories = async () => {
         try{
-        await axios.get('http://localhost:5000/api/productcategory')
+        await axios.get('http://localhost:5000/api/organizationcategory')
         .then(res=>{
             setCategories(res.data)
         })
@@ -157,6 +157,9 @@ const PostProdForm = ({loggedInUser}) => {
              as="select" 
              custom
              >
+              {categories.map(categorie=>(
+              <option>{categorie.OrganizationCategoryName}</option>
+             ))}
             </Form.Control>
           </Form.Group> 
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">

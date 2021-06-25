@@ -6,7 +6,7 @@ import { Search } from '../DataTable/Search';
 import { NotificationManager } from 'react-notifications'
 
 
-const ResponseTable = () => { 
+const ResponseTable = ({loggedInUser}) => { 
  
     const [responses, setResponses] = useState([]);
     const [allResponses, setAllResponses] = useState([]);
@@ -18,13 +18,15 @@ const ResponseTable = () => {
 
 
         useEffect(()=>{
+            if(loggedInUser.length!==0){
             getAmOfResponses(maxResponseShow);
             getAllResponses(); 
-        },[maxResponseShow,deleteResponseModal]);
+            }
+        },[maxResponseShow,deleteResponseModal,loggedInUser]);
         
         const getAmOfResponses = async (maxResponseShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/ProductRequestResponse/amount/"+maxResponseShow)
+              await axios.get("http://localhost:5000/api/ProductRequestResponse/amount/"+maxResponseShow+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):""))
               .then(res=>{
                   console.log(res.data)
                   setResponses(res.data)
@@ -37,7 +39,7 @@ const ResponseTable = () => {
 
         const getAllResponses = async () => {
             try{ 
-            await axios.get("http://localhost:5000/api/ProductRequestResponse/")
+            await axios.get("http://localhost:5000/api/ProductRequestResponse/"+(loggedInUser.UserRole==="Donator"?("donator/"+loggedInUser.UserId):""))
             .then(res=>{
                 console.log(res.data)
                 setAllResponses(res.data)

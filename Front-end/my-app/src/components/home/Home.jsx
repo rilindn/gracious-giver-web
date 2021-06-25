@@ -33,7 +33,7 @@ const Home = ({loggedInUser}) => {
 
     return (
         <div>
-            <Header loggedInUser={loggedInUser} />
+            <Header loggedInUser={loggedInUser} search={true}/>
            
         <Sidebar />
         <Switch>

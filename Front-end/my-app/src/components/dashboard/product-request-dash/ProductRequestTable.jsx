@@ -21,13 +21,15 @@ const ProductRequestTable = ({loggedInUser}) => {
 
 
         useEffect(()=>{
+            if(loggedInUser.length!==0){
             getAmOfRequests(maxRequestShow);
             getAllRequests(); 
-        },[maxRequestShow,editRequestModal,deleteRequestModal]);
+            }
+        },[maxRequestShow,editRequestModal,deleteRequestModal,loggedInUser]);
         
         const getAmOfRequests = async (maxRequestShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/product_request/request/" +loggedInUser.UserId + "/amount/" + maxRequestShow)
+              await axios.get("http://localhost:5000/api/product_request/" +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId + "/amount/" + maxRequestShow):""))
               .then(res=>{
                   console.log(res.data)
                   setRequests(res.data)
@@ -40,7 +42,7 @@ const ProductRequestTable = ({loggedInUser}) => {
 
         const getAllRequests = async () => {
             try{ 
-            await axios.get(`http://localhost:5000/api/product_request/request/` + loggedInUser.UserId)
+            await axios.get(`http://localhost:5000/api/product_request/` +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId):""))
             .then(res=>{
                 console.log(res.data)
                 setAllRequests(res.data)
@@ -59,7 +61,8 @@ const ProductRequestTable = ({loggedInUser}) => {
                RequestId: RId.RequestId,
                Message: RId.Message,
                Response: "Accepted",
-               Response_Date: date
+               Response_Date: date,
+               DonatorId: loggedInUser.UserId
               }) 
               .then(()=>{
                 axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
@@ -96,7 +99,8 @@ const ProductRequestTable = ({loggedInUser}) => {
                     RequestId: RId.RequestId,
                     Message: RId.Message,
                     Response: "Declined",
-                    Response_Date: date
+                    Response_Date: date,
+                    DonatorId: loggedInUser.UserId
                     }) 
                     .then(()=>{
                       axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
@@ -200,6 +204,8 @@ const ProductRequestTable = ({loggedInUser}) => {
                                 <td>{request.Request_Date}</td>
 
                                 <td>
+                                    {loggedInUser.UserRole==="Admin" || loggedInUser.UserRole==="SuperAdmin"?
+                                     <div>
                                     <Button 
                                     onClick={() => 
                                         {setEditRequestModal(true);
@@ -219,7 +225,10 @@ const ProductRequestTable = ({loggedInUser}) => {
                                      variant ="danger"
                                      data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
                                      </Button>
-
+                                    </div>
+                                    :null} 
+                                     {loggedInUser.UserRole==="Donator"?
+                                     <div>
                                      <Button onClick={()=>handleAcceptRequest(request)}
                                     className="m-2" 
                                     variant ="success" 
@@ -231,6 +240,8 @@ const ProductRequestTable = ({loggedInUser}) => {
                                     variant ="danger" 
                                     data-toggle="modal">Decline
                                     </Button>
+                                    </div>
+                                    :null}   
                                 </td>
                             </tr>
                             ))}

@@ -8,9 +8,10 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:5000/api/Request/'+ requestt.RequestId, {
+        axios.put('http://localhost:5000/api/Request/'+ requestt.RequesttId, {
             RequesttId: requestt.RequesttId,
             ReceiverId: requestt.ReceiverId,
+            RequestDescription: event.target.RequestDescription.value,
             RequestComment: event.target.RequestComment.value,
           })
           .then(()=> {
@@ -54,12 +55,22 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
                                 className="form-control" 
                                 required
                                 disabled/>
+                            </FormGroup>
+                            <FormGroup className="form-group">
+                                <label>Request Description</label>
+                                <input 
+                                defaultValue={requestt.RequestDescription}
+                                name="RequestDescription"
+                                type="text" 
+                                className="form-control" 
+                                required
+                                />
                             </FormGroup>	
                             <FormGroup className="form-group">
-                                <label>RequestComment</label>
+                                <label>Request Comment</label>
                                 <input 
                                 defaultValue={requestt.RequestComment}
-                                name="comment"
+                                name="RequestComment"
                                 type="text" 
                                 className="form-control" 
                                 required

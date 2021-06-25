@@ -26,7 +26,7 @@ const RequesttTable = ({loggedInUser})=> {
 
     const getAmOfRequestts = async (maxRequesttShow) =>{
         try{
-          await axios.get("http://localhost:5000/api/Request/" +loggedInUser.UserId + "/amount/" + maxRequesttShow)
+          await axios.get("http://localhost:5000/api/Request/amount/" + maxRequesttShow)
           .then(res=>{
               console.log(res.data)
               setRequestts(res.data)
@@ -39,7 +39,7 @@ const RequesttTable = ({loggedInUser})=> {
 
     const getAllRequestts = async () => {
         try{ 
-        await axios.get(`http://localhost:5000/api/Request/` + loggedInUser.UserId)
+        await axios.get(`http://localhost:5000/api/Request/`)
         .then(res=>{
             console.log(res.data)
             setAllRequestts(res.data)

@@ -7,7 +7,7 @@ import { Search } from '../DataTable/Search';
 import DashProduct from './DashProduct';
 
 
-const ProductTable = () => {
+const ProductTable = ({loggedInUser}) => {
 
     const [products, setProducts] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
@@ -20,25 +20,29 @@ const ProductTable = () => {
     const [updatePhotos,setUpdatePhotos] = useState(false);
     
 
-        useEffect( ()=>{
+        useEffect(()=>{
+            if(loggedInUser.length!==0){
              getAmOfProducts(maxProdShow); 
              getAllProducts();
-        },[maxProdShow]);
+            }
+        },[maxProdShow,loggedInUser]);
 
         const getAmOfProducts = async (maxProdShow) => {
+            
             try{ 
-                await axios.get("http://localhost:5000/api/product/amount/"+maxProdShow)
+                await axios.get("http://localhost:5000/api/product/amount/"+maxProdShow+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):""))
                 .then(res=>{
+                    console.log(loggedInUser)
                     setProducts(res.data)
                 })
             }
             catch(e){
                 console.log(e);
-            }
+        }
         }
         const getAllProducts = async () => {
             try{ 
-            await axios.get("http://localhost:5000/api/product")
+            await axios.get("http://localhost:5000/api/product"+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):""))
             .then(res=>{
                 setAllProducts(res.data)
             })
@@ -76,6 +80,7 @@ const ProductTable = () => {
                             <Col className="col-sm-4">
                                 <h2><b>Products</b></h2>
                             </Col>
+                            
                             <Col className="col-sm-7 d-flex justify-content-end">
                             <span className="showing-res-txt">Showing {productsData.length} out of {allProducts.length} entries</span>
                                 <Search

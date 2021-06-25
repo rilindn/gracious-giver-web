@@ -59,13 +59,15 @@ const Header = ({search}) => {
         </Navbar.Brand>
         <Navbar.Collapse id="">
           <Nav className="">
-          <Form inline className="searchpost" style={{width:"300px"}}>
+          <Form inline className="searchpost" >
           <Nav.Link id="post" href="/postProd">
                 <span className="mt-2" style={{fontSize:"19px",marginTop:"10px"}}>
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
-            {search?
-              <div className="mr-sm-2 header-search">
+            
+              <div className="mr-sm-2 header-search "style={{width:"320px"}}>
+              {search?
+              <div>
               <FormControl
                 type="text"
                 id="textbox"
@@ -74,8 +76,9 @@ const Header = ({search}) => {
                 style={{width:"240px"}}
               />
               <BsSearch className="header-search-icon"/>
-              </div>:null}
-              
+              </div>
+              :null}
+              </div>
             </Form>
             
             
@@ -111,7 +114,7 @@ const Header = ({search}) => {
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item href ="/bookmark "eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
-                <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
+                <Dropdown.Item  href="/settings" eventKey="3">Settings</Dropdown.Item>
                 <Dropdown.Divider />
                 {loggedInUser===null? null:
                 <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>

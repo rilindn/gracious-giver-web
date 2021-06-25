@@ -9,7 +9,7 @@ import { NotificationManager } from 'react-notifications';
       
 
      
-     const FormPage = () => {
+     const EditMyUserData = () => {
         const [loggedInUser, setLoggedInUser] = useState([])
         const [states, setStates] = useState([]);
         const [cities, setCities] = useState([]);
@@ -217,4 +217,4 @@ import { NotificationManager } from 'react-notifications';
 </div>
             )
         }
-        export default FormPage;
+        export default EditMyUserData;

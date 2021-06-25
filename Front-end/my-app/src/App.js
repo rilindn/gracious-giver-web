@@ -12,13 +12,12 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-<<<<<<< HEAD
 import Chat from './components/chat/Chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
+import EditMyUserData from './components/UserSettings/editUser'
+import Organization from './components/Organization/Organization'
 
-=======
-import Chat from './components/chat/chat'
->>>>>>> 9c28dd9acb30ca85e3249106138ef013683032cc
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
 
@@ -61,6 +60,12 @@ function App() {
         </Route>
         <Route path="/bookmark" exact>
           <BookmarkPage  />
+        </Route>
+        <Route path="/settings" exact>
+          <EditMyUserData/>
+        </Route>
+        <Route path="/organization" exact>
+          <Organization/>
         </Route>
         <NotificationContainer />
       </Router>

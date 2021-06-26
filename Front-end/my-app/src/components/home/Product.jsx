@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react"
 import { NotificationManager } from 'react-notifications'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark } from '@fortawesome/free-solid-svg-icons'
 
 const Product = ({product, loggedInUser}) => {
 
@@ -10,31 +12,42 @@ const Product = ({product, loggedInUser}) => {
 
 
     const handleBookmark = async () =>{
-          await axios.post(`http://localhost:5000/api/Bookmark/`,{
-              ProductId:product.ProductId,
-              UserId:loggedInUser.UserId,
-          })
-          .then (()=>{
-            NotificationManager.success(
-              'Product has been bookmarked succefsully!',
-              "",
-              2000
-            )
-          },
-          (error) => {
+          try{
+          await axios.get('http://localhost:5000/api/bookmark/bookmarked/'+loggedInUser.UserId+"/"+product.ProductId)
+          .then((res)=>{
+            if(res.data===false){
+              axios.post(`http://localhost:5000/api/Bookmark/`,{
+                  ProductId:product.ProductId,
+                  UserId:loggedInUser.UserId,
+              })
+              NotificationManager.success(
+                'Product has been bookmarked succefsully!',
+                "",
+                2000
+              )
+          }
+          else{
             NotificationManager.error(
-            'Error while bookmarking the product!',
-            '',
-            1000,
-            )
-        },
-      )
+            'Product already bookmarked!',
+            "",
+            2000
+          )
+            }
+          })
+        }catch(e){
+          console.log(e)
+          NotificationManager.error(
+            'Problems while bookmarking the product!',
+            "",
+            1000
+          )
+        }
     }
     
     return (
         <div>
             <div className="prodCol">
-            <i class="fas fa-bookmark bo-prod" onClick={handleBookmark} ></i>
+            <FontAwesomeIcon class="bo-prod" onClick={handleBookmark} icon={faBookmark}/>
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={imgSrc} 
@@ -51,26 +64,6 @@ const Product = ({product, loggedInUser}) => {
                   </a>
             </div>
 
-            <div className="request">
-            <a href="" >
-              <div className="home-prodd">
-                
-              <div className="reques">
-                  <h1 style={{fontSize:"20px",marginTop:"100px",color:"black"}}>request .....</h1>
-                  </div>
-                    <div className="itemText">
-                
-                      <h5 className="prodTitle" style={{color:"black"}}>
-                       <span className="requestFree">NEEDED
-                         </span> 
-                              Needed something .....
-                          </h5>
-                          <p className="prodLocation"
-                          style={{color:"black"}}>Location</p> 
-                       </div>
-                    </div>
-                  </a>
-            </div>
 
           </div>
         

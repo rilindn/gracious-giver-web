@@ -13,12 +13,10 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-import Chat from './components/chat/chat'
+import Chat from './components/chat/Chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
 import EditMyUserData from './components/UserSettings/editUser'
 import Organization from './components/Organization/Organization'
-
-
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -49,7 +47,7 @@ function App() {
           <Login />
         </Route>
         <Route path="/RequestForm">
-          <RequestForm/>
+          <RequestForm />
         </Route>
         <Route path="/register" exact>
           <Register />
@@ -57,7 +55,7 @@ function App() {
         <Route path="/chat" exact>
           <Chat />
         </Route>
-        <Route path="/editmydata" exact>
+        <Route path="/settings" exact>
           <EditMyUserData />
         </Route>
         <Route path="/dashboard" exact>
@@ -70,10 +68,10 @@ function App() {
           <BookmarkPage />
         </Route>
         <Route path="/settings" exact>
-          <EditMyUserData/>
+          <EditMyUserData />
         </Route>
         <Route path="/organization" exact>
-          <Organization/>
+          <Organization />
         </Route>
         <NotificationContainer />
       </Router>

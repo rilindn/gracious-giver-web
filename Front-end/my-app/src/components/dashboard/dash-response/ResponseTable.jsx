@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import {Col, Container, Form, Row, Table } from 'react-bootstrap';
 import DeleteResponse from './DeleteResponse'
 import { Search } from '../DataTable/Search';
-import { NotificationManager } from 'react-notifications'
+import Response from './Response';
 
 
 const ResponseTable = ({loggedInUser}) => { 
@@ -11,11 +11,9 @@ const ResponseTable = ({loggedInUser}) => {
     const [responses, setResponses] = useState([]);
     const [allResponses, setAllResponses] = useState([]);
     const [deleteResponseModal,setDeleteResponseModal] = useState(false);
-    const [responseV, setResponseV] = useState([]);
     const [responseD, setResponseD] = useState();
     const [search,setSearch] = useState("");
     const [maxResponseShow, setMaxResponseShow] = useState(10);
-
 
         useEffect(()=>{
             if(loggedInUser.length!==0){
@@ -26,7 +24,7 @@ const ResponseTable = ({loggedInUser}) => {
         
         const getAmOfResponses = async (maxResponseShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/ProductRequestResponse/amount/"+maxResponseShow+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):""))
+              await axios.get("http://localhost:5000/api/ProductRequestResponse/amount/"+maxResponseShow+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):"")))
               .then(res=>{
                   console.log(res.data)
                   setResponses(res.data)
@@ -39,7 +37,7 @@ const ResponseTable = ({loggedInUser}) => {
 
         const getAllResponses = async () => {
             try{ 
-            await axios.get("http://localhost:5000/api/ProductRequestResponse/"+(loggedInUser.UserRole==="Donator"?("donator/"+loggedInUser.UserId):""))
+            await axios.get("http://localhost:5000/api/ProductRequestResponse/"+(loggedInUser.UserRole==="Donator"?("donator/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("receiver/"+loggedInUser.UserId):"")))
             .then(res=>{
                 console.log(res.data)
                 setAllResponses(res.data)
@@ -106,36 +104,27 @@ const ResponseTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>ProductRequestResponseId</th>
-                                <th>RequestId</th>
+                                <th>Nr</th>
+                                <th>Receiver</th>
+                                <th>Donator</th>
+                                <th>Product</th>
                                 <th>Message</th>
                                 <th>Response</th>
-                                <th>ResponseDate</th>
+                                <th>Date</th>
+                                <th>Time</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {responseData.map(response=>(
-                                <tr>
-                                <td>{response.ProductRequestResponseId}</td>
-                                <td>{response.RequestId}</td>
-                                <td>{response.Message}</td>
-                                <td>{response.Response}</td>
-                                <td>{response.ResponseDate}</td>
-                                <td>                                   
-                                    <Button 
-                                    onClick={() => 
-                                        {setDeleteResponseModal(true);
-                                            setResponseD(response.ProductRequestResponseId)
-                                        }} 
-                                     className="delete" 
-                                     variant ="danger"
-                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                     </Button>
-                                </td>
-                            </tr>
+                            {responseData.map((response,i)=>(
+                                <Response
+                                response={response}
+                                i={i}
+                                onUpdate={()=>{
+                                    setDeleteResponseModal(true);
+                                    setResponseD(response.ProductRequestResponseId)
+                                }}
+                                />
                             ))}
-                        </tbody>
                     </Table>
                           
                 </div>

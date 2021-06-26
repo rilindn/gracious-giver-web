@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ResponseTable from'../dash-response/ResponseTable';
 import ProductRequestTable from '../product-request-dash/ProductRequestTable';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 
 const RequestsTables = () => {
@@ -10,18 +11,21 @@ const RequestsTables = () => {
     const [requestTable, setRequestTable] = useState(true);
     const [responseTable, setResponseTable] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
+    const [loading,setLoading] = useState(false);
     
     useEffect(() => {(async () => {
         await axios
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
+            setLoading(true);
           })
       })()
     }, [])
 
     return (
     <div>
+        {loading?
         <div className="d-flex">
         <div className="dash-content">
         <ul className="d-flex dash-selector">
@@ -34,7 +38,8 @@ const RequestsTables = () => {
                 }}
                 className={`dash-btn ${requestTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                 Request Table
+                {loggedInUser.UserRole==="Receiver"?"My Requests":loggedInUser.UserRole==="Donator"?"My Products Requests":"Product Requests"}
+                 
                 </button>
             </li>
             <li>
@@ -45,7 +50,7 @@ const RequestsTables = () => {
                 }}
                 className={`dash-btn ${responseTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                 Response Table
+                 Responded Requests
                 </button>
             </li>
         </ul>
@@ -55,7 +60,7 @@ const RequestsTables = () => {
         </div>
         </div>
         </div>
-        
+        :<Spinner animation="border" className="m-5"/>}
     </div>
     )
 }

@@ -5,7 +5,7 @@ import faPhotoUpload from '../../images/photoUpload.png'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import Footer from '../footer/Footer';
-import HeaderLoginRegister from "../Header/HeaderLoginRegister";
+import Header from './../Header/HeaderLoginRegister';
 
 
 const PostProdForm = ({loggedInUser}) => {
@@ -100,9 +100,7 @@ const PostProdForm = ({loggedInUser}) => {
 
     return (
         <div>
-                    <HeaderLoginRegister>
-
-                </HeaderLoginRegister>
+              <Header/>
             <div className="pt-3 prod-form-wrapper mx-auto">
             <h2  style ={{fontFamily:'Hanalei Fill'}} className="new-post-t1">Register as Organization</h2>
             <h6 className="new-post-j1">As an organization you can create events and iniciatives to help people!</h6>    

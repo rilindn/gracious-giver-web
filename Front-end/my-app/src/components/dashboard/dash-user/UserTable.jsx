@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
 import EditUser from './EditUser'
 import DeleteUser from './DeleteUser'
 import { Search } from '../DataTable/Search'
+import { Spinner } from 'react-bootstrap';
 
 const UserTable = () => {
   const [users, setUsers] = useState([])
@@ -14,10 +15,12 @@ const UserTable = () => {
   const [userD, setUserD] = useState()
   const [search, setSearch] = useState('')
   const [maxUserShow, setMaxUserShow] = useState(10)
+  const [loading,setLoading] = useState(false);
 
   useEffect(() => {
     getAmofUsers(maxUserShow)
     getAllUsers()
+    setLoading(true);
   }, [maxUserShow,editUserModal,deleteUserModal])
 
 
@@ -113,6 +116,7 @@ const UserTable = () => {
                   <th>Actions</th>
                 </tr>
               </thead>
+            {loading?
               <tbody>
                 {userData.map((user, i) => (
                   <tr key={user.UserId}>
@@ -164,6 +168,8 @@ const UserTable = () => {
                   </tr>
                 ))}
               </tbody>
+              
+      :<Spinner animation="border" className="m-5"/>}
             </Table>
           </div>
         </Table>

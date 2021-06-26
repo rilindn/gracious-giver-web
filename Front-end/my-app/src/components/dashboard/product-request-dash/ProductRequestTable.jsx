@@ -5,6 +5,7 @@ import EditRequest from './EditRequest'
 import DeleteRequest from './DeleteRequest'
 import { Search } from '../DataTable/Search';
 import { NotificationManager } from 'react-notifications'
+import Request from './Request';
 
 
 const ProductRequestTable = ({loggedInUser}) => { 
@@ -17,7 +18,6 @@ const ProductRequestTable = ({loggedInUser}) => {
     const [requestD, setRequestD] = useState();
     const [search,setSearch] = useState("");
     const [maxRequestShow, setMaxRequestShow] = useState(10);
-    const [requester,setRequester] = useState();
 
 
         useEffect(()=>{
@@ -29,7 +29,7 @@ const ProductRequestTable = ({loggedInUser}) => {
         
         const getAmOfRequests = async (maxRequestShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/product_request/" +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId + "/amount/" + maxRequestShow):""))
+              await axios.get("http://localhost:5000/api/product_request" +(loggedInUser.UserRole==="Donator"?("/request/"+loggedInUser.UserId ):(loggedInUser.UserRole==="Receiver"?("/requester/"+loggedInUser.UserId):""))+ "/amount/" + maxRequestShow)
               .then(res=>{
                   console.log(res.data)
                   setRequests(res.data)
@@ -42,7 +42,7 @@ const ProductRequestTable = ({loggedInUser}) => {
 
         const getAllRequests = async () => {
             try{ 
-            await axios.get(`http://localhost:5000/api/product_request/` +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId):""))
+            await axios.get(`http://localhost:5000/api/product_request/` +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("requester/"+loggedInUser.UserId):"")))
             .then(res=>{
                 console.log(res.data)
                 setAllRequests(res.data)
@@ -53,81 +53,6 @@ const ProductRequestTable = ({loggedInUser}) => {
             } 
         }
 
-
-        const handleAcceptRequest  = async (RId) => {
-            var date = new Date().toLocaleString()
-            try{
-              await axios.post(`http://localhost:5000/api/ProductRequestResponse/`,{
-               RequestId: RId.RequestId,
-               Message: RId.Message,
-               Response: "Accepted",
-               Response_Date: date,
-               DonatorId: loggedInUser.UserId
-              }) 
-              .then(()=>{
-                axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
-                    RequestId: RId.RequestId,
-                    UserId: RId.UserId,
-                    ProductId: RId.ProductId,
-                    Message: RId.Message,
-                    Request_Date: RId.Request_Date,
-                    checkedR : true
-                  })
-              })
-              .then(()=>{
-                getAmOfRequests(maxRequestShow);
-                getAllRequests();
-              })
-              .then((res) => {
-                NotificationManager.success(
-                'Request has been accepted!',
-                '',
-                1000,
-                )},
-                )
-            }
-            catch(e){
-                console.log(e);
-                }
-            }
-
-            const handleDeclineRequest  = async (RId) => {
-                var date = new Date().toLocaleString()
-                try{
-                  console.log("prod res")
-                  await axios.post(`http://localhost:5000/api/ProductRequestResponse`,{
-                    RequestId: RId.RequestId,
-                    Message: RId.Message,
-                    Response: "Declined",
-                    Response_Date: date,
-                    DonatorId: loggedInUser.UserId
-                    }) 
-                    .then(()=>{
-                      axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
-                          RequestId: RId.RequestId,
-                          UserId: RId.UserId,
-                          ProductId: RId.ProductId,
-                          Message: RId.Message,
-                          Request_Date: RId.Request_Date,
-                          checkedR : true
-                        })
-                    })
-                  .then(()=>{
-                    getAmOfRequests(maxRequestShow);
-                    getAllRequests();
-                  })
-                  .then((res) => {
-                    NotificationManager.success(
-                    'Request has been declined!',
-                    '',
-                    1000,
-                    )},
-                    )
-                }
-                catch(e){
-                    console.log(e);
-                    }
-                }
 
 
 
@@ -143,6 +68,9 @@ const ProductRequestTable = ({loggedInUser}) => {
             return computedRequest
     
         },[requests,search])
+
+        
+        
 
         
     return (
@@ -186,64 +114,32 @@ const ProductRequestTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Request Id</th>
+                                <th>Nr.</th>
                                 <th>Requester</th>
-                                <th>Product Id</th>
+                                <th>Product</th>
                                 <th>Request</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {requestData.map(request=>(
-                                <tr>
-                                <td>{request.RequestId}</td>
-                                <td>{request.UserId}</td>
-                                <td>{request.ProductId}</td>
-                                <td>{request.Message}</td>
-                                <td>{request.Request_Date}</td>
-
-                                <td>
-                                    {loggedInUser.UserRole==="Admin" || loggedInUser.UserRole==="SuperAdmin"?
-                                     <div>
-                                    <Button 
-                                    onClick={() => 
-                                        {setEditRequestModal(true);
-                                            setRequestV(request)
-                                        } }
-                                    className="m-2" 
-                                    variant ="warning" 
-                                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                    </Button>
-                                    
-                                    <Button 
-                                    onClick={() => 
-                                        {setDeleteRequestModal(true);
-                                            setRequestD(request.RequestId)
-                                        }} 
-                                     className="delete" 
-                                     variant ="danger"
-                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                     </Button>
-                                    </div>
-                                    :null} 
-                                     {loggedInUser.UserRole==="Donator"?
-                                     <div>
-                                     <Button onClick={()=>handleAcceptRequest(request)}
-                                    className="m-2" 
-                                    variant ="success" 
-                                    data-toggle="modal">Accept
-                                    </Button>
-
-                                    <Button onClick={()=>handleDeclineRequest(request)}
-                                    className="m-2" 
-                                    variant ="danger" 
-                                    data-toggle="modal">Decline
-                                    </Button>
-                                    </div>
-                                    :null}   
-                                </td>
-                            </tr>
+                            {requestData.map((request,i)=>(
+                                <Request request={request} i={i} 
+                                loggedInUser={loggedInUser}
+                                setRequestV ={()=>{
+                                    setEditRequestModal(true)
+                                    setRequestV(request)
+                                }}
+                                setRequestD ={()=>{
+                                    setDeleteRequestModal(true)
+                                    setRequestD(request.RequestId)
+                                }}
+                                onUpdate={()=>{
+                                    getAmOfRequests(maxRequestShow);
+                                    getAllRequests();
+                                }}
+                                />
                             ))}
                         </tbody>
                     </Table>

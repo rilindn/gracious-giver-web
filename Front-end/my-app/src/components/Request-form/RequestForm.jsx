@@ -1,16 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { Form, Button} from 'react-bootstrap'
-// import faPhotoUpload from '../../images/photoUpload.png'
+import faPhotoUpload from '../../images/photoUpload.png'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import Footer from '../footer/Footer';
 import Header from '../Header/Header';
 
-const RequestForm = () => {
+const RequestForm = ({loggedInUser}) => {
     let history = useHistory()
     const [categories, setCategories] = useState([]);
     const [selectedFiles,setSelectedFiles] = useState([]);
+    const [selectedFilesName,setSelectedFilesName] = useState([]);
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -38,9 +39,21 @@ const RequestForm = () => {
         axios.post('http://localhost:5000/api/Request/', {
             RequestDescription: event.target.RequestDescription.value,
             RequestName: event.target.RequestName.value,
+            RequestPhoto: event.target.RequestPhoto.value,
             RequestCategory: event.target.RequestCategory.value,
             RequestLocation: event.target.RequestLocation.value,
             RequestComment: event.target.RequestComment.value,
+            ReceiverId: loggedInUser.UserId
+          })
+          .then(()=>{
+            axios.get("http://localhost:5000/api/request/last")
+            .then((res)=>{
+              for (let index = 0; index < selectedFilesName.length; index++) {
+                axios.post('http://localhost:5000/api/RequestPhotos',{
+                  Request: res.data.RequesttId,
+                  RequestPhotoPath: selectedFilesName[index].name
+                }
+              )}})
           })
           .then(
             (res) => {
@@ -60,6 +73,27 @@ const RequestForm = () => {
             },
           )
     }
+
+    const handlePhotoSubmit = (e) => {
+      e.preventDefault()
+      if(e.target.files){
+        const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
+        setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
+        var fileArrayN = Array.from(e.target.files)
+        setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
+        //console.log("fileArrayN");
+        //console.log(fileArrayN.[0].name);
+        for (let index = 0; index < e.target.files.length; index++) {
+            const formdata = new FormData();
+            formdata.append('image',e.target.files[index], e.target.files[index].name)
+            try{
+              axios.post('http://localhost:5000/api/request/SaveFile/Request', formdata)
+            }catch(e){
+              console.log(e)
+            }
+          }
+        }
+      }
 
     return (
        <div>
@@ -110,6 +144,30 @@ const RequestForm = () => {
             rows={3} 
             />
           </Form.Group>
+          <Form.Group className="form-group-el img-prod-fgr">
+          <div className="img-prod-label" >
+          <Form.Label >Product Images</Form.Label></div>
+            <button
+            type="button"
+            onClick={handleFileInputClick}
+            className="imgUploadBtn"
+            >
+              <img src={faPhotoUpload} alt="" className="add-photo-icon" />
+            {selectedFiles.map(file=>(
+                <img src={file} alt="" className="postProd-img-preview" />
+              ))}
+            </button>
+            <Form.File
+            name="RequestPhoto" 
+            multiple
+            style={{display:"none"}}  
+            hidden
+            className ="d-flex"
+            id="exampleFormControlFile1"
+            onChange={handlePhotoSubmit}
+            ref={fileInput}
+            />
+          </Form.Group >
 
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
             <Form.Label>Location</Form.Label>

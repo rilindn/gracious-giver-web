@@ -9,14 +9,15 @@ import { NotificationManager } from 'react-notifications';
 const RequestDetails = ({loggedInUser}) => {
   
   var {requestId} = useParams();
-  const [request, setrequest] = useState([]);
-  const [donator,setDonator] = useState([]);
-  const [requestPhotos,setrequestPhotos] = useState([])
+  const [request, setRequest] = useState([]);
+  const [receiver,setReceiver] = useState([]);
+  const [requestPhotos,setRequestPhotos] = useState([])
   const [bigImg,setBigImg] = useState()
   
  
     useEffect(()=>{
       getrequestData();
+      console.log(requestPhotos)
     // eslint-disable-next-line
     },[]);
 
@@ -25,14 +26,14 @@ const RequestDetails = ({loggedInUser}) => {
         try{
         await axios.get(`http://localhost:5000/api/request/`+requestId)
         .then(res=>{
-            setrequest(res.data)
-            axios.get("http://localhost:5000/api/requestphotos/"+res.data.requestId)
+            setRequest(res.data)
+            axios.get("http://localhost:5000/api/requestphotos/"+res.data.RequesttId)
             .then(resu=>{
-              setrequestPhotos(resu.data)
+              setRequestPhotos(resu.data)
             })
-            axios.get("http://localhost:5000/api/user/"+res.data.DonatorId)
+            axios.get("http://localhost:5000/api/user/"+res.data.ReceiverId)
             .then(don=>{
-              setDonator(don.data)
+              setReceiver(don.data)
             })
         })
         }
@@ -40,15 +41,15 @@ const RequestDetails = ({loggedInUser}) => {
             console.log(e);
         }
     }
-      if(request.requestPhoto!==undefined){
+      if(request.RequestPhoto!==undefined){
         const defaultImg = "prodImg.jpg"
-        var imgSrc = "http://localhost:5000/photos/"+
-        (request.requestPhoto===''?defaultImg:(request.requestPhoto).replace("C:\\fakepath\\", ""))
+        var imgSrc = "http://localhost:5000/photos/RequestPhotos/"+
+        (request.RequestPhoto===''?defaultImg:(request.RequestPhoto).replace("C:\\fakepath\\", ""))
       }
       
 
       const displaySelectedImage = (e) => {
-        var imgSrc = `http://localhost:5000/photos/${e}`
+        var imgSrc = `http://localhost:5000/photos/RequestPhotos/${e}`
         setBigImg(imgSrc);
       }
 
@@ -118,10 +119,10 @@ const RequestDetails = ({loggedInUser}) => {
                           <div key={requestPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
-                              src={`http://localhost:5000/photos/${requestPhoto.requestPhotoPath}`}
+                              src={`http://localhost:5000/photos/ProductPhotos/${requestPhoto.RequestPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                              onClick={() => displaySelectedImage(requestPhoto.requestPhotoPath)}
+                              onClick={() => displaySelectedImage(requestPhoto.RequestPhotoPath)}
                             />
                           </div>
                         </div>
@@ -134,8 +135,7 @@ const RequestDetails = ({loggedInUser}) => {
               </div>
             </div>
             <div id="prDetail" className="col-md-6 prDetail">
-              <h5>{request.requestName}</h5>
-              <p className="mb-2 text-muted text-uppercase small">{request.requestState}</p>
+              <h5>{request.RequestName}</h5>
 
               <p>
                 <span className="mr-1">
@@ -143,7 +143,7 @@ const RequestDetails = ({loggedInUser}) => {
                 </span>
               </p>
               <p className="pt-1">
-              {request.requestDescription}
+              {request.RequestDescription}
               </p>
               <div className="table-responsive">
                 <table className="table table-sm table-borderless mb-0">
@@ -152,25 +152,25 @@ const RequestDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{request.requestCategory}</td> 
+                      <td>{request.RequestCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
                         <strong>Location</strong>
                       </th>
-                      <td>{request.requestLocation}</td>
+                      <td>{request.RequestLocation}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
-                        <strong>Donator</strong>
+                        <strong>Receiver</strong>
                       </th>
-                      <td>{donator.UserName}</td>
+                      <td>{receiver.UserName}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
                         <strong>Comment</strong>
                       </th>
-                      <td>{request.requestComment}</td>
+                      <td>{request.RequestComment}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -179,14 +179,14 @@ const RequestDetails = ({loggedInUser}) => {
               <Form onSubmit={(event) => insertRequest(event)}  className="d-flex justify-content-start align-items-start">
                 <textarea
                 name = "Message"
-                placeholder="I need this request because..."
+                placeholder="Describe your product..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
 
                 </textarea>
               <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
-                Request{' '}
+                Offer{' '}
               </button>
               </Form>}
             </div>

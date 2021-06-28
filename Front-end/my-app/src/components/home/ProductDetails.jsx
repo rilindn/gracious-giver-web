@@ -45,13 +45,13 @@ const ProductDetails = ({loggedInUser}) => {
     }
       if(product.ProductPhoto!==undefined){
         const defaultImg = "prodImg.jpg"
-        var imgSrc = "http://localhost:5000/photos/"+
+        var imgSrc = "http://localhost:5000/photos/ProductPhotos/"+
         (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
       }
       
 
       const displaySelectedImage = (e) => {
-        var imgSrc = `http://localhost:5000/photos/${e}`
+        var imgSrc = `http://localhost:5000/photos/ProductPhotos/${e}`
         setBigImg(imgSrc);
       }
 
@@ -121,7 +121,7 @@ const ProductDetails = ({loggedInUser}) => {
                           <div key={productPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
-                              src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
+                              src={`http://localhost:5000/photos/ProductPhotos/${productPhoto.ProductPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
                               onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}

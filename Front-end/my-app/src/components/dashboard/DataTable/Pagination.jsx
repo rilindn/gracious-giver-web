@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-export const Pagination = ({total=0,itemsPerPage=10,currentPage=1,onPageChange}) => {
+export const Pagination = ({total=10,itemsPerPage=10,currentPage=1,onPageChange}) => {
 
     const [totalPages,setTotalPages] = useState(0)
 

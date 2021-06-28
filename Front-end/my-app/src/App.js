@@ -15,8 +15,9 @@ import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/Chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
-import EditMyUserData from './components/UserSettings/editUser'
+import EditMyUserData from './components/UserSettings/EditMyUserData'
 import Organization from './components/Organization/Organization'
+import RequestDetails from './components/home/RequestDetails'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -47,7 +48,7 @@ function App() {
           <Login />
         </Route>
         <Route path="/RequestForm">
-          <RequestForm />
+          <RequestForm loggedInUser={loggedInUser} />
         </Route>
         <Route path="/register" exact>
           <Register />
@@ -64,11 +65,11 @@ function App() {
         <Route path="/prodDetails/:productId" exact>
           <ProductDetails loggedInUser={loggedInUser} />
         </Route>
+        <Route path="/reqDetails/:requestId" exact>
+          <RequestDetails loggedInUser={loggedInUser} />
+        </Route>
         <Route path="/bookmark" exact>
           <BookmarkPage />
-        </Route>
-        <Route path="/settings" exact>
-          <EditMyUserData />
         </Route>
         <Route path="/organization" exact>
           <Organization />

@@ -7,7 +7,7 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons'
 const Product = ({product, loggedInUser}) => {
 
     const defaultImg = "prodImg.jpg"
-    const imgSrc = "http://localhost:5000/photos/"+
+    const imgSrc = "http://localhost:5000/photos/ProductPhotos/"+
     (product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
 
 
@@ -21,7 +21,7 @@ const Product = ({product, loggedInUser}) => {
                   UserId:loggedInUser.UserId,
               })
               NotificationManager.success(
-                'Product has been bookmarked succefsully!',
+                'Product has been bookmarked successfully!',
                 "",
                 2000
               )

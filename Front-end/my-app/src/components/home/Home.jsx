@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination, Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import { Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import { Footer } from '../footer/Footer';
 import Header from '../Header/Header';
 import Product from './Product';
 import axios from 'axios';
 import {Switch, Route } from "react-router-dom";
 import Sidebar from '../Sidebar/Sidebar';
+import Request from './Request';
+import Pagination from '../dashboard/DataTable/Pagination';
 
 const Home = ({loggedInUser}) => {
 
     const [products, setProducts] = useState([]);
+    const [requests, setRequests] = useState([]);
     const [loading,setLoading] = useState(false);
     const [showProducts,setShowProducts] = useState(true)
     const [showRequests,setShowRequests] = useState(false)
@@ -17,6 +20,7 @@ const Home = ({loggedInUser}) => {
 
     useEffect(()=>{
         getproducts();
+        getRequests();
     },[]);
 
     const getproducts = async () => {
@@ -32,6 +36,21 @@ const Home = ({loggedInUser}) => {
             console.log(e);
         }
     }
+    const getRequests = async () => {
+        try{
+        await axios.get(`http://localhost:5000/api/request`)
+        .then(res=>{
+            console.log(res.data)
+            setRequests(res.data)
+        })
+        setLoading(true);
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    
 
     return (
         <div>
@@ -73,7 +92,13 @@ const Home = ({loggedInUser}) => {
                             loggedInUser={loggedInUser}
                             />
                     )):
-                    "Requests" 
+                    requests.map(request=>(
+                        <Request
+                        key={request.RequestId}
+                        request={request}
+                        loggedInUser={loggedInUser}
+                        />
+                    ))
                     :  <Spinner animation="border" className="m-5"/>
                        }
                     
@@ -81,17 +106,9 @@ const Home = ({loggedInUser}) => {
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Pagination>
-                    <Pagination.Prev />
-                    <Pagination.Item active>{1}</Pagination.Item>
-                    <Pagination.Item>{2}</Pagination.Item>
-                    <Pagination.Item>{3}</Pagination.Item>
-                    <Pagination.Item>{4}</Pagination.Item>
-                    <Pagination.Item>{5}</Pagination.Item>
-                    <Pagination.Item>{6}</Pagination.Item>
-                    <Pagination.Item>{7}</Pagination.Item>
-                    <Pagination.Next />
-                </Pagination>
+                <Pagination
+                total={products.length}
+                />
             </div>
             </div>
         <Footer/>

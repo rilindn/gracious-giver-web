@@ -102,6 +102,7 @@ const Header = ({search}) => {
             <DropdownButton
                 menuAlign={{ lg: 'right' }}
                 title={<FaUser id="user" color="white" size="25px"  />}
+                
                 id="dropdown-menu-align-right hell2"
                 variant="transparent"
                 style={{marginLeft:"50px"}}
@@ -111,11 +112,7 @@ const Header = ({search}) => {
                 <Dropdown.Item eventKey="1">Posts</Dropdown.Item> 
                 <Dropdown.Item eventKey="2">Bookmark</Dropdown.Item>
                 <Dropdown.Item href="/dashboard" eventKey="3">Dashboard</Dropdown.Item>
-<<<<<<< HEAD
-                <Dropdown.Item  href="/settings"eventKey="3">Settings</Dropdown.Item>
-=======
                 <Dropdown.Item  href="" eventKey="3">Settings</Dropdown.Item>
->>>>>>> c05a9149005ffddafaad842691cd935042491754
                 <Dropdown.Divider />
                 {loggedInUser===null? null:
                 <Dropdown.Item href="/login"style={{fontWeight:"bold" ,color:"#3c6e71"}} onClick={handleLogout} eventKey="4">Log out {loggedInUser.UserName}</Dropdown.Item>

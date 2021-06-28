@@ -5,33 +5,30 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Form } from 'semantic-ui-react'
 import { NotificationManager } from 'react-notifications';
-import { Redirect } from 'react-router-dom'
 
-const ProductDetails = ({loggedInUser}) => {
+const RequestDetails = ({loggedInUser}) => {
   
-  var {productId} = useParams();
-  const [product, setProduct] = useState([]);
+  var {requestId} = useParams();
+  const [request, setrequest] = useState([]);
   const [donator,setDonator] = useState([]);
-  const [productPhotos,setProductPhotos] = useState([])
+  const [requestPhotos,setrequestPhotos] = useState([])
   const [bigImg,setBigImg] = useState()
   
  
-
-
     useEffect(()=>{
-      getProductData();
+      getrequestData();
     // eslint-disable-next-line
     },[]);
 
 
-    const getProductData = async () => {
+    const getrequestData = async () => {
         try{
-        await axios.get(`http://localhost:5000/api/product/`+productId)
+        await axios.get(`http://localhost:5000/api/request/`+requestId)
         .then(res=>{
-            setProduct(res.data)
-            axios.get("http://localhost:5000/api/productphotos/"+res.data.ProductId)
+            setrequest(res.data)
+            axios.get("http://localhost:5000/api/requestphotos/"+res.data.requestId)
             .then(resu=>{
-              setProductPhotos(resu.data)
+              setrequestPhotos(resu.data)
             })
             axios.get("http://localhost:5000/api/user/"+res.data.DonatorId)
             .then(don=>{
@@ -43,10 +40,10 @@ const ProductDetails = ({loggedInUser}) => {
             console.log(e);
         }
     }
-      if(product.ProductPhoto!==undefined){
+      if(request.requestPhoto!==undefined){
         const defaultImg = "prodImg.jpg"
         var imgSrc = "http://localhost:5000/photos/"+
-        (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
+        (request.requestPhoto===''?defaultImg:(request.requestPhoto).replace("C:\\fakepath\\", ""))
       }
       
 
@@ -61,9 +58,9 @@ const ProductDetails = ({loggedInUser}) => {
       
           var date = new Date().toLocaleString()
           console.log(date)
-          axios.post('http://localhost:5000/api/Product_Request', {
+          axios.post('http://localhost:5000/api/request_Request', {
             UserId: loggedInUser.UserId,
-            ProductId: product.ProductId,
+            requestId: request.requestId,
             Message: event.target.Message.value,
             Request_Date: date,
             checkedR : false
@@ -76,7 +73,7 @@ const ProductDetails = ({loggedInUser}) => {
             },
             (error) =>{
               console.log(error)
-              NotificationManager.error('Problems while requesting the product!','',3000);
+              NotificationManager.error('Problems while requesting the request!','',3000);
             },
           )
         }
@@ -105,7 +102,7 @@ const ProductDetails = ({loggedInUser}) => {
               <div id="mdb-lightbox-ui"></div>
 
               <div className="mdb-lightbox">
-                <div className="row product-gallery mx-1">
+                <div className="row request-gallery mx-1">
                   <div className="col-12 mb-0">
                     <figure
                       id="figure01"
@@ -117,14 +114,14 @@ const ProductDetails = ({loggedInUser}) => {
                   <div className="col-12">
                     <div className="row">
                       {
-                        productPhotos.map((productPhoto,i) => (
-                          <div key={productPhoto.PhotoId} className="col-3 mb-3">
+                        requestPhotos.map((requestPhoto,i) => (
+                          <div key={requestPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
-                              src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
+                              src={`http://localhost:5000/photos/${requestPhoto.requestPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                              onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}
+                              onClick={() => displaySelectedImage(requestPhoto.requestPhotoPath)}
                             />
                           </div>
                         </div>
@@ -137,8 +134,8 @@ const ProductDetails = ({loggedInUser}) => {
               </div>
             </div>
             <div id="prDetail" className="col-md-6 prDetail">
-              <h5>{product.ProductName}</h5>
-              <p className="mb-2 text-muted text-uppercase small">{product.ProductState}</p>
+              <h5>{request.requestName}</h5>
+              <p className="mb-2 text-muted text-uppercase small">{request.requestState}</p>
 
               <p>
                 <span className="mr-1">
@@ -146,7 +143,7 @@ const ProductDetails = ({loggedInUser}) => {
                 </span>
               </p>
               <p className="pt-1">
-              {product.ProductDescription}
+              {request.requestDescription}
               </p>
               <div className="table-responsive">
                 <table className="table table-sm table-borderless mb-0">
@@ -155,13 +152,13 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{product.ProductCategory}</td> 
+                      <td>{request.requestCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
                         <strong>Location</strong>
                       </th>
-                      <td>{product.ProductLocation}</td>
+                      <td>{request.requestLocation}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -173,7 +170,7 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Comment</strong>
                       </th>
-                      <td>{product.ProductComment}</td>
+                      <td>{request.requestComment}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -182,7 +179,7 @@ const ProductDetails = ({loggedInUser}) => {
               <Form onSubmit={(event) => insertRequest(event)}  className="d-flex justify-content-start align-items-start">
                 <textarea
                 name = "Message"
-                placeholder="I need this product because..."
+                placeholder="I need this request because..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
@@ -200,4 +197,4 @@ const ProductDetails = ({loggedInUser}) => {
     </div>
   )
 }
-export default ProductDetails
+export default RequestDetails

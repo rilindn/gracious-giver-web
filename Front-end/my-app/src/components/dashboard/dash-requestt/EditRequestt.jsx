@@ -3,7 +3,36 @@ import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
-const EditRequestt = ({show,onHide}) => {
+const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
+    
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        axios.put('http://localhost:5000/api/Request/'+ requestt.RequesttId, {
+            RequesttId: requestt.RequesttId,
+            ReceiverId: requestt.ReceiverId,
+            RequestDescription: event.target.RequestDescription.value,
+            RequestComment: event.target.RequestComment.value,
+          })
+          .then(()=> {
+              onUpdate();
+          })
+          .then((res) => {
+            NotificationManager.success(
+            'Request edited succesfully!',
+            '',
+            2000,
+            )
+        },
+            (error) => {
+                NotificationManager.success(
+                'Error while editing the request!'+{error},
+                '',
+                1000,
+                )
+            },
+          )
+    }
 
     return (
         <div>
@@ -12,7 +41,7 @@ const EditRequestt = ({show,onHide}) => {
             className="modal fade">
             <div className="modal-dialog">
                 <div className="modal-content">
-                    <Form >
+                    <Form onSubmit={handleSubmit}>
                         <div className="modal-header">						
                             <h3 className="modal-title">Edit Request</h3>
                     </div>
@@ -20,64 +49,33 @@ const EditRequestt = ({show,onHide}) => {
                             <FormGroup className="form-group">
                                 <label>Request Id </label>
                                 <input 
-                              
-                                name="id"
+                                defaultValue={requestt.RequesttId}
+                                name="requesttId"
                                 type="text" 
                                 className="form-control" 
                                 required
                                 disabled/>
                             </FormGroup>
                             <FormGroup className="form-group">
-                                <label>Receiver Id </label>
+                                <label>Request Description</label>
                                 <input 
-                              
-                                name="id"
-                                type="text" 
-                                className="form-control" 
-                                required
-                                disabled/>
-                            </FormGroup>
-                            <FormGroup className="form-group">
-                                <label>Category</label>
-                                <input 
-                               
-                                name="Category"
-                                type="text" 
-                                className="form-control" 
-                                required
-                                />
-                            </FormGroup>
-                            <FormGroup className="form-group">
-                                <label>Description</label>
-                                <input 
-                               
-                                name="Description"
+                                defaultValue={requestt.RequestDescription}
+                                name="RequestDescription"
                                 type="text" 
                                 className="form-control" 
                                 required
                                 />
                             </FormGroup>	
                             <FormGroup className="form-group">
-                                <label>Location</label>
+                                <label>Request Comment</label>
                                 <input 
-                               
-                                name="Location"
+                                defaultValue={requestt.RequestComment}
+                                name="RequestComment"
                                 type="text" 
                                 className="form-control" 
                                 required
                                 />
-                            </FormGroup>
-                            <FormGroup className="form-group">
-                                <label>Comments</label>
-                                <input 
-                               
-                                name="Comments"
-                                type="text" 
-                                className="form-control" 
-                                required
-                                />
-                            </FormGroup>
-                            				
+                            </FormGroup>			
                         </div>
                         
                         <Modal.Footer className="modal-footer">

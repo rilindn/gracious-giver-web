@@ -1,21 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import EditRequest from './EditRequest'
-import DeleteRequest from './DeleteRequest'
 import { Search } from '../DataTable/Search';
 import { NotificationManager } from 'react-notifications'
 import Request from './Request';
 
 
-const ProductRequestTable = ({loggedInUser}) => { 
+
+const PendingOrganizationRequestTable = ({loggedInUser}) => { 
  
     const [requests, setRequests] = useState([]);
     const [allRequests, setAllRequests] = useState([]);
-    const [editRequestModal,setEditRequestModal] = useState(false);
-    const [deleteRequestModal,setDeleteRequestModal] = useState(false);
-    const [requestV, setRequestV] = useState([]);
-    const [requestD, setRequestD] = useState();
     const [search,setSearch] = useState("");
     const [maxRequestShow, setMaxRequestShow] = useState(10);
 
@@ -25,13 +20,12 @@ const ProductRequestTable = ({loggedInUser}) => {
             getAmOfRequests(maxRequestShow);
             getAllRequests(); 
             }
-        },[maxRequestShow,editRequestModal,deleteRequestModal,loggedInUser]);
+        },[maxRequestShow,loggedInUser]);
         
         const getAmOfRequests = async (maxRequestShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/product_request" +(loggedInUser.UserRole==="Donator"?("/request/"+loggedInUser.UserId ):(loggedInUser.UserRole==="Receiver"?("/requester/"+loggedInUser.UserId):""))+ "/amount/" + maxRequestShow)
+              await axios.get("http://localhost:5000/api/PendingOrganizationsRequest/amount/" + maxRequestShow)
               .then(res=>{
-                  console.log(res.data)
                   setRequests(res.data)
               })  
             }
@@ -42,9 +36,8 @@ const ProductRequestTable = ({loggedInUser}) => {
 
         const getAllRequests = async () => {
             try{ 
-            await axios.get(`http://localhost:5000/api/product_request/` +(loggedInUser.UserRole==="Donator"?("request/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("requester/"+loggedInUser.UserId):"")))
+            await axios.get(`http://localhost:5000/api/PendingOrganizationsRequest`)
             .then(res=>{
-                console.log(res.data)
                 setAllRequests(res.data)
             })
             }
@@ -62,15 +55,13 @@ const ProductRequestTable = ({loggedInUser}) => {
             if(search){
                 computedRequest=computedRequest.filter(
                     requests =>
-                        requests.requestName.toLowerCase().includes(search.toLowerCase())
+                        requests.Name.toLowerCase().includes(search.toLowerCase()) ||
+                        requests.Username.toLowerCase().includes(search.toLowerCase())
                 )
             }
             return computedRequest
-    
+            
         },[requests,search])
-
-        
-        
 
         
     return (
@@ -81,7 +72,7 @@ const ProductRequestTable = ({loggedInUser}) => {
                     <div className="table-title">
                         <Row className="row">
                             <Col className="col-sm-3">
-                                <h2><b>Product Requests</b></h2>
+                                <h2><b>Organization Requests</b></h2>
                             </Col>
                             <Col className ="col-sm-6 d-flex justify-content-end">
                                  <span className="showing-res-txt">Showing {requestData.length} of {allRequests.length} entries</span>
@@ -98,7 +89,7 @@ const ProductRequestTable = ({loggedInUser}) => {
                                     style={{width:"80px",marginLeft:"3px"}}
                                     onChange={e=>
                                         {
-                                            e.target.value==='All'?setMaxRequestShow(allRequests.length):setMaxRequestShow(e.target.value);
+                                            e.target.value==='All'?setMaxRequestShow(maxRequestShow):setMaxRequestShow(e.target.value);
                                         }
                                     }
                                     >
@@ -114,27 +105,22 @@ const ProductRequestTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Nr.</th>
-                                <th>Requester</th>
-                                <th>Product</th>
-                                <th>Request</th>
-                                <th>Date</th>
-                                <th>Time</th>
+                                <th>OrganizationId</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Location</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {requestData.map((request,i)=>(
-                                <Request request={request} i={i} 
+                                <Request 
+                                request={request} 
+                                i={i} 
                                 loggedInUser={loggedInUser}
-                                setRequestV ={()=>{
-                                    setEditRequestModal(true)
-                                    setRequestV(request)
-                                }}
-                                setRequestD ={()=>{
-                                    setDeleteRequestModal(true)
-                                    setRequestD(request.RequestId)
-                                }}
                                 onUpdate={()=>{
                                     getAmOfRequests(maxRequestShow);
                                     getAllRequests();
@@ -148,18 +134,7 @@ const ProductRequestTable = ({loggedInUser}) => {
             </Table>  
 
         </Container>
-        <EditRequest
-         show={editRequestModal}
-         onHide={() => setEditRequestModal(false)}
-         onUpdate={()=>{
-            getAllRequests();
-            setEditRequestModal(false)
-            getAmOfRequests(maxRequestShow);
-        } }
-         request={requestV}
-         />
-
-        <DeleteRequest
+        {/* <DeleteRequest
         show={deleteRequestModal}
         onHide={() => setDeleteRequestModal(false)} 
         onUpdate={()=>{
@@ -168,9 +143,9 @@ const ProductRequestTable = ({loggedInUser}) => {
             getAmOfRequests(maxRequestShow);
         } }
         requestId={requestD}
-        />
+        /> */}
     </div>
     )
 }
 
-export default ProductRequestTable
+export default PendingOrganizationRequestTable

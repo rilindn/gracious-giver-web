@@ -22,7 +22,7 @@ const DeleteState = ({show,onHide,stateId,onUpdate}) => {
             (error) => {
                 NotificationManager.error(
                 'Error while deleting the state!',
-                {error},
+                "",
                 1000,
                 )
             },

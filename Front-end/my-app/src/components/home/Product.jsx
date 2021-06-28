@@ -1,14 +1,53 @@
+import axios from "axios";
 import React from "react"
-const Product = ({product}) => {
+import { NotificationManager } from 'react-notifications'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark } from '@fortawesome/free-solid-svg-icons'
+
+const Product = ({product, loggedInUser}) => {
 
     const defaultImg = "prodImg.jpg"
     const imgSrc = "http://localhost:5000/photos/"+
     (product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
 
+
+    const handleBookmark = async () =>{
+          try{
+          await axios.get('http://localhost:5000/api/bookmark/bookmarked/'+loggedInUser.UserId+"/"+product.ProductId)
+          .then((res)=>{
+            if(res.data===false){
+              axios.post(`http://localhost:5000/api/Bookmark/`,{
+                  ProductId:product.ProductId,
+                  UserId:loggedInUser.UserId,
+              })
+              NotificationManager.success(
+                'Product has been bookmarked succefsully!',
+                "",
+                2000
+              )
+          }
+          else{
+            NotificationManager.error(
+            'Product already bookmarked!',
+            "",
+            2000
+          )
+            }
+          })
+        }catch(e){
+          console.log(e)
+          NotificationManager.error(
+            'Problems while bookmarking the product!',
+            "",
+            1000
+          )
+        }
+    }
     
     return (
         <div>
             <div className="prodCol">
+            <FontAwesomeIcon class="bo-prod" onClick={handleBookmark} icon={faBookmark}/>
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={imgSrc} 
@@ -25,26 +64,6 @@ const Product = ({product}) => {
                   </a>
             </div>
 
-            <div className="request">
-            <a href="" >
-              <div className="home-prodd">
-                
-              <div className="reques">
-                  <h1 style={{fontSize:"20px",marginTop:"100px",color:"black"}}>request .....</h1>
-                  </div>
-                    <div className="itemText">
-                
-                      <h5 className="prodTitle" style={{color:"black"}}>
-                       <span className="requestFree">NEEDED
-                         </span> 
-                              Needed something .....
-                          </h5>
-                          <p className="prodLocation"
-                          style={{color:"black"}}>Location</p> 
-                       </div>
-                    </div>
-                  </a>
-            </div>
 
           </div>
         

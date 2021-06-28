@@ -3,9 +3,31 @@ import React from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteRequestt = ({show,onHide}) => {
+const DeleteRequestt = ({show,onHide,requesttId,onUpdate}) => {
 
-   
+    const handleSubmit = (event) => {
+
+        event.preventDefault();
+        axios.delete("http://localhost:5000/api/Request/"+requesttId)
+        .then(()=>{
+            onUpdate();
+        })
+        .then((res) => {
+            NotificationManager.success(
+            'Request deleted succesfully!',
+            '',
+            1000,
+            )
+        },
+            (error) => {
+                NotificationManager.error(
+                'Error while deleting the request!',
+                "",
+                1000,
+                )
+            },
+          )
+    }
     
     return (
         <div>   
@@ -18,7 +40,7 @@ const DeleteRequestt = ({show,onHide}) => {
              className="modal-content"
              >
                     <Form 
-                   
+                    onSubmit={handleSubmit}
                     className="p-3"
                     >
                         <div>					

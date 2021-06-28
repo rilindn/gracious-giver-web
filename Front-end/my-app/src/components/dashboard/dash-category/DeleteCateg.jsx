@@ -21,7 +21,7 @@ const DeleteCateg = ({show,onHide,ProductCategoryId,onUpdate}) => {
             (error) => {
                 NotificationManager.error(
                 'Error while deleting the category!',
-                {error},
+                "",
                 1000,
                 )
             },

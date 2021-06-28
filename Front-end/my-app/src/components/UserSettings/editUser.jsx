@@ -6,6 +6,11 @@ import axios from 'axios';
 import { MDBRadio } from 'mdb-react-ui-kit';
 import { NotificationManager } from 'react-notifications';
 
+import { Tab } from 'semantic-ui-react';
+import { Tabs } from 'react-bootstrap';
+
+import { MDBBtn } from 'mdb-react-ui-kit';
+
       
 
      
@@ -13,6 +18,7 @@ import { NotificationManager } from 'react-notifications';
         const [loggedInUser, setLoggedInUser] = useState([])
         const [states, setStates] = useState([]);
         const [cities, setCities] = useState([]);
+        
 
         useEffect(() => {(async () => {
             await axios
@@ -55,6 +61,7 @@ import { NotificationManager } from 'react-notifications';
                 axios.put('http://localhost:5000/api/user/'+ loggedInUser.UserId, {
                 UserId: loggedInUser.UserId,
                 UserName: event.target.UserName.value,
+                UserPassword:loggedInUser.UserPassword,
                 UserState: event.target.UserState.value,
                 UserCity: event.target.UserCity.value,
                 UserPostcode: loggedInUser.UserPostcode,
@@ -92,12 +99,10 @@ import { NotificationManager } from 'react-notifications';
                  <div class="col-12 col-lg-10 col-xl-8 mx-auto">
                  <h2 class="h3 mb-4 page-title">Settings</h2>
             <div class="my-4">
-            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Profile</a>
-                </li>
-            </ul>
-            <form onSubmit={handleSubmit}>
+            
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+               <Tab eventKey="MyProfile" title="Myprofile">
+               <form onSubmit={handleSubmit}>
                 <div class="row mt-5 align-items-center">
                     <div class="col-md-3 text-center mb-5">
                         <div class="avatar avatar-xl">
@@ -119,7 +124,7 @@ import { NotificationManager } from 'react-notifications';
                                 </p>
                             </div>
                             <div class="col">
-                                <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
+                                <p class="small mb-0 text-muted" defaultValue={loggedInUser.UserName}>Nec Urna Suscipit Ltd</p>
                                 <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
                                 <p class="small mb-0 text-muted">(537) 315-1481</p>
                             </div>
@@ -180,6 +185,14 @@ import { NotificationManager } from 'react-notifications';
                 </div>
               
                 <hr class="my-4" />
+                
+                <button type="submit" class="btn btn-primary">Save Change</button>
+            </form>
+    
+                </Tab>
+                <Tab eventKey="Password" title="Password">
+                <form onSubmit={handleSubmit}>
+                <hr class="my-4" />
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -188,11 +201,11 @@ import { NotificationManager } from 'react-notifications';
                         </div>
                         <div class="form-group">
                             <label for="inputPassword5">New Password</label>
-                            <input type="password" class="form-control" id="inputPassword5" />
+                            <input  name="UserPassword" type="password" class="form-control" id="inputPassword5" />
                         </div>
                         <div class="form-group">
                             <label for="inputPassword6">Confirm Password</label>
-                            <input type="password" class="form-control" id="inputPassword6" />
+                            <input name="UserPassword" type="password" class="form-control" id="inputPassword6" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -208,7 +221,9 @@ import { NotificationManager } from 'react-notifications';
                 </div>
                 <button type="submit" class="btn btn-primary">Save Change</button>
             </form>
-        </div>
+                </Tab>
+            </Tabs>
+            </div>
     </div>
 </div>
 

@@ -50,7 +50,7 @@ const Bookmark = ({bookmark, loggedInUser,updated}) => {
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={
-                   ("http://localhost:5000/photos/"+
+                   ("http://localhost:5000/photos/ProductPhotos/"+
                   (product.ProductPhoto===undefined?"prodImg.jpg":(product.ProductPhoto.replace("C:\\fakepath\\", ""))))
                 } 
                  width="300px" height="270px" alt="Product " className="prodImg"/>

@@ -21,7 +21,7 @@ const DashProduct = ({product,updatePhotos}) => {
                productPhotos.map(productPhoto => (
                      <img
                        key={productPhoto.PhotoId}
-                       src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`}
+                       src={`http://localhost:5000/photos/ProductPhotos/${productPhoto.ProductPhotoPath}`}
                        className="img-fluid z-depth-1 prodDetails-Dashimg"
                        alt=""
                      >

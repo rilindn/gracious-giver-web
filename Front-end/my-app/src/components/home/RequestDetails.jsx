@@ -5,37 +5,35 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Form } from 'semantic-ui-react'
 import { NotificationManager } from 'react-notifications';
-import { Redirect } from 'react-router-dom'
 
-const ProductDetails = ({loggedInUser}) => {
+const RequestDetails = ({loggedInUser}) => {
   
-  var {productId} = useParams();
-  const [product, setProduct] = useState([]);
-  const [donator,setDonator] = useState([]);
-  const [productPhotos,setProductPhotos] = useState([])
+  var {requestId} = useParams();
+  const [request, setRequest] = useState([]);
+  const [receiver,setReceiver] = useState([]);
+  const [requestPhotos,setRequestPhotos] = useState([])
   const [bigImg,setBigImg] = useState()
   
  
-
-
     useEffect(()=>{
-      getProductData();
+      getrequestData();
+      console.log(requestPhotos)
     // eslint-disable-next-line
     },[]);
 
 
-    const getProductData = async () => {
+    const getrequestData = async () => {
         try{
-        await axios.get(`http://localhost:5000/api/product/`+productId)
+        await axios.get(`http://localhost:5000/api/request/`+requestId)
         .then(res=>{
-            setProduct(res.data)
-            axios.get("http://localhost:5000/api/productphotos/"+res.data.ProductId)
+            setRequest(res.data)
+            axios.get("http://localhost:5000/api/requestphotos/"+res.data.RequesttId)
             .then(resu=>{
-              setProductPhotos(resu.data)
+              setRequestPhotos(resu.data)
             })
-            axios.get("http://localhost:5000/api/user/"+res.data.DonatorId)
+            axios.get("http://localhost:5000/api/user/"+res.data.ReceiverId)
             .then(don=>{
-              setDonator(don.data)
+              setReceiver(don.data)
             })
         })
         }
@@ -43,15 +41,15 @@ const ProductDetails = ({loggedInUser}) => {
             console.log(e);
         }
     }
-      if(product.ProductPhoto!==undefined){
+      if(request.RequestPhoto!==undefined){
         const defaultImg = "prodImg.jpg"
-        var imgSrc = "http://localhost:5000/photos/ProductPhotos/"+
-        (product.ProductPhoto===''?defaultImg:(product.ProductPhoto).replace("C:\\fakepath\\", ""))
+        var imgSrc = "http://localhost:5000/photos/RequestPhotos/"+
+        (request.RequestPhoto===''?defaultImg:(request.RequestPhoto).replace("C:\\fakepath\\", ""))
       }
       
 
       const displaySelectedImage = (e) => {
-        var imgSrc = `http://localhost:5000/photos/ProductPhotos/${e}`
+        var imgSrc = `http://localhost:5000/photos/RequestPhotos/${e}`
         setBigImg(imgSrc);
       }
 
@@ -61,9 +59,9 @@ const ProductDetails = ({loggedInUser}) => {
       
           var date = new Date().toLocaleString()
           console.log(date)
-          axios.post('http://localhost:5000/api/Product_Request', {
+          axios.post('http://localhost:5000/api/request_Request', {
             UserId: loggedInUser.UserId,
-            ProductId: product.ProductId,
+            requestId: request.requestId,
             Message: event.target.Message.value,
             Request_Date: date,
             checkedR : false
@@ -76,7 +74,7 @@ const ProductDetails = ({loggedInUser}) => {
             },
             (error) =>{
               console.log(error)
-              NotificationManager.error('Problems while requesting the product!','',3000);
+              NotificationManager.error('Problems while requesting the request!','',3000);
             },
           )
         }
@@ -105,7 +103,7 @@ const ProductDetails = ({loggedInUser}) => {
               <div id="mdb-lightbox-ui"></div>
 
               <div className="mdb-lightbox">
-                <div className="row product-gallery mx-1">
+                <div className="row request-gallery mx-1">
                   <div className="col-12 mb-0">
                     <figure
                       id="figure01"
@@ -117,14 +115,14 @@ const ProductDetails = ({loggedInUser}) => {
                   <div className="col-12">
                     <div className="row">
                       {
-                        productPhotos.map((productPhoto,i) => (
-                          <div key={productPhoto.PhotoId} className="col-3 mb-3">
+                        requestPhotos.map((requestPhoto,i) => (
+                          <div key={requestPhoto.PhotoId} className="col-3 mb-3">
                           <div className="view overlay rounded z-depth-1 gallery-item">
                             <img
-                              src={`http://localhost:5000/photos/ProductPhotos/${productPhoto.ProductPhotoPath}`}
+                              src={`http://localhost:5000/photos/ProductPhotos/${requestPhoto.RequestPhotoPath}`}
                               className="img-fluid z-depth-1 prodDetails-2img"
                               alt=""
-                              onClick={() => displaySelectedImage(productPhoto.ProductPhotoPath)}
+                              onClick={() => displaySelectedImage(requestPhoto.RequestPhotoPath)}
                             />
                           </div>
                         </div>
@@ -137,8 +135,7 @@ const ProductDetails = ({loggedInUser}) => {
               </div>
             </div>
             <div id="prDetail" className="col-md-6 prDetail">
-              <h5>{product.ProductName}</h5>
-              <p className="mb-2 text-muted text-uppercase small">{product.ProductState}</p>
+              <h5>{request.RequestName}</h5>
 
               <p>
                 <span className="mr-1">
@@ -146,7 +143,7 @@ const ProductDetails = ({loggedInUser}) => {
                 </span>
               </p>
               <p className="pt-1">
-              {product.ProductDescription}
+              {request.RequestDescription}
               </p>
               <div className="table-responsive">
                 <table className="table table-sm table-borderless mb-0">
@@ -155,25 +152,25 @@ const ProductDetails = ({loggedInUser}) => {
                       <th className="pl-0 w-25" scope="row">
                         <strong>Category</strong>
                       </th>
-                      <td>{product.ProductCategory}</td> 
+                      <td>{request.RequestCategory}</td> 
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
                         <strong>Location</strong>
                       </th>
-                      <td>{product.ProductLocation}</td>
+                      <td>{request.RequestLocation}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
-                        <strong>Donator</strong>
+                        <strong>Receiver</strong>
                       </th>
-                      <td>{donator.UserName}</td>
+                      <td>{receiver.UserName}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
                         <strong>Comment</strong>
                       </th>
-                      <td>{product.ProductComment}</td>
+                      <td>{request.RequestComment}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -182,14 +179,14 @@ const ProductDetails = ({loggedInUser}) => {
               <Form onSubmit={(event) => insertRequest(event)}  className="d-flex justify-content-start align-items-start">
                 <textarea
                 name = "Message"
-                placeholder="I need this product because..."
+                placeholder="Describe your product..."
                 rows="3"
                 className="pl-2 req-prod-textarea"
                 >
 
                 </textarea>
               <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
-                Request{' '}
+                Offer{' '}
               </button>
               </Form>}
             </div>
@@ -200,4 +197,4 @@ const ProductDetails = ({loggedInUser}) => {
     </div>
   )
 }
-export default ProductDetails
+export default RequestDetails

@@ -77,7 +77,7 @@ const EditProduct = ({show,onHide,product,onUpdate}) => {
               const formdata = new FormData();
               formdata.append('image',e.target.files[index], e.target.files[index].name)
               try{
-                axios.post('http://localhost:5000/api/product/SaveFile', formdata)
+                axios.post('http://localhost:5000/api/product/SaveFile/Product', formdata)
               }catch(e){
                 console.log(e)
               }
@@ -168,7 +168,7 @@ const EditProduct = ({show,onHide,product,onUpdate}) => {
                                 </button>
                                 {productPhotos.map(productPhoto=>(
                                     <div className="position-relative">
-                                        <img src={`http://localhost:5000/photos/${productPhoto.ProductPhotoPath}`} 
+                                        <img src={`http://localhost:5000/photos/ProductPhotos/${productPhoto.ProductPhotoPath}`} 
                                         alt="" 
                                         className="editProd-img-preview" 
                                         />

@@ -6,6 +6,9 @@ import OtherTables from './dash-sections/OtherTables';
 import PostsTables from './dash-sections/PostsTables';
 import RequestsTables from './dash-sections/RequestsTables';
 import UsersDataTable from './dash-sections/UsersDataTables';
+import RequestIcon from '../../images/requestIcon.jpg'
+import PostIcon from '../../images/postIcon.png'
+import { Spinner } from 'react-bootstrap';
 
 const Dashboard = () => {
 
@@ -14,12 +17,14 @@ const Dashboard = () => {
     const [postsTables,setPostsTables] = useState(true);
     const [otherTables,setOtherTables] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
+    const [loading,setLoading] = useState(false);
     
     useEffect(() => {(async () => {
         await axios
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
+            setLoading(true);
           })
       })()
     }, [])
@@ -27,6 +32,7 @@ const Dashboard = () => {
     return (
     <div>
         <Header search={false}/>
+            {loading?
         <div className="d-flex">
         <div className="dash-side-selector">
             <ul>
@@ -38,7 +44,7 @@ const Dashboard = () => {
                 setOtherTables(false);
                 }}
                 className={` ${postsTables ? "active-side-btn" : ""}`}
-                >Posts</li>
+                > Posts</li>
                 {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"?
                 <li 
                 onClick={()=>{
@@ -48,7 +54,7 @@ const Dashboard = () => {
                     setOtherTables(false);
                 }}
                 className={`${usersTables ? "active-side-btn" : ""}`}
-                ><i class="fas fa-users"></i>  Users</li>
+                >Users</li>
                 :null}
                 <li
                 onClick={()=>{
@@ -58,7 +64,7 @@ const Dashboard = () => {
                     setOtherTables(false);
                 }}
                 className={`${requestsTables ? "active-side-btn" : ""}`}
-                >Requests</li>
+                > Requests</li>
                 
                 {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"?
                 <li
@@ -82,7 +88,7 @@ const Dashboard = () => {
         </div>
         </div>
         </div>
-        
+        :<Spinner animation="border" className="m-5" style={{marginBottom:"400px"}}/>}
         <Footer/>
     </div>
     )

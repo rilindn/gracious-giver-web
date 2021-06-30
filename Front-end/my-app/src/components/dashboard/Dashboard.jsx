@@ -6,6 +6,7 @@ import OtherTables from './dash-sections/OtherTables';
 import PostsTables from './dash-sections/PostsTables';
 import RequestsTables from './dash-sections/RequestsTables';
 import UsersDataTable from './dash-sections/UsersDataTables';
+import OfferedProductTables from './dash-sections/OfferedProductResponseTable';
 import RequestIcon from '../../images/requestIcon.jpg'
 import PostIcon from '../../images/postIcon.png'
 import { Spinner } from 'react-bootstrap';
@@ -15,6 +16,7 @@ const Dashboard = () => {
     const [usersTables, setUsersTables] = useState(false);
     const [requestsTables,setRequestsTables] = useState(false);
     const [postsTables,setPostsTables] = useState(true);
+    const [offeredProductTables,setOfferedProductTables] = useState(false);
     const [otherTables,setOtherTables] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
     const [loading,setLoading] = useState(false);
@@ -42,6 +44,7 @@ const Dashboard = () => {
                 setRequestsTables(false);
                 setPostsTables(true);
                 setOtherTables(false);
+                setOfferedProductTables(false);
                 }}
                 className={` ${postsTables ? "active-side-btn" : ""}`}
                 > Posts</li>
@@ -52,6 +55,7 @@ const Dashboard = () => {
                     setRequestsTables(false);
                     setPostsTables(false);
                     setOtherTables(false);
+                    setOfferedProductTables(false);
                 }}
                 className={`${usersTables ? "active-side-btn" : ""}`}
                 >Users</li>
@@ -62,21 +66,37 @@ const Dashboard = () => {
                     setRequestsTables(true);
                     setPostsTables(false);
                     setOtherTables(false);
+                    setOfferedProductTables(false);
                 }}
                 className={`${requestsTables ? "active-side-btn" : ""}`}
                 > Requests</li>
                 
                 {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"?
+
+                
                 <li
                 onClick={()=>{
                     setUsersTables(false);
                     setRequestsTables(false);
                     setPostsTables(false);
                     setOtherTables(true);
+                    setOfferedProductTables(false);
                 }}
                 className={`${otherTables ? "active-side-btn" : ""}`}
                 >Other Tables</li>
                 :null}
+                <li
+                onClick={()=>{
+                    setUsersTables(false);
+                    setRequestsTables(false);
+                    setPostsTables(false);
+                    setOtherTables(false);
+                    setOfferedProductTables(true);
+                }}
+                className={`${offeredProductTables ? "active-side-btn" : ""}`}
+                > Offered Products</li>
+                
+                
             </ul>
         </div>
         <div className="dash-content">
@@ -84,6 +104,7 @@ const Dashboard = () => {
             {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"? (usersTables ? <UsersDataTable/>: null):null}
             {postsTables ? <PostsTables/>: null }
             {requestsTables ? <RequestsTables/>: null}
+            {offeredProductTables? <OfferedProductTables/>:null}
             {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"? (otherTables ? <OtherTables/>: null ):null}
         </div>
         </div>

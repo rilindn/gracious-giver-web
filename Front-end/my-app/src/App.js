@@ -16,7 +16,7 @@ import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/Chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
 import EditMyUserData from './components/UserSettings/EditMyUserData'
-import Organization from './components/Organization/Organization'
+import Organization from './components/Organization/RegisterOrganizationForm'
 import RequestDetails from './components/home/RequestDetails'
 
 function App() {

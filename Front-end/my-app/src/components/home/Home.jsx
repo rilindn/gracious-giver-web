@@ -21,6 +21,9 @@ const Home = ({loggedInUser}) => {
     useEffect(()=>{
         getproducts();
         getRequests();
+        console.log("loggedInUser")
+        console.log(loggedInUser)
+        
     },[]);
 
     const getproducts = async () => {
@@ -105,11 +108,11 @@ const Home = ({loggedInUser}) => {
                         
                 </div>
             </div>
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
                 <Pagination
                 total={products.length}
                 />
-            </div>
+            </div> */}
             </div>
         <Footer/>
             

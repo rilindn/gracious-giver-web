@@ -150,7 +150,7 @@ const Header = ({ search }) => {
                     onClick={handleLogout}
                     eventKey="4"
                   >
-                    Log out {loggedInUser.UserName}
+                    Log out {loggedInUser.UserName || loggedInUser.Username}
                   </Dropdown.Item>
                 </DropdownButton>
               </Nav>

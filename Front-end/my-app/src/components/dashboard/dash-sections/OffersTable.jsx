@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import OfferedProductResponseTable from '../OfferedProductResponse/OfferedProductResponseTable';
+import  OfferproductTable from '../dash-offerproduct/OfferproductTable';
 
 
-
-const OfferedProductTables = () => {
+const OffersTables = () => {
 
     
     const [offeredProductResponseTable, setOfferedProductResponseTable] = useState(true);
     const [loggedInUser, setLoggedInUser] = useState([])
     const [loading,setLoading] = useState(false);
-    const [offeredProductTable, setOfferedProductTable] = useState(false);
-    
+    const [offerproductTable, setOfferproductTable] = useState(false);
+   
+  
     
     useEffect(() => {(async () => {
         await axios
@@ -31,32 +32,36 @@ const OfferedProductTables = () => {
         <div className="dash-content">
         <ul className="d-flex dash-selector">
         
-            <li>
+            
+            {/* <li>
                 <button
                 onClick={()=>{
                     setOfferedProductResponseTable(true);
-                    setOfferedProductTable(false);
+                    setOfferproductTable(false);
                 }}
                 className={`dash-btn ${offeredProductResponseTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                  OffProdResponseTable
                 </button>
-            </li>
+            </li> */}
             <li>
                 <button
                 onClick={()=>{
                     setOfferedProductResponseTable(false);
-                    setOfferedProductTable(true);
+                    setOfferproductTable(true);
                 }}
-                className={`dash-btn ${offeredProductTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                className={`dash-btn ${offerproductTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                   Offered Product Table
                 </button>
             </li>
+
+        
         </ul>
         <div className="dash-tables">
             {offeredProductResponseTable ? <OfferedProductResponseTable loggedInUser={loggedInUser}/>: null }
-            {offeredProductTable ? <OfferedProductResponseTable loggedInUser={loggedInUser}/>: null }
+            {offerproductTable ? <OfferproductTable />: null }
+       
         </div>
         </div>
         </div>
@@ -65,5 +70,5 @@ const OfferedProductTables = () => {
     )
 }
 
-export default OfferedProductTables
+export default OffersTables
 

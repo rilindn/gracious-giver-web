@@ -5,7 +5,7 @@ import OfferedProductResponseTable from '../OfferedProductResponse/OfferedProduc
 import  OfferproductTable from '../dash-offerproduct/OfferproductTable';
 
 
-const OfferedProductTables = () => {
+const OffersTables = () => {
 
     
     const [offeredProductResponseTable, setOfferedProductResponseTable] = useState(true);
@@ -32,7 +32,8 @@ const OfferedProductTables = () => {
         <div className="dash-content">
         <ul className="d-flex dash-selector">
         
-            <li>
+            
+            {/* <li>
                 <button
                 onClick={()=>{
                     setOfferedProductResponseTable(true);
@@ -42,7 +43,7 @@ const OfferedProductTables = () => {
                 >
                  OffProdResponseTable
                 </button>
-            </li>
+            </li> */}
             <li>
                 <button
                 onClick={()=>{
@@ -69,5 +70,5 @@ const OfferedProductTables = () => {
     )
 }
 
-export default OfferedProductTables
+export default OffersTables
 

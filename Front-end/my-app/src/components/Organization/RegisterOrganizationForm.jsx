@@ -5,8 +5,7 @@ import faPhotoUpload from '../../images/photoUpload.png'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import Footer from '../footer/Footer';
-import Header from './../Header/HeaderLoginRegister';
-
+import Header from '../Header/HeaderLoginRegister';
 
 const RegisterOrganizationForm = ({loggedInUser}) => {
 
@@ -14,6 +13,8 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
     const [categories, setCategories] = useState([]);
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
     const fileInput = useRef(null);
 
     const handleFileInputClick = event => {
@@ -22,7 +23,35 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
 
     useEffect(()=>{
         getCategories();
+        getStates();
+        getCities();
     },[selectedFiles]);
+
+    const getStates = async () => {
+      try{
+        await axios.get('http://localhost:5000/api/shteti')
+        .then(res=>{
+          console.log(res)
+          setStates(res.data)
+        })
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
+
+    const getCities = async () => {
+      try{
+        await axios.get('http://localhost:5000/api/city')
+        .then(res=>{
+          console.log(res)
+          setCities(res.data)
+        })
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
 
     const getCategories = async () => {
         try{
@@ -144,6 +173,15 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             />
           </Form.Group>
 
+          <Form.Group className="form-group-el d-flex">
+            <Form.Label htmlFor="inputName">Logo </Form.Label>
+            <Form.Control
+              style={{width: "400px"}}
+              type="file"
+              name="logo"
+            />
+          </Form.Group>
+
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
             <Form.Label> Category</Form.Label>
             <Form.Control
@@ -169,19 +207,34 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
           </Form.Group>
 
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
-            <Form.Label>Location</Form.Label>
-            <Form.Control 
-            name="location"
-            style={{width: "400px"}} 
-            as="select" 
-            custom
+            <Form.Label>State</Form.Label>
+            <Form.Control
+             style={{width: "400px"}} 
+             as="select" 
+             name="state"
+             custom
+             required
             >
-              <option>London</option>
-              <option>Manchester</option>
-              <option>Oxford</option>
-              <option>Edinburgh</option>
-              <option>Glasgow</option>
-            </Form.Control>
+             <option></option>
+             {states.map(state=>(
+             <option value={state.Emri}>{state.Emri}</option>
+            ))}
+         </Form.Control>
+          </Form.Group>            
+          <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+             style={{width: "400px"}} 
+             as="select" 
+             name="state"
+             custom
+             required
+            >
+             <option></option>
+            {cities.map(city=>(
+             <option value={city.CityName}>{city.CityName}</option>
+             ))}
+         </Form.Control>
           </Form.Group>            
           <Button 
           type="submit" 

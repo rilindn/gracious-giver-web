@@ -105,23 +105,21 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>OffProdResId</th>
-                                <th>ResponseName</th>
-                                <th>ResponseId</th>
-                                <th>ResponseDate</th>
-                                <th>OffProductId</th>
+                                <th>Nr.</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>OfferedProduct</th>
                                 <th>Message</th>
-                                <th>ProdProvId</th>
-                                <th>ReceiverId</th>
+                                <th>Donator</th>
+                                <th>Receiver</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {offeredProductResponseData.map(offProdresponse=>(
+                            {offeredProductResponseData.map((offProdresponse,i)=>(
                                 <tr>
-                                <td>{offProdresponse.OfferedProductResponseId}</td>
+                                <td>#{i}</td>
                                 <td>{offProdresponse.OfferedProductResponseName}</td>
-                                <td>{offProdresponse.ResponseId}</td>
                                 <td>{offProdresponse.OfferedProductResponseDate}</td>
                                 <td>{offProdresponse.OfferedProductId}</td>
                                 <td>{offProdresponse.Message}</td>

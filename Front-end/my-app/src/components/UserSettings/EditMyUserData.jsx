@@ -14,6 +14,9 @@ const EditMyUserData = () => {
         const [loggedInUser, setLoggedInUser] = useState([])
         const [states, setStates] = useState([]);
         const [cities, setCities] = useState([]);
+        const [selectedState,setSelectedState] = useState()
+        const [selectedCity,setSelectedCity] = useState()
+        const [selectedRole,setSelectedRole] = useState()
         
 
         useEffect(() => {(async () => {
@@ -174,37 +177,48 @@ const EditMyUserData = () => {
                 
    
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <label for="">State</label>
-                        <select name="UserState"  defaultValue={loggedInUser.UserState} id="State" class="form-control">
-                        {states.map(state=>(
-                          <option >{state.Emri}</option>
-                     ))}
-                         
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="">City</label>
-                        <select  name="UserCity" id="City" class="form-control">
-                        {cities.map(city=>(
-                
-                <option>{city.CityName}</option>
-                ))}
-                        </select>
-                    </div>
+                    <select
+                      name="UserState"
+                      id="State"
+                      class="form-control"
+                      value={selectedState}
+                      onChange={(e)=>setSelectedState(e.target.value)}
+                    >
+                      {states.map((state) => (
+                        <option>{state.Emri}</option>
+                      ))}
+                    </select>
+                  </div>
+                    <div class="form-group col-md-6">
+                    <label for="">City</label>
+                    <select name="UserCity" id="City" class="form-control" value={selectedCity}
+                    onChange={(e)=>setSelectedCity(e.target.value)}
+                    >
+                      {cities.map((city) => (
+                        <option value={city.CityName}>{city.CityName}</option>
+                      ))}
+                    </select>
+                  </div>
                     
                     <div class="form-group col-md-2">
                         <label for="inputZip5">Zip</label>
                         <input  name="UserPostcode" defaultValue={loggedInUser.UserPostcode} type="text" class="form-control" id="inputZip5" placeholder="98232" />
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="">Role</label>
-                        <select name="UserRole"  defaultValue={loggedInUser.UserRole} id="Role" class="form-control">
-                            <option   selected="">Choose...</option>
-                            <option>Donator</option>
-                            <option>Giver</option>
-                        </select>
-                    </div>
+                    <div class="form-group col-md-6">
+                    <label for="">Role</label>
+                    <select
+                      name="UserRole"
+                      id="Role"
+                      class="form-control"
+                      value={selectedRole}
+                      onChange={(e)=>setSelectedRole(e.target.value)}
+                    >
+                      <option value="Donator">Donator</option>
+                      <option value="Receiver">Receiver</option>
+                    </select>
+                  </div>
 
                    
                 </div>

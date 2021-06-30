@@ -2,7 +2,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } 
 import React, { useState } from "react";
 import Footer from "../footer/Footer";
 import HeaderLoginRegister from "../Header/HeaderLoginRegister";
-import { Form, FormLabel } from "react-bootstrap";
+import { Form, FormLabel,FormGroup } from "react-bootstrap";
 import { SocialIcon } from 'react-social-icons';
 import { FaUser, FaLock} from 'react-icons/fa'
 import axios from "axios";
@@ -57,11 +57,13 @@ const FormPage = () => {
               </div>
             <Form
               onSubmit={handleSubmit}
+              className="d-flex flex-column align-items-center"
             >
-              <FormLabel>
+              <FormGroup className="icon-position-fg">
+              <FormLabel className="label-alignin">
                       Username </FormLabel>
-              <FaUser className="icon-position-ul"/>       
-              <MDBInput className="lbl-position-lgn"
+              <FaUser className="icon-position"/>       
+              <MDBInput className="lbl-position"
                 type="text"
                 error="wrong"
                 success="right"
@@ -69,11 +71,13 @@ const FormPage = () => {
                 onChange={e=>setUsername(e.target.value)}
                 style={{width:"400px", paddingLeft:"30px",marginBottom:"5px"}}
               />
+              </FormGroup>
 
-            <FormLabel>
+              <FormGroup className="icon-position-fg">
+            <FormLabel className="label-alignin">
                       Password </FormLabel>
-              <FaLock className="icon-position-pl"/>        
-              <MDBInput className = "lbl-position-lgn"
+              <FaLock className="icon-position"/>        
+              <MDBInput className = "lbl-position"
                 type="password"
                 containerClass="mb-0"
                 icon="BsPersonFill"
@@ -81,6 +85,7 @@ const FormPage = () => {
                 onChange={e=>setPassword(e.target.value)}
                 style={{width:"400px", paddingLeft:"30px"}}
               />
+              </FormGroup>
               <p className="font-small blue-text d-flex-f pb-3">
                 Forgot
                 <a href="#!" className="blue-text ml-1">

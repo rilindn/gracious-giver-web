@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import ResponseTable from'../dash-response/ResponseTable';
-import ProductRequestTable from '../product-request-dash/ProductRequestTable';
 import axios from 'axios';
+import OfferedProductResponseTable from '../OfferedProductResponse/OfferedProductResponseTable';
 
 
-const RequestsTables = () => {
+const OfferedProductTables = () => {
 
     
-    const [requestTable, setRequestTable] = useState(true);
-    const [responseTable, setResponseTable] = useState(false);
-    const [loggedInUser, setLoggedInUser] = useState([])
+    const [offeredProductResponseTable, setOfferedProductResponseTable] = useState(true);
     
     useEffect(() => {(async () => {
         await axios
@@ -29,8 +26,7 @@ const RequestsTables = () => {
             <li>
                 <button
                 onClick={()=>{
-                    setRequestTable(true);
-                    setResponseTable(false);
+                    setOfferedProductResponseTable(true);
                 }}
                 className={`dash-btn ${requestTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -40,8 +36,7 @@ const RequestsTables = () => {
             <li>
                 <button
                 onClick={()=>{
-                    setRequestTable(false);
-                    setResponseTable(true);
+                    setOfferedProductResponseTable(false);
                 }}
                 className={`dash-btn ${responseTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -50,8 +45,7 @@ const RequestsTables = () => {
             </li>
         </ul>
         <div className="dash-tables">
-            {responseTable ? <ResponseTable loggedInUser={loggedInUser}/>: null }
-            {requestTable ? <ProductRequestTable loggedInUser={loggedInUser}/>: null }
+            {offeredProductResponseTable ? <OfferedProductResponseTable loggedInUser={loggedInUser}/>: null }
         </div>
         </div>
         </div>
@@ -60,5 +54,5 @@ const RequestsTables = () => {
     )
 }
 
-export default RequestsTables
+export default OfferedProductTables
 

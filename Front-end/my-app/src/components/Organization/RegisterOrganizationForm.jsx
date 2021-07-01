@@ -11,8 +11,8 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
 
     let history = useHistory()
     const [categories, setCategories] = useState([]);
-    const [selectedFiles,setSelectedFiles] = useState([]);
-    const [selectedFilesName,setSelectedFilesName] = useState([]);
+    const [logoName,setLogoName] = useState([]);
+    const [docFileName,setDocFileName] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const fileInput = useRef(null);
@@ -25,7 +25,7 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
         getCategories();
         getStates();
         getCities();
-    },[selectedFiles]);
+    },[]);
 
     const getStates = async () => {
       try{
@@ -66,24 +66,19 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
         }
     }
 
-    const handlePhotoSubmit = (e) => {
+    const handleFileSubmit = (e) => {
       e.preventDefault()
+      setLogoName(e.target.files[0].name);
+      const formData = new FormData()
+      formData.append('myFile',e.target.files[0],e.target.files[0].name)
       if(e.target.files){
-        const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
-        setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
-        var fileArrayN = Array.from(e.target.files)
-        setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
-        for (let index = 0; index < e.target.files.length; index++) {
-            const formdata = new FormData();
-            formdata.append('image',e.target.files[index], e.target.files[index].name)
             try{
-              axios.post('http://localhost:5000/api/product/SaveFile/Product', formdata)
+              axios.post('http://localhost:5000/api/Organization/SaveFile/Organization', formData)
             }catch(e){
               console.log(e)
             }
           }
         }
-      }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -92,9 +87,12 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             Password: event.target.password.value,
             Name: event.target.name.value,
             Email: event.target.email.value,
+            Logo: event.target.logo.value,
+            Documentation: event.target.documentation.value,
             Category: event.target.category.value,
             Description: event.target.description.value,
-            Location: event.target.location.value,
+            State: event.target.state.value,
+            City: event.target.city.value,
             Checked: false
           })
           // .then(()=>{
@@ -179,6 +177,17 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
               style={{width: "400px"}}
               type="file"
               name="logo"
+              onChange={handleFileSubmit}
+            />
+          </Form.Group>
+
+          <Form.Group className="form-group-el d-flex">
+            <Form.Label htmlFor="inputName">Documentation </Form.Label>
+            <Form.Control
+              style={{width: "400px"}}
+              type="file"
+              name="documentation"
+              onChange={handleFileSubmit}
             />
           </Form.Group>
 
@@ -226,7 +235,7 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             <Form.Control
              style={{width: "400px"}} 
              as="select" 
-             name="state"
+             name="city"
              custom
              required
             >

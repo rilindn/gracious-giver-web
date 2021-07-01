@@ -4,9 +4,11 @@ import { Button, Col, Container, Form,  Row, Table } from 'react-bootstrap';
 import EditOfferProduct from './EditOfferProduct'
 import DeleteOfferProduct from './DeleteOfferProduct'
 import { Search } from '../DataTable/Search';
+import Offer from './Offer';
 
 
-const OfferProductTable = () => {
+
+const OfferProductTable = ({loggedInUser}) => {
 
     const [OfferProducts, setOfferProduct] = useState([]);
     const [allOfferProduct, setAllOfferProduct]= useState([]);
@@ -25,9 +27,10 @@ const OfferProductTable = () => {
         },[maxOfferProductShow,editOfferProductModal,deleteOfferProductModal]);
         
 
+    
         const getAmOfOfferProduct = async (maxOfferProductShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/OfferProduct/amount/" + maxOfferProductShow)
+              await axios.get("http://localhost:5000/api/offerproduct/amount/"+ maxOfferProductShow +(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId ):(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):"")))
               .then(res=>{
                 console.log(res.data)
                   setOfferProduct(res.data)
@@ -40,7 +43,7 @@ const OfferProductTable = () => {
 
         const getAllOfferProduct = async () => {
             try{
-             await axios.get(`http://localhost:5000/api/OfferProduct`)
+             await axios.get(`http://localhost:5000/api/OfferProduct`+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId ):(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):"")))
             .then(res=>{
                 console.log(res.data)
                 setAllOfferProduct(res.data)
@@ -108,45 +111,34 @@ const OfferProductTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>OfferProduct Id</th>
-                                <th>ProductProvider Id</th>
-                                <th>Receiver Id</th>
+                                <th>Nr.</th>
+                                <th>Donator</th>
+                                <th>Receiver</th>
+                                <th>Request</th>
                                 <th>Message</th>
-                                <th>OfferDate</th>
-                                <th>Check Offer</th>
+                                <th>Date</th>
+                                <th>Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            { OfferProductData.map( OfferProduct=>(
-                                <tr>
-                                <td>{ OfferProduct.OfferProductId}</td>
-                                <td>{ OfferProduct.ProductProviderId}</td>
-                                <td>{ OfferProduct.ReceiverId}</td>
-                                <td>{ OfferProduct.Message}</td>
-                                <td>{ OfferProduct.OfferDate}</td>
-                                <td>{ OfferProduct.CheckOffer}</td>
-                                <td>
-                                    <Button 
-                                    onClick={() => {
-                                        setEditOfferProductModal(true);
-                                        setOfferProductV(OfferProduct)
-                                    }}
-                                    className="m-2" 
-                                    variant ="warning"
-                                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                    </Button>
-                                    <Button 
-                                     onClick={() => {
-                                        setDeleteOfferProductModal(true);
-                                        setOfferProductD(OfferProduct.OfferProductId)
-                                    }} 
-                                     className="delete" 
-                                     variant ="danger"
-                                     data-toggle="modal"
-                                     ><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                     </Button>
-                                </td>
-                            </tr>
+                            {OfferProductData.map((offer,i)=>(
+                            <Offer offer={offer} 
+                            i={i} 
+                                loggedInUser={loggedInUser}
+                                setRequestV ={()=>{
+                                    setEditOfferProductModal(true)
+                                    setOfferProductV(offer)
+                                }}
+                                setRequestD ={()=>{
+                                    setDeleteOfferProductModal(true)
+                                    setOfferProductD(offer.OfferProductId)
+                                }}
+                                onUpdate={()=>{
+                                    getAmOfOfferProduct(maxOfferProductShow);
+                                    getAllOfferProduct();
+                                }}
+                                />
+
                             ))}
                         </tbody>
                     </Table>

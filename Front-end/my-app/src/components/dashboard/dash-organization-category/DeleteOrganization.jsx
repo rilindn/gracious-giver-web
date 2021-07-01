@@ -1,27 +1,26 @@
-import axios from 'axios'
 import React from 'react'
-import { Form, Modal } from 'react-bootstrap'
+import { Form, Modal} from 'react-bootstrap'
+import axios from 'axios'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteOfferProduct = ({show,onHide,OfferProductId,onUpdate}) => {
+const DeleteOrganization = ({show,onHide,OrganizationId,onUpdate}) => {
 
     const handleSubmit = (event) => {
-
         event.preventDefault();
-        axios.delete("http://localhost:5000/api/OfferProduct/"+OfferProductId)
+        axios.delete("http://localhost:5000/api/Organization/"+OrganizationId)
         .then(()=>{
             onUpdate();
         })
         .then((res) => {
             NotificationManager.success(
-            'OfferProduct deleted succesfully!',
+            'Organization deleted succesfully!',
             '',
             1000,
             )
         },
             (error) => {
                 NotificationManager.error(
-                'Error while deleting the OfferProduct!',
+                'Error while deleting the Organization!',
                 "",
                 1000,
                 )
@@ -29,41 +28,33 @@ const DeleteOfferProduct = ({show,onHide,OfferProductId,onUpdate}) => {
           )
     }
     
+    
     return (
         <div>   
-        <Modal
+        <Modal 
            show={show}
-           className="modal fade"
-           >
+          className="modal fade">
             <div className ="modal-dialog">
-             <div 
-             className="modal-content"
-             >
-                    <Form 
-                    onSubmit={handleSubmit}
-                    className="p-3"
-                    >
+             <div className="modal-content " >
+                    <Form  onSubmit={handleSubmit}  className="p-3">
                         <div>					
-                            <h4 className="modal-title">Delete Request</h4>
+                            <h4 className="modal-title">Delete Organization</h4>
                         </div>
                         <div>				
-                            <p>Are you sure you want to delete this OfferProduct</p>
+                            <p>Are you sure you want to delete this Organization?</p>
                             <p className="text-warning"><small>This action cannot be undone.</small></p>
                             </div>	
                         <Modal.Footer>
-                            <input 
+                            <input                                                                                                  
                             onClick={onHide}
                             type="button" 
                             className="btn btn-info" 
-                            data-dismiss="Modal" 
-                            value="Cancel"
-                            />
+                            data-dismiss="Modal" value="Cancel"/>
                             <input 
+                            onClick={onUpdate}
                             type="submit" 
                             className="btn btn-danger" 
-                            value="Delete"
-                            onClick={onHide}
-                            />
+                            value="Delete"/>
                         </Modal.Footer>
                     </Form>
                 </div>
@@ -73,4 +64,4 @@ const DeleteOfferProduct = ({show,onHide,OfferProductId,onUpdate}) => {
     )
 }
 
-export default DeleteOfferProduct
+export default DeleteOrganization

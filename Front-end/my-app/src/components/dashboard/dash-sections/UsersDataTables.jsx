@@ -3,6 +3,11 @@ import UserTable from '../dash-user/UserTable';
 import AdminTable from'../dash-admin/AdminTable';
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
+<<<<<<< HEAD
+import OrganizationTable from '../dash-organization/Organization';
+=======
+
+>>>>>>> a0760997066a838c77a6e72dadcfd6cbd112faad
 
 
 const UsersDataTable = () => {
@@ -11,6 +16,7 @@ const UsersDataTable = () => {
     const [adminTable, setAdminTable] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
     const [loading,setLoading] = useState(false);
+    const [organizationTable, setOrganizationTable] = useState(false);
     
     useEffect(() => {(async () => {
         await axios
@@ -33,10 +39,24 @@ const UsersDataTable = () => {
                 onClick={()=>{
                     setUserTable(true);
                     setAdminTable(false);
+                    setOrganizationTable(false);
                 }}
                 className={`dash-btn ${userTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
                 Users
+                </button>
+            </li>
+
+            <li>
+                <button
+                onClick={()=>{
+                    setUserTable(false);
+                    setAdminTable(false);
+                    setOrganizationTable(true);
+                }}
+                className={`dash-btn ${organizationTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+               Organizations
                 </button>
             </li>
             
@@ -46,6 +66,7 @@ const UsersDataTable = () => {
                 onClick={()=>{
                     setUserTable(false);
                     setAdminTable(true);
+                    setOrganizationTable(false);
                 }}
                 className={`dash-btn ${adminTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
@@ -53,10 +74,11 @@ const UsersDataTable = () => {
                 </button>
             </li>
             :null}
-            
+   
         </ul>
         <div className="dash-tables">
             {userTable ? <UserTable/>: null}
+            {organizationTable ? <OrganizationTable/>:null}
             {loggedInUser.UserRole==='SuperAdmin'?
             (adminTable ? <AdminTable/>: null) :null}
         </div>

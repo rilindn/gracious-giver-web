@@ -3,12 +3,12 @@ import React from 'react'
 import { Form, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteOfferedProductResponse = ({show,onHide,OffProdResponseId,onUpdate}) => {
+const DeleteOfferedProductResponse = ({show,onHide,OfferedProductResponseId,onUpdate}) => {
 
     const handleSubmit = (event) => {
 
         event.preventDefault();
-        axios.delete("http://localhost:5000/api/OfferedProductResponse/"+OffProdResponseId)
+        axios.delete("http://localhost:5000/api/OfferedProductResponse/"+OfferedProductResponseId)
         .then(()=>{
             onUpdate();
         })

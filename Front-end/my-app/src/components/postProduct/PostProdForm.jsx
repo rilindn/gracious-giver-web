@@ -4,15 +4,33 @@ import { Form, Col, Button} from 'react-bootstrap'
 import faPhotoUpload from '../../images/photoUpload.png'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
-
+import ValidationPostProduct from './ValidationPostProduct';
 
 const PostProdForm = ({loggedInUser}) => {
 
     let history = useHistory()
     const [categories, setCategories] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [errors, setErrors] = useState({});
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
     const fileInput = useRef(null);
+
+    const [values,setValues] = useState({
+      ProductName:"",
+      ProductCategory:"",
+      ProductState: "",
+      ProductDescription: "",
+      ProductLocation: "",
+      ProductComment: "",
+    })
+
+    const handleChange = (event) => {
+      setValues({
+        ...values,
+        [event.target.name]:event.target.value,
+      })
+    }
 
     const handleFileInputClick = event => {
       fileInput.current.click();
@@ -20,6 +38,7 @@ const PostProdForm = ({loggedInUser}) => {
 
     useEffect(()=>{
         getCategories();
+        getCities();
     },[selectedFiles]);
 
     const getCategories = async () => {
@@ -34,6 +53,19 @@ const PostProdForm = ({loggedInUser}) => {
         }
     }
 
+    const getCities = async () => {
+      try{ 
+      await axios.get(`http://localhost:5000/api/city`)
+      .then(res=>{
+          console.log(res.data)
+          setCities(res.data)
+      })
+      }
+      catch(e){
+          console.log(e);
+      }
+  }
+
     const handlePhotoSubmit = (e) => {
       e.preventDefault()
       if(e.target.files){
@@ -41,8 +73,6 @@ const PostProdForm = ({loggedInUser}) => {
         setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
         var fileArrayN = Array.from(e.target.files)
         setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
-        //console.log("fileArrayN");
-        //console.log(fileArrayN.[0].name);
         for (let index = 0; index < e.target.files.length; index++) {
             const formdata = new FormData();
             formdata.append('image',e.target.files[index], e.target.files[index].name)
@@ -57,6 +87,8 @@ const PostProdForm = ({loggedInUser}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setErrors(ValidationPostProduct(values));
+        if(Object.keys(errors).length===0){
         axios.post('http://localhost:5000/api/product', {
             ProductName: event.target.ProductName.value,
             ProductCategory: event.target.ProductCategory.value,
@@ -95,6 +127,7 @@ const PostProdForm = ({loggedInUser}) => {
             },
           )
     }
+  }
 
     return (
         <div>
@@ -104,25 +137,41 @@ const PostProdForm = ({loggedInUser}) => {
         className ="form-components-width mx-auto">
           <Form.Group className="form-group-el d-flex">
             <Form.Label htmlFor="inputName">Product Name</Form.Label>
+            <div>
             <Form.Control
               style={{width: "400px"}}
               type="text"
               name="ProductName"
+              required
+              value={values.ProductName}
+              onChange={handleChange}
             />
+                    <p className="error">{errors.ProductName}</p>
+                    {errors.ProductName &&
+                    <ul>
+                      <li className="info">{errors.ProductNameNote1}</li>
+                      <li className="info">{errors.ProductNameNote2}</li>
+                    </ul>}
+                    </div>
           </Form.Group>
-
+          
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
             <Form.Label>Product Category</Form.Label>
+            <div>
             <Form.Control
              name="ProductCategory"
              style={{width: "400px"}} 
              as="select" 
              custom
+             required
+             value={values.ProductCategory}
+             onChange={handleChange}
              >
              {categories.map(categorie=>(
-              <option>{categorie.ProductCategoryName}</option>
+              <option values={categorie.ProductCategoryName}>{categorie.ProductCategoryName}</option>
              ))}
             </Form.Control>
+            </div>
           </Form.Group> 
         <Form.Group className="form-group-el">
               <Form.Label sm={3}>
@@ -139,6 +188,7 @@ const PostProdForm = ({loggedInUser}) => {
                   name="ProductState"
                   type="radio"
                   label="Brand New"
+                  required
                   id="formHorizontalRadios1"
                 />
                 <Form.Check inline
@@ -146,6 +196,7 @@ const PostProdForm = ({loggedInUser}) => {
                   name="ProductState"
                   type="radio"
                   label="Second Hand"
+                  required
                   id="formHorizontalRadios2"
                 />
                 <Form.Check inline
@@ -153,6 +204,7 @@ const PostProdForm = ({loggedInUser}) => {
                   name="ProductState"
                   type="radio"
                   label="Refurbished"
+                  required
                   id="formHorizontalRadios3"
                 />
                 
@@ -185,13 +237,19 @@ const PostProdForm = ({loggedInUser}) => {
           </Form.Group >
             <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
             <Form.Label  >Additional Description</Form.Label>
+            <div>
             <Form.Control 
             name="ProductDescription" 
             placeholder ="Type here..." 
             style={{width: "400px"}} 
             as="textarea" 
+            value={values.ProductDescription}
+            onChange={handleChange}
+            required
             rows={3} 
             />
+            <p className="error">{errors.ProductDescription}</p>
+            </div>
           </Form.Group>
 
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
@@ -201,12 +259,13 @@ const PostProdForm = ({loggedInUser}) => {
             style={{width: "400px"}} 
             as="select" 
             custom
+            required
+            value={values.ProductLocation}
+            onChange={handleChange}
             >
-              <option>London</option>
-              <option>Manchester</option>
-              <option>Oxford</option>
-              <option>Edinburgh</option>
-              <option>Glasgow</option>
+              {cities.map(city=>(
+              <option values={city.CityName}>{city.CityName}</option>
+             ))}
             </Form.Control>
           </Form.Group>
 
@@ -217,6 +276,8 @@ const PostProdForm = ({loggedInUser}) => {
             placeholder ="Type here..." 
             style={{width: "400px"}} 
             as="textarea" 
+            value={values.ProductComment}
+            onChange={handleChange}
             rows={3} 
             />
           </Form.Group>

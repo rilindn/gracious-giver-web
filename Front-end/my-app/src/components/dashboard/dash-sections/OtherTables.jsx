@@ -3,7 +3,11 @@ import CityTable from '../dash-city/CityTable';
 import CategTable from '../dash-category/CategTable';
 import StateTable from '../dash-state/StateTable';
 import StreetTable from'../dash-street/StreetTable';
-import OrganizationCategoryTable from '../dash-organization/OrganizationCategoryTable'
+<<<<<<< HEAD
+import OrganizationCategoryTable from '../dash-organizationcategory/OrganizationCategoryTable'
+=======
+import OrganizationCategoryTable from '../dash-organization-category/OrganizationCategoryTable'
+>>>>>>> a0760997066a838c77a6e72dadcfd6cbd112faad
 import axios from 'axios';
 
 

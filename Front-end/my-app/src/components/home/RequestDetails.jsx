@@ -59,22 +59,22 @@ const RequestDetails = ({loggedInUser}) => {
       
           var date = new Date().toLocaleString()
           console.log(date)
-          axios.post('http://localhost:5000/api/request_Request', {
-            UserId: loggedInUser.UserId,
-            requestId: request.requestId,
+          axios.post('http://localhost:5000/api/offerproduct', {
+            ProductProviderId: loggedInUser.UserId,
+            ReceiverId: receiver.UserId,
             Message: event.target.Message.value,
-            Request_Date: date,
+            Offerdate: date,
             checkedR : false
           })
           .then(
             (res) =>{
               console.log(res.data); 
-              NotificationManager.success('Your request has been sent!','',3000);
+              NotificationManager.success('Your offer has been sent!','',3000);
               event.target.Message.value=null
             },
             (error) =>{
               console.log(error)
-              NotificationManager.error('Problems while requesting the request!','',3000);
+              NotificationManager.error('Problems while sending the offer!','',3000);
             },
           )
         }

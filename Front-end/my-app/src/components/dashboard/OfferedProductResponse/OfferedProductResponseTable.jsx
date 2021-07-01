@@ -38,7 +38,7 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
 
         const getAllOffProdResponses = async () => {
             try{ 
-            await axios.get("http://localhost:5000/api/OfferedProductResponse/"+(loggedInUser.UserRole==="Receiver"?("receiver/"+loggedInUser.UserId):""))
+            await axios.get("http://localhost:5000/api/OfferedProductResponse/"+(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):""))
             .then(res=>{
                 console.log(res.data)
                 setAlloffProdResponses(res.data)
@@ -72,7 +72,7 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
                     <div className="table-title">
                         <Row className="row">
                             <Col className="col-sm-3">
-                                <h2><b> Responses</b></h2>
+                                <h2><b>OffProd Responses</b></h2>
                             </Col>
                             <Col className ="col-sm-6 d-flex justify-content-end">
                                  <span className="showing-res-txt">Showing {offeredProductResponseData.length} of {alloffProdResponses.length} entries</span>
@@ -105,23 +105,21 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>OfferedProductResponseId</th>
-                                <th>OfferedProductResponseName</th>
-                                <th>ResponseId</th>
-                                <th>OfferedProductResponseDate</th>
-                                <th>OfferedProductId</th>
+                                <th>Nr.</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>OfferedProduct</th>
                                 <th>Message</th>
-                                <th>ProductProviderId</th>
-                                <th>ReceiverId</th>
+                                <th>Donator</th>
+                                <th>Receiver</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {offeredProductResponseData.map(offProdresponse=>(
+                            {offeredProductResponseData.map((offProdresponse,i)=>(
                                 <tr>
-                                <td>{offProdresponse.OfferedProductResponseId}</td>
+                                <td>#{i}</td>
                                 <td>{offProdresponse.OfferedProductResponseName}</td>
-                                <td>{offProdresponse.ResponseId}</td>
                                 <td>{offProdresponse.OfferedProductResponseDate}</td>
                                 <td>{offProdresponse.OfferedProductId}</td>
                                 <td>{offProdresponse.Message}</td>

@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import DeleteOfferedProductResponse from './DeleteOfferedProductResponse'
 import { Search } from '../DataTable/Search';
 import { NotificationManager } from 'react-notifications'
+import Response from './Response';
 
 
 const OfferedProductResponseTable = ({loggedInUser}) => { 
@@ -25,7 +26,7 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
         
         const getAmOfOffProdResponses = async (maxOffProdResponsesShow) =>{
             try{
-              await axios.get("http://localhost:5000/api/OfferedProductResponse/amount/"+maxOffProdResponsesShow+(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):""))
+              await axios.get("http://localhost:5000/api/OfferedProductResponse/amount/"+maxOffProdResponsesShow+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):"")))
               .then(res=>{
                   console.log(res.data)
                   setoffProdResponses(res.data)
@@ -38,7 +39,7 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
 
         const getAllOffProdResponses = async () => {
             try{ 
-            await axios.get("http://localhost:5000/api/OfferedProductResponse/"+(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):""))
+            await axios.get("http://localhost:5000/api/OfferedProductResponse"+(loggedInUser.UserRole==="Donator"?("/donator/"+loggedInUser.UserId):(loggedInUser.UserRole==="Receiver"?("/receiver/"+loggedInUser.UserId):"")))
             .then(res=>{
                 console.log(res.data)
                 setAlloffProdResponses(res.data)
@@ -106,39 +107,26 @@ const OfferedProductResponseTable = ({loggedInUser}) => {
                         <thead>
                             <tr>
                                 <th>Nr.</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>OfferedProduct</th>
-                                <th>Message</th>
                                 <th>Donator</th>
                                 <th>Receiver</th>
+                                <th>Request</th>
+                                <th>Message</th>
+                                <th>Response</th>
+                                <th>Date</th>
+                                <th>Time</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {offeredProductResponseData.map((offProdresponse,i)=>(
-                                <tr>
-                                <td>#{i}</td>
-                                <td>{offProdresponse.OfferedProductResponseName}</td>
-                                <td>{offProdresponse.OfferedProductResponseDate}</td>
-                                <td>{offProdresponse.OfferedProductId}</td>
-                                <td>{offProdresponse.Message}</td>
-                                <td>{offProdresponse.ProductProviderId}</td>
-                                <td>{offProdresponse.ReceiverId}</td>
-                                <td>                                   
-                                    <Button 
-                                    onClick={() => 
-                                        {setDeleteOffProdResponsesModal(true);
-                                            setoffProdResponsesD(offProdresponse.OfferedProductResponseId)
-                                        }} 
-                                     className="delete" 
-                                     variant ="danger"
-                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                     </Button>
-                                </td>
-                            </tr>
+                            {offeredProductResponseData.map((response,i)=>(
+                                <Response
+                                response={response}
+                                i={i}
+                                onUpdate={()=>{
+                                    setDeleteOffProdResponsesModal(true);
+                                    setoffProdResponsesD(response.OfferedProductResponseId)
+                                }}
+                                />
                             ))}
-                        </tbody>
                     </Table>
                           
                 </div>

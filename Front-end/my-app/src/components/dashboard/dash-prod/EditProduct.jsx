@@ -36,7 +36,8 @@ const EditProduct = ({show,onHide,product,onUpdate}) => {
             ProductPhoto: product.ProductPhoto,
             ProductDescription: event.target.ProductDescription.value,
             ProductLocation: event.target.ProductLocation.value,
-            ProductComment: event.target.ProductComment.value
+            ProductComment: event.target.ProductComment.value,
+            DonatorId:product.DonatorId
           })
           .then(()=>{
             for (let index = 0; index < selectedFilesName.length; index++) {

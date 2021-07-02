@@ -18,7 +18,7 @@ import BookmarkPage from './components/Bookmark/BookmarkPage'
 import EditMyUserData from './components/UserSettings/EditMyUserData'
 import Organization from './components/Organization/RegisterOrganizationForm'
 import RequestDetails from './components/home/RequestDetails'
-
+import Organizations from './components/Organization/Organizations'
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
 
@@ -73,6 +73,9 @@ function App() {
         </Route>
         <Route path="/organization" exact>
           <Organization />
+        </Route>
+        <Route path="/organizations" exact>
+          <Organizations />
         </Route>
         <NotificationContainer />
       </Router>

@@ -14,8 +14,9 @@ const EditOfferProduct = ({show,onHide,OfferProduct,onUpdate}) => {
             ProductProviderId: OfferProduct.ProductProviderId,
             ReceiverId: OfferProduct.ReceiverId,
             Message: event.target.Message.value,
-            OfferDate: event.target.OfferDate.value,
-            CheckOffer: event.target.CheckOffer.value,
+            OfferDate: OfferProduct.OfferDate,
+            CheckOffer: OfferProduct.CheckOffer,
+            RequestId:OfferProduct.RequestId
           })
           .then(()=>{
             onUpdate();
@@ -29,8 +30,8 @@ const EditOfferProduct = ({show,onHide,OfferProduct,onUpdate}) => {
             )
             },
             (error) => {
-                NotificationManager.success(
-                'Error while editing theOfferProduct!'+{error},
+                NotificationManager.error(
+                'Error while editing theOfferProduct!',
                 '',
                 1000,
                 )
@@ -50,52 +51,23 @@ const EditOfferProduct = ({show,onHide,OfferProduct,onUpdate}) => {
                     </div>
                         <div className="modal-body">	
                         <FormGroup className="form-group">
-                                <label> OfferProduct Id</label>
+                                <label> Offer Product Id</label>
                                 <input type="text" 
                                  name="offerProductId"
                                  defaultValue={OfferProduct.OfferProductId}  
                                  className="form-control" 
                                  required disabled/>
-                            </FormGroup>	
-                            <FormGroup className="form-group">
-                                <label>  ProductProvider Id</label>
-                                <input 
-                                name="ProductProviderId"
-                                type="text"
-                                  defaultValue={OfferProduct.ProductProviderId} 
-                                   className="form-control" required
-                                    disabled/>
-                            </FormGroup>
-                            <FormGroup className="form-group">
-                                <label>Receiver Id</label>
-                                <input type="text" 
-                                 name="receiverId"
-                                  defaultValue={OfferProduct.ReceiverId}  className="form-control" required disabled/>
-                            </FormGroup>				
+                            </FormGroup>					
                             <FormGroup className="form-group">
                                 <label>Message</label>
-                                <input
+                                <textarea
                                  defaultValue={OfferProduct.Message} 
                                    name="Message" 
                                    type="text" 
-                                   className="form-control" required />
-                            </FormGroup>	
-                            <FormGroup className="form-group">
-                                <label> OfferDate</label>
-                                <input
-                                 defaultValue={OfferProduct.OfferDate} 
-                                   name="OfferDate" 
-                                  
-                                   className="form-control" required  disabled/>
-                            </FormGroup>	
-                            <FormGroup className="form-group">
-                                <label>CheckOffer</label>
-                                <input
-                                 defaultValue={OfferProduct.CheckOffer} 
-                                   name="CheckOffer" 
-                                   
-                                   className="form-control" required  disabled/>
-                            </FormGroup>	
+                                   className="form-control" 
+                                   required 
+                                   />
+                            </FormGroup>		
                         </div>
                         <Modal.Footer className="modal-footer">
                             <input 

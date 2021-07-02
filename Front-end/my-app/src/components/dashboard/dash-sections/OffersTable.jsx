@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import OfferedProductResponseTable from '../OfferedProductResponse/OfferedProductResponseTable';
-import  OfferproductTable from '../dash-offerproduct/OfferproductTable';
+import OfferProductTable from '../dash-offer-product/OfferProductTable'
 
 
 const OffersTables = () => {
 
     
-    const [offeredProductResponseTable, setOfferedProductResponseTable] = useState(true);
+    const [offeredProductResponseTable, setOfferedProductResponseTable] = useState(false);
+    const [offerproductTable, setOfferproductTable] = useState(true);
     const [loggedInUser, setLoggedInUser] = useState([])
     const [loading,setLoading] = useState(false);
-    const [offerproductTable, setOfferproductTable] = useState(false);
    
   
     
@@ -33,17 +33,6 @@ const OffersTables = () => {
         <ul className="d-flex dash-selector">
         
             
-            {/* <li>
-                <button
-                onClick={()=>{
-                    setOfferedProductResponseTable(true);
-                    setOfferproductTable(false);
-                }}
-                className={`dash-btn ${offeredProductResponseTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
-                >
-                 OffProdResponseTable
-                </button>
-            </li> */}
             <li>
                 <button
                 onClick={()=>{
@@ -52,16 +41,26 @@ const OffersTables = () => {
                 }}
                 className={`dash-btn ${offerproductTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                  Offered Product Table
+                Offered Products
+                </button>
+            </li>
+            <li>
+                <button
+                onClick={()=>{
+                    setOfferedProductResponseTable(true);
+                    setOfferproductTable(false);
+                }}
+                className={`dash-btn ${offeredProductResponseTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
+                >
+                  Offer Responses
                 </button>
             </li>
 
         
         </ul>
         <div className="dash-tables">
+            {offerproductTable ? <OfferProductTable loggedInUser={loggedInUser}/>: null }
             {offeredProductResponseTable ? <OfferedProductResponseTable loggedInUser={loggedInUser}/>: null }
-            {offerproductTable ? <OfferproductTable />: null }
-       
         </div>
         </div>
         </div>

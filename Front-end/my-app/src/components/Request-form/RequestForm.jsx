@@ -6,20 +6,39 @@ import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import Footer from '../footer/Footer';
 import Header from '../Header/Header';
+import ValidationPostRequest from './ValidationPostRequest';
 
 const RequestForm = ({loggedInUser}) => {
     let history = useHistory()
     const [categories, setCategories] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [errors, setErrors] = useState({});
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
     const fileInput = useRef(null);
 
+    
+    const [values,setValues] = useState({
+      RequestName:"",
+      RequestCategory:"",
+      RequestDescription: "",
+      RequestLocation: "",
+      RequestComment: "",
+    })
+
+    const handleChange = (event) => {
+      setValues({
+        ...values,
+        [event.target.name]:event.target.value,
+      })
+    }
     const handleFileInputClick = event => {
         fileInput.current.click();
     };
 
     useEffect(()=>{
         getCategories();
+        getCities();
     },[selectedFiles]);
 
     const getCategories = async () => {
@@ -34,8 +53,22 @@ const RequestForm = ({loggedInUser}) => {
         }
     }
 
+    const getCities = async () => {
+      try{ 
+      await axios.get(`http://localhost:5000/api/city`)
+      .then(res=>{
+          console.log(res.data)
+          setCities(res.data)
+      })
+      }
+      catch(e){
+          console.log(e);
+      }
+  }
     const handleSubmit = (event) => {
         event.preventDefault();
+        setErrors(ValidationPostRequest(values));
+        if(Object.keys(errors).length===0){
         axios.post('http://localhost:5000/api/Request/', {
             RequestDescription: event.target.RequestDescription.value,
             RequestName: event.target.RequestName.value,
@@ -73,6 +106,7 @@ const RequestForm = ({loggedInUser}) => {
             },
           )
     }
+  }
 
     const handlePhotoSubmit = (e) => {
       e.preventDefault()
@@ -81,8 +115,6 @@ const RequestForm = ({loggedInUser}) => {
         setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
         var fileArrayN = Array.from(e.target.files)
         setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
-        //console.log("fileArrayN");
-        //console.log(fileArrayN.[0].name);
         for (let index = 0; index < e.target.files.length; index++) {
             const formdata = new FormData();
             formdata.append('image',e.target.files[index], e.target.files[index].name)
@@ -101,7 +133,7 @@ const RequestForm = ({loggedInUser}) => {
 
         </Header>
         
-        <div className="pt-3 prod-form-wrapper mx-auto">
+        <div className="pt-3 prod-form-wrapper1 mx-auto">
         <h2  style ={{fontFamily:'Hanalei Fill'}} className="new-post-t1">Post a requirement</h2>
             <h6 className="new-post-j1">As a receiver you can post requirements for the product you need!</h6>    
             <div className ="txt-post-product1 mx-auto ">
@@ -112,11 +144,22 @@ const RequestForm = ({loggedInUser}) => {
         className ="form-components-width mx-auto">
           <Form.Group className="form-group-el d-flex">
             <Form.Label htmlFor="inputName">Request Name</Form.Label>
+            <div>
             <Form.Control
               style={{width: "400px"}}
               type="text"
               name="RequestName"
+              required
+              value={values.RequestName}
+              onChange={handleChange}
             />
+             <p className="error">{errors.RequestName}</p>
+                    {errors.RequestName &&
+                    <ul>
+                      <li className="info">{errors.RequestNameNote1}</li>
+                      <li className="info">{errors.RequestNameNote2}</li>
+                    </ul>}
+              </div>
           </Form.Group>
 
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
@@ -126,6 +169,9 @@ const RequestForm = ({loggedInUser}) => {
              style={{width: "400px"}} 
              as="select" 
              custom
+             required
+             value={values.ProductCategory}
+             onChange={handleChange}
              >
              {categories.map(categorie=>(
               <option>{categorie.ProductCategoryName}</option>
@@ -134,15 +180,19 @@ const RequestForm = ({loggedInUser}) => {
           </Form.Group> 
 
             
-            <Form.Group className="form-group-el" controlId="exampleForm.ControlTextarea1">
-            <Form.Label  >Request Description</Form.Label>
-            <Form.Control 
+            <Form.Group className="form-group-el lblDesc " controlId="exampleForm.ControlTextarea1">
+            <Form.Label  > Description</Form.Label>
+            <Form.Control className ="reqDesc"
             name="RequestDescription" 
+            required
             placeholder ="Type here..." 
             style={{width: "400px"}} 
             as="textarea" 
+            value={values.RequestDescription}
+            onChange={handleChange}
             rows={3} 
             />
+            <p className="error">{errors.RequestDescription}</p>
           </Form.Group>
           <Form.Group className="form-group-el img-prod-fgr">
           <div className="img-prod-label" >
@@ -175,13 +225,15 @@ const RequestForm = ({loggedInUser}) => {
             name="RequestLocation"
             style={{width: "400px"}} 
             as="select" 
+            required
             custom
+            value={values.RequestLocation}
+            onChange={handleChange}
             >
-              <option>London</option>
-              <option>Manchester</option>
-              <option>Oxford</option>
-              <option>Edinburgh</option>
-              <option>Glasgow</option>
+              {cities.map(city=>(
+              <option values={city.CityName}>{city.CityName}</option>
+             ))}
+          
             </Form.Control>
           </Form.Group>
 

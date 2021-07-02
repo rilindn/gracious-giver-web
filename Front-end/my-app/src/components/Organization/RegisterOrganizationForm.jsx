@@ -11,14 +11,18 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
 
     let history = useHistory()
     const [categories, setCategories] = useState([]);
-    const [logoName,setLogoName] = useState([]);
-    const [docFileName,setDocFileName] = useState([]);
+    const [photoName, setPhotoName] = useState();
+    const [fileName, setFileName] = useState();
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const fileInput = useRef(null);
+    const logoInput = useRef(null);
 
     const handleFileInputClick = event => {
       fileInput.current.click();
+    };
+    const handleLogoInputClick = event => {
+      logoInput.current.click();
     };
 
     useEffect(()=>{
@@ -68,10 +72,23 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
 
     const handleFileSubmit = (e) => {
       e.preventDefault()
-      setLogoName(e.target.files[0].name);
+      if(e.target.files.length!==0){
+      setFileName(e.target.files[0].name);
       const formData = new FormData()
       formData.append('myFile',e.target.files[0],e.target.files[0].name)
-      if(e.target.files){
+            try{
+              axios.post('http://localhost:5000/api/Organization/SaveFile/Organization', formData)
+            }catch(e){
+              console.log(e)
+            }
+        }
+      }
+    const handlePhotoSubmit = (e) => {
+      e.preventDefault()
+      if(e.target.files.length!==0){
+      setPhotoName(e.target.files[0].name);
+      const formData = new FormData()
+      formData.append('myFile',e.target.files[0],e.target.files[0].name)
             try{
               axios.post('http://localhost:5000/api/Organization/SaveFile/Organization', formData)
             }catch(e){
@@ -95,16 +112,6 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             City: event.target.city.value,
             Checked: false
           })
-          // .then(()=>{
-          //   axios.get("http://localhost:5000/api/product/last")
-          //   .then((res)=>{
-          //     for (let index = 0; index < selectedFilesName.length; index++) {
-          //       axios.post('http://localhost:5000/api/ProductPhotos',{
-          //         Product: res.data.ProductId,
-          //         ProductPhotoPath: selectedFilesName[index].name
-          //       }
-          //     )}})
-          // })
           .then(
             (res) => {
               history.push("/home");
@@ -171,23 +178,42 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             />
           </Form.Group>
 
-          <Form.Group className="form-group-el d-flex">
-            <Form.Label htmlFor="inputName">Logo </Form.Label>
+          <Form.Group className="form-group-el d-flex justify-content-start">
+            <Form.Label htmlFor="inputName"
+            style={{marginRight:"90px"}}
+            >Logo </Form.Label>
+            <button
+            type="button"
+            onClick={handleLogoInputClick}
+            className="orgUploadBtn"
+            >
+              {photoName?photoName:"Choose file"}
+            </button>
             <Form.Control
-              style={{width: "400px"}}
+              style={{width: "400px",display:"none"}}
               type="file"
               name="logo"
-              onChange={handleFileSubmit}
+              onChange={handlePhotoSubmit}
+              ref={logoInput}
             />
+            
           </Form.Group>
 
-          <Form.Group className="form-group-el d-flex">
+          <Form.Group className="form-group-el d-flex justify-content-start">
             <Form.Label htmlFor="inputName">Documentation </Form.Label>
+            <button
+            type="button"
+            onClick={handleFileInputClick}
+            className="orgUploadBtn"
+            >
+              {fileName?fileName:"Choose file"}
+            </button>
             <Form.Control
-              style={{width: "400px"}}
+              style={{width: "400px",display:"none"}}
               type="file"
               name="documentation"
               onChange={handleFileSubmit}
+              ref={fileInput}
             />
           </Form.Group>
 

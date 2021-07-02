@@ -52,7 +52,7 @@ const Organizations = () => {
             different events and initiatives.
           </h5>
         </div>
-
+        <a href={`/OrganizationDetails/${organizations.OrganizationId}`}>
         <div className="organizationbody">
           <MDBRow className="row-cols-1 row-cols-md-3 g-4 organizationbody">
             {organizations.map(organization=>(
@@ -63,7 +63,9 @@ const Organizations = () => {
           </MDBRow>
           
         </div>
+        </a>
       </div>
+     
       <div>
         <Footer />
       </div>

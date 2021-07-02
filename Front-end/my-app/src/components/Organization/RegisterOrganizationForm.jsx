@@ -11,21 +11,25 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
 
     let history = useHistory()
     const [categories, setCategories] = useState([]);
-    const [selectedFiles,setSelectedFiles] = useState([]);
-    const [selectedFilesName,setSelectedFilesName] = useState([]);
+    const [photoName, setPhotoName] = useState();
+    const [fileName, setFileName] = useState();
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const fileInput = useRef(null);
+    const logoInput = useRef(null);
 
     const handleFileInputClick = event => {
       fileInput.current.click();
+    };
+    const handleLogoInputClick = event => {
+      logoInput.current.click();
     };
 
     useEffect(()=>{
         getCategories();
         getStates();
         getCities();
-    },[selectedFiles]);
+    },[]);
 
     const getStates = async () => {
       try{
@@ -66,24 +70,32 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
         }
     }
 
+    const handleFileSubmit = (e) => {
+      e.preventDefault()
+      if(e.target.files.length!==0){
+      setFileName(e.target.files[0].name);
+      const formData = new FormData()
+      formData.append('myFile',e.target.files[0],e.target.files[0].name)
+            try{
+              axios.post('http://localhost:5000/api/Organization/SaveFile/Organization', formData)
+            }catch(e){
+              console.log(e)
+            }
+        }
+      }
     const handlePhotoSubmit = (e) => {
       e.preventDefault()
-      if(e.target.files){
-        const fileArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file))
-        setSelectedFiles((prevImages)=>prevImages.concat(fileArray));
-        var fileArrayN = Array.from(e.target.files)
-        setSelectedFilesName((prevImages)=>prevImages.concat(fileArrayN))
-        for (let index = 0; index < e.target.files.length; index++) {
-            const formdata = new FormData();
-            formdata.append('image',e.target.files[index], e.target.files[index].name)
+      if(e.target.files.length!==0){
+      setPhotoName(e.target.files[0].name);
+      const formData = new FormData()
+      formData.append('myFile',e.target.files[0],e.target.files[0].name)
             try{
-              axios.post('http://localhost:5000/api/product/SaveFile/Product', formdata)
+              axios.post('http://localhost:5000/api/Organization/SaveFile/Organization', formData)
             }catch(e){
               console.log(e)
             }
           }
         }
-      }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -92,21 +104,14 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             Password: event.target.password.value,
             Name: event.target.name.value,
             Email: event.target.email.value,
+            Logo: event.target.logo.value,
+            Documentation: event.target.documentation.value,
             Category: event.target.category.value,
             Description: event.target.description.value,
-            Location: event.target.location.value,
+            State: event.target.state.value,
+            City: event.target.city.value,
             Checked: false
           })
-          // .then(()=>{
-          //   axios.get("http://localhost:5000/api/product/last")
-          //   .then((res)=>{
-          //     for (let index = 0; index < selectedFilesName.length; index++) {
-          //       axios.post('http://localhost:5000/api/ProductPhotos',{
-          //         Product: res.data.ProductId,
-          //         ProductPhotoPath: selectedFilesName[index].name
-          //       }
-          //     )}})
-          // })
           .then(
             (res) => {
               history.push("/home");
@@ -173,12 +178,42 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             />
           </Form.Group>
 
-          <Form.Group className="form-group-el d-flex">
-            <Form.Label htmlFor="inputName">Logo </Form.Label>
+          <Form.Group className="form-group-el d-flex justify-content-start">
+            <Form.Label htmlFor="inputName"
+            style={{marginRight:"90px"}}
+            >Logo </Form.Label>
+            <button
+            type="button"
+            onClick={handleLogoInputClick}
+            className="orgUploadBtn"
+            >
+              {photoName?photoName:"Choose file"}
+            </button>
             <Form.Control
-              style={{width: "400px"}}
+              style={{width: "400px",display:"none"}}
               type="file"
               name="logo"
+              onChange={handlePhotoSubmit}
+              ref={logoInput}
+            />
+            
+          </Form.Group>
+
+          <Form.Group className="form-group-el d-flex justify-content-start">
+            <Form.Label htmlFor="inputName">Documentation </Form.Label>
+            <button
+            type="button"
+            onClick={handleFileInputClick}
+            className="orgUploadBtn"
+            >
+              {fileName?fileName:"Choose file"}
+            </button>
+            <Form.Control
+              style={{width: "400px",display:"none"}}
+              type="file"
+              name="documentation"
+              onChange={handleFileSubmit}
+              ref={fileInput}
             />
           </Form.Group>
 
@@ -226,7 +261,7 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             <Form.Control
              style={{width: "400px"}} 
              as="select" 
-             name="state"
+             name="city"
              custom
              required
             >

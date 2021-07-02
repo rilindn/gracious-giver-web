@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import OrganizationTable from '../dash-organization/Organization';
 
-
 const UsersDataTable = () => {
 
     const [userTable, setUserTable] = useState(true);

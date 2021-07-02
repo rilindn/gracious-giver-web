@@ -29,8 +29,8 @@ const EditUser = ({show, onHide, user,onUpdate}) => {
             )
             },
             (error) => {
-                NotificationManager.erorr(
-                'Error while editing the user!'+{error},
+                NotificationManager.error(
+                'Error while editing the user!',
                 '',
                 1000,
                 )

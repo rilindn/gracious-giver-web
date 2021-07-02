@@ -289,6 +289,15 @@ section .section-title {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
+.orgUploadBtn {
+  min-width: 120px;
+  max-width: 400px;
+  height: 36px;
+  margin-left: 120px;
+  border-radius: 7px;
+  background-color: #ffffff;
+  border: 1px solid rgb(182, 182, 182);
+}
 .imgUploadBtn-dash-edit {
   margin-left: 0px !important;
   margin-top: 5px;
@@ -1440,24 +1449,48 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   margin-left: 70px;
   padding: 5px;
 }
-.bodyorganizations{
+.bodyorganizations {
   background-color: rgb(205 219 216 / 85%);
 }
-.organizationbody{
-  padding: 70px;
-
+.organizationbody {
+  padding: 20px 70px;
 }
 
-
-.reqDesc{
+.reqDesc {
   margin-left: 150px;
 }
 
-.prod-form-wrapper1{
+.prod-form-wrapper1 {
   width: 800px;
   margin: 50px;
   box-shadow: inset 0 0 5px #3c6e71;
   background: #e4e4e4;
   border-radius: 20px;
   height: 1000px;
+}
+
+.org-heading {
+  width: 1060px;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.org-heading h1 {
+  width: 350px;
+  background-color: #3c6e71;
+  border-radius: 10px;
+  padding: 6px;
+  color: white;
+}
+.org-card-btn {
+  width: 120px;
+  font-weight: 600 !important;
+}
+.org-card-btn-join {
+  width: 120px;
+  background-color: transparent !important;
+  color: #ed1858 !important;
+  font-weight: 700 !important;
+}
+.org-card-img {
+  height: 230px;
 }

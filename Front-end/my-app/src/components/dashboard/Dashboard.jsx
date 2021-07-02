@@ -8,6 +8,7 @@ import RequestsTables from './dash-sections/RequestsTables';
 import UsersDataTable from './dash-sections/UsersDataTables';
 import { Spinner } from 'react-bootstrap';
 import OffersTables from './dash-sections/OffersTable';
+import OrganizationsTable from './dash-sections/OrganizationsTable';
 
 const Dashboard = () => {
 
@@ -16,6 +17,7 @@ const Dashboard = () => {
     const [postsTables,setPostsTables] = useState(true);
     const [otherTables,setOtherTables] = useState(false);
     const [offersTables,setOffersTables] = useState(false);
+    const [organizationTables, setOrganizationTables] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([])
     const [loading,setLoading] = useState(false);
     
@@ -43,6 +45,7 @@ const Dashboard = () => {
                 setPostsTables(true);
                 setOtherTables(false);
                 setOffersTables(false);
+                setOrganizationTables(false);
                 }}
                 className={` ${postsTables ? "active-side-btn" : ""}`}
                 > Posts</li>
@@ -54,6 +57,7 @@ const Dashboard = () => {
                     setPostsTables(false);
                     setOtherTables(false);
                     setOffersTables(false);
+                    setOrganizationTables(false);
                 }}
                 className={`${usersTables ? "active-side-btn" : ""}`}
                 >Users</li>
@@ -65,6 +69,7 @@ const Dashboard = () => {
                     setPostsTables(false);
                     setOtherTables(false);
                     setOffersTables(false);
+                    setOrganizationTables(false);
                 }}
                 className={`${requestsTables ? "active-side-btn" : ""}`}
                 > Requests</li>
@@ -75,6 +80,7 @@ const Dashboard = () => {
                     setPostsTables(false);
                     setOtherTables(false);
                     setOffersTables(true);
+                    setOrganizationTables(false);
                 }}
                 className={`${offersTables ? "active-side-btn" : ""}`}
                 > Offers</li>
@@ -89,11 +95,22 @@ const Dashboard = () => {
                     setPostsTables(false);
                     setOtherTables(true);
                     setOffersTables(false);
+                    setOrganizationTables(false);
                 }}
                 className={`${otherTables ? "active-side-btn" : ""}`}
                 >Other Tables</li>
                 :null}
-                
+                                <li
+                onClick={()=>{
+                    setUsersTables(false);
+                    setRequestsTables(false);
+                    setPostsTables(false);
+                    setOtherTables(false);
+                    setOffersTables(false);
+                    setOrganizationTables(true);
+                }}
+                className={`${organizationTables ? "active-side-btn" : ""}`}
+                > Organization</li>
                 
             </ul>
         </div>
@@ -103,6 +120,7 @@ const Dashboard = () => {
             {postsTables ? <PostsTables/>: null }
             {requestsTables ? <RequestsTables/>: null}
             {offersTables? <OffersTables/>:null}
+            {organizationTables? <OrganizationsTable/>:null}
             {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"? (otherTables ? <OtherTables/>: null ):null}
 
         </div>

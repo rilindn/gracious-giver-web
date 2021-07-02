@@ -3,12 +3,7 @@ import UserTable from '../dash-user/UserTable';
 import AdminTable from'../dash-admin/AdminTable';
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
-<<<<<<< HEAD
 import OrganizationTable from '../dash-organization/Organization';
-=======
-
->>>>>>> a0760997066a838c77a6e72dadcfd6cbd112faad
-
 
 const UsersDataTable = () => {
 

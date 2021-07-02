@@ -3,11 +3,11 @@ import { Form, Modal} from 'react-bootstrap'
 import axios from 'axios'
 import { NotificationManager } from 'react-notifications'
 
-const DeleteMember = ({show,onHide,UserId,onUpdate}) => {
+const DeleteMember = ({show,onHide,user,onUpdate}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.delete("http://localhost:5000/api/productcategory/"+UserId)
+        axios.delete("http://localhost:5000/api/organizationmember/"+user.UserId + "/"+ user.OrganizationId)
         .then(()=>{
             onUpdate();
         })

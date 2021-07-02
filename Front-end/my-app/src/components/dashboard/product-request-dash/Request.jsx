@@ -50,7 +50,7 @@ const Request = ({request,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
            Response: "Accepted",
            Response_Date: date,
            DonatorId: loggedInUser.UserId,
-           ReceierId: RId.UserId
+           ReceiverId: RId.UserId
           }) 
           .then(()=>{
             axios.put('http://localhost:5000/api/Product_Request/'+RId.RequestId, {
@@ -60,6 +60,16 @@ const Request = ({request,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
                 Message: RId.Message,
                 Request_Date: RId.Request_Date,
                 checkedR : true
+              })
+          })
+          .then(()=>{
+            axios.post('http://localhost:5000/api/notification', {
+                Initiator: loggedInUser.UserId,
+                Acceptor: RId.UserId,
+                Content: "Your request for "+productName+ " has been accepted by "
+                +loggedInUser.Firstname+" "+loggedInUser.Lastname,
+                Date: date,
+                Readed : false
               })
           })
           .then(()=>{
@@ -98,6 +108,16 @@ const Request = ({request,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
                       Message: RId.Message,
                       Request_Date: RId.Request_Date,
                       checkedR : true
+                    })
+                })
+                .then(()=>{
+                  axios.post('http://localhost:5000/api/notification', {
+                      Initiator: loggedInUser.UserId,
+                      Acceptor: RId.UserId,
+                      Content: "Your request for "+productName+ " has been declined by "
+                      +loggedInUser.Firstname+" "+loggedInUser.Lastname,
+                      Date: date,
+                      Readed : false
                     })
                 })
               .then(()=>{

@@ -105,13 +105,16 @@ const PendingOrganizationRequestTable = ({loggedInUser}) => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>OrganizationId</th>
+                            <th>Nr.</th>
+                                <th>Organization Name</th>
+                                <th>Logo</th>
                                 <th>Username</th>
-                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Category</th>
                                 <th>Description</th>
-                                <th>Location</th>
+                                <th>Documentation</th>
+                                <th>State</th>
+                                <th>City</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

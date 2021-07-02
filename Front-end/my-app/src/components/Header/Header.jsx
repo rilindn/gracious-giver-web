@@ -15,6 +15,8 @@ import { NotificationManager } from 'react-notifications'
 
 const Header = ({ search }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
+  const [notifications, setNotifications] = useState([])
+  const [r, setR] = useState(false)
   let history = useHistory()
 
   const handleLogout = async (event) => {
@@ -39,9 +41,39 @@ const Header = ({ search }) => {
         .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
         .then((res) => {
           setLoggedInUser(res.data)
+          getNotifications(res.data.UserId);
         })
     })()
-  }, [])
+  }, [r])
+
+  const getNotifications = (id) =>{
+    try{
+       axios.get('http://localhost:5000/api/notification/acceptor/' + id)
+        .then((res) => {
+          setNotifications(res.data)
+        })
+    }catch(e){
+      console.log(e)
+    }
+  }
+
+  const readNotification = (notification) =>{
+    try{
+      axios.put('http://localhost:5000/api/notification/' + notification.NotificationId,{
+        NotificationId:notification.NotificationId,
+        Initiator:notification.Initiator,
+        Acceptor:notification.Acceptor,
+        Content:notification.Content,
+        Date:notification.Date,
+        Readed:true
+      })
+      .then(()=>{
+        setR(!r);
+      })
+   }catch(e){
+     console.log(e)
+   }
+  }
 
   return (
     <div className="header">
@@ -94,8 +126,21 @@ const Header = ({ search }) => {
                       fontWeight: 'bold',
                       color: '#26543b',
                     }}
-                  >
-                    No message
+                  > {notifications.length===0?"No message":
+                  notifications.map(notification=>(
+                    <div className="msg-header">
+                      <div className="d-inline d-flex">
+                        <span className="msg-header-read"
+                        onClick={()=>{readNotification(notification)}}
+                        >{notification.Readed===false?"Read":"Readed"}</span>
+                        <span className="msg-header-time">
+                          {notification.Date.substring(0,10)} <b>at</b> {notification.Date.substring(11,16)}
+                          </span>
+                        </div>
+                      <h6>{notification.Content}</h6>
+                    </div>
+                  ))
+                    }
                   </Dropdown.Item>
 
                   <Dropdown.Divider />

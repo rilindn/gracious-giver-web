@@ -78,6 +78,16 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
               })
           })
           .then(()=>{
+            axios.post('http://localhost:5000/api/notification', {
+                Initiator: loggedInUser.UserId,
+                Acceptor: offer.ProductProviderId,
+                Content: "Your request for "+request.RequestName+ " has been accepted by "
+                +loggedInUser.Firstname+" "+loggedInUser.Lastname,
+                Date: date,
+                Readed : false
+              })
+          })
+          .then(()=>{
             onUpdate();
           })
           .then((res) => {
@@ -114,6 +124,16 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
                       Offerdate: offer.Offerdate,
                       CheckOffer : true,
                       RequestId:offer.RequestId
+                    })
+                })
+                .then(()=>{
+                  axios.post('http://localhost:5000/api/notification', {
+                      Initiator: loggedInUser.UserId,
+                      Acceptor: offer.ProductProviderId,
+                      Content: "Your request for "+request.RequestName+ " has been declined by "
+                      +loggedInUser.Firstname+" "+loggedInUser.Lastname,
+                      Date: date,
+                      Readed : false
                     })
                 })
               .then(()=>{

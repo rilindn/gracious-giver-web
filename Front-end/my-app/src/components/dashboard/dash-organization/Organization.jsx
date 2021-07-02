@@ -4,6 +4,7 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import EditOrganization from './EditOrganization'
 import DeleteOrganization from './DeleteOrganization'
 import { Search } from '../DataTable/Search';
+import StateTable from './../dash-state/StateTable';
 
 
 const OrganizationTable = () => { 
@@ -103,28 +104,49 @@ const OrganizationTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Organization Id</th>
+                                <th>Nr.</th>
                                 <th>Organization Name</th>
+                                <th>Logo</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Category</th>
                                 <th>Description</th>
-                                <th>Location</th>
+                                <th>Documentation</th>
+                                <th>State</th>
+                                <th>City</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {OrganizationData.map(Organization=>(
+                        <tbody
+                        style={{overflow:"hidden", overflowY: "scroll"}}
+                        >
+                            {OrganizationData.map((Organization,i)=>(
                                 <tr>
-                                <td>{Organization.OrganizationId}</td>
+                                <td>#{++i}</td>
                                 <td>{Organization.Name}</td>
+                                <td>
+                                <img 
+                                style={{width:"50px"}}
+                                src={"http://localhost:5000/photos/organization/"+
+                                (Organization.Logo===''?"prodImg.jpg":Organization.Logo)} 
+                                alt="." />
+                                </td>
                                 <td>{Organization.Username}</td>
                                 <td>{Organization.Email}</td>
                                 <td>{Organization.Category}</td>
                                 <td>{Organization.Description}</td>
-                                <td>{Organization.Location}</td>
+                                <td>
+                                <a 
+                                style={{width:"50px"}}
+                                href={"http://localhost:5000/photos/organization/"+
+                                (Organization.Documentation===''?"prodImg.jpg":Organization.Documentation)}>
+                                {Organization.Documentation.substring(0, 7)} ...
+                                <i class="fas fa-download"></i></a>
+                                </td>
+                                <td>{Organization.State}</td>
+                                <td>{Organization.City}</td>
 
-
+                                
 
                                 <td>
                                     <Button 

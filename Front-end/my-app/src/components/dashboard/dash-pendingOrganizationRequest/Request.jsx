@@ -116,12 +116,28 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
   return (
       <tr key={request.RequestId} >
         <td>#{++i}</td>
-        <td>{request.Username}</td>
         <td>{request.Name}</td>
+        <td>
+        <img 
+        style={{width:"50px"}}
+        src={"http://localhost:5000/photos/organization/"+
+        (request.Logo===''?"prodImg.jpg":request.Logo)} 
+        alt="." />
+        </td>
+        <td>{request.Username}</td>
         <td>{request.Email}</td>
         <td>{request.Category}</td>
         <td>{request.Description}</td>
-        <td>{request.Location}</td>
+        <td>
+        <a 
+        style={{width:"50px"}}
+        href={"http://localhost:5000/photos/organization/"+
+        (request.Documentation===''?"prodImg.jpg":request.Documentation)}>
+        {request.Documentation.substring(0, 7)} ...
+        <i class="fas fa-download"></i></a>
+        </td>
+        <td>{request.State}</td>
+        <td>{request.City}</td>
 
         <td>
             <div>

@@ -4,13 +4,13 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
 import DeleteMember from './DeleteMember'
 import { Search } from '../DataTable/Search'
 import { Spinner } from 'react-bootstrap';
+import Member from './Member'
 
 const MemberTable = () => {
   const [members, setMembers] = useState([])
   const [allMembers, setAllMembers] = useState([])
   const [deleteUserModal, setDeleteUserModal] = useState(false)
-  const [userV, setUserV] = useState([])
-  const [userD, setUserD] = useState()
+  const [userD, setUserD] = useState([])
   const [search, setSearch] = useState('')
   const [maxMembershow, setMaxMembershow] = useState(10)
   const [loading,setLoading] = useState(false);
@@ -36,7 +36,8 @@ const MemberTable = () => {
 
   const getAllMembers = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/organizationmember/all`).then((res) => {
+      await axios.get(`http://localhost:5000/api/organizationmember`)
+      .then((res) => {
         setAllMembers(res.data)
       })
     } catch (e) {
@@ -103,40 +104,24 @@ const MemberTable = () => {
               <thead>
                 <tr>
                   <th>Nr.</th>
-                  <th>OrganizationId</th>
-                  <th>UserId</th>
-                  <th>DateOfJoining</th>
+                  <th>Fullname</th>
+                  <th>Username</th>
+                  <th>Member Role</th>
+                  <th>Date Of Joining</th>
                   <th>Actions</th>
                 </tr>
               </thead>
             {loading?
               <tbody>
                 {userData.map((user, i) => (
-                  <tr key={user.UserId}>
-                    <td>#{++i}</td>
-                    <td>{user.OrganizationId}</td>
-                    <td>{user.UserId}</td>
-                    <td>{user.DateOfJoining}</td>
-                    <td>
-                      <Button
-                        onClick={() => {
-                          setDeleteUserModal(true)
-                          setUserD(user.UserId)
-                        }}
-                        className="delete"
-                        variant="danger"
-                        data-toggle="modal"
-                      >
-                        <i
-                          className="material-icons"
-                          data-toggle="tooltip"
-                          title="Delete"
-                        >
-                          &#xE872;
-                        </i>
-                      </Button>
-                    </td>
-                  </tr>
+                  <Member
+                  user={user}
+                  onDelete={() => {
+                      setDeleteUserModal(true)
+                      setUserD(user)
+                  }}
+                  i={i}
+                  />
                 ))}
               </tbody>
               
@@ -153,7 +138,7 @@ const MemberTable = () => {
           setDeleteUserModal(false)
           getAmofMembers(maxMembershow);
         }}
-        userId={userD}
+        user={userD}
       />
     </div>
   )

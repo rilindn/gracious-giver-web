@@ -108,8 +108,6 @@ const PendingOrganizationRequestTable = ({loggedInUser}) => {
                             <th>Nr.</th>
                                 <th>Organization Name</th>
                                 <th>Logo</th>
-                                <th>Username</th>
-                                <th>Email</th>
                                 <th>Category</th>
                                 <th>Description</th>
                                 <th>Documentation</th>

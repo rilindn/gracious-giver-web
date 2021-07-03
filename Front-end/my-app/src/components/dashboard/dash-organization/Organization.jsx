@@ -104,11 +104,9 @@ const OrganizationTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Nr.</th>
+                            <th>Nr.</th>
                                 <th>Organization Name</th>
                                 <th>Logo</th>
-                                <th>Username</th>
-                                <th>Email</th>
                                 <th>Category</th>
                                 <th>Description</th>
                                 <th>Documentation</th>
@@ -131,10 +129,8 @@ const OrganizationTable = () => {
                                 (Organization.Logo===''?"prodImg.jpg":Organization.Logo)} 
                                 alt="." />
                                 </td>
-                                <td>{Organization.Username}</td>
-                                <td>{Organization.Email}</td>
                                 <td>{Organization.Category}</td>
-                                <td>{Organization.Description}</td>
+                               <td>{Organization.Description.substring(0,20)}...</td>
                                 <td>
                                 <a 
                                 style={{width:"50px"}}

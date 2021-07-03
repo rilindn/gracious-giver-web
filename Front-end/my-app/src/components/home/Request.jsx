@@ -48,7 +48,7 @@ const Request = ({request,loggedInUser}) => {
               <div className="home-prodd">
               <FontAwesomeIcon class="bo-prod" onClick={handleBookmark} icon={faBookmark}/>
               <div className="reques">
-                  <h1 style={{fontSize:"20px",marginTop:"100px",color:"black"}}>{request.RequestDescription}</h1>
+                  <h1 >{request.RequestDescription}</h1>
                   </div>
                     <div className="itemText">
                 

@@ -64,7 +64,8 @@ const RequestDetails = ({loggedInUser}) => {
             ReceiverId: receiver.UserId,
             Message: event.target.Message.value,
             Offerdate: date,
-            checkedR : false
+            CheckOffer : false,
+            RequestId: requestId
           })
           .then(
             (res) =>{

@@ -37,7 +37,7 @@ const OrganizationsTables = () => {
                 }}
                 className={`dash-btn ${memberTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                Member
+                Members
                 </button>
             </li>
 

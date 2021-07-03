@@ -39,13 +39,17 @@ const AddAdmin = ({ show, onHide, onUpdate }) => {
     event.preventDefault()
     axios
       .post('http://localhost:5000/api/register', {
+        Firstname: event.target.Firstname.value,
+        Lastname: event.target.Lastname.value,
         UserName: event.target.AdminName.value,
         UserPassword: event.target.AdminPassword.value,
+        UserConfirmPassword: event.target.confirmPassword.value,
         UserState: event.target.state.value,
         UserCity: event.target.city.value,
         UserPostCode: event.target.postcode.value,
         UserRole: 'Admin',
         UserEmail: event.target.AdminEmail.value,
+        UserConfirmEmail: event.target.confirmEmail.value,
         UserGender: event.target.maleFemale.value,
         UserDbo: event.target.birth.value,
       })
@@ -76,6 +80,24 @@ const AddAdmin = ({ show, onHide, onUpdate }) => {
               </div>
               <div className="modal-body">
                 <FormGroup className="form-group">
+                  <label>Firstname</label>
+                  <input
+                    type="text"
+                    name="Firstname"
+                    className="form-control"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className="form-group">
+                  <label>Lastname</label>
+                  <input
+                    type="text"
+                    name="Lastname"
+                    className="form-control"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className="form-group">
                   <label>Username</label>
                   <input
                     type="text"
@@ -89,6 +111,15 @@ const AddAdmin = ({ show, onHide, onUpdate }) => {
                   <input
                     type="password"
                     name="AdminPassword"
+                    className="form-control"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className="form-group">
+                  <label>Confirm Password</label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
                     className="form-control"
                     required
                   />
@@ -132,6 +163,15 @@ const AddAdmin = ({ show, onHide, onUpdate }) => {
                   <input
                     type="email"
                     name="AdminEmail"
+                    className="form-control"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className="form-group">
+                  <label>Confirm Email</label>
+                  <input
+                    type="email"
+                    name="confirmEmail"
                     className="form-control"
                     required
                   />

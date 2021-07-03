@@ -39,7 +39,10 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
     //     }
     // }
 
-    
+    const defaultImg = "prodImg.jpg"
+    const imgSrc = "http://localhost:5000/photos/organization/"+
+    (request.Logo===''?defaultImg:request.Logo);
+    console.log(request.Logo)
 
     const handleAcceptOrganizationRequest  = async (OId) => {
         var date = new Date().toLocaleString()
@@ -51,7 +54,10 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
            Email : OId.Email,
            Category: OId.Category,
            Description: OId.Description,
-           Location: OId.Location,
+           State: OId.State,
+           City: OId.City,
+           Documentation:OId.Documentation,
+           Logo:OId.Logo
           }) 
           .then(()=>{
             axios.put('http://localhost:5000/api/pendingorganizationsrequest/'+OId.OrganizationId, {
@@ -63,7 +69,10 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
                 Category: OId.Category,
                 Checked : true,
                 Description: OId.Description,
-                Location: OId.Location
+                State: OId.State,
+                City: OId.City,
+                Documentation:OId.Documentation,
+                Logo:OId.Logo,
               })
           })
           .then(()=>{
@@ -94,7 +103,10 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
                     Category: OId.Category,
                     Checked : true,
                     Description: OId.Description,
-                    Location: OId.Location
+                    State: OId.State,
+                    City: OId.City,
+                    Documentation:OId.Documentation,
+                    Logo:OId.Logo,
                   })
               
               .then(()=>{
@@ -124,10 +136,8 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
         (request.Logo===''?"prodImg.jpg":request.Logo)} 
         alt="." />
         </td>
-        <td>{request.Username}</td>
-        <td>{request.Email}</td>
         <td>{request.Category}</td>
-        <td>{request.Description}</td>
+        <td>{request.Description.substring(0,20)}...</td>
         <td>
         <a 
         style={{width:"50px"}}

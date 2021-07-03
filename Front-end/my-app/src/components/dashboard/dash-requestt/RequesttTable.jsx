@@ -5,6 +5,7 @@ import EditRequestt from './EditRequestt'
 import DeleteRequestt from './DeleteRequestt'
 import { Search } from '../DataTable/Search';
 import { NotificationManager } from 'react-notifications'
+import Request from './Request';
 
 
 
@@ -105,44 +106,28 @@ const RequesttTable = ()=> {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Request Id</th>
+                                <th>Nr.</th>
                                 <th>Requester</th>
-                                <th>Request Description</th>
-                                <th>Request Comment</th>
+                                <th>Description</th>
+                                <th>Category</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {requesttData.map(requestt=>(
-                                <tr>
-                                <td>{requestt.RequesttId}</td>
-                                <td>{requestt.ReceiverId}</td>
-                                <td>{requestt.RequestDescription}</td>
-                                <td>{requestt.RequestComment}</td>
-
-                                <td>
-                                    <Button 
-                                    onClick={() => 
+                            {requesttData.map((requestt,i)=>(
+                                <Request
+                                i={i}
+                                request={requestt}
+                                onDelete={() => 
+                                    {setDeleteRequesttModal(true);
+                                        setRequesttD(requestt.RequesttId)
+                                    }} 
+                                onEdit={() => 
                                         {setEditRequesttModal(true);
                                             setRequesttV(requestt)
                                         } }
-                                    className="m-2" 
-                                    variant ="warning" 
-                                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                                    </Button>
                                     
-                                    <Button 
-                                    onClick={() => 
-                                        {setDeleteRequesttModal(true);
-                                            setRequesttD(requestt.RequesttId)
-                                        }} 
-                                     className="delete" 
-                                     variant ="danger"
-                                     data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                                     </Button>
-
-                                </td>
-                            </tr>
+                                />
                             ))}
                         </tbody>
                     </Table>

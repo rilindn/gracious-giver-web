@@ -117,15 +117,15 @@ const StreetTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Street Id</th>
+                                <th>Nr.</th>
                                 <th>Street Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {streets.map(street=>(
+                            {streets.map((street,i)=>(
                                 <tr>
-                                <td>{street.StreetId }</td>
+                                <td>#{++i}</td>
                                 <td>{street.StreetName}</td>
                                 <td >
                                     <Button 

@@ -115,15 +115,15 @@ const CityTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>City Id</th>
+                                <th>Nr.</th>
                                 <th>City Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {cityData.map(city=>(
+                            {cityData.map((city,i)=>(
                                 <tr>
-                                <td>{city.CityId}</td>
+                                <td>#{++i}</td>
                                 <td>{city.CityName}</td>
                                 <td>
                                     <Button 

@@ -12,6 +12,7 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
             RequesttId: requestt.RequesttId,
             ReceiverId: requestt.ReceiverId,
             RequestDescription: event.target.RequestDescription.value,
+            RequestName: event.target.RequestName.value,
             RequestComment: event.target.RequestComment.value,
           })
           .then(()=> {
@@ -57,8 +58,18 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
                                 disabled/>
                             </FormGroup>
                             <FormGroup className="form-group">
-                                <label>Request Description</label>
+                                <label>Request Name</label>
                                 <input 
+                                defaultValue={requestt.RequestName}
+                                name="RequestName"
+                                type="text" 
+                                className="form-control" 
+                                required
+                                />
+                            </FormGroup>	
+                            <FormGroup className="form-group">
+                                <label>Request Description</label>
+                                <textarea 
                                 defaultValue={requestt.RequestDescription}
                                 name="RequestDescription"
                                 type="text" 

@@ -1411,6 +1411,13 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   width: 300px;
   height: 270px;
   position: absolute;
+  display: flex;
+}
+.reques h1 {
+  font-size: 15px;
+  margin: auto 0;
+  padding: 13px;
+  color: #000;
 }
 .requestFree {
   text-align: left;
@@ -1907,6 +1914,7 @@ table.shoping-cart-table tr td:last-child {
   border-radius: 4px;
   background-color: rgb(245, 239, 239);
   border: 1px solid rgb(219, 218, 214);
+  margin: 5px;
 }
 .msg-header h6 {
   white-space: pre-line;

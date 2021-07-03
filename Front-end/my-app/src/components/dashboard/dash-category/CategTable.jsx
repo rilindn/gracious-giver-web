@@ -113,15 +113,15 @@ const CategTable = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Product Category Id</th>
+                                <th>Nr.</th>
                                 <th>Product Category Name</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {categData.map(categ=>(
+                            {categData.map((categ,i)=>(
                                 <tr>
-                                <td>{categ.ProductCategoryId}</td>
+                                <td>#{++i}</td>
                                 <td>{categ.ProductCategoryName}</td>
                                 <td>
                                     <Button 

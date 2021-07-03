@@ -133,10 +133,10 @@ const ProductTable = ({loggedInUser}) => {
                                 <td>{product.ProductName}</td>
                                 <td>{product.ProductCategory}</td>
                                 <td>{product.ProductState}</td>
-                                <td>{product.ProductDescription}</td>
+                                <td>{product.ProductDescription.substring(0,20)}..</td>
                                 <DashProduct product={product} updatePhotos={updatePhotos}/>
                                 <td>{product.ProductLocation}</td>
-                                <td>{product.ProductComment}</td>
+                                <td>{product.ProductComment.substring(0,15)}..</td>
                                 <td>
                                     
                                     <Button 

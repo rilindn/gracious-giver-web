@@ -235,7 +235,7 @@ section .section-title {
   box-shadow: inset 0 0 5px #3c6e71;
   background: #e4e4e4;
   border-radius: 20px;
-  height: 1200px;
+  min-height: 1250px;
 }
 
 .new-post-t {
@@ -1620,28 +1620,15 @@ body {
 }
 
 .pro-d-title {
-  font-size: 16px;
+  font-size: 25px;
   margin-top: 0;
-}
-
-.product_meta {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  margin: 15px 0;
-}
-
-.product_meta span {
-  display: block;
-  margin-bottom: 10px;
-}
-.product_meta a,
-.pro-price {
-  color: #030303;
-}
-.product_meta a:hover {
   color: #d92362;
 }
+
+.pro-d-title p {
+  text-align: left;
+}
+
 .pro-price,
 .amount-old {
   font-size: 18px;
@@ -1674,50 +1661,58 @@ body {
 }
 .orgdetails {
   width: 100vw;
-  height: 150vh;
   position: relative;
 }
 .imgorg {
-  width: 40vw;
-  height: 50vh;
   position: relative;
   display: flex;
-  margin-top: 170px;
-  margin-left: 40px;
+  flex-direction: column;
 }
-.detailss {
-  width: 60vw;
-  height: 80vh;
-  margin-left: 60px;
+.organization-details-wrapper {
   display: flex;
-  margin-top: 100px;
+  width: 450px;
+  flex-direction: column;
 }
 
 .panel-body {
   display: flex;
   flex-direction: row;
   border: 10px solid rgba(157, 187, 177, 0.247);
-  margin-top: 50px;
-  height: 800px;
+  min-height: 400px;
   background-color: rgba(163, 194, 183, 0.247);
+  justify-content: space-evenly;
+  align-items: center;
 }
 #imgo {
-  width: 400px;
-  height: 400px;
-
-  margin-left: 20px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50px;
 }
-
-.hee {
-  margin-left: 120px;
-  margin-top: 40px;
+.create-event-btn {
+  float: right;
+  background-color: #ffffff !important;
+  border: none;
+  height: 170px;
+  width: 150px;
+  margin: 120px 20px 0 0;
+  color: rgba(0, 82, 54, 0.425) !important;
+  border-radius: 5px;
+}
+.create-event-btn:hover {
+  background-color: rgba(0, 82, 55, 0.425) !important;
+  color: white !important;
+  opacity: 0.9 !important;
+}
+.events-sec,
+.initatives-wrapper {
+  border: 10px solid rgba(157, 187, 177, 0.247);
+  background-color: rgba(163, 194, 183, 0.247);
+  padding: 20px;
+  box-shadow: green;
 }
 
 /*EVENTETTT=============================================*/
-body {
-  margin-top: 20px;
-  background: #eee;
-}
+
 /* E-commerce */
 .product-box {
   padding: 0;
@@ -1855,6 +1850,7 @@ table.shoping-cart-table tr td:last-child {
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0;
+  width: 250px;
 }
 .ibox-footer {
   color: inherit;
@@ -1867,13 +1863,21 @@ table.shoping-cart-table tr td:last-child {
 /*somechange*/
 
 .eventet {
-  height: 80vh;
+  height: 520px;
   position: relative;
 }
 .eveent {
   width: 100vw;
-  height: 20vh;
+  height: 80px;
+  margin-top: 20px;
   position: relative;
+}
+
+.eveent span {
+  color: #555958;
+  font-size: 35px;
+  font-weight: bold;
+  font-family: Courier New;
 }
 
 .ss {
@@ -1885,21 +1889,19 @@ table.shoping-cart-table tr td:last-child {
   margin-top: 10px;
 }
 .iniciativat {
-  height: 80vh;
+  height: 600px;
   position: relative;
-  background-color: rgba(163, 194, 183, 0.247);
 }
 .inicia {
   width: 100vw;
-  height: 15vh;
+  height: 70px;
   position: relative;
-  background-color: rgba(163, 194, 183, 0.247);
 }
 
 .strong a {
   color: black;
 }
 
-.position{
+.position {
   margin-left: 5px;
 }

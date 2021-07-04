@@ -77,7 +77,7 @@ const OrganizationCard = ({organization}) => {
                 </MDBCardBody>
 
                 <MDBCardFooter>
-                  <MDBBtn href={`/OrganizationDetails/${organization.OrganizationId}`} className="org-card-btn">Read More</MDBBtn>
+                  <MDBBtn href={`/Organizationdetails/${organization.OrganizationId}`} className="org-card-btn">Read More</MDBBtn>
                   <MDBBtn href="#" className="org-card-btn org-card-btn-join" onClick={handleSubmit}>Join</MDBBtn>
                 </MDBCardFooter>
               </MDBCard>

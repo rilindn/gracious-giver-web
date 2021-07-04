@@ -21,9 +21,6 @@ const Home = ({loggedInUser}) => {
     useEffect(()=>{
         getproducts();
         getRequests();
-        console.log("loggedInUser")
-        console.log(loggedInUser)
-        
     },[]);
 
     const getproducts = async () => {
@@ -43,6 +40,7 @@ const Home = ({loggedInUser}) => {
         try{
         await axios.get(`http://localhost:5000/api/request`)
         .then(res=>{
+            console.log("reqqust")
             console.log(res.data)
             setRequests(res.data)
         })

@@ -58,7 +58,7 @@ const Request = ({request,loggedInUser}) => {
                               {request.RequestName}
                           </h5>
                           <p className="prodLocation"
-                          style={{color:"black"}}>{request.RequestLocation}</p> 
+                          style={{color:"black"}}>{request.State}, {request.City}</p> 
                        </div>
                     </div>
                   </a>

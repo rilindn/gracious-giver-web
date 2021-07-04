@@ -67,15 +67,7 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
             OfferedProductResponseName: "Declined",
           }) 
           .then(()=>{
-            axios.put('http://localhost:5000/api/offerproduct/'+offer.OfferProductId, {
-                OfferProductId: offer.OfferProductId,
-                ProductProviderId: offer.ProductProviderId,
-                ReceiverId:offer.ReceiverId,
-                Message: offer.Message,
-                Offerdate: offer.Offerdate,
-                CheckOffer : true,
-                RequestId:offer.RequestId
-              })
+            axios.put('http://localhost:5000/api/offerproduct/check/'+offer.OfferProductId)
           })
           .then(()=>{
             axios.post('http://localhost:5000/api/notification', {
@@ -116,15 +108,7 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
                 OfferedProductResponseName: "Declined",
                 }) 
                 .then(()=>{
-                  axios.put('http://localhost:5000/api/offerproduct/'+offer.OfferProductId, {
-                      OfferProductId: offer.OfferProductId,
-                      ProductProviderId: offer.ProductProviderId,
-                      ReceiverId:offer.ReceiverId,
-                      Message: offer.Message,
-                      Offerdate: offer.Offerdate,
-                      CheckOffer : true,
-                      RequestId:offer.RequestId
-                    })
+                  axios.put('http://localhost:5000/api/offerproduct/check/'+offer.OfferProductId)
                 })
                 .then(()=>{
                   axios.post('http://localhost:5000/api/notification', {

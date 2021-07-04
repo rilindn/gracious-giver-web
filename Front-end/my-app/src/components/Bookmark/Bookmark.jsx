@@ -37,6 +37,11 @@ const Bookmark = ({bookmark, loggedInUser,updated}) => {
           2000,
           )
     })
+    .then(()=>{
+      setTimeout(()=>{
+        getBookmarkedProducts();
+      },500)
+    })
     }
     catch(e){
         console.log(e);
@@ -46,7 +51,7 @@ const Bookmark = ({bookmark, loggedInUser,updated}) => {
     return (
         <div>
             <div className="prodCol">
-            <i class="fas fa-bookmark bo-prod" onClick ={deleteBookmark}></i>
+            <i className="fas fa-bookmark bo-prod" onClick ={deleteBookmark}></i>
             <a href={`/prodDetails/${product.ProductId}`} >
               <div className="home-prod">
                  <img src={
@@ -60,7 +65,7 @@ const Bookmark = ({bookmark, loggedInUser,updated}) => {
                          </span> 
                                {product.ProductName}
                           </h5>
-                          <p className="prodLocation">{product.ProductLocation}</p> 
+                          <p className="prodLocation">{product.State}, {product.City}</p> 
                        </div>
                     </div>
                   </a>

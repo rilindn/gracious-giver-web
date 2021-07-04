@@ -2,7 +2,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBContainer, MDBInput, MDBRow } 
 import React, { useState } from "react";
 import Footer from "../footer/Footer";
 import HeaderLoginRegister from "../Header/HeaderLoginRegister";
-import { Form, FormLabel,FormGroup } from "react-bootstrap";
+import { Form, FormLabel,FormGroup,Spinner } from "react-bootstrap";
 import { SocialIcon } from 'react-social-icons';
 import { FaUser, FaLock} from 'react-icons/fa'
 import axios from "axios";
@@ -14,28 +14,40 @@ const FormPage = () => {
 
   const[username,setUsername]=useState('')
   const[password,setPassword]=useState('')
+  const[logged,setLogged]=useState(false)
   let history = useHistory();
 
   const handleSubmit = async (event) => {
-    
     event.preventDefault()
     const posReq = axios.create({
       withCredentials:true
     })
-    await posReq.post('http://localhost:5000/api/login',{
-        UserName: username,
-        UserPassword: password
-      })
-    .then(
-      (res) =>{
-        history.push('/home');
-        NotificationManager.success('You have been successfully logged in!','',3000);
-        //console.log(res.data)
-      },
-      (error) =>{
-        NotificationManager.error('Username or password incorrect!','',500);
-      },
-    )
+    setTimeout(()=>{
+      posReq.post('http://localhost:5000/api/login',{
+          UserName: username,
+          UserPassword: password
+        })
+      .then(
+        (res) =>{
+            console.log(res.data)
+            if(res.data.OrganizationId!==undefined)
+            {
+              history.push('/Organizationdetails/'+res.data.OrganizationId);
+              NotificationManager.success(`You have been successfully logged in as Organization!`,'',3000);
+            }
+            else{
+              history.push('/home');
+              NotificationManager.success(`You have been successfully logged in as ${res.data.UserRole}!`,'',3000);
+            }
+            setLogged(false);
+        },
+        (error) =>{
+          NotificationManager.error('Username or password incorrect!','',500);
+          setLogged(false);
+        },
+      )
+    },2000)
+    
   }
 
   return (
@@ -100,8 +112,10 @@ const FormPage = () => {
                   rounded
                   className="btn-block z-depth-1a"
                   style={{width:"150px",margin:"0"}}
+                  onClick={()=>setLogged(true)}
                 >
-                  Sign in
+                  
+                  {logged?<span>Loading...<Spinner animation="border" style={{width:"20px",height:"20px",marginLeft:"10px"}} /></span> :"Sign in"}
                 </MDBBtn>
                 
               </div>

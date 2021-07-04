@@ -79,7 +79,7 @@ function App() {
         <Route path="/organizations" exact>
           <Organizations />
         </Route>
-        <Route path="/Organizationdetails" exact>
+        <Route path="/Organizationdetails/:orgId" exact>
           <Organizationdetails />
         </Route>
         <NotificationContainer />

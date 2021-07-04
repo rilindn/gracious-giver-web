@@ -27,6 +27,7 @@ const Dashboard = () => {
           .then((res) => {
             setLoggedInUser(res.data)
             setLoading(true);
+            setOrganizationTables(res.data.OrganizationId!==undefined?true:false)
           })
       })()
     }, [])
@@ -37,6 +38,8 @@ const Dashboard = () => {
             {loading?
         <div className="d-flex">
         <div className="dash-side-selector">
+            
+        {loggedInUser.OrganizationId===undefined?
             <ul>
                 <li
                onClick={()=>{
@@ -100,7 +103,11 @@ const Dashboard = () => {
                 className={`${otherTables ? "active-side-btn" : ""}`}
                 >Other Tables</li>
                 :null}
-                                <li
+                
+            </ul>
+            :
+            <ul>
+                <li
                 onClick={()=>{
                     setUsersTables(false);
                     setRequestsTables(false);
@@ -111,18 +118,18 @@ const Dashboard = () => {
                 }}
                 className={`${organizationTables ? "active-side-btn" : ""}`}
                 > Organization</li>
-                
             </ul>
+            }
         </div>
         <div className="dash-content">
         <div className="dash-tables">
+            {loggedInUser.OrganizationId!==undefined?organizationTables? <OrganizationsTable/>:null:null}
             {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"? (usersTables ? <UsersDataTable/>: null):null}
             {postsTables ? <PostsTables/>: null }
             {requestsTables ? <RequestsTables/>: null}
             {offersTables? <OffersTables/>:null}
-            {organizationTables? <OrganizationsTable/>:null}
             {loggedInUser.UserRole === "Admin" || loggedInUser.UserRole === "SuperAdmin"? (otherTables ? <OtherTables/>: null ):null}
-
+            
         </div>
         </div>
         </div>

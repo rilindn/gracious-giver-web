@@ -31,18 +31,16 @@ const BookmarkPage = () => {
     }, [])
 
     const getBookmarks = async () =>{
+        try{
         await axios.get(`http://localhost:5000/api/Bookmark/id/`+loggedInUser.UserId)
         .then(resu=>{
             console.log(resu.data)
             setBookmarks(resu.data)
         })
-        .then(()=>{
-            NotificationManager.error(
-                'Error while bookmarking the product!',
-                '',
-                1000,
-                )
-        })
+    }
+    catch(e){
+        console.log(e)
+    }
   }
 
 
@@ -50,11 +48,12 @@ const BookmarkPage = () => {
         <div>
             <Header loggedInUser={loggedInUser} />
         <Sidebar />
-            <div className="pt-5">
+            <div className="pt-5" style={{minHeight:"500px"}}>
             <h3>Bookmarked Products</h3>
             <div className="productsALL">
                 <div className="rowProd" >
                     {loading ? 
+                    bookmarks.length===0?"No bookmarked products":
                     bookmarks.map(bookmark=>(
                            <Bookmark
                             key={bookmark.BookmarkId}

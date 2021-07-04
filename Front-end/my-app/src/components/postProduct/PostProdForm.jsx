@@ -11,6 +11,7 @@ const PostProdForm = ({loggedInUser}) => {
     let history = useHistory()
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
+    const [states, setStates] = useState([]);
     const [errors, setErrors] = useState({});
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
@@ -21,7 +22,8 @@ const PostProdForm = ({loggedInUser}) => {
       ProductCategory:"",
       ProductState: "",
       ProductDescription: "",
-      ProductLocation: "",
+      State: "",
+      City: "",
       ProductComment: "",
     })
 
@@ -39,6 +41,7 @@ const PostProdForm = ({loggedInUser}) => {
     useEffect(()=>{
         getCategories();
         getCities();
+        getStates();
     },[selectedFiles]);
 
     const getCategories = async () => {
@@ -59,6 +62,18 @@ const PostProdForm = ({loggedInUser}) => {
       .then(res=>{
           console.log(res.data)
           setCities(res.data)
+      })
+      }
+      catch(e){
+          console.log(e);
+      }
+  }
+    const getStates = async () => {
+      try{ 
+      await axios.get(`http://localhost:5000/api/shteti`)
+      .then(res=>{
+          console.log(res.data)
+          setStates(res.data)
       })
       }
       catch(e){
@@ -95,7 +110,8 @@ const PostProdForm = ({loggedInUser}) => {
             ProductState: event.target.ProductState.value,
             ProductPhoto: event.target.ProductPhoto.value,
             ProductDescription: event.target.ProductDescription.value,
-            ProductLocation: event.target.ProductLocation.value,
+            State: event.target.State.value,
+            City: event.target.City.value,
             ProductComment: event.target.ProductComment.value,
             DonatorId: loggedInUser.UserId
           })
@@ -147,11 +163,6 @@ const PostProdForm = ({loggedInUser}) => {
               onChange={handleChange}
             />
                     <p className="error">{errors.ProductName}</p>
-                    {errors.ProductName &&
-                    <ul>
-                      <li className="info">{errors.ProductNameNote1}</li>
-                      <li className="info">{errors.ProductNameNote2}</li>
-                    </ul>}
                     </div>
           </Form.Group>
           
@@ -251,16 +262,33 @@ const PostProdForm = ({loggedInUser}) => {
             <p className="error">{errors.ProductDescription}</p>
             </div>
           </Form.Group>
-
+          
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
-            <Form.Label>Location</Form.Label>
+            <Form.Label>State</Form.Label>
             <Form.Control 
-            name="ProductLocation"
+            name="State"
             style={{width: "400px"}} 
             as="select" 
             custom
             required
-            value={values.ProductLocation}
+            value={values.State}
+            onChange={handleChange}
+            >
+              {states.map(state=>(
+              <option values={state.Emri}>{state.Emri}</option>
+             ))}
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
+            <Form.Label>City</Form.Label>
+            <Form.Control 
+            name="City"
+            style={{width: "400px"}} 
+            as="select" 
+            custom
+            required
+            value={values.City}
             onChange={handleChange}
             >
               {cities.map(city=>(

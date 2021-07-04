@@ -58,7 +58,7 @@ const Product = ({product, loggedInUser}) => {
                          </span> 
                                {product.ProductName}
                           </h5>
-                          <p className="prodLocation">{product.ProductLocation}</p> 
+                          <p className="prodLocation">{product.State}, {product.City}</p> 
                        </div>
                     </div>
                   </a>

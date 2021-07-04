@@ -12,6 +12,7 @@ const RequestForm = ({loggedInUser}) => {
     let history = useHistory()
     const [categories, setCategories] = useState([]);
     const [cities, setCities] = useState([]);
+    const [states, setStates] = useState([]);
     const [errors, setErrors] = useState({});
     const [selectedFiles,setSelectedFiles] = useState([]);
     const [selectedFilesName,setSelectedFilesName] = useState([]);
@@ -22,7 +23,8 @@ const RequestForm = ({loggedInUser}) => {
       RequestName:"",
       RequestCategory:"",
       RequestDescription: "",
-      RequestLocation: "",
+      State: "",
+      City: "",
       RequestComment: "",
     })
 
@@ -39,7 +41,8 @@ const RequestForm = ({loggedInUser}) => {
     useEffect(()=>{
         getCategories();
         getCities();
-    },[selectedFiles]);
+        getStates();
+    },[]);
 
     const getCategories = async () => {
         try{
@@ -65,6 +68,20 @@ const RequestForm = ({loggedInUser}) => {
           console.log(e);
       }
   }
+
+  const getStates = async () => {
+    try{ 
+    await axios.get(`http://localhost:5000/api/shteti`)
+    .then(res=>{
+        console.log(res.data)
+        setStates(res.data)
+    })
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(ValidationPostRequest(values));
@@ -74,7 +91,8 @@ const RequestForm = ({loggedInUser}) => {
             RequestName: event.target.RequestName.value,
             RequestPhoto: event.target.RequestPhoto.value,
             RequestCategory: event.target.RequestCategory.value,
-            RequestLocation: event.target.RequestLocation.value,
+            State: event.target.State.value,
+            City: event.target.City.value,
             RequestComment: event.target.RequestComment.value,
             ReceiverId: loggedInUser.UserId
           })
@@ -154,11 +172,6 @@ const RequestForm = ({loggedInUser}) => {
               onChange={handleChange}
             />
              <p className="error">{errors.RequestName}</p>
-                    {errors.RequestName &&
-                    <ul>
-                      <li className="info">{errors.RequestNameNote1}</li>
-                      <li className="info">{errors.RequestNameNote2}</li>
-                    </ul>}
               </div>
           </Form.Group>
 
@@ -220,14 +233,31 @@ const RequestForm = ({loggedInUser}) => {
           </Form.Group >
 
           <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
-            <Form.Label>Location</Form.Label>
+            <Form.Label>State</Form.Label>
             <Form.Control 
-            name="RequestLocation"
+            name="State"
             style={{width: "400px"}} 
             as="select" 
             required
             custom
-            value={values.RequestLocation}
+            value={values.State}
+            onChange={handleChange}
+            >
+              {states.map(state=>(
+              <option values={state.Emri}>{state.Emri}</option>
+             ))}
+          
+            </Form.Control>
+          </Form.Group>
+          <Form.Group className="form-group-el" controlId="exampleForm.SelectCustom">
+            <Form.Label>City</Form.Label>
+            <Form.Control 
+            name="City"
+            style={{width: "400px"}} 
+            as="select" 
+            required
+            custom
+            value={values.City}
             onChange={handleChange}
             >
               {cities.map(city=>(

@@ -89,12 +89,12 @@ const Header = ({ search }) => {
         <Navbar.Collapse id="">
           <Nav className="">
           <Form inline className="searchpost" >
-            {loggedInUser.length===0?null:
+            {loggedInUser.UserRole==="Donator" || loggedInUser.UserRole==="Receiver"?
           <Nav.Link id="post" href={`${loggedInUser.UserRole==="Donator"?"/postProd":loggedInUser.UserRole==="Receiver"?"/RequestForm":""}`}>
                 <span className="mt-2" style={{fontSize:"19px",marginTop:"10px"}}>   
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
-            }
+            :null}
               <div className="mr-sm-2 header-search "style={{width:"320px"}}>
               {search?
               <div>
@@ -179,12 +179,16 @@ const Header = ({ search }) => {
                     Your Account
                   </List.Item>
                   <Dropdown.Item eventKey="1">Posts</Dropdown.Item>
+                  {loggedInUser.OrganizationId!==undefined?null:
+                  <div>
                   <Dropdown.Item href="/bookmark " eventKey="2">
                     Bookmark
                   </Dropdown.Item>
                   <Dropdown.Item href="/dashboard" eventKey="3">
                     Dashboard
                   </Dropdown.Item>
+                  </div>
+                  }
                   <Dropdown.Item href="/settings" eventKey="3">
                     Settings
                   </Dropdown.Item>

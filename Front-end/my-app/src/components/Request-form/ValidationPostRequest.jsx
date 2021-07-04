@@ -4,17 +4,23 @@ const ValidationPostRequest = (values) => {
 
     let errors ={};
 
-    if(!/[a-zA-Z]{5,50}$/.test(values.RequestName)){
-        errors.RequestName = "* Request Name is not valid"
-        errors.RequestNameNote1 = "Request name should be between 5 and 50 chars"
-        errors.RequestNameNote2 = "Only letters allowed"
+    if(values.RequestName.length<5){
+        errors.RequestName = "* Minimum 5 characters!"
         return errors;
     }
-    if(!/[a-zA-Z0-9]{20,250}$/.test(values.RequestDescription)){
-        errors.RequestDescription = "*Minimum 20 characters!"
+    if(values.RequestName.length>50){
+        errors.RequestName = "* Maximium 50 characters!"
         return errors;
     }
-
+    if(values.RequestDescription.length<10){
+        errors.RequestDescription = "* Minimum 10 characters!"
+        return errors;
+    }
+    if(values.RequestDescription.length>400){
+        errors.RequestDescription = "* Maximium 400 characters!"
+        return errors;
+    }
+    
     return errors;
 }
 

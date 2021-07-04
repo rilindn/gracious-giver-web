@@ -36,11 +36,11 @@ const OrganizationCard = ({organization}) => {
       var date = new Date().toLocaleString()
       event.preventDefault();
        axios
-      .post('http://localhost:5000/api/OrganizationMember', {
+      .post('http://localhost:5000/api/OrganizationMemberRequest', {
         DateOfJoining: date,
         OrganizationId: organization.OrganizationId,
-        UserId:loggedInUser.UserId
-
+        UserId:loggedInUser.UserId,
+        Checked : false
       })
       .then(
         (res) => {

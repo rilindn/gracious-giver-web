@@ -1,12 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
-import DeleteMember from './DeleteMember'
 import { Search } from '../DataTable/Search'
 import { Spinner } from 'react-bootstrap';
 import Member from './Member'
 
-const MemberTable = () => {
+const OrgMemberRequestTable = () => {
   const [members, setMembers] = useState([])
   const [allMembers, setAllMembers] = useState([])
   const [deleteUserModal, setDeleteUserModal] = useState(false)
@@ -51,7 +50,7 @@ const MemberTable = () => {
     if (search) {
       setMembers(allMembers)
       computedMembers = computedMembers.filter((user) =>
-        user.UserName.toLowerCase().includes(search.toLowerCase()),
+        user.UserId.toLowerCase().includes(search.toLowerCase()),
       )
     }
     return computedMembers
@@ -116,10 +115,11 @@ const MemberTable = () => {
                 {userData.map((user, i) => (
                   <Member
                   user={user}
-                  onDelete={() => {
-                      setDeleteUserModal(true)
-                      setUserD(user)
+                  onUpdate={() => {
+                    getAmofMembers(maxMembershow)
+                    getAllMembers()
                   }}
+                  
                   i={i}
                   />
                 ))}
@@ -130,18 +130,8 @@ const MemberTable = () => {
           </div>
         </Table>
       </Container>
-      <DeleteMember
-        show={deleteUserModal}
-        onHide={() => setDeleteUserModal(false)}
-        onUpdate={()=>{
-          getAllMembers();
-          setDeleteUserModal(false)
-          getAmofMembers(maxMembershow);
-        }}
-        user={userD}
-      />
     </div>
   )
 }
 
-export default MemberTable
+export default OrgMemberRequestTable

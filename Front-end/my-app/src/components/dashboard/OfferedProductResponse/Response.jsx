@@ -56,15 +56,6 @@ const Response = ({response,i,onUpdate}) => {
         }
     }
 
-{/* <th>Nr.</th>
-                                <th>Donator</th>
-                                <th>Receiver</th>
-                                <th>Request</th>
-                                <th>Message</th>
-                                <th>Response</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Actions</th> */}
     return (
         <tbody>
         {loading?

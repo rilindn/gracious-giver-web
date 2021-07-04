@@ -1501,15 +1501,6 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 .org-card-img {
   height: 230px;
 }
-
-.prod-form-wrapper2 {
-  width: 800px;
-  margin: 50px;
-  box-shadow: inset 0 0 5px #3c6e71;
-  background: #e4e4e4;
-  border-radius: 20px;
-  height: 1300px;
-}
 /*organizdetails*/
 body {
   margin-top: 20px;
@@ -1908,34 +1899,7 @@ table.shoping-cart-table tr td:last-child {
 .strong a {
   color: black;
 }
-.msg-header {
-  width: 303px;
-  height: 70px;
-  border-radius: 4px;
-  background-color: rgb(245, 239, 239);
-  border: 1px solid rgb(219, 218, 214);
-  margin: 5px;
-}
-.msg-header h6 {
-  white-space: pre-line;
-  text-align: left;
-  font-size: 14px;
-  padding: 0 6px;
-}
-.msg-header-time {
-  width: 303px;
-  text-align: right;
-  padding: 5px;
-  font-size: 11px;
-  float: right;
-  color: rgb(139, 139, 139);
-}
-.msg-header-read {
-  padding: 5px;
-  height: 20px;
-  font-size: 12px;
-  color: rgb(109, 108, 108);
-}
-.msg-header-read:hover {
-  color: rgb(179, 179, 179);
+
+.position{
+  margin-left: 5px;
 }

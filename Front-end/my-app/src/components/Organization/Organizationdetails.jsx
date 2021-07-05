@@ -3,6 +3,7 @@ import Footer from '../footer/Footer'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { NotificationManager } from 'react-notifications'
 
 const OrganizationDetails = () => {
 
@@ -38,6 +39,31 @@ const OrganizationDetails = () => {
     const imgSrc = "http://localhost:5000/photos/organization/"+
     (organization.Logo===''?defaultImg:organization.Logo);
     console.log(organization.Logo)
+
+    const handleSubmit = async (event) =>  {
+      event.preventDefault();
+       axios
+      .post('http://localhost:5000/api/EventParticipants', {
+        // EventId:,
+        ParticipantId:loggedInUser.UserId,
+      })
+      .then(
+        (res) => {
+          NotificationManager.success(
+          'Joined Successfully!',
+          '',
+          2000,
+          )
+        },
+        (error) => {
+          NotificationManager.error(
+            'Error while joining!',
+            '',
+            1000,
+            )
+        },
+      )
+}
 
   return (
    
@@ -101,7 +127,7 @@ const OrganizationDetails = () => {
                    Description
                   </div>
                   <div className="m-t">
-                    <button className="btn btn-block btn-primary mt-3 ml-0">Join</button>
+                    <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
                   </div>
                 </div>
               </div>

@@ -178,17 +178,18 @@ const Header = ({ search }) => {
                   >
                     Your Account
                   </List.Item>
-                  <Dropdown.Item eventKey="1">Posts</Dropdown.Item>
                   {loggedInUser.OrganizationId!==undefined?null:
                   <div>
+                  <Dropdown.Item eventKey="1">Posts</Dropdown.Item>
                   <Dropdown.Item href="/bookmark " eventKey="2">
                     Bookmark
                   </Dropdown.Item>
+                  </div>
+                  }
+                  
                   <Dropdown.Item href="/dashboard" eventKey="3">
                     Dashboard
                   </Dropdown.Item>
-                  </div>
-                  }
                   <Dropdown.Item href="/settings" eventKey="3">
                     Settings
                   </Dropdown.Item>

@@ -10,6 +10,7 @@ import { Spinner } from 'react-bootstrap';
 import OffersTables from './dash-sections/OffersTable';
 import OrganizationsTable from './dash-sections/OrganizationsTable';
 
+
 const Dashboard = () => {
 
     const [usersTables, setUsersTables] = useState(false);
@@ -28,6 +29,7 @@ const Dashboard = () => {
             setLoggedInUser(res.data)
             setLoading(true);
             setOrganizationTables(res.data.OrganizationId!==undefined?true:false)
+            setPostsTables(res.data.OrganizationId!==undefined?false:true)
           })
       })()
     }, [])

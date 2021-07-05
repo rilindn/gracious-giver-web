@@ -1498,6 +1498,27 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   color: #ed1858 !important;
   font-weight: 700 !important;
 }
+.org-card-btn-join:hover {
+  background-color: #ed1858 !important;
+  color: #ffffff !important;
+}
+.org-card-btn-joined {
+  width: 120px;
+  background-color: transparent !important;
+  color: #ed1858 !important;
+  font-weight: 700 !important;
+}
+.org-details-btn {
+  background-color: transparent !important;
+  color: #ed1858 !important;
+  font-weight: 700 !important;
+  float: right;
+}
+.org-details-btn:hover {
+  background-color: #ed1858 !important;
+  color: #ffffff !important;
+  border-color: #ed1858 !important;
+}
 .org-card-img {
   height: 230px;
 }

@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import { NotificationManager } from 'react-notifications'
 
-const Bookmark = ({bookmark, loggedInUser,updated}) => {
+const Bookmark = ({bookmark,loggedInUser,updated}) => {
 
    const [product, setProducts] = useState([]);
    
     useEffect(()=>{
       getBookmarkedProducts();
-      },[]);
+    },[]);
    
     const getBookmarkedProducts= async () => {
       try{

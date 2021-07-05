@@ -22,15 +22,28 @@ const OrganizationCard = ({organization}) => {
     console.log(organization.Logo)
 
     const [loggedInUser, setLoggedInUser] = useState([])
+    const [joined, setJoined] = useState();
     
     useEffect(() => {(async () => {
          axios
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
-            setLoggedInUser(res.data)
+            setLoggedInUser(res.data);
+            joinCheck(res.data.UserId);
           })
       })()
     }, [])
+
+    const joinCheck = (UserId) =>{
+      try{
+        axios.get(`http://localhost:5000/api/OrganizationMember/joined/${organization.OrganizationId}/${UserId}`)
+        .then((res)=>{
+          setJoined(res.data);
+        })
+      }catch(e){
+        console.log(e)
+      }
+    }
 
     const handleSubmit = async (event) =>  {
       var date = new Date().toLocaleString()
@@ -52,7 +65,7 @@ const OrganizationCard = ({organization}) => {
         },
         (error) => {
           NotificationManager.error(
-            'Error while joining!'+{error},
+            'Error while joining!',
             '',
             1000,
             )
@@ -78,7 +91,9 @@ const OrganizationCard = ({organization}) => {
 
                 <MDBCardFooter>
                   <MDBBtn href={`/Organizationdetails/${organization.OrganizationId}`} className="org-card-btn">Read More</MDBBtn>
-                  <MDBBtn href="#" className="org-card-btn org-card-btn-join" onClick={handleSubmit}>Join</MDBBtn>
+                  {joined===undefined?
+                  <MDBBtn className="org-card-btn org-card-btn-join" onClick={handleSubmit}>Join</MDBBtn>:
+                  <MDBBtn className="org-card-btn org-card-btn-joined" >Joined</MDBBtn>}
                 </MDBCardFooter>
               </MDBCard>
     </MDBCol>

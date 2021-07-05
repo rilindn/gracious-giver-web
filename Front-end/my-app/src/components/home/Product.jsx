@@ -10,9 +10,8 @@ const Product = ({product, loggedInUser}) => {
     const imgSrc = "http://localhost:5000/photos/ProductPhotos/"+
     (product.ProductPhoto===''?defaultImg:(product.ProductPhoto.replace("C:\\fakepath\\", "")));
 
-
     const handleBookmark = async () =>{
-          try{
+        try{
           await axios.get('http://localhost:5000/api/bookmark/bookmarked/'+loggedInUser.UserId+"/"+product.ProductId)
           .then((res)=>{
             if(res.data===false){

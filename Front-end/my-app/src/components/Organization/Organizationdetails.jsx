@@ -10,6 +10,7 @@ const OrganizationDetails = () => {
   var {orgId} = useParams();
   const [organization,setOrganization] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState([])
+  const [joined, setJoined] = useState();
 
   useEffect(() => {
     ;(async () => {
@@ -17,10 +18,22 @@ const OrganizationDetails = () => {
         .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
         .then((res) => {
           setLoggedInUser(res.data)
+          joinCheck(res.data.UserId)
         })
     })()
     getOrganization();
   }, [])
+
+    const joinCheck = (UserId) =>{
+      try{
+        axios.get(`http://localhost:5000/api/OrganizationMember/joined/${organization.OrganizationId}/${UserId}`)
+        .then((res)=>{
+          setJoined(res.data);
+        })
+      }catch(e){
+        console.log(e)
+      }
+    }
   
   const getOrganization = () =>{
     try{
@@ -34,13 +47,41 @@ const OrganizationDetails = () => {
     console.log(e)
   }
   }
+  
+  const handleSubmit = async (event) =>  {
+    var date = new Date().toLocaleString()
+    event.preventDefault();
+     axios
+    .post('http://localhost:5000/api/OrganizationMemberRequest', {
+      DateOfJoining: date,
+      OrganizationId: organization.OrganizationId,
+      UserId:loggedInUser.UserId,
+      Checked : false
+    })
+    .then(
+      (res) => {
+        NotificationManager.success(
+        'Joined Successfully!',
+        '',
+        2000,
+        )
+      },
+      (error) => {
+        NotificationManager.error(
+          'Error while joining!',
+          '',
+          1000,
+          )
+      },
+    )
+}
 
   const defaultImg = "prodImg.jpg"
     const imgSrc = "http://localhost:5000/photos/organization/"+
     (organization.Logo===''?defaultImg:organization.Logo);
     console.log(organization.Logo)
 
-    const handleSubmit = async (event) =>  {
+    const handleJoinedSubmit = async (event) =>  {
       event.preventDefault();
        axios
       .post('http://localhost:5000/api/EventParticipants', {
@@ -93,7 +134,10 @@ const OrganizationDetails = () => {
                 
                 <p style={{textAlign:"left"}}>
                   {loggedInUser.OrganizationId===undefined?
-                  <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Join us</button>:null}
+                  joined===undefined?
+                  <button style={{backgroundColor:"#d92362"}} onClick={handleJoinedSubmit} className="btn btn-round btn-danger" type="button">Join us</button>:
+                  <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Joined</button>
+                  :null}
                 </p>
               </div>
             </div>
@@ -171,6 +215,9 @@ const OrganizationDetails = () => {
 
       <div className="iniciativat">
       <div className="container initatives-wrapper">
+        {loggedInUser.UserRole==="Receiver"?
+        <button className="btn btn-round btn-danger org-details-btn" type="button">Make a request<i className="fas fa-plus ml-2" ></i></button>
+        :null}
         <div className="row">
           <div className="col-md-3">
             <div className="ibox">

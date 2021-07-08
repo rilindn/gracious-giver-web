@@ -23,6 +23,7 @@ import Organizations from './components/Organization/Organizations'
 import Organizationdetails from './components/Organization/Organizationdetails'
 import EventDetails from './components/Organization/EventDetails'
 import InitiativeDetails from './components/Organization/InitiativeDetails'
+import EventsForm from './components/Organization/EventsForm'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])

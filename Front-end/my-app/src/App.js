@@ -13,13 +13,14 @@ import axios from 'axios'
 import 'react-notifications/lib/notifications.css'
 import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
-import Chat from './components/chat/Chat'
+import Chat from './components/chat/chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
 import EditMyUserData from './components/UserSettings/EditMyUserData'
 import Organization from './components/Organization/RegisterOrganizationForm'
 import RequestDetails from './components/home/RequestDetails'
 import Organizations from './components/Organization/Organizations'
 import Organizationdetails from './components/Organization/Organizationdetails'
+import EventsForm from './components/Organization/EventsForm'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -57,6 +58,9 @@ function App() {
         </Route>
         <Route path="/chat" exact>
           <Chat />
+        </Route>
+        <Route path="/EventsForm" exact>
+          <EventsForm />
         </Route>
         <Route path="/settings" exact>
           <EditMyUserData />

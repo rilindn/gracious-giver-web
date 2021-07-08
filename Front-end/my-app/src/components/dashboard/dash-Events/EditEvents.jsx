@@ -3,28 +3,32 @@ import React from 'react'
 import { Form, FormGroup, Modal } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
-const EditState = ({show,onHide,state,onUpdate}) => {
-    
+const EditEvents = ({show,onHide,ev,onUpdate}) => {
+
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put('http://localhost:5000/api/Shteti/'+ state.ShtetiId, {
-            ShtetiId: state.ShtetiId,
-            Emri: event.target.Emri.value,
+        axios.put('http://localhost:5000/api/Events/'+ev.EventId, {
+            EventId:ev.EventId,
+            EventName: event.target.EventName.value,
+            EventDescription:event.target.EventDescription.value,
+            EventDate: ev.EventDate,
+            City: ev.City,
+            OrganizationId: ev.OrganizationId
           })
           .then(()=> {
               onUpdate();
           })
           .then((res) => {
             NotificationManager.success(
-            'State edited succesfully!',
+            'Event edited succesfully!',
             '',
             2000,
             )
         },
             (error) => {
                 NotificationManager.error(
-                'Error while editing the state!'+{error},
+                'Error while editing the Event!',
                 '',
                 1000,
                 )
@@ -41,19 +45,30 @@ const EditState = ({show,onHide,state,onUpdate}) => {
                 <div className="modal-content">
                     <Form onSubmit={handleSubmit}>
                         <div className="modal-header">						
-                            <h3 className="modal-title">Edit State</h3>
+                            <h3 className="modal-title">Edit Event</h3>
                     </div>
-                        <div className="modal-body">					
+                        <div className="modal-body">		
                             <FormGroup className="form-group">
-                                <label>State Name</label>
+                                <label>Name</label>
                                 <input 
-                                defaultValue={state.Emri}
-                                name="Emri"
+                                name="EventName"
+                                defaultValue={ev.EventName} 
                                 type="text" 
                                 className="form-control" 
-                                required/>
+                                required
+                                />
+                            </FormGroup>		
+                            <FormGroup className="form-group">
+                                <label>Description</label>
+                                <input 
+                                name="EventDescription"
+                                defaultValue={ev.EventDescription} 
+                                type="text" 
+                                className="form-control" 
+                                required
+                                />
                             </FormGroup>
-                            				
+                           				
                         </div>
                         <Modal.Footer className="modal-footer">
                             <input 
@@ -69,4 +84,4 @@ const EditState = ({show,onHide,state,onUpdate}) => {
     )
 }
 
-export default EditState
+export default EditEvents

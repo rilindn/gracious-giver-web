@@ -238,6 +238,16 @@ section .section-title {
   min-height: 1250px;
 }
 
+.prod-form-wrapper3 {
+  width: 800px;
+ min-height: 500px;
+  margin: 50px;
+  box-shadow: inset 0 0 5px #3c6e71;
+  background: #e4e4e4;
+  border-radius: 20px;
+
+}
+
 .new-post-t {
   margin-right: 530px;
 }
@@ -245,6 +255,7 @@ section .section-title {
 .new-post-t1 {
   margin-left: 10px;
 }
+
 
 .new-post-p {
   margin-right: 450px;
@@ -267,6 +278,19 @@ section .section-title {
   margin-left: 70px;
   padding: 5px;
 }
+
+.new-post-j2 {
+  color: white;
+  margin-top: 25px;
+  background-color: #3c6e71;
+  height: 30px;
+  border-radius: 10px;
+  width: 660px;
+  margin-left: 60px;
+  padding: 5px;
+}
+
+
 .form-components-width .form-group-el label {
   font-weight: 500;
   font-size: 14pt;

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { NotificationManager } from 'react-notifications'
+import EventsForm from './EventsForm'
 
 const OrganizationDetails = () => {
 
@@ -11,6 +12,7 @@ const OrganizationDetails = () => {
   const [organization,setOrganization] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState([])
   const [joined, setJoined] = useState();
+  const[allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
     ;(async () => {
@@ -22,6 +24,7 @@ const OrganizationDetails = () => {
         })
     })()
     getOrganization();
+    getAllEvents();
   }, [])
 
     const joinCheck = (UserId) =>{
@@ -34,6 +37,18 @@ const OrganizationDetails = () => {
         console.log(e)
       }
     }
+    const getAllEvents = async () => {
+      try{ 
+      await axios.get(`http://localhost:5000/api/Events`)
+      .then(res=>{
+          console.log(res.data)
+          setAllEvents(res.data)
+      })
+      }
+      catch(e){
+          console.log(e);
+      }
+  }
   
   const getOrganization = () =>{
     try{
@@ -152,55 +167,36 @@ const OrganizationDetails = () => {
 
       <div className="eventet">
       <div className="container events-sec">
-        {loggedInUser.Description!==undefined?
-        <button className="create-event-btn" type="button"><i className="fas fa-plus ml-1 fa-3x" ></i></button>:null}
-        <div className="row">
-          <div className="col-md-3">
-            <div className="ibox">
-              <div className="ibox-content product-box">
-                <div className="product-imitation">
-                  [ INFO ]
-                </div>
-                <div className="product-desc">
-                  <span className="product-price">
-                    1
-                  </span>
-                  <small className="text-muted">First Event</small>
-                  <h5 className="product-name"> Name of Event</h5>
-                  <div className="small m-t-xs">
-                   Description
-                  </div>
-                  <div className="m-t">
-                    <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {loggedInUser.OrganizationId!==undefined?
+   <a href="/EventsForm" ><button className="create-event-btn" type="button"><i className="fas fa-plus ml-1 fa-3x" ></i></button></a> :null}
+       
+         <div className="row">
+         {allEvents.map(event=>(
+         <div className="col-md-4">
+           <div className="ibox">
+             <div className="ibox-content product-box">
+               <div className="product-imitation">
+                
+               </div>
+               <div className="product-desc">
+                 <span className="product-price">
+                   1
+                 </span>
+                 <small className="text-muted">{event.EventDate}</small>
+                 <h5 className="product-name"> {event.EventName}</h5>
+                 <div className="small m-t-xs">
+                 {event.EventDescription}
+                 </div>
+                 <div className="m-t">
+                   <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>   
+         ))}
+        
          
-         
-          <div className="col-md-3">
-            <div className="ibox">
-              <div className="ibox-content product-box">
-                <div className="product-imitation">
-                  [ INFO ]
-                </div>
-                <div className="product-desc">
-                  <span className="product-price">
-                  2
-                  </span>
-                  <small className="text-muted">First Event</small>
-                  <h5 className="product-name"> Name of Event</h5>
-                  <div className="small m-t-xs">
-                   Description
-                  </div>
-                  <div className="m-t">
-                    <button className="btn btn-block btn-primary mt-3 ml-0">Join</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       </div>

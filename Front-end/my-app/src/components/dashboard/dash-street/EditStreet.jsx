@@ -23,7 +23,7 @@ const EditStreet = ({show,onHide,street,onUpdate}) => {
             )
         },
             (error) => {
-                NotificationManager.success(
+                NotificationManager.error(
                 'Error while editing the street!'+{error},
                 '',
                 1000,

@@ -129,7 +129,7 @@ const OrganizationDetails = () => {
       <Header />
     <div className="orgdetails">
     
-        <div className="container bootdey">
+      <div className="container bootdey">
         <div className="col-md-12">
           <section className="panel">
             <div className="panel-body">
@@ -166,36 +166,36 @@ const OrganizationDetails = () => {
       </div>
 
       <div className="eventet">
-      <div className="container events-sec">
-        {loggedInUser.OrganizationId!==undefined?
-   <a href="/EventsForm" ><button className="create-event-btn" type="button"><i className="fas fa-plus ml-1 fa-3x" ></i></button></a> :null}
-       
-         <div className="row">
-         {allEvents.map(event=>(
-         <div className="col-md-4">
-           <div className="ibox">
-             <div className="ibox-content product-box">
-               <div className="product-imitation">
-                
-               </div>
-               <div className="product-desc">
-                 <span className="product-price">
-                   1
-                 </span>
-                 <small className="text-muted">{event.EventDate}</small>
-                 <h5 className="product-name"> {event.EventName}</h5>
-                 <div className="small m-t-xs">
-                 {event.EventDescription}
-                 </div>
-                 <div className="m-t">
-                   <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>   
-         ))}
         
+      <div className="container events-sec">
+        {loggedInUser.Description!==undefined?
+        <button className="create-event-btn" type="button"><i className="fas fa-plus ml-1 fa-3x" ></i></button>:null}
+        <div className="row">
+          
+        <a href="/eventdetails/2" style={{textDecoration:"none"}}>
+          <div className="col-md-3" >
+            <div className="ibox">
+              <div className="ibox-content product-box">
+                <div className="product-imitation">
+                  [ INFO ]
+                </div>
+                <div className="product-desc">
+                  <span className="product-price">
+                    1
+                  </span>
+                  <small className="text-muted">First Event</small>
+                  <h5 className="product-name"> Name of Event</h5>
+                  <div className="small m-t-xs">
+                   Description
+                  </div>
+                  <div className="m-t">
+                    <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </a>
          
         </div>
       </div>
@@ -205,7 +205,7 @@ const OrganizationDetails = () => {
 
       <div className="inicia">
           <h1 style={{color:"#555958",fontSize:"35px",fontWeight:"bold",fontFamily:"Courier New"}}>Iniciatives
-</h1>
+         </h1>
           <div className="ss"></div>
       </div>
 
@@ -215,6 +215,8 @@ const OrganizationDetails = () => {
         <button className="btn btn-round btn-danger org-details-btn" type="button">Make a request<i className="fas fa-plus ml-2" ></i></button>
         :null}
         <div className="row">
+          
+        <a href="/initativedetails/2" style={{textDecoration:"none"}}>
           <div className="col-md-3">
             <div className="ibox">
               <div className="ibox-content product-box">
@@ -237,7 +239,7 @@ const OrganizationDetails = () => {
               </div>
             </div>
           </div>
-         
+          </a>
          
           <div className="col-md-3">
             <div className="ibox">

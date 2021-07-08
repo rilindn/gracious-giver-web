@@ -15,12 +15,14 @@ import { NotificationContainer } from 'react-notifications'
 import ProductDetails from './components/home/ProductDetails'
 import Chat from './components/chat/chat'
 import BookmarkPage from './components/Bookmark/BookmarkPage'
-import EditMyUserData from './components/UserSettings/EditMyUserData'
+import EditMyUserData from './components/Settings/EditMyUserData'
+import EditOrgData from './components/Settings/EditOrgData'
 import Organization from './components/Organization/RegisterOrganizationForm'
 import RequestDetails from './components/home/RequestDetails'
 import Organizations from './components/Organization/Organizations'
 import Organizationdetails from './components/Organization/Organizationdetails'
-import EventsForm from './components/Organization/EventsForm'
+import EventDetails from './components/Organization/EventDetails'
+import InitiativeDetails from './components/Organization/InitiativeDetails'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -65,6 +67,9 @@ function App() {
         <Route path="/settings" exact>
           <EditMyUserData />
         </Route>
+        <Route path="/OrgSettings" exact>
+          <EditOrgData />
+        </Route>
         <Route path="/dashboard" exact>
           <Dashboard loggedInUser={loggedInUser} />
         </Route>
@@ -85,6 +90,12 @@ function App() {
         </Route>
         <Route path="/Organizationdetails/:orgId" exact>
           <Organizationdetails />
+        </Route>
+        <Route path="/eventdetails/:EventId" exact>
+          <EventDetails />
+        </Route>
+        <Route path="/initativedetails/:InitiativeId" exact>
+          <InitiativeDetails />
         </Route>
         <NotificationContainer />
       </Router>

@@ -190,9 +190,13 @@ const Header = ({ search }) => {
                   <Dropdown.Item href="/dashboard" eventKey="3">
                     Dashboard
                   </Dropdown.Item>
+                  {loggedInUser.OrganizationId===undefined?
                   <Dropdown.Item href="/settings" eventKey="3">
                     Settings
-                  </Dropdown.Item>
+                  </Dropdown.Item>:
+                  <Dropdown.Item href="/OrgSettings" eventKey="3">
+                    Settings
+                  </Dropdown.Item>}
                   <Dropdown.Divider />
                   <Dropdown.Item
                     href="/login"

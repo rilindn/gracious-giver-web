@@ -1441,6 +1441,34 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   background-color: white;
 }
 
+.search-form-wrapper {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: 1400px 400px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.57),
+      rgba(0, 0, 0, 0.57)
+    ),
+    url('./images/Mask\ Group\ 2.png');
+}
+
+.search-form-wrapper h1 {
+  color: white;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
+    sans-serif;
+}
+
+.search-form-input {
+  width: 170px !important;
+  height: 50px !important;
+  margin: 10px;
+}
+
 /*request*/
 .new-post-t1 {
   margin-left: 10px;
@@ -1931,4 +1959,11 @@ table.shoping-cart-table tr td:last-child {
 
 .position {
   margin-left: 5px;
+}
+.divide-line {
+  height: 30px;
+  width: 3px;
+  background-color: rgb(121, 121, 121);
+  margin: 5px 4px 0 4px;
+  border-radius: 10px;
 }

@@ -5,23 +5,42 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Form } from 'semantic-ui-react'
 import { NotificationManager } from 'react-notifications';
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const ProductDetails = ({loggedInUser}) => {
   
   var {productId} = useParams();
+  let history = useHistory();
   const [product, setProduct] = useState([]);
   const [donator,setDonator] = useState([]);
   const [productPhotos,setProductPhotos] = useState([])
   const [bigImg,setBigImg] = useState()
-  
- 
-
 
     useEffect(()=>{
       getProductData();
     // eslint-disable-next-line
     },[]);
+
+    const handleDirectMessage = () => {
+      try{
+        axios.get("http://localhost:5000/api/Chat/check/"+product.DonatorId+"/"+loggedInUser.UserId)
+        .then((res)=>{
+          if(res.data.length===0){
+          axios.post(`http://localhost:5000/api/Chat/`,{
+          AcceptorId:product.DonatorId,
+          SenderId:loggedInUser.UserId
+        })
+        .then(()=>{
+          history.push('/chat')
+        })}
+        else{
+          history.push('/chat')
+        }
+        })
+      }catch(e){
+        console.log(e)
+      }
+    }
 
 
     const getProductData = async () => {
@@ -159,9 +178,15 @@ const ProductDetails = ({loggedInUser}) => {
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
-                        <strong>Location</strong>
+                        <strong>State</strong>
                       </th>
-                      <td>{product.ProductLocation}</td>
+                      <td>{product.State}</td>
+                    </tr>
+                    <tr>
+                      <th className="pl-0 w-25" scope="row">
+                        <strong>City</strong>
+                      </th>
+                      <td>{product.City}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -191,7 +216,13 @@ const ProductDetails = ({loggedInUser}) => {
               <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
                 Request{' '}
               </button>
-              </Form>}
+              <div className="divide-line"></div>
+              <button onClick={handleDirectMessage} type="button" className="btn btn-primary btn-md mb-2 ml-1">
+                Direct Message{' '}
+              </button>
+              
+              </Form>
+              }
             </div>
           </div>
         </div>

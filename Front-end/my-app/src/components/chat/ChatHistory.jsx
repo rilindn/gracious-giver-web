@@ -12,7 +12,7 @@ const ChatHistory = ({loggedInUser,user}) =>{
   const [chatMessages, setChatMessages] = useState([])
   const [userDetails, setUserDetails] = useState([])
   const messagesEndRef = useRef(null)
-  const chatSA = user.SenderId===loggedInUser.UserId?user.AcceptorId:user.SenderId 
+  const chatSA = user!==undefined?user.SenderId===loggedInUser.UserId?user.AcceptorId:user.SenderId:null
   const scrollToBottom = useScrollToBottom();
 
     const getMessages =  () =>{

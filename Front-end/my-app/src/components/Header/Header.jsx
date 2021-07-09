@@ -95,24 +95,10 @@ const Header = ({ search }) => {
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
             :null}
-              <div className="mr-sm-2 header-search "style={{width:"320px"}}>
-              {search?
-              <div>
-              <FormControl
-                type="text"
-                id="textbox"
-                placeholder="Search"
-                className="mr-sm-2"
-                style={{width:"240px"}}
-              />
-              <BsSearch className="header-search-icon"/>
-              </div>
-              :null}
-              </div>
             </Form>
 
             {loggedInUser.length === 0 ? null : (
-              <Nav className="dropdownmenu">
+              <Nav className="dropdownmenu"  style={{marginLeft:"550px"}}>
                 <DropdownButton
                   id="hell"
                   menuAlign={{ lg: 'right' }}

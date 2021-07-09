@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import { Footer } from '../footer/Footer';
@@ -7,7 +8,6 @@ import axios from 'axios';
 import {Switch, Route } from "react-router-dom";
 import Sidebar from '../Sidebar/Sidebar';
 import Request from './Request';
-import Pagination from '../dashboard/DataTable/Pagination';
 
 const Home = ({loggedInUser}) => {
 

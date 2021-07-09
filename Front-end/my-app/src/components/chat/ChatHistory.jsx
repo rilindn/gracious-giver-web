@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios"
 import React, { useState,useEffect, useRef} from "react"
 import maleUser from '../../images/maleUser.png'
 import femaleUser from '../../images/femaleUser.png'
 import Moment from 'react-moment';
-import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
+import ScrollToBottom, { useScrollToBottom } from 'react-scroll-to-bottom';
 
 const ChatHistory = ({loggedInUser,user}) =>{
 
@@ -13,7 +14,6 @@ const ChatHistory = ({loggedInUser,user}) =>{
   const messagesEndRef = useRef(null)
   const chatSA = user.SenderId===loggedInUser.UserId?user.AcceptorId:user.SenderId 
   const scrollToBottom = useScrollToBottom();
-  const [sticky] = useSticky();
 
     const getMessages =  () =>{
       try{
@@ -41,7 +41,7 @@ const ChatHistory = ({loggedInUser,user}) =>{
       const interval = setInterval(() => {
         getMessages();}, 5000);
       return () => clearInterval(interval);
-    }, [user])
+    }, [user,chatSA])
 
 
     const newMessage = async (event) => {

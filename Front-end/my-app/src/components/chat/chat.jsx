@@ -52,7 +52,7 @@ const Chat = () => {
               setUserDetails(res.data)
           })
       })()
-    }, [user])
+    }, [user,chatSA])
 
   
       return (

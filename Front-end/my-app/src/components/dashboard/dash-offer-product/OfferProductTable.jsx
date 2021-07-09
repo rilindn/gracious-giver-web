@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form,  Row, Table } from 'react-bootstrap';
+import { Col, Container, Form,  Row, Table } from 'react-bootstrap';
 import EditOfferProduct from './EditOfferProduct'
 import DeleteOfferProduct from './DeleteOfferProduct'
 import { Search } from '../DataTable/Search';

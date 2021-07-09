@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Form, FormGroup, Modal, FormLabel, FormControl } from 'react-bootstrap'
-import { MDBInput } from 'mdb-react-ui-kit'
+import { Form, FormGroup, Modal} from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
 const AddAdmin = ({ show, onHide, onUpdate }) => {

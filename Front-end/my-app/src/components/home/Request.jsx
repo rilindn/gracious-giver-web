@@ -6,9 +6,6 @@ import { faBookmark } from '@fortawesome/free-solid-svg-icons'
 
 const Request = ({request,loggedInUser}) => {
 
-  const defaultImg = "prodImg.jpg"
-    const imgSrc = "http://localhost:5000/photos/RequestPhotos/"+
-    (request.RequestPhoto===''?defaultImg:(request.RequestPhoto.replace("C:\\fakepath\\", "")));
 
     const handleBookmark = async () =>{
         try{

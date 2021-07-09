@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
+import {  Col, Container, Form, Row, Table } from 'react-bootstrap'
 import { Search } from '../DataTable/Search'
 import { Spinner } from 'react-bootstrap';
 import Member from './Member'
@@ -8,8 +8,6 @@ import Member from './Member'
 const OrgMemberRequestTable = () => {
   const [members, setMembers] = useState([])
   const [allMembers, setAllMembers] = useState([])
-  const [deleteUserModal, setDeleteUserModal] = useState(false)
-  const [userD, setUserD] = useState([])
   const [search, setSearch] = useState('')
   const [maxMembershow, setMaxMembershow] = useState(10)
   const [loading,setLoading] = useState(false);
@@ -18,7 +16,7 @@ const OrgMemberRequestTable = () => {
     getAmofMembers(maxMembershow)
     getAllMembers()
     setLoading(true);
-  }, [maxMembershow,deleteUserModal])
+  }, [maxMembershow])
 
 
   const getAmofMembers = async (maxMembershow) => {

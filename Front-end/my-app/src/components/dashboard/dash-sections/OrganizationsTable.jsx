@@ -1,6 +1,5 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
-import UserTable from '../dash-user/UserTable';
-import AdminTable from'../dash-admin/AdminTable';
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import MemberTable from '../dash-organization-member/MemberTable';

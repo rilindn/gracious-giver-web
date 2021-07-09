@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button} from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
@@ -39,13 +39,7 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
     //     }
     // }
 
-    const defaultImg = "prodImg.jpg"
-    const imgSrc = "http://localhost:5000/photos/organization/"+
-    (request.Logo===''?defaultImg:request.Logo);
-    console.log(request.Logo)
-
     const handleAcceptOrganizationRequest  = async (OId) => {
-        var date = new Date().toLocaleString()
         try{
           await axios.post(`http://localhost:5000/api/organization/`,{
            Username: OId.Username,
@@ -92,7 +86,6 @@ const OrganizationRequest = ({request,i,loggedInUser,setRequestV,setRequestD,onU
         }
 
         const handleDeclinedOrganizationRequest  = async (OId) => {
-            var date = new Date().toLocaleString()
             try{
                 axios.put('http://localhost:5000/api/pendingorganizationsrequest/'+OId.OrganizationId, {
                     OrganizationId: OId.OrganizationId,

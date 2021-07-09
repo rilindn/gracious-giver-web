@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import DeleteOfferedProductResponse from './DeleteOfferedProductResponse'
 import { Search } from '../DataTable/Search';
-import { NotificationManager } from 'react-notifications'
 import Response from './Response';
 
 

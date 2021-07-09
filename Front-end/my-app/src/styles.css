@@ -240,12 +240,11 @@ section .section-title {
 
 .prod-form-wrapper3 {
   width: 800px;
- min-height: 500px;
+  height: 780px;
   margin: 50px;
   box-shadow: inset 0 0 5px #3c6e71;
   background: #e4e4e4;
   border-radius: 20px;
-
 }
 
 .new-post-t {
@@ -255,7 +254,6 @@ section .section-title {
 .new-post-t1 {
   margin-left: 10px;
 }
-
 
 .new-post-p {
   margin-right: 450px;
@@ -289,7 +287,6 @@ section .section-title {
   margin-left: 60px;
   padding: 5px;
 }
-
 
 .form-components-width .form-group-el label {
   font-weight: 500;
@@ -1684,7 +1681,6 @@ body {
   font-weight: 300;
 }
 .orgdetails {
-  width: 100vw;
   position: relative;
 }
 .imgorg {
@@ -1734,7 +1730,17 @@ body {
   padding: 20px;
   box-shadow: green;
 }
-
+.events-scroller-arrows {
+  cursor: pointer;
+  color: rgba(0, 82, 54, 0.425);
+  margin: 10px;
+}
+.menu-wrapper--inner:first-child {
+  margin-left: -130px;
+}
+.menu-wrapper--inner:last-child {
+  margin-right: -190px !important;
+}
 /*EVENTETTT=============================================*/
 
 /* E-commerce */
@@ -1751,7 +1757,6 @@ body {
 }
 .product-imitation {
   text-align: center;
-  padding: 90px 0;
   background-color: #f8f8f9;
   color: #bebec3;
   font-weight: 600;
@@ -1891,7 +1896,6 @@ table.shoping-cart-table tr td:last-child {
   position: relative;
 }
 .eveent {
-  width: 100vw;
   height: 80px;
   margin-top: 20px;
   position: relative;
@@ -1917,7 +1921,6 @@ table.shoping-cart-table tr td:last-child {
   position: relative;
 }
 .inicia {
-  width: 100vw;
   height: 70px;
   position: relative;
 }

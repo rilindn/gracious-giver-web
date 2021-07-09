@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NotificationManager } from 'react-notifications'
-import { useHistory } from 'react-router-dom'
 
 import {
     MDBCard,
@@ -14,6 +14,7 @@ import {
     MDBCol,
     MDBCardFooter,
   } from 'mdb-react-ui-kit'
+  
 const OrganizationCard = ({organization}) => {
 
     const defaultImg = "prodImg.jpg"

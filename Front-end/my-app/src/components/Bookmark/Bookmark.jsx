@@ -8,6 +8,7 @@ const Bookmark = ({bookmark,loggedInUser,updated}) => {
    
     useEffect(()=>{
       getBookmarkedProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
    
     const getBookmarkedProducts= async () => {

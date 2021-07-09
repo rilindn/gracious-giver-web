@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination, Spinner, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import {  Spinner} from 'react-bootstrap'
 import { Footer } from '../footer/Footer';
 import Header from '../Header/Header';
 import Bookmark from './Bookmark';
 import axios from 'axios';
-import {Switch, Route } from "react-router-dom";
 import Sidebar from '../Sidebar/Sidebar';
-import { NotificationManager } from 'react-notifications'
 
 const BookmarkPage = () => {
 

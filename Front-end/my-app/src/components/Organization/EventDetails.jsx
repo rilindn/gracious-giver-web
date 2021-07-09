@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
@@ -18,16 +19,18 @@ const EventDetails = () => {
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
+            console.log(res.data)
+            getEvent();
           })
       })()
-      getEvent();
     }, [])
 
     const getEvent = () =>{
         try{
-            axios.get('htttp://localhost:5000/api/event/'+EventId)
+            axios.get('http://localhost:5000/api/events/'+EventId)
             .then((res)=>{
                 setEvent(res.data)
+                console.log(res.data)
             })
         }catch(e){
             console.log(e)
@@ -67,17 +70,17 @@ const EventDetails = () => {
         <div className="col-md-12">
           <section className="panel">
             <div className="panel-body">
-              {/* <div className="imgorg">
+              <div className="imgorg">
                 <div className="pro-img-details">
-                  <img id="imgo" src={imgSrc} alt="" />
+                  <img id="imgo" src={`http://localhost:5000/photos/organization/events/${event.Photo}`} alt="" />
                 </div>
-              </div> */}
+              </div>
               <div className="organization-details-wrapper">
                 <h4 className="pro-d-title">
-                {event.Name} Event name
+                {event.EventName} 
                 </h4>
                 <p style={{textAlign:"left"}}>
-                 {event.Description} Event Description
+                 {event.EventDescription} 
                 </p>
                 
                 <p style={{textAlign:"left"}}>

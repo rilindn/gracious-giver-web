@@ -1,15 +1,5 @@
 import React, { useState } from 'react'
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBBtn,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBCardFooter,
-} from 'mdb-react-ui-kit'
+import { MDBRow} from 'mdb-react-ui-kit'
 import Footer from '../footer/Footer'
 import Header from './../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'

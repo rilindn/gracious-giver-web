@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import { Form, Col, Button} from 'react-bootstrap'
-import faPhotoUpload from '../../images/photoUpload.png'
+import { Form, Button} from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import Footer from '../footer/Footer';

@@ -4,7 +4,6 @@ import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import EditOrganization from './EditOrganization'
 import DeleteOrganization from './DeleteOrganization'
 import { Search } from '../DataTable/Search';
-import StateTable from './../dash-state/StateTable';
 
 
 const OrganizationTable = () => { 

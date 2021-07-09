@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
 import {Col, Container, Form, Row, Table } from 'react-bootstrap';

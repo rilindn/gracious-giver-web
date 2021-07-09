@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
@@ -69,21 +70,13 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
       const handleDeclineRequest  = async () => {
           var date = new Date().toLocaleString()
           try{
-            console.log("prod res")
-            await axios.post(`http://localhost:5000/api/OrganizationMember`,{
-              DateOfJoining: date,
-              OrganizationId: user.OrganizationId,
-              UserId:loggedInUser.UserId
-              }) 
-              .then(()=>{
                 axios.put('http://localhost:5000/api/OrganizationMemberRequest/'+user.OrganizationMemberRequestId, {
                   OrganizationMemberRequestId:user.OrganizationMemberRequestId,
                   DateOfJoining: date,
                   OrganizationId: user.OrganizationId,
-                  UserId:loggedInUser.UserId,
+                  UserId:user.UserId,
                   Checked : true
                   })
-              })
               // .then(()=>{
               //   axios.post('http://localhost:5000/api/notification', {
               //       // Initiator: loggedInUser.UserId,
@@ -113,8 +106,6 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
     return (
                   <tr key={user.UserId}>
                     <td>#{++i}</td>
-                    {console.log(userDetails)}
-                    {console.log(user)}
                     <td>{userDetails.Firstname} {userDetails.Lastname}</td>
                     <td>{userDetails.UserName}</td>
                     <td>{userDetails.UserRole}</td>

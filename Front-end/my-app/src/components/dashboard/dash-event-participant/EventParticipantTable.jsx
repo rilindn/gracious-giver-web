@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
+import { Col, Container, Form, Row, Table } from 'react-bootstrap'
 import DeleteParticipant from './DeleteParticipant'
 import { Search } from '../DataTable/Search'
 import { Spinner } from 'react-bootstrap';

@@ -6,6 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import Header from '../Header/Header'
 import Footer from '../footer/Footer'
 import { useParams } from 'react-router-dom';
+import EventParticipantTable from "../dashboard/dash-event-participant/EventParticipantTable";
 
 const EventDetails = () => {
 
@@ -42,7 +43,7 @@ const EventDetails = () => {
         event.preventDefault();
          axios
         .post('http://localhost:5000/api/EventParticipants', {
-          // EventId:,
+          EventId:EventId,
           ParticipantId:loggedInUser.UserId,
         })
         .then(
@@ -82,16 +83,15 @@ const EventDetails = () => {
                 <p style={{textAlign:"left"}}>
                  {event.EventDescription} 
                 </p>
-                
                 <p style={{textAlign:"left"}}>
                   
                   <button style={{backgroundColor:"#d92362"}} onClick={handleJoinedSubmit} className="btn btn-round btn-danger" type="button">Join us</button>
                   <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Joined</button>
-                  
                 </p>
               </div>
             </div>
           </section>
+          {loggedInUser.OrganizationId !== undefined? <EventParticipantTable EventId={EventId}></EventParticipantTable>: null}
         </div>
       </div>
       <Footer/>

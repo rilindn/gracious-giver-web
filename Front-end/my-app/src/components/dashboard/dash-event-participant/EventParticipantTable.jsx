@@ -6,7 +6,7 @@ import { Search } from '../DataTable/Search'
 import { Spinner } from 'react-bootstrap';
 import EventMember from './EventMember'
 
-const MemberEventTable = () => {
+const MemberEventTable = ({EventId}) => {
   const [members, setMembers] = useState([])
   const [allMembers, setAllMembers] = useState([])
   const [deleteUserModal, setDeleteUserModal] = useState(false)
@@ -25,7 +25,7 @@ const MemberEventTable = () => {
   const getAmofMembers = async (maxMembershow) => {
     try {
       await axios
-        .get('http://localhost:5000/api/EventParticipants/amount/' + maxMembershow)
+        .get('http://localhost:5000/api/EventParticipants/amount/' + maxMembershow +"/" + EventId)
         .then((res) => {
           setMembers(res.data)
         })
@@ -36,7 +36,7 @@ const MemberEventTable = () => {
 
   const getAllMembers = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/EventParticipants`)
+      await axios.get(`http://localhost:5000/api/EventParticipants/` + EventId)
       .then((res) => {
         setAllMembers(res.data)
       })

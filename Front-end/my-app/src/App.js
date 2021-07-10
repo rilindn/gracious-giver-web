@@ -24,7 +24,7 @@ import Organizationdetails from './components/Organization/Organizationdetails'
 import EventDetails from './components/Organization/EventDetails'
 import InitiativeDetails from './components/Organization/InitiativeDetails'
 import EventsForm from './components/Organization/EventsForm'
-
+import InitiativeForm from './components/Organization/InitiativeForm'
 function App() {
   const [loggedInUser, setLoggedInUser] = useState([])
 
@@ -64,6 +64,9 @@ function App() {
         </Route>
         <Route path="/EventsForm" exact>
           <EventsForm />
+        </Route>
+        <Route path="/InitiativeForm" exact>
+          <InitiativeForm />
         </Route>
         <Route path="/settings" exact>
           <EditMyUserData />

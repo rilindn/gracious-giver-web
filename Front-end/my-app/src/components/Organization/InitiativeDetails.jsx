@@ -9,8 +9,8 @@ import { useParams } from 'react-router-dom';
 
 const InitiativeDetails = () => {
 
-    var {InitiativeId} = useParams();
-    const [initiative,setInitiative] = useState([]);
+    var {IniciativeId} = useParams();
+    const [iniciative,setInitiative] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState([])
   
     useEffect(() => {
@@ -26,7 +26,7 @@ const InitiativeDetails = () => {
 
     const getInitiative = () =>{
         try{
-            axios.get('htttp://localhost:5000/api/event/'+ InitiativeId)
+            axios.get('htttp://localhost:5000/api/Iniciative/'+ IniciativeId)
             .then((res)=>{
                 setInitiative(res.data)
             })
@@ -75,10 +75,10 @@ const InitiativeDetails = () => {
               </div> */}
               <div className="organization-details-wrapper">
                 <h4 className="pro-d-title">
-                {initiative.Name} Initiative name
+                {iniciative.Name} Initiative name
                 </h4>
                 <p style={{textAlign:"left"}}>
-                 {initiative.Description} Initiative Description
+                 {iniciative.Description} Initiative Description
                 </p>
                 
                 <p style={{textAlign:"left"}}>

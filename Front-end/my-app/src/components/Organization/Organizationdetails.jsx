@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { NotificationManager } from 'react-notifications'
 import Event from './Event'
+import Initiative from './Initiative'
 import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 const OrganizationDetails = () => {
@@ -190,7 +191,12 @@ const OrganizationDetails = () => {
             </button>
           ) : null}
           <div className="row">
-            <a href="/initativedetails/2" style={{ textDecoration: 'none' }}>
+          <a href="/InitiativeForm">
+              <button className="create-event-btn" type="button">
+                <i className="fas fa-plus ml-1 fa-3x"></i>
+              </button>
+            </a>
+
               <div className="col-md-3">
                 <div className="ibox">
                   <div className="ibox-content product-box">
@@ -212,8 +218,7 @@ const OrganizationDetails = () => {
                   </div>
                 </div>
               </div>
-            </a>
-
+          
             <div className="col-md-3">
               <div className="ibox">
                 <div className="ibox-content product-box">

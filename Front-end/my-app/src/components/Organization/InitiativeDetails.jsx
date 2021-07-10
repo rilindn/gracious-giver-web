@@ -3,6 +3,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { NotificationManager } from 'react-notifications';
 import Header from '../Header/Header'
 import Footer from '../footer/Footer'
 import { useParams } from 'react-router-dom';
@@ -19,9 +20,10 @@ const InitiativeDetails = () => {
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
+            console.log(res.data)
+            getInitiative();
           })
       })()
-      getInitiative();
     }, [])
 
     const getInitiative = () =>{
@@ -29,6 +31,7 @@ const InitiativeDetails = () => {
             axios.get('htttp://localhost:5000/api/Iniciative/'+ IniciativeId)
             .then((res)=>{
                 setInitiative(res.data)
+                console.log(res.data)
             })
         }catch(e){
             console.log(e)
@@ -75,10 +78,10 @@ const InitiativeDetails = () => {
               </div> */}
               <div className="organization-details-wrapper">
                 <h4 className="pro-d-title">
-                {iniciative.Name} Initiative name
+                {iniciative.IniciativeName} 
                 </h4>
                 <p style={{textAlign:"left"}}>
-                 {iniciative.Description} Initiative Description
+                 {iniciative.IniciativeDescription} 
                 </p>
                 
                 <p style={{textAlign:"left"}}>

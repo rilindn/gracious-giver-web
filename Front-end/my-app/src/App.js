@@ -98,7 +98,7 @@ function App() {
         <Route path="/eventdetails/:EventId" exact>
           <EventDetails />
         </Route>
-        <Route path="/initativedetails/:InitiativeId" exact>
+        <Route path="/initiativedetails/:IniciativeId" exact>
           <InitiativeDetails />
         </Route>
         <NotificationContainer />

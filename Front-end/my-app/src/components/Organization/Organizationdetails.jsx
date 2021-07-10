@@ -15,6 +15,7 @@ const OrganizationDetails = () => {
   const [loggedInUser, setLoggedInUser] = useState([])
   const [joined, setJoined] = useState()
   const [allEvents, setAllEvents] = useState([])
+  const [allInitiatives, setAllInitiatives] = useState([])
 
   useEffect(() => {
     ;(async () => {
@@ -27,6 +28,7 @@ const OrganizationDetails = () => {
     })()
     getOrganization()
     getAllEvents()
+    getAllInitiatives()
   }, [])
 
   const joinCheck = (UserId) => {
@@ -52,6 +54,19 @@ const OrganizationDetails = () => {
       console.log(e)
     }
   }
+
+
+  const getAllInitiatives= async () => {
+    try {
+      await axios.get(`http://localhost:5000/api/Iniciative`).then((res) => {
+        console.log(res.data)
+        setAllInitiatives(res.data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
 
   const getOrganization = () => {
     try {
@@ -181,66 +196,30 @@ const OrganizationDetails = () => {
       </div>
 
       <div className="iniciativat">
-        <div className="container initatives-wrapper">
-          {loggedInUser.UserRole === 'Receiver' ? (
-            <button
-              className="btn btn-round btn-danger org-details-btn"
-              type="button"
-            >
-              Make a request<i className="fas fa-plus ml-2"></i>
-            </button>
-          ) : null}
-          <div className="row">
-          <a href="/InitiativeForm">
+      <div className="container events-sec">
+          {loggedInUser.OrganizationId === organization.OrganizationId ? (
+            <a href="/InitiativeForm">
               <button className="create-event-btn" type="button">
                 <i className="fas fa-plus ml-1 fa-3x"></i>
               </button>
             </a>
-
-              <div className="col-md-3">
-                <div className="ibox">
-                  <div className="ibox-content product-box">
-                    <div className="product-imitation">[ INFO ]</div>
-                    <div className="product-desc">
-                      <span className="product-price">1</span>
-                      <small className="text-muted">First Inciativ</small>
-                      <a href="///" className="product-name">
-                        {' '}
-                        Name of Inciativ
-                      </a>
-                      <div className="small m-t-xs">Description</div>
-                      <div className="m-t text-righ">
-                        <button className="btn btn-block btn-primary mt-3 ml-0">
-                          Donate
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          
-            <div className="col-md-3">
-              <div className="ibox">
-                <div className="ibox-content product-box">
-                  <div className="product-imitation">[ INFO ]</div>
-                  <div className="product-desc">
-                    <span className="product-price">2</span>
-                    <small className="text-muted">Second Inciative</small>
-                    <a href="///" className="product-name">
-                      {' '}
-                      Iniciative
-                    </a>
-                    <div className="small m-t-xs">Description</div>
-                    <div className="m-t">
-                      <button className="btn btn-block btn-primary mt-3 ml-0">
-                        Donate
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          ) : null}
+          <div className="events-scroller" >
+            <ScrollMenu
+              data={allInitiatives.map((iniciative) => (
+                <Initiative
+                  key={iniciative.IniciativeId}
+                  iniciative={iniciative}
+                  loggedInUser={loggedInUser}
+                  organization={organization}
+                />
+              ))}
+              arrowLeft={<div className="events-scroller-arrows" >{<i class="fas fa-angle-left fa-4x"></i>}</div>}
+              arrowRight={<div className="events-scroller-arrows">{<i class="fas fa-angle-right fa-4x"></i>}</div>}
+            ></ScrollMenu>
           </div>
+        
+        
         </div>
       </div>
 

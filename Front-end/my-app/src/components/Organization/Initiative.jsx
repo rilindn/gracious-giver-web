@@ -3,16 +3,17 @@ import React from 'react'
 import Moment from 'react-moment';
 import { NotificationManager } from 'react-notifications';
 
-const Iniciative = ({event,loggedInUser,iniciative}) => {
+
+const Initiative = ({iniciative,loggedInUser,organization}) => {
 
 
-    const handleSubmit = async (iniciative) =>  {
+    const handleSubmit = async (initiative) =>  {
         var date = new Date().toLocaleString() 
-        event.preventDefault();
+        initiative.preventDefault();
          axios
         .post('http://localhost:5000/api/OrganizationMemberRequest', {
           DateOfJoining: date,
-          IniciativeId: iniciative.IniciativeId,
+          OrganizationId: organization.OrganizationId,
           UserId:loggedInUser.UserId,
           Checked : false
         })
@@ -64,4 +65,4 @@ const Iniciative = ({event,loggedInUser,iniciative}) => {
     )
 }
 
-export default Iniciative
+export default Initiative

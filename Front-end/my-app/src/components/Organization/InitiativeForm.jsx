@@ -13,8 +13,9 @@ const InitiativeForm = () => {
     
     const [errors, setErrors] = useState({});
     const [organization, setOrganization] = useState([]);
-    
-    const [loggedInUser, setLoggedInUser] = useState([])
+    const [loggedInUser, setLoggedInUser] = useState([]);
+    const [photoName, setPhotoName] = useState();
+    const photoInput = useRef(null);
     
   
 
@@ -35,7 +36,9 @@ const InitiativeForm = () => {
       IniciativeDate: ""
     })
 
-    
+    const handlePhotoInputClick = event => {
+      photoInput.current.click();
+    };
 
 
     const handleChange = (event) => {
@@ -68,9 +71,9 @@ const InitiativeForm = () => {
           IniciativeName: event.target.IniciativeName.value,
           IniciativeDescription: event.target.IniciativeDescription.value,
           IniciativeDate: event.target.IniciativeDate.value,
-            
-            OrganizationId: loggedInUser.OrganizationId,
-            ReceriverId: loggedInUser.ReceriverId
+          IniciativePhoto:photoName,
+          OrganizationId: loggedInUser.OrganizationId,
+          ReceriverId: loggedInUser.ReceriverId
           })
           .then(
             (res) => {
@@ -92,7 +95,19 @@ const InitiativeForm = () => {
        
       }
 
-   
+      const handlePhotoSubmit = (e) => {
+        e.preventDefault()
+        if(e.target.files.length!==0){
+        setPhotoName(e.target.files[0].name);
+        const formData = new FormData()
+        formData.append('myFile',e.target.files[0],e.target.files[0].name)
+              try{
+                axios.post('http://localhost:5000/api/Events/SaveFile', formData)
+              }catch(e){
+                console.log(e)
+              }
+            }
+          }
 
       return (
         <div>
@@ -136,7 +151,27 @@ const InitiativeForm = () => {
             </div>
             </FormGroup>
 
-       
+            <Form.Group className="form-group-el d-flex justify-content-start">
+            <Form.Label htmlFor="inputName"
+            style={{marginRight:"138px"}}
+            >Photo </Form.Label>
+            <button
+            type="button"
+            onClick={handlePhotoInputClick}
+            className="orgUploadBtn"
+            
+            >
+              {photoName?photoName:"Choose file"}
+            </button>
+            <Form.Control
+              style={{width: "400px",display:"none"}}
+              type="file"
+              name="Photo"
+              onChange={handlePhotoSubmit}
+              ref={photoInput}
+              required
+            />
+            </Form.Group>
           
 
             <FormGroup className="form-group-el" controlId="exampleForm.ControlTextarea1">

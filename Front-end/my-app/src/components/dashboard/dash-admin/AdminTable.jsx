@@ -37,7 +37,8 @@ const AdminTable = () => {
 
   const getAllAdmins = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/user/role/admin`).then(res => {
+      await axios.get(`http://localhost:5000/api/user/role/admin`)
+      .then(res => {
         setAllAdmins(res.data)
       })
     } catch (e) {

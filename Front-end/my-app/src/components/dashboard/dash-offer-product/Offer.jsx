@@ -65,7 +65,7 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
             Message: offer.Message,
             ProductProviderId: offer.ProductProviderId,
             ReceiverId:offer.ReceiverId,
-            OfferedProductResponseName: "Declined",
+            OfferedProductResponseName: "Accepted",
           }) 
           .then(()=>{
             axios.put('http://localhost:5000/api/offerproduct/check/'+offer.OfferProductId)

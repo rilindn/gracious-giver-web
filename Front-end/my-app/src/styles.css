@@ -238,6 +238,15 @@ section .section-title {
   min-height: 1250px;
 }
 
+.prod-form-wrapper2 {
+  width: 800px;
+  margin: 50px;
+  box-shadow: inset 0 0 5px #3c6e71;
+  background: #e4e4e4;
+  border-radius: 20px;
+  min-height: 1300px;
+}
+
 .prod-form-wrapper3 {
   width: 800px;
   height: 780px;
@@ -672,6 +681,44 @@ section .section-title {
 }
 .sidebar.active .hamburger div {
   transform: scale(0);
+}
+
+.msg-header {
+  white-space: break-spaces;
+  background-color: rgb(230, 230, 230);
+  padding: 4px;
+  border-radius: 5px;
+  text-align: left;
+}
+.msg-header h6 {
+  font-size: 10pt;
+}
+
+.msg-header-read {
+  font-size: 8pt;
+  background-color: rgb(201, 201, 201);
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+.msg-header-read:hover {
+  background-color: rgb(179, 179, 179);
+}
+
+.msg-header-time {
+  width: 280px;
+  font-size: 8pt;
+  text-align: right;
+  color: gray;
+}
+.chat-msg-nav {
+  position: relative;
+}
+.msg-dot {
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  color: orangered;
+  font-size: 9pt;
 }
 
 .q-width {
@@ -1758,6 +1805,7 @@ body {
   background-color: rgba(163, 194, 183, 0.247);
   padding: 20px;
   box-shadow: green;
+  min-height: 400px;
 }
 .events-scroller-arrows {
   cursor: pointer;
@@ -1769,6 +1817,11 @@ body {
 }
 .menu-wrapper--inner:last-child {
   margin-right: -190px !important;
+}
+
+.menu-wrapper {
+  min-width: 700px;
+  height: 400px;
 }
 /*EVENTETTT=============================================*/
 

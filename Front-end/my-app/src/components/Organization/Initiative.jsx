@@ -41,6 +41,8 @@ const Initiative = ({iniciative,loggedInUser,organization}) => {
             <div className="ibox">
               <div className="ibox-content product-box">
                
+              <img src={`http://localhost:5000/photos/organization/initiative/${iniciative.IniciativePhoto}`} className="product-imitation" alt="" style={{width:"210px",height:"200px"}}> 
+                </img>
                
                 <div className="product-desc">
                   <span className="product-price">

@@ -18,13 +18,13 @@ const PostProdForm = ({loggedInUser}) => {
     const fileInput = useRef(null);
 
     const [values,setValues] = useState({
-      ProductName:"",
-      ProductCategory:"",
-      ProductState: "",
-      ProductDescription: "",
-      State: "",
-      City: "",
-      ProductComment: "",
+      ProductName:"toys",
+      ProductCategory:"asd",
+      ProductState: "asd",
+      ProductDescription: "asd",
+      State: "sad",
+      City: "asd",
+      ProductComment: "asd",
     })
 
     const handleChange = (event) => {

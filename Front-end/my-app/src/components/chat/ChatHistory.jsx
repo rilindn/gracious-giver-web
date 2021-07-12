@@ -20,8 +20,6 @@ const ChatHistory = ({loggedInUser,user}) =>{
          axios.get('http://localhost:5000/api/ChatMsg/acceptor/'+ loggedInUser.UserId+"/"+chatSA)
         .then((res)=>{
           setChatMessages(res.data)
-          console.log("res.data")
-          console.log(res.data)
         })
       }
       catch(e){

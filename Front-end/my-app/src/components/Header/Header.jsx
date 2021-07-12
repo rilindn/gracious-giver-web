@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
-import { FaUser } from 'react-icons/fa'
+import { FaBullseye, FaUser } from 'react-icons/fa'
 import { BsChatFill, BsSearch } from 'react-icons/bs'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -57,6 +57,18 @@ const Header = ({ search }) => {
     }
   }
 
+  const newNotifications = useMemo(() => {
+    var res = false;
+
+    notifications.map(notification=>{
+      if(notification.Readed===false){
+        res=true;
+        return res;
+      }
+    })
+    return res;
+  }, [notifications])
+
   const readNotification = (notification) =>{
     try{
       axios.put('http://localhost:5000/api/notification/' + notification.NotificationId,{
@@ -90,7 +102,7 @@ const Header = ({ search }) => {
           <Nav className="">
           <Form inline className="searchpost" >
             {loggedInUser.UserRole==="Donator" || loggedInUser.UserRole==="Receiver"?
-          <Nav.Link id="post" href={`${loggedInUser.UserRole==="Donator"?"/postProd":loggedInUser.UserRole==="Receiver"?"/RequestForm":""}`}>
+            <Nav.Link id="post" href={`${loggedInUser.UserRole==="Donator"?"/postProd":loggedInUser.UserRole==="Receiver"?"/RequestForm":""}`}>
                 <span className="mt-2" style={{fontSize:"19px",marginTop:"10px"}}>   
                 <MdAddCircleOutline id="icon" color="white" size="23px" style={{marginRight:"3px"}}/>Post</span>
               </Nav.Link>
@@ -102,8 +114,15 @@ const Header = ({ search }) => {
                 <DropdownButton
                   id="hell"
                   menuAlign={{ lg: 'right' }}
-                  title={<BsChatFill id="chatt" color="white" size="25px" />}
+                  title={
+                    <div>
+                  <BsChatFill id="chatt" color="white" size="25px" />
+                  {newNotifications===true?
+                  <i className="fas fa-circle msg-dot"></i>:null}
+                  </div>
+                }
                   variant="transparent"
+                  className="chat-msg-nav"
                 >
                   <Dropdown.Item
                     style={{
@@ -111,10 +130,11 @@ const Header = ({ search }) => {
                       width: '350px',
                       fontWeight: 'bold',
                       color: '#26543b',
+                      padding:"3px 14px"
                     }}
                   > {notifications.length===0?"No message":
                   notifications.map(notification=>(
-                    <div className="msg-header">
+                    <div className="msg-header mb-1">
                       <div className="d-inline d-flex">
                         <span className="msg-header-read"
                         onClick={()=>{readNotification(notification)}}

@@ -4,16 +4,16 @@ const Validation = (values) => {
 
     let errors ={};
 
-    if(!/^[A-Z][A-Za-z]{3,20}$/.test(values.firstname)){
+    if(!/^[A-Z][A-Za-z]{2,20}$/.test(values.firstname)){
         errors.firstname = "* Firstname is not valid"
-        errors.firstnameNote1 = "Username should be between 3 and 20 chars"
+        errors.firstnameNote1 = "Username should be between 2 and 20 chars"
         errors.firstnameNote2 = "Start with an uppercase"
         errors.firstnameNote3 = "Only letters allowed"
         return errors;
     }
-    if(!/^[A-Z][A-Za-z]{3,20}$/.test(values.lastname)){
+    if(!/^[A-Z][A-Za-z]{2,20}$/.test(values.lastname)){
         errors.lastname = "* Lastname is not valid"
-        errors.lastnameNote1 = "Lastname should be between 3 and 20 chars"
+        errors.lastnameNote1 = "Lastname should be between 2 and 20 chars"
         errors.lastnameNote2 = "Start with an uppercase"
         errors.lastnameNote3 = "Only letters allowed"
         return errors;

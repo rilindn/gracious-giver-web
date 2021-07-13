@@ -68,7 +68,15 @@ const Offer = ({offer,i,loggedInUser,setRequestV,setRequestD,onUpdate}) => {
             OfferedProductResponseName: "Accepted",
           }) 
           .then(()=>{
-            axios.put('http://localhost:5000/api/offerproduct/check/'+offer.OfferProductId)
+            axios.put('http://localhost:5000/api/offerproduct/'+offer.OfferProductId, {
+                OfferProductId:offer.OfferProductId,
+                ProductProviderId: offer.ProductProviderId,
+                ReceiverId: offer.ReceiverId,
+                Message: offer.Message,
+                Offerdate: offer.Offerdate,
+                CheckOffer : true,
+                RequestId: offer.RequestId
+              })
           })
           .then(()=>{
             axios.post('http://localhost:5000/api/notification', {

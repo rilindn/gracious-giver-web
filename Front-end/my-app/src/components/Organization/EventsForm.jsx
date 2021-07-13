@@ -99,7 +99,7 @@ const EventsForm = () => {
             },
             (error) => {
               NotificationManager.error(
-                'Error while adding new Event!'+{error},
+                'Error while adding new Event!',
                 '',
                 1000,
                 )

@@ -141,7 +141,7 @@ const RegisterOrganizationForm = ({loggedInUser}) => {
             },
             (error) => {
               NotificationManager.error(
-                'Error while adding new organization!'+{error},
+                'Error while adding new organization!',
                 '',
                 1000,
                 )

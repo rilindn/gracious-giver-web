@@ -22,7 +22,7 @@ const AddState = ({show,onHide,onUpdate}) => {
             },
             (error) => {
                 NotificationManager.error(
-                    'Error while adding new state!'+{error},
+                    'Error while adding new state!',
                     '',
                     1000,
                     )

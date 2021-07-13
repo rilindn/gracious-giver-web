@@ -188,7 +188,6 @@ section .section-title {
   padding: 30px;
   height: 900px;
 }
-
 .txt-post-product {
   background-color: #3c6e71;
   border-radius: 20px;
@@ -1812,12 +1811,12 @@ body {
   color: rgba(0, 82, 54, 0.425);
   margin: 10px;
 }
-.menu-wrapper--inner:first-child {
+/* .menu-wrapper--inner:first-child {
   margin-left: -130px;
-}
-.menu-wrapper--inner:last-child {
+} */
+/* .menu-wrapper--inner:last-child {
   margin-right: -190px !important;
-}
+} */
 
 .menu-wrapper {
   min-width: 700px;
@@ -1856,6 +1855,7 @@ body {
 .product-desc {
   padding: 20px;
   position: relative;
+  text-align: center;
 }
 .ecommerce .tag-list {
   padding: 0;
@@ -1889,6 +1889,7 @@ table.shoping-cart-table tr td:last-child {
   color: #676a6c;
   display: block;
   margin: 2px 0 5px 0;
+  white-space: break-spaces;
 }
 .product-name:hover,
 .product-name:focus {

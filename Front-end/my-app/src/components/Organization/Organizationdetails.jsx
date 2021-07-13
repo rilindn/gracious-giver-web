@@ -197,7 +197,7 @@ const OrganizationDetails = () => {
 
       <div className="iniciativat">
       <div className="container events-sec">
-          {loggedInUser.OrganizationId === organization.OrganizationId ? (
+          {loggedInUser.UserRole === "Receiver" ? (
             <a href="/InitiativeForm">
               <button className="create-event-btn" type="button">
                 <i className="fas fa-plus ml-1 fa-3x"></i>

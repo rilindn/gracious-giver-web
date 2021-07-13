@@ -136,7 +136,7 @@ const PostProdForm = ({loggedInUser}) => {
             },
             (error) => {
               NotificationManager.error(
-                'Error while adding new product!'+{error},
+                'Error while adding new product!',
                 '',
                 1000,
                 )

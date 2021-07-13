@@ -117,7 +117,7 @@ const RequestForm = ({loggedInUser}) => {
             },
             (error) => {
               NotificationManager.error(
-                'Error while adding new request!'+{error},
+                'Error while adding new request!',
                 '',
                 1000,
                 )

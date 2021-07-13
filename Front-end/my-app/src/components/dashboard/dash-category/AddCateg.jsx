@@ -24,7 +24,7 @@ const AddCateg = ({ show, onHide,onUpdate }) => {
     },
     (error) => {
         NotificationManager.error(
-            'Error while adding new category!'+{error},
+            'Error while adding new category!',
             '',
             1000,
             )

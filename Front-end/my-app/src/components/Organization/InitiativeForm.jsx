@@ -86,7 +86,7 @@ const InitiativeForm = () => {
             },
             (error) => {
               NotificationManager.error(
-                'Error while adding new Initiative!'+{error},
+                'Error while adding new Initiative!',
                 '',
                 1000,
                 )

@@ -61,7 +61,7 @@ const AddAdmin = ({ show, onHide, onUpdate }) => {
         },
         (error) => {
           NotificationManager.error(
-            'Error while adding new admin!' + { error },
+            'Error while adding new admin!',
             '',
             1000,
           )

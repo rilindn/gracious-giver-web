@@ -1,44 +1,45 @@
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Col, Container, Form, Row, Table } from 'react-bootstrap'
-import DeleteParticipant from './DeleteParticipant'
-import { Search } from '../DataTable/Search'
+import DeleteParticipant from './DeleteDonation'
+import { Search } from '../dashboard/DataTable/Search'
 import { Spinner } from 'react-bootstrap';
-import EventMember from './EventMember'
+import EventMember from './Donation'
+import Donation from './Donation'
 
-const MemberEventTable = ({EventId}) => {
-  const [members, setMembers] = useState([])
-  const [allMembers, setAllMembers] = useState([])
+const InitiativeDonators = ({InitiativeId}) => {
+  const [donators, setDonators] = useState([])
+  const [allDonators, setAllDonators] = useState([])
   const [deleteUserModal, setDeleteUserModal] = useState(false)
-  const [userD, setUserD] = useState([])
+  const [donationD, setDonationD] = useState([])
   const [search, setSearch] = useState('')
-  const [maxMembershow, setMaxMembershow] = useState(10)
+  const [maxDonatorshow, setMaxDonatorshow] = useState(10)
   const [loading,setLoading] = useState(false);
 
   useEffect(() => {
-    getAmofMembers(maxMembershow)
-    getAllMembers()
+    getAmofDonators(maxDonatorshow)
+    getAllDonators()
     setLoading(true);
-  }, [maxMembershow,deleteUserModal])
+  }, [maxDonatorshow,deleteUserModal])
 
 
-  const getAmofMembers = async (maxMembershow) => {
+  const getAmofDonators = async (maxDonatorshow) => {
     try {
       await axios
-        .get('http://localhost:5000/api/EventParticipants/amount/' + maxMembershow +"/" + EventId)
+        .get('http://localhost:5000/api/Donation/amount/' + maxDonatorshow +"/" + InitiativeId)
         .then((res) => {
-          setMembers(res.data)
+          setDonators(res.data)
         })
     } catch (e) {
       console.log(e)
     }
   }
 
-  const getAllMembers = async () => {
+  const getAllDonators = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/EventParticipants/event/` + EventId)
+      await axios.get(`http://localhost:5000/api/Donation/initiative/` + InitiativeId)
       .then((res) => {
-        setAllMembers(res.data)
+        setAllDonators(res.data)
       })
     } catch (e) {
       console.log(e)
@@ -46,16 +47,16 @@ const MemberEventTable = ({EventId}) => {
   }
 
   const userData = useMemo(() => {
-    let computedMembers = members
+    let computedDonators = donators
 
     if (search) {
-      setMembers(allMembers)
-      computedMembers = computedMembers.filter((user) =>
+      setDonators(allDonators)
+      computedDonators = computedDonators.filter((user) =>
         user.UserName.toLowerCase().includes(search.toLowerCase()),
       )
     }
-    return computedMembers
-  }, [members, search, allMembers])
+    return computedDonators
+  }, [donators, search, allDonators])
 
   return (
     <div>
@@ -66,12 +67,12 @@ const MemberEventTable = ({EventId}) => {
               <Row className="row">
                 <Col className="col-sm-4">
                   <h2>
-                    <b>Members</b>
+                    <b>Donators</b>
                   </h2>
                 </Col>
                 <Col className="col-sm-7 d-flex justify-content-end">
                   <span className="showing-res-txt">
-                    Showing {userData.length} out of {allMembers.length} entries
+                    Showing {userData.length} out of {allDonators.length} entries
                   </span>
                   <Search
                     onSearch={(value) => {
@@ -80,16 +81,16 @@ const MemberEventTable = ({EventId}) => {
                     style={{ float: 'right', width: '200px' }}
                   />
                   <Form.Control
-                    name="ShowAmOfMembers"
+                    name="ShowAmOfDonators"
                     as="select"
                     custom
                     style={{ width: '80px', marginLeft: '3px' }}
                     onChange={(e) => {
                       e.target.value === 'All'
-                        ? setMaxMembershow(allMembers.length)
-                        : setMaxMembershow(e.target.value)
+                        ? setMaxDonatorshow(allDonators.length)
+                        : setMaxDonatorshow(e.target.value)
                     }}
-                    value={maxMembershow}
+                    value={maxDonatorshow}
                   >
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -108,17 +109,18 @@ const MemberEventTable = ({EventId}) => {
                   <th>Fullname</th>
                   <th>Username</th>
                   <th>UserRole</th>
+                  <th>Amount</th>
                   <th>Actions</th>
                 </tr>
               </thead>
             {loading?
               <tbody>
-                {userData.map((user, i) => (
-                  <EventMember
-                  user={user}
+                {userData.map((donation, i) => (
+                  <Donation
+                  donation={donation}
                   onDelete={() => {
                       setDeleteUserModal(true)
-                      setUserD(user)
+                      setDonationD(donation)
                   }}
                   i={i}
                   />
@@ -134,14 +136,14 @@ const MemberEventTable = ({EventId}) => {
         show={deleteUserModal}
         onHide={() => setDeleteUserModal(false)}
         onUpdate={()=>{
-          getAllMembers();
+          getAllDonators();
           setDeleteUserModal(false)
-          getAmofMembers(maxMembershow);
+          getAmofDonators(maxDonatorshow);
         }}
-        user={userD}
+        initiative={donationD}
       />
     </div>
   )
 }
 
-export default MemberEventTable
+export default InitiativeDonators

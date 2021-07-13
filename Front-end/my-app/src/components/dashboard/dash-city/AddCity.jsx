@@ -22,7 +22,7 @@ const AddCity = ({show,onHide,onUpdate}) => {
             },
             (error) => {
                 NotificationManager.error(
-                    'Error while adding new city!'+{error},
+                    'Error while adding new city!',
                     '',
                     1000,
                     )

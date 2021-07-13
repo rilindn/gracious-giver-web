@@ -25,7 +25,7 @@ const AddStreet = ({show,onHide,onUpdate}) => {
             },
             (error) => {
                 NotificationManager.error(
-                    'Error while adding new street!'+{error},
+                    'Error while adding new street!',
                     '',
                     1000,
                     )

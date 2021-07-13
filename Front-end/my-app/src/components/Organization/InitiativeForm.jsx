@@ -6,13 +6,13 @@ import { NotificationManager } from 'react-notifications'
 import Header from '../Header/Header';
 import Footer from '../footer/Footer';
 import { Form, Button, FormControl, FormGroup, FormLabel } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 
 const InitiativeForm = () => {
 
     let history = useHistory()
-    
+    var { orgId } = useParams()
     const [errors, setErrors] = useState({});
-    const [organization, setOrganization] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState([]);
     const [photoName, setPhotoName] = useState();
     const photoInput = useRef(null);
@@ -26,8 +26,6 @@ const InitiativeForm = () => {
          setLoggedInUser(res.data);
        })
    })()
-  
-   getOrganization();
  }, [])
 
     const [values,setValues] = useState({
@@ -49,21 +47,6 @@ const InitiativeForm = () => {
     }
     
 
-
-
-    const getOrganization = async () => {
-        try{
-          await axios.get('http://localhost:5000/api/Organization')
-          .then(res=>{
-            console.log(res)
-            setOrganization(res.data)
-          })
-        }
-        catch(e){
-          console.log(e);
-        }
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         
@@ -72,12 +55,13 @@ const InitiativeForm = () => {
           IniciativeDescription: event.target.IniciativeDescription.value,
           IniciativeDate: event.target.IniciativeDate.value,
           IniciativePhoto:photoName,
-          OrganizationId: loggedInUser.OrganizationId,
-          ReceriverId: loggedInUser.ReceriverId
+          OrganizationId: orgId,
+          ReceiverId: loggedInUser.UserId,
+          Checked:false
           })
           .then(
             (res) => {
-              history.push("/Initiativedetails/"+loggedInUser.OrganizationId);
+              history.push("/Organizationdetails/"+orgId);
               NotificationManager.success(
               'Initiative added succesfully!',
               '',
@@ -102,7 +86,7 @@ const InitiativeForm = () => {
         const formData = new FormData()
         formData.append('myFile',e.target.files[0],e.target.files[0].name)
               try{
-                axios.post('http://localhost:5000/api/Events/SaveFile', formData)
+                axios.post('http://localhost:5000/api/Iniciative/SaveFile', formData)
               }catch(e){
                 console.log(e)
               }

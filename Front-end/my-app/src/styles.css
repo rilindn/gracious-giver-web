@@ -1811,6 +1811,20 @@ body {
   color: rgba(0, 82, 54, 0.425);
   margin: 10px;
 }
+.create-initiative-btn {
+  float: right;
+  background-color: #ffffff !important;
+  border: none;
+  height: 40px;
+  width: 180px;
+  color: rgba(0, 82, 54, 0.425) !important;
+  border-radius: 5px;
+}
+.create-initiative-btn:hover {
+  background-color: rgba(0, 82, 55, 0.425) !important;
+  color: white !important;
+  opacity: 0.9 !important;
+}
 /* .menu-wrapper--inner:first-child {
   margin-left: -130px;
 } */

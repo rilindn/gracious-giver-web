@@ -9,7 +9,10 @@ const EditAdmin = ({show, onHide, admin,onUpdate}) => {
         event.preventDefault()
             axios.put('http://localhost:5000/api/user/'+ admin.UserId, {
             UserId: admin.UserId,
+            Firstname: admin.Firstname,
+            Lastname: admin.Lastname,
             UserName: event.target.UserName.value,
+            UserPassword: admin.UserPassword,
             UserState: event.target.UserState.value,
             UserCity: event.target.UserCity.value,
             UserPostcode: admin.UserPostcode,

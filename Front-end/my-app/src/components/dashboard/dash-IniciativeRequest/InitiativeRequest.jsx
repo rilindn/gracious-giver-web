@@ -5,19 +5,32 @@ import { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { NotificationManager } from 'react-notifications';
 
-const Member = ({user,i, loggedInUser, onUpdate}) => {
+const InitiativeRequest = ({request,i, loggedInUser, onUpdate}) => {
 
     const [userDetails,setUserDetails] = useState([]);
+    const [organizationDetails,setOrganizationDetails] = useState([]);
 
     useEffect(()=>{
         getUserDetails();
+        getOrganizationDetails();
     },[])
 
     const getUserDetails = () => {
         try{
-            axios.get('http://localhost:5000/api/user/'+ user.UserId)
+            axios.get('http://localhost:5000/api/user/'+ request.ReceiverId)
             .then((res)=>{
                 setUserDetails(res.data)
+            })
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+    const getOrganizationDetails = () => {
+        try{
+            axios.get('http://localhost:5000/api/Organization/'+ request.OrganizationId)
+            .then((res)=>{
+              setOrganizationDetails(res.data)
             })
         }
         catch(e){
@@ -28,25 +41,31 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
     const handleAcceptRequest  = async () => {
       var date = new Date().toLocaleString()
       try{
-        await axios.post(`http://localhost:5000/api/InitiativeRequest/`,{
-          DateOfJoining: date,
-          OrganizationId: user.OrganizationId,
-          UserId:user.UserId
+        await axios.post(`http://localhost:5000/api/Iniciative/`,{
+          IniciativeName: request.IniciativeName,
+          IniciativeDescription: request.IniciativeDescription,
+          IniciativeDate: request.IniciativeDate,
+          IniciativePhoto:request.IniciativePhoto,
+          OrganizationId: request.OrganizationId,
+          ReceiverId: request.ReceiverId
         }) 
         .then(()=>{
-          axios.put('http://localhost:5000/api/InitiativeRequest/'+user.InitiativeRequest, {
-            OrganizationMemberRequestId:user.OrganizationMemberRequestId,
-            DateOfJoining: date,
-            OrganizationId: user.OrganizationId,
-            UserId:user.UserId,
+          axios.put('http://localhost:5000/api/InitiativeRequest/'+request.IniciativeRequestId, {
+            IniciativeRequestId:request.IniciativeRequestId,
+            IniciativeName: request.IniciativeName,
+            IniciativeDescription: request.IniciativeDescription,
+            IniciativeDate: request.IniciativeDate,
+            IniciativePhoto:request.IniciativePhoto,
+            OrganizationId: request.OrganizationId,
+            ReceiverId: request.ReceiverId,
             Checked : true
             })
         })
         .then(()=>{
           axios.post('http://localhost:5000/api/notification', {
-              Initiator: user.OrgnizationId,
-              Acceptor: user.UserId,
-              Content: "Your request for  has been accepted by ",
+              Initiator: request.OrganizationId,
+              Acceptor: request.ReceiverId,
+              Content: "Your initiative request for has been accepted by " + organizationDetails.Name,
               Date: date,
               Readed : false
             })
@@ -70,14 +89,16 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
       const handleDeclineRequest  = async () => {
           var date = new Date().toLocaleString()
           try{
-                axios.put('http://localhost:5000/api/InitiativeRequest/'+user.OrganizationMemberRequestId, {
-                  OrganizationMemberRequestId:user.OrganizationMemberRequestId,
-                  DateOfJoining: date,
-                  OrganizationId: user.OrganizationId,
-                  UserId:user.UserId,
-                  Checked : true
-                  })
-           
+              axios.put('http://localhost:5000/api/InitiativeRequest/'+request.IniciativeRequestId, {
+                IniciativeRequestId:request.IniciativeRequestId,
+                IniciativeName: request.IniciativeName,
+                IniciativeDescription: request.IniciativeDescription,
+                IniciativeDate: request.IniciativeDate,
+                IniciativePhoto:request.IniciativePhoto,
+                OrganizationId: request.OrganizationId,
+                ReceiverId: request.ReceiverId,
+                Checked : true
+                })
             .then(()=>{
               onUpdate();
             })
@@ -95,12 +116,13 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
           }
 
     return (
-                  <tr key={user.UserId}>
+                  <tr key={request.IniciativeRequestId}>
                     <td>#{++i}</td>
+                    <td>{request.IniciativeName}</td>
+                    <td>{request.IniciativeDescription}</td>
                     <td>{userDetails.Firstname} {userDetails.Lastname}</td>
-                    <td>{userDetails.UserName}</td>
-                    <td>{userDetails.UserRole}</td>
-                    <td>{user.DateOfJoining.substring(0,10)}</td>
+                    <td>{organizationDetails.Name}</td>
+                    <td>{request.IniciativeDate.substring(0,10)}</td>
                     <td >
                        <div>
                       <Button
@@ -122,4 +144,4 @@ const Member = ({user,i, loggedInUser, onUpdate}) => {
     )
 }
 
-export default Member
+export default InitiativeRequest

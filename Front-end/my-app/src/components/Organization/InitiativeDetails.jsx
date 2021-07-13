@@ -8,12 +8,15 @@ import Header from '../Header/Header'
 import Footer from '../footer/Footer'
 import { useParams } from 'react-router-dom';
 import DonateModal from './DonateModal';
+import InitiativeDonators from './InitiativeDonators';
+import Moment from 'react-moment';
 
 const InitiativeDetails = () => {
 
     var {IniciativeId} = useParams();
     const [iniciative,setInitiative] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState([])
+    const [receiver, setReceiver] = useState([])
     const [donateModal, setDonateModal] = useState(false)
   
     useEffect(() => {
@@ -24,15 +27,28 @@ const InitiativeDetails = () => {
             setLoggedInUser(res.data)
             console.log(res.data)
             getInitiative();
+            getReceiver();
           })
       })()
     }, [])
 
-    const getInitiative = () =>{
+    const getInitiative = async () =>{
         try{
-            axios.get('http://localhost:5000/api/Iniciative/'+ IniciativeId)
+          await axios.get('http://localhost:5000/api/Iniciative/'+ IniciativeId)
             .then((res)=>{
                 setInitiative(res.data)
+                console.log(res.data)
+            })
+        }catch(e){
+            console.log(e)
+        }
+        
+    }
+    const getReceiver = async () =>{
+        try{
+            await axios.get('http://localhost:5000/api/user/'+ iniciative.ReceiverId)
+            .then((res)=>{
+              setReceiver(res.data)
                 console.log(res.data)
             })
         }catch(e){
@@ -88,9 +104,16 @@ const InitiativeDetails = () => {
                 <p style={{textAlign:"left"}}>
                   <button onClick={()=>{setDonateModal(true)}} style={{backgroundColor:"#d92362"}}  className="btn btn-round btn-danger" type="button">Donate</button>
                 </p>
+                <div className="text-left">
+                Created <b><Moment fromNow>
+                {iniciative.IniciativeDate}
+                </Moment>
+                </b>  |  <p className="mt-1 d-inline">Requested by <b>{receiver.Firstname} {receiver.Lastname}</b> </p>
+                </div>
               </div>
             </div>
           </section>
+          {loggedInUser.OrganizationId !== undefined && iniciative.length!==0? <InitiativeDonators InitiativeId={iniciative.IniciativeId}></InitiativeDonators>: null}
         </div>
       </div>
       <Footer/>

@@ -27,7 +27,7 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
         },
             (error) => {
                 NotificationManager.success(
-                'Error while editing the request!'+{error},
+                'Error while editing the request!',
                 '',
                 1000,
                 )

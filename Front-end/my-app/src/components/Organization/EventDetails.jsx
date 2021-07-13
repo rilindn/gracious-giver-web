@@ -7,12 +7,14 @@ import Header from '../Header/Header'
 import Footer from '../footer/Footer'
 import { useParams } from 'react-router-dom';
 import EventParticipantTable from "../dashboard/dash-event-participant/EventParticipantTable";
+import Moment from 'react-moment';
 
 const EventDetails = () => {
 
     var {EventId} = useParams();
     const [event,setEvent] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState([])
+    const [joined, setJoined] = useState();
   
     useEffect(() => {
       ;(async () => {
@@ -22,6 +24,7 @@ const EventDetails = () => {
             setLoggedInUser(res.data)
             console.log(res.data)
             getEvent();
+            joinCheck(res.data.UserId);
           })
       })()
     }, [])
@@ -37,6 +40,17 @@ const EventDetails = () => {
             console.log(e)
         }
         
+    }
+
+    const joinCheck = (UserId) =>{
+      try{
+        axios.get(`http://localhost:5000/api/eventparticipants/joined/${UserId}`)
+        .then((res)=>{
+          setJoined(res.data);
+        })
+      }catch(e){
+        console.log(e)
+      }
     }
 
     const handleJoinedSubmit = async (event) =>  {
@@ -76,7 +90,7 @@ const EventDetails = () => {
                   <img id="imgo" src={`http://localhost:5000/photos/organization/events/${event.Photo}`} alt="" />
                 </div>
               </div>
-              <div className="organization-details-wrapper">
+              <div className="organization-details-wrapper p-4">
                 <h4 className="pro-d-title">
                 {event.EventName} 
                 </h4>
@@ -84,10 +98,15 @@ const EventDetails = () => {
                  {event.EventDescription} 
                 </p>
                 <p style={{textAlign:"left"}}>
-                  
-                  <button style={{backgroundColor:"#d92362"}} onClick={handleJoinedSubmit} className="btn btn-round btn-danger" type="button">Join us</button>
-                  <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Joined</button>
+                  {joined===undefined?
+                  <button style={{backgroundColor:"#d92362"}} onClick={handleJoinedSubmit} className="btn btn-round btn-danger" type="button">Join us</button>:
+                  <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Joined</button>}
                 </p>
+                <div className="text-left">
+                Created <b><Moment fromNow>
+                {event.EventDate}
+                </Moment></b>
+                </div>
               </div>
             </div>
           </section>

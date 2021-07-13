@@ -24,7 +24,7 @@ const EditCity = ({show,onHide,city,onUpdate}) => {
         },
             (error) => {
                 NotificationManager.success(
-                'Error while editing the city!'+{error},
+                'Error while editing the city!',
                 '',
                 1000,
                 )

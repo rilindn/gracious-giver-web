@@ -24,7 +24,7 @@ const EditState = ({show,onHide,state,onUpdate}) => {
         },
             (error) => {
                 NotificationManager.error(
-                'Error while editing the state!'+{error},
+                'Error while editing the state!',
                 '',
                 1000,
                 )

@@ -26,8 +26,8 @@ function Sidebar() {
         <div></div>
       </button>
       <ul onClick={showSidebar}>
-        <li><Link to="">Home</Link></li>
-        <li><Link to="">Services</Link></li>
+        <li><Link to="/home">Home</Link></li>
+        <li><Link to="/">Welcome</Link></li>
         <li><Link to="">Contact</Link></li>
         <li><Link to="/organizations">Organizations</Link></li>
         {loggedInUser.length!==0 && loggedInUser.UserRole==="Donator"?

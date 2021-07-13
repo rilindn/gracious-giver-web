@@ -67,7 +67,7 @@ const InitiativeForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post('http://localhost:5000/api/Iniciative', {
+        axios.post('http://localhost:5000/api/InitiativeRequest', {
           IniciativeName: event.target.IniciativeName.value,
           IniciativeDescription: event.target.IniciativeDescription.value,
           IniciativeDate: event.target.IniciativeDate.value,

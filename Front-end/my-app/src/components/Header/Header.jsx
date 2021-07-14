@@ -12,6 +12,8 @@ import { useEffect } from 'react'
 import { List } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
+import maleUser from '../../images/maleUser.png'
+import femaleUser from '../../images/femaleUser.png'
 
 const Header = ({ search }) => {
   const [loggedInUser, setLoggedInUser] = useState([])
@@ -167,7 +169,7 @@ const Header = ({ search }) => {
 
                 <DropdownButton
                   menuAlign={{ lg: 'right' }}
-                  title={<FaUser id="user" color="white" size="25px" />}
+                  title={ <img src={loggedInUser.UserGender==="F"?femaleUser:maleUser} alt=".." className="user-header-logo"/> }
                   id="dropdown-menu-align-right hell2"
                   variant="transparent"
                   style={{ marginLeft: '50px' }}

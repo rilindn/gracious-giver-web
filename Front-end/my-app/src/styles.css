@@ -558,6 +558,12 @@ section .section-title {
   top: 12px;
   right: 26px;
 }
+.user-header-logo {
+  width: 28px;
+  border-radius: 14px;
+  margin-top: 10px;
+}
+
 #bodyRegister {
   min-width: 100%;
   background-position: fixed;

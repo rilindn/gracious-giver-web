@@ -58,7 +58,9 @@ const Initiative = ({iniciative,loggedInUser,organization}) => {
                       </Moment>
                   </div>
                   <div className="m-t">
-                    <button className="btn btn-block btn-primary mt-3 ml-0"  onClick={handleSubmit}>Join</button>
+                   <a href={`/initiativedetails/${iniciative.IniciativeId}`} style={{textDecoration:"none"}}>
+                   <button className="btn btn-block btn-primary mt-3 ml-0">Donate</button>
+                    </a> 
                   </div>
                 </div>
               </div>

@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Form } from 'semantic-ui-react'
 import { NotificationManager } from 'react-notifications';
+import { useHistory } from 'react-router-dom'
 
 const RequestDetails = ({loggedInUser}) => {
   
   var {requestId} = useParams();
+  let history = useHistory();
   const [request, setRequest] = useState([]);
   const [receiver,setReceiver] = useState([]);
   const [requestPhotos,setRequestPhotos] = useState([])
@@ -20,6 +22,27 @@ const RequestDetails = ({loggedInUser}) => {
       console.log(requestPhotos)
     // eslint-disable-next-line
     },[]);
+
+    const handleDirectMessage = () => {
+      try{
+        axios.get("http://localhost:5000/api/Chat/check/"+request.ReceiverId+"/"+loggedInUser.UserId)
+        .then((res)=>{
+          if(res.data.length===0){
+          axios.post(`http://localhost:5000/api/Chat/`,{
+          AcceptorId:request.ReceiverId,
+          SenderId:loggedInUser.UserId
+        })
+        .then(()=>{
+          history.push('/chat')
+        })}
+        else{
+          history.push('/chat')
+        }
+        })
+      }catch(e){
+        console.log(e)
+      }
+    }
 
 
     const getrequestData = async () => {
@@ -67,9 +90,18 @@ const RequestDetails = ({loggedInUser}) => {
             CheckOffer : false,
             RequestId: requestId
           })
+          .then(()=>{
+            axios.post('http://localhost:5000/api/notification', {
+                Initiator: loggedInUser.UserId,
+                Acceptor: receiver.UserId,
+                Content: "Your have a new product offer for this request "+request.RequestName +
+                " from "+ loggedInUser.Firstname + loggedInUser.Lastname,
+                Date: date,
+                Readed : false
+              })
+          })
           .then(
             (res) =>{
-              console.log(res.data); 
               NotificationManager.success('Your offer has been sent!','',3000);
               event.target.Message.value=null
             },
@@ -157,9 +189,15 @@ const RequestDetails = ({loggedInUser}) => {
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
-                        <strong>Location</strong>
+                        <strong>State</strong>
                       </th>
-                      <td>{request.RequestLocation}</td>
+                      <td>{request.State}</td>
+                    </tr>
+                    <tr>
+                      <th className="pl-0 w-25" scope="row">
+                        <strong>City</strong>
+                      </th>
+                      <td>{request.City}</td>
                     </tr>
                     <tr>
                       <th className="pl-0 w-25" scope="row">
@@ -188,6 +226,10 @@ const RequestDetails = ({loggedInUser}) => {
                 </textarea>
               <button type="submit" className="btn btn-primary btn-md mr-1 mb-2">
                 Offer{' '}
+              </button>
+              <div className="divide-line"></div>
+              <button onClick={handleDirectMessage} type="button" className="btn btn-primary btn-md mb-2 ml-1">
+                Direct Message{' '}
               </button>
               </Form>}
             </div>

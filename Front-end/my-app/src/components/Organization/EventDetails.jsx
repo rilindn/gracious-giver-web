@@ -11,10 +11,10 @@ import Moment from 'react-moment';
 
 const EventDetails = () => {
 
-    var {EventId} = useParams();
+    var {EventId,OrgId} = useParams();
     const [event,setEvent] = useState([]);
     const [loggedInUser, setLoggedInUser] = useState([])
-    const [joined, setJoined] = useState();
+    const [joined, setJoined] = useState(false);
   
     useEffect(() => {
       ;(async () => {
@@ -33,8 +33,7 @@ const EventDetails = () => {
         try{
             axios.get('http://localhost:5000/api/events/'+EventId)
             .then((res)=>{
-                setEvent(res.data)
-                console.log(res.data)
+                setEvent(true)
             })
         }catch(e){
             console.log(e)
@@ -44,7 +43,7 @@ const EventDetails = () => {
 
     const joinCheck = (UserId) =>{
       try{
-        axios.get(`http://localhost:5000/api/eventparticipants/joined/${UserId}`)
+        axios.get(`http://localhost:5000/api/eventparticipants/joined/${UserId}/${EventId}`)
         .then((res)=>{
           setJoined(res.data);
         })
@@ -52,31 +51,44 @@ const EventDetails = () => {
         console.log(e)
       }
     }
-
-    const handleJoinedSubmit = async (event) =>  {
-        event.preventDefault();
-         axios
-        .post('http://localhost:5000/api/EventParticipants', {
-          EventId:EventId,
-          ParticipantId:loggedInUser.UserId,
-        })
-        .then(
-          (res) => {
-            NotificationManager.success(
-            'Joined Successfully!',
-            '',
-            2000,
-            )
-          },
-          (error) => {
+    const handleSubmit = async (e) =>  {
+      e.preventDefault();
+      axios.get('http://localhost:5000/api/OrganizationMember/joined/'+OrgId+"/"+loggedInUser.UserId)
+      .then((res)=>{
+          if(res.data===false){
             NotificationManager.error(
-              'Error while joining!',
+              'You must be a organization member to join in this event!',
               '',
-              1000,
+              3000,
               )
-          },
-        )
+          }
+          else{
+            axios
+            .post('http://localhost:5000/api/EventParticipants', {
+              EventId:event.EventId,
+              ParticipantId:loggedInUser.UserId
+            })
+            .then(
+              (res) => {
+                NotificationManager.success(
+                'Joined Successfully!',
+                '',
+                2000,
+                )
+              },
+              (error) => {
+                NotificationManager.error(
+                  'Error while joining!',
+                  '',
+                  1000,
+                  )
+              },
+            )
+          }
+      })
+       
   }
+    
 
     return (
         <div>
@@ -98,8 +110,8 @@ const EventDetails = () => {
                  {event.EventDescription} 
                 </p>
                 <p style={{textAlign:"left"}}>
-                  {joined===undefined?
-                  <button style={{backgroundColor:"#d92362"}} onClick={handleJoinedSubmit} className="btn btn-round btn-danger" type="button">Join us</button>:
+                  {joined===false?
+                  <button style={{backgroundColor:"#d92362"}} onClick={handleSubmit} className="btn btn-round btn-danger" type="button">Join us</button>:
                   <button style={{backgroundColor:"#d92362"}} className="btn btn-round btn-danger" type="button">Joined</button>}
                 </p>
                 <div className="text-left">

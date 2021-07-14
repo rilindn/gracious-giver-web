@@ -87,9 +87,18 @@ const ProductDetails = ({loggedInUser}) => {
             Request_Date: date,
             checkedR : false
           })
+          .then(()=>{
+            axios.post('http://localhost:5000/api/notification', {
+                Initiator: loggedInUser.UserId,
+                Acceptor: product.DonatorId,
+                Content: "Your havea new request for this product "+product.ProductName+
+                " from "+ loggedInUser.Firstname + loggedInUser.Lastname,
+                Date: date,
+                Readed : false
+              })
+          })
           .then(
             (res) =>{
-              console.log(res.data); 
               NotificationManager.success('Your request has been sent!','',3000);
               event.target.Message.value=null
             },

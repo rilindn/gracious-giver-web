@@ -35,7 +35,7 @@ const OrganizationDetails = () => {
     try {
       axios
         .get(
-          `http://localhost:5000/api/OrganizationMember/joined/${organization.OrganizationId}/${UserId}`,
+          `http://localhost:5000/api/OrganizationMember/joined/${orgId}/${UserId}`,
         )
         .then((res) => {
           setJoined(res.data)
@@ -46,7 +46,7 @@ const OrganizationDetails = () => {
   }
   const getAllEvents = async () => {
     try {
-      await axios.get(`http://localhost:5000/api/Events`).then((res) => {
+      await axios.get(`http://localhost:5000/api/Events/org/${orgId}`).then((res) => {
         console.log(res.data)
         setAllEvents(res.data)
       })
@@ -58,7 +58,7 @@ const OrganizationDetails = () => {
 
   const getAllInitiatives= async () => {
     try {
-      await axios.get(`http://localhost:5000/api/Iniciative`).then((res) => {
+      await axios.get(`http://localhost:5000/api/Iniciative/org/${orgId}`).then((res) => {
         console.log(res.data)
         setAllInitiatives(res.data)
       })
@@ -88,18 +88,21 @@ const OrganizationDetails = () => {
   console.log(organization.Logo)
 
   const handleJoinedSubmit = async (event) => {
+    var date = new Date().toLocaleString()
     event.preventDefault()
-    axios
-      .post('http://localhost:5000/api/EventParticipants', {
-        // EventId:,
-        ParticipantId: loggedInUser.UserId,
-      })
+        axios
+        .post('http://localhost:5000/api/OrganizationMemberRequest', {
+          DateOfJoining: date,
+          OrganizationId: orgId,
+          UserId:loggedInUser.UserId,
+          Checked : false
+        })
       .then(
         (res) => {
-          NotificationManager.success('Joined Successfully!', '', 2000)
+          NotificationManager.success('Joining request sent!', '', 2000)
         },
         (error) => {
-          NotificationManager.error('Error while joining!', '', 1000)
+          NotificationManager.error('Error while sending request!', '', 1000)
         },
       )
   }
@@ -124,7 +127,7 @@ const OrganizationDetails = () => {
 
                   <p style={{ textAlign: 'left' }}>
                     {loggedInUser.OrganizationId === undefined ? (
-                      joined === undefined ? (
+                      joined === false ? (
                         <button
                           style={{ backgroundColor: '#d92362' }}
                           onClick={handleJoinedSubmit}

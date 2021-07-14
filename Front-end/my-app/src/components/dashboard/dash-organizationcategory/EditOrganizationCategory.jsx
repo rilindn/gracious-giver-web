@@ -27,7 +27,7 @@ const EditCategory = ({show,onHide,category,onUpdate}) => {
             )
             },
             (error) => {
-                NotificationManager.erorr(
+                NotificationManager.error(
                 'Error while editing the category!',
                 '',
                 1000,

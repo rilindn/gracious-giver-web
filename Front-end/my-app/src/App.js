@@ -95,7 +95,7 @@ function App() {
         <Route path="/Organizationdetails/:orgId" exact>
           <Organizationdetails />
         </Route>
-        <Route path="/eventdetails/:EventId" exact>
+        <Route path="/eventdetails/:EventId/:OrgId" exact>
           <EventDetails />
         </Route>
         <Route path="/initiativedetails/:IniciativeId" exact>

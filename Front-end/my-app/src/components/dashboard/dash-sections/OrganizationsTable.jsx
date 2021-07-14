@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
 import MemberTable from '../dash-organization-member/MemberTable';
 import OrgMemberRequestTable from '../dash-organization-member-request/OrgMemberRequestTable';
-import EventParticipantTable from '../dash-event-participant/EventParticipantTable';
 import EventsTable from '../dash-Events/EventsTable';
 import InitiativesTable from '../dash-initiatives/InitiativesTable';
 import OrgInitiativeRequestTable from '../dash-IniciativeRequest/OrgInitiativeRequestTable';
@@ -12,7 +11,6 @@ import OrgInitiativeRequestTable from '../dash-IniciativeRequest/OrgInitiativeRe
 const OrganizationsTables = () => {
 
     const [memberTable, setMemberTable] = useState(true);
-    const [memberEventTable, setMemberEventTable] = useState(false);
     const [loggedInUser, setLoggedInUser] = useState([]);
     const [memberRequest, setMemberRequest] = useState(false);
     const [eventss, setEventss] = useState(false);
@@ -42,7 +40,6 @@ const OrganizationsTables = () => {
                 onClick={()=>{
                     setMemberTable(true);
                     setMemberRequest(false);
-                    setMemberEventTable(false);
                     setEventss(false);
                     setInitiativess(false);
                     setInitiativeRequest(false);
@@ -59,7 +56,6 @@ const OrganizationsTables = () => {
                 onClick={()=>{
                     setMemberTable(false);
                     setMemberRequest(true);
-                    setMemberEventTable(false);
                     setEventss(false);
                     setInitiativess(false);
                     setInitiativeRequest(false);
@@ -67,7 +63,7 @@ const OrganizationsTables = () => {
                 }}
                 className={`dash-btn ${memberRequest ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                Organization Requests
+                Join Requests
                 </button>
             </li>
             <li>
@@ -75,22 +71,6 @@ const OrganizationsTables = () => {
                 onClick={()=>{
                     setMemberTable(false);
                     setMemberRequest(false);
-                    setMemberEventTable(true);
-                    setEventss(false);
-                    setInitiativess(false);
-                    setInitiativeRequest(false);
-                }}
-                className={`dash-btn ${memberEventTable ? "active-dash-btn" : "nonactive-dash-btn"}`}
-                >
-                Event Members
-                </button>
-            </li>
-            <li>
-                <button
-                onClick={()=>{
-                    setMemberTable(false);
-                    setMemberRequest(false);
-                    setMemberEventTable(false);
                     setEventss(true);
                     setInitiativess(false);
                 }}
@@ -105,7 +85,6 @@ const OrganizationsTables = () => {
                 onClick={()=>{
                     setMemberTable(false);
                     setMemberRequest(false);
-                    setMemberEventTable(false);
                     setEventss(false);
                     setInitiativess(true);
                     setInitiativeRequest(false);
@@ -120,14 +99,13 @@ const OrganizationsTables = () => {
                 onClick={()=>{
                     setMemberTable(false);
                     setMemberRequest(false);
-                    setMemberEventTable(false);
                     setEventss(false);
                     setInitiativess(false);
                     setInitiativeRequest(true);
                 }}
                 className={`dash-btn ${initiativeRequest ? "active-dash-btn" : "nonactive-dash-btn"}`}
                 >
-                InitiativesRequest
+                Initiatives Request
                 </button>
             </li>
 
@@ -136,7 +114,6 @@ const OrganizationsTables = () => {
         <div className="dash-tables">
             {memberTable ? <MemberTable/>: null}
             {memberRequest ? <OrgMemberRequestTable/>:null}
-            {memberEventTable ? <EventParticipantTable/>:null}
             {eventss ? <EventsTable/>:null}
             {initiativess ? <InitiativesTable/>:null}
             {initiativeRequest ? <OrgInitiativeRequestTable/>:null}

@@ -92,7 +92,7 @@ const OrganizationCard = ({organization}) => {
 
                 <MDBCardFooter>
                   <MDBBtn href={`/Organizationdetails/${organization.OrganizationId}`} className="org-card-btn">Read More</MDBBtn>
-                  {joined===undefined?
+                  {joined===false?
                   <MDBBtn className="org-card-btn org-card-btn-join" onClick={handleSubmit}>Join</MDBBtn>:
                   <MDBBtn className="org-card-btn org-card-btn-joined" >Joined</MDBBtn>}
                 </MDBCardFooter>

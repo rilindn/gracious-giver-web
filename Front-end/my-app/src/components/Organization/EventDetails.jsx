@@ -22,7 +22,6 @@ const EventDetails = () => {
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
-            console.log(res.data)
             getEvent();
             joinCheck(res.data.UserId);
           })
@@ -33,7 +32,8 @@ const EventDetails = () => {
         try{
             axios.get('http://localhost:5000/api/events/'+EventId)
             .then((res)=>{
-                setEvent(true)
+                setEvent(res.data)
+                console.log("check event")
             })
         }catch(e){
             console.log(e)

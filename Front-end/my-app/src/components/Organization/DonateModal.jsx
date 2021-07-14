@@ -39,7 +39,7 @@ const DonateModal = ({show, onHide,Initiative,loggedInUser}) => {
           <div className="modal-content" style={{ width: '360px' }}>
             <Form onSubmit={handleSubmit}>
               <div className="modal-header">
-                <h3 className="modal-title">Add Admin</h3>
+                <h3 className="modal-title">Donate</h3>
               </div>
               <div className="modal-body">
                 <FormGroup className="form-group">

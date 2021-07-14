@@ -9,27 +9,28 @@ const EditIniciatives = ({show,onHide,inc,onUpdate}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.put('http://localhost:5000/api/Iniciative/'+inc.IniciativeId, {
-            InicitativeId:inc.IniciativeId,
-            InicitativeName: event.target.InicitativeName.value,
-            InicitativeDescription:event.target.InicitativeDescription.value,
-            InicitativeDate: inc.InicitativeDate,
+            IniciativeId:inc.IniciativeId,
+            IniciativeName: event.target.IniciativeName.value,
+            IniciativeDescription:event.target.IniciativeDescription.value,
+            IniciativeDate: inc.IniciativeDate,
             
             OrganizationId:inc.OrganizationId,
-            ReceiverId:inc.ReceiverId
+            ReceiverId:inc.ReceiverId,
+            IniciativePhoto:inc.IniciativePhoto
           })
           .then(()=> {
               onUpdate();
           })
           .then((res) => {
             NotificationManager.success(
-            'Inicitative edited succesfully!',
+            'Iniciative edited succesfully!',
             '',
             2000,
             )
         },
             (error) => {
                 NotificationManager.error(
-                'Error while editing the Inicitative!',
+                'Error while editing the Iniciative!',
                 '',
                 1000,
                 )
@@ -46,13 +47,13 @@ const EditIniciatives = ({show,onHide,inc,onUpdate}) => {
                 <div className="modal-content">
                     <Form onSubmit={handleSubmit}>
                         <div className="modal-header">						
-                            <h3 className="modal-title">Edit Inicitative</h3>
+                            <h3 className="modal-title">Edit Iniciative</h3>
                     </div>
                         <div className="modal-body">		
                             <FormGroup className="form-group">
                                 <label>Name</label>
                                 <input 
-                                name="InicitativeName"
+                                name="IniciativeName"
                                 defaultValue={inc.IniciativeName} 
                                 type="text" 
                                 className="form-control" 
@@ -62,7 +63,7 @@ const EditIniciatives = ({show,onHide,inc,onUpdate}) => {
                             <FormGroup className="form-group">
                                 <label>Description</label>
                                 <input 
-                                name="InicitativeDescription"
+                                name="IniciativeDescription"
                                 defaultValue={inc.IniciativeDescription} 
                                 type="text" 
                                 className="form-control" 

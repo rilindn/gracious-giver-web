@@ -14,7 +14,8 @@ const EditEvents = ({show,onHide,ev,onUpdate}) => {
             EventDescription:event.target.EventDescription.value,
             EventDate: ev.EventDate,
             City: ev.City,
-            OrganizationId: ev.OrganizationId
+            OrganizationId: ev.OrganizationId,
+            Photo:ev.Photo
           })
           .then(()=> {
               onUpdate();
@@ -60,7 +61,7 @@ const EditEvents = ({show,onHide,ev,onUpdate}) => {
                             </FormGroup>		
                             <FormGroup className="form-group">
                                 <label>Description</label>
-                                <input 
+                                <textarea 
                                 name="EventDescription"
                                 defaultValue={ev.EventDescription} 
                                 type="text" 

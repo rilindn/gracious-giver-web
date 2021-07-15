@@ -14,6 +14,12 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
             RequestDescription: event.target.RequestDescription.value,
             RequestName: event.target.RequestName.value,
             RequestComment: event.target.RequestComment.value,
+
+            RequestCategory:requestt.RequestCategory,
+            State:requestt.State,
+            City:requestt.City,
+            RequestPhoto:requestt.RequestPhoto
+            
           })
           .then(()=> {
               onUpdate();
@@ -26,7 +32,7 @@ const EditRequestt = ({show,onHide,requestt,onUpdate}) => {
             )
         },
             (error) => {
-                NotificationManager.success(
+                NotificationManager.error(
                 'Error while editing the request!',
                 '',
                 1000,

@@ -42,7 +42,7 @@ const InitiativeRequest = ({request,i, loggedInUser, onUpdate}) => {
       var date = new Date().toLocaleString()
       try{
         await axios.post(`http://localhost:5000/api/Iniciative/`,{
-          IniciativeName: request.IniciativeName,
+        IniciativeName: request.IniciativeName,
           IniciativeDescription: request.IniciativeDescription,
           IniciativeDate: request.IniciativeDate,
           IniciativePhoto:request.IniciativePhoto,

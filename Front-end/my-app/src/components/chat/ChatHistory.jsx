@@ -78,7 +78,6 @@ const ChatHistory = ({loggedInUser,user}) =>{
         </div>
       </div>
       <div className="col-lg-6 hidden-sm text-right">
-        <a href="///" className="btn btn-outline-primary"><i className="fa fa-image" /></a>
         <a href="//" className="btn btn-outline-info"><i className="fa fa-cogs" /></a>
         <a href="//" className="btn btn-outline-warning"><i className="fa fa-question" /></a>
       </div>

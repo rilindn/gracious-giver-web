@@ -25,7 +25,6 @@ const InitiativeDetails = () => {
           .get('http://localhost:5000/api/loggedUser', { withCredentials: true })
           .then((res) => {
             setLoggedInUser(res.data)
-            console.log(res.data)
             getInitiative();
             getReceiver();
           })
@@ -49,7 +48,6 @@ const InitiativeDetails = () => {
             await axios.get('http://localhost:5000/api/user/'+ iniciative.ReceiverId)
             .then((res)=>{
               setReceiver(res.data)
-                console.log(res.data)
             })
         }catch(e){
             console.log(e)
@@ -57,30 +55,6 @@ const InitiativeDetails = () => {
         
     }
 
-//     const handleJoinedSubmit = async (event) =>  {
-//         event.preventDefault();
-//          axios
-//         .post('http://localhost:5000/api/EventParticipants', {
-//           // EventId:,
-//           ParticipantId:loggedInUser.UserId,
-//         })
-//         .then(
-//           (res) => {
-//             NotificationManager.success(
-//             'Joined Successfully!',
-//             '',
-//             2000,
-//             )
-//           },
-//           (error) => {
-//             NotificationManager.error(
-//               'Error while joining!',
-//               '',
-//               1000,
-//               )
-//           },
-//         )
-//   }
 
     return (
         <div>
@@ -108,7 +82,7 @@ const InitiativeDetails = () => {
                 Created <b><Moment fromNow>
                 {iniciative.IniciativeDate}
                 </Moment>
-                </b>  |  <p className="mt-1 d-inline">Requested by <b>{receiver.Firstname} {receiver.Lastname}</b> </p>
+                </b>  | {receiver.length!==0? <p className="mt-1 d-inline">Requested by <b>{receiver.Firstname} {receiver.Lastname}</b> </p>:null}
                 </div>
               </div>
             </div>

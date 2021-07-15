@@ -200,7 +200,7 @@ const OrganizationDetails = () => {
 
       <div className="iniciativat">
       <div className="container events-sec">
-          {loggedInUser.UserRole === "Receiver"? (
+          {loggedInUser.UserRole !== "Donator"? (
             <a href={`/InitiativeForm/${orgId}`}>
               <button className="create-initiative-btn" type="button">
                 <i className="fas fa-plus fa-1x"> Request Initiative</i>

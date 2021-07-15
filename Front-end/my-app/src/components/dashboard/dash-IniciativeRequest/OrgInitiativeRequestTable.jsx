@@ -41,7 +41,7 @@ const OrgInitiativeRequestTable = () => {
 
   const getAllRequests = async (orgId) => {
     try {
-      await axios.get(`http://localhost:5000/api/InitiativeRequest/`+orgId)
+      await axios.get(`http://localhost:5000/api/InitiativeRequest/org/`+orgId)
       .then((res) => {
         setAllRequests(res.data)
       })
